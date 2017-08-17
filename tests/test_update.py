@@ -4,23 +4,23 @@ import unittest
 from app import app
 from database import TestDB
 
-item1 = {
-        'id': 1,
-        'title': u'Nike Shoes AirMax',
-        'seller_id': 12345,
-        'price': 15,
-        'description': u'Hardly used air maxes. Get em while you can',
-        'sold': False,
-        'location': '-121.45356 46.51119 4392'
+ITEM1 = {
+    'id': 1,
+    'title': u'Nike Shoes AirMax',
+    'seller_id': 12345,
+    'price': 15,
+    'description': u'Hardly used air maxes. Get em while you can',
+    'sold': False,
+    'location': '-121.45356 46.51119 4392'
     }
-item2 = {
-        'id': 2,
-        'title': u'MacBook Air mid 2012',
-        'seller_id': 23456,
-        'price': 600,
-        'description': u'Killer Mac for serious use. You will love it.',
-        'sold': False,
-        'location': '-121.45356 46.51119 4392'
+ITEM2 = {
+    'id': 2,
+    'title': u'MacBook Air mid 2012',
+    'seller_id': 23456,
+    'price': 600,
+    'description': u'Killer Mac for serious use. You will love it.',
+    'sold': False,
+    'location': '-121.45356 46.51119 4392'
     }
 
 test_db = TestDB()
@@ -40,8 +40,8 @@ class TestApp(unittest.TestCase):
         self.app = app.test_client()
         self.valid_credentials = base64.b64encode(b'mojo:python').decode('utf-8')
         self.db = test_db
-        self.db.items.insert(item1)
-        self.db.items.insert(item2)
+        self.db.items.insert(ITEM1)
+        self.db.items.insert(ITEM2)
 
     def tearDown(self):
         self.db.items.remove({})

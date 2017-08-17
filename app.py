@@ -98,12 +98,11 @@ def get_item_details(items_list):
         'description': request.json.get('description', ""),
         'sold': False,
         'location': request.json.get('location', None),
-        'pictures':
-            {
+        'pictures': {
                 '1': request.json.get('pictures', {}).get('1'),
                 '2': request.json.get('pictures', {}).get('2'),
                 '3': request.json.get('pictures', {}).get('3')
-            }
+        }
     }
 
 

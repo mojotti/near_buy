@@ -1,8 +1,8 @@
 """
 All database related methods are in DatabaseHelper() class.
 """
-import bcrypt
 import sys
+import bcrypt
 from pymongo import MongoClient
 from pymongo import errors
 
@@ -72,7 +72,7 @@ class DatabaseHelper(object):
     def retrieve_user_by_username(self, username):
         return self.users.find_one({'username': username}, {'_id': 0})
 
-    def create_non_existing_user_to_database(self, username, password):
+    def create_new_user_to_database(self, username, password):
         hash_ = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt(ENCRYPTION_ROUNDS))
         user_info = {'username': username, 'hash': hash_}
         user = self.retrieve_user_by_username(username)
@@ -98,9 +98,8 @@ class TestDB(DatabaseHelper):
             print(err)
 
     def create_test_users_to_test_db(self):
-        self.create_non_existing_user_to_database('mojo', 'python')
-        self.create_non_existing_user_to_database('kojo', 'python')
+        self.create_new_user_to_database('mojo', 'python')
+        self.create_new_user_to_database('kojo', 'python')
 
     def remove_test_users_from_db(self):
         self.users.remove({})
-
