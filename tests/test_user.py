@@ -30,7 +30,6 @@ class TestUser(unittest.TestCase):
                                  headers={'Authorization': 'Basic ' + self.valid_credentials2})
         self.assertEqual(response.status_code, 201)
         self.assertEqual(self.db.items.count(), 1)
-        print("users", self.db.users.count())
-        items = self.db.retrieve_items()
-        for item in items:
-            print(item)
+        for item in self.db.retrieve_items():  # only one item in db
+            self.assertEquals(item['seller_id'], 1)  # id = 1, because user 'kojo' was used to login
+
