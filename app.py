@@ -76,25 +76,23 @@ def get_item(item_id):
 @auth.login_required
 def create_item():
     """Create new item and add it to database."""
-    items_list = []
-    items = DB.retrieve_items()
-    for item in items:
-        items_list.append(item)
+    user_id = DB.retrieve_user_id_with_username(auth.username())
+    items_list = [item for item in DB.retrieve_items()]
     if not request.json or 'title' not in request.json or 'price' not in request.json:
         abort(400)
-    item = get_item_details(items_list)
+    item = get_item_details(items_list, user_id)
     DB.add_item_to_db(item)
     item = DB.retrieve_item_with_title(request.json['title'])
     return jsonify({'item': make_public_item(item)}), 201
 
 
-def get_item_details(items_list):
+def get_item_details(items_list, user_id):
     """Get and return all necessary details for item."""
     return {
-        'id': items_list[-1]['id'] + 1,
+        'id': 0 if not items_list else items_list[-1]['id'] + 1,  # in case there are no items yet created
         'title': request.json['title'],
         'price': request.json['price'],
-        'seller_id': request.json['seller_id'],
+        'seller_id': user_id,
         'description': request.json.get('description', ""),
         'sold': False,
         'location': request.json.get('location', None),

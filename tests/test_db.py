@@ -24,14 +24,14 @@ ITEM2 = {
     'location': '-121.45356 46.51119 4392'
     }
 
-test_db = TestDB()
+TEST_DB = TestDB()
 
 
 class TestApp(unittest.TestCase):
     def setUp(self):
         app.config['TESTING'] = True
         self.app = app.test_client()
-        self.db = test_db
+        self.db = TEST_DB
         self.db.items.insert(ITEM1)
         self.db.items.insert(ITEM2)
 
@@ -151,6 +151,7 @@ class TestApp(unittest.TestCase):
     def test_given_there_is_user_in_db_when_user_is_retrieved_then_password_is_hashed(self):
         self.db.create_new_user_to_database('user', 'password')
         user = self.db.retrieve_user_by_username('user')
+        self.assertEquals(user['username'], 'user')
         self.assertNotEquals(user['hash'], 'password')
         self.assertTrue('password' not in user and 'hash' in user)
 

@@ -72,9 +72,14 @@ class DatabaseHelper(object):
     def retrieve_user_by_username(self, username):
         return self.users.find_one({'username': username}, {'_id': 0})
 
+    def retrieve_user_id_with_username(self, username):
+        user = self.users.find_one({'username': username}, {'_id': 0})
+        return user['id']
+
     def create_new_user_to_database(self, username, password):
         hash_ = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt(ENCRYPTION_ROUNDS))
-        user_info = {'username': username, 'hash': hash_}
+        user_id = self.users.count()
+        user_info = {'username': username, 'hash': hash_, 'id': user_id}
         user = self.retrieve_user_by_username(username)
         if not user:
             self.insert_user_to_db(user_info)
@@ -97,9 +102,10 @@ class TestDB(DatabaseHelper):
         except errors.ServerSelectionTimeoutError as err:
             print(err)
 
-    def create_test_users_to_test_db(self):
+    def create_two_users_to_db(self):
         self.create_new_user_to_database('mojo', 'python')
         self.create_new_user_to_database('kojo', 'python')
 
-    def remove_test_users_from_db(self):
+    def remove_all_users_from_db(self):
         self.users.remove({})
+

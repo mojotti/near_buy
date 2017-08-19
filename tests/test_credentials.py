@@ -22,20 +22,20 @@ ITEM2 = {
     'location': '-121.45356 46.51119 4392'
     }
 
-test_db = TestDB()
+TEST_DB = TestDB()
 
 
 class TestLogin(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        test_db.create_test_users_to_test_db()
-        test_db.items.insert(ITEM1)
-        test_db.items.insert(ITEM2)
+        TEST_DB.create_two_users_to_db()
+        TEST_DB.items.insert(ITEM1)
+        TEST_DB.items.insert(ITEM2)
 
     @classmethod
     def tearDownClass(cls):
-        test_db.remove_test_users_from_db()
-        test_db.items.remove({})
+        TEST_DB.remove_all_users_from_db()
+        TEST_DB.items.remove({})
 
     def setUp(self):
         app.config['TESTING'] = True

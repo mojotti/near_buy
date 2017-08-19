@@ -23,17 +23,17 @@ ITEM2 = {
     'location': '-121.45356 46.51119 4392'
     }
 
-test_db = TestDB()
+TEST_DB = TestDB()
 
 
 class TestApp(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        test_db.create_test_users_to_test_db()
+        TEST_DB.create_two_users_to_db()
 
     @classmethod
     def tearDownClass(cls):
-        test_db.remove_test_users_from_db()
+        TEST_DB.remove_all_users_from_db()
 
     def setUp(self):
         app.config['TESTING'] = True
@@ -42,7 +42,7 @@ class TestApp(unittest.TestCase):
         self.invalid_credentials = base64.b64encode(b'hopo:python').decode('utf-8')  # invalid username
         self.new_item = '{"title":"Almost new pair of socks", "seller_id": 12345, "price": 2, ' \
                         '"pictures": {"1": "IMG_1234.jpeg", "2": "IMG_2345.jpg"}}'
-        self.db = test_db
+        self.db = TEST_DB
         self.db.items.insert(ITEM1)
         self.db.items.insert(ITEM2)
 
