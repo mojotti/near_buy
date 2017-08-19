@@ -23,7 +23,19 @@ class TestUser(unittest.TestCase):
     def tearDown(self):
         self.db.items.remove({})
 
-    def test_given_there_is_user_when_user_puts_item_to_sell_then_item_has_user_id(self):
+    def test_given_there_is_two_users_when_user_1_puts_item_to_sell_then_item_has_user_1s_id(self):
+        self.assertEquals(self.db.items.count(), 0)
+        response = self.app.post('/todo/api/v1.0/items',
+                                 data=self.new_item,
+                                 content_type='application/json',
+                                 headers={'Authorization': 'Basic ' + self.valid_credentials1})
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(self.db.items.count(), 1)
+        for item in self.db.retrieve_items():  # only one item in db
+            self.assertEquals(item['seller_id'], 0)  # id = 0, because user 'mojo' was used to login
+
+    def test_given_there_is_two_users_when_user_2_puts_item_to_sell_then_item_has_user_2s_id(self):
+        self.assertEquals(self.db.items.count(), 0)
         response = self.app.post('/todo/api/v1.0/items',
                                  data=self.new_item,
                                  content_type='application/json',
