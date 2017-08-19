@@ -31,6 +31,9 @@ class DatabaseHelper(object):
     def retrieve_item_with_id(self, id_):
         return self.items.find_one({'id': id_}, {'_id': 0})
 
+    def retrieve_items_with_seller_id(self, id_):
+        return self.items.find({'seller_id': id_}, {'_id': 0})
+
     def find_and_update_item(self, item):
         id_ = item['id']
         items = self.retrieve_items()
@@ -103,8 +106,8 @@ class TestDB(DatabaseHelper):
             print(err)
 
     def create_two_users_to_db(self):
-        self.create_new_user_to_database('mojo', 'python')
-        self.create_new_user_to_database('kojo', 'python')
+        self.create_new_user_to_database('mojo', 'best_password_ever')
+        self.create_new_user_to_database('kojo', 'very_good_password')
 
     def remove_all_users_from_db(self):
         self.users.remove({})

@@ -108,13 +108,14 @@ def get_item_details(items_list, user_id):
 @auth.login_required
 def update_item(item_id):
     """Update one item with id."""
+    user_id = DB.retrieve_user_id_with_username(auth.username())
     items = DB.retrieve_items()
     item = [item for item in items if item['id'] == item_id]
     check_if_item_is_valid(item)
     item[0]['title'] = request.json.get('title', item[0]['title'])
     item[0]['description'] = request.json.get('description',
                                               item[0]['description'])
-    item[0]['seller_id'] = request.json.get('seller_id', item[0]['seller_id'])
+    item[0]['seller_id'] = user_id
     item[0]['sold'] = request.json.get('sold', item[0]['sold'])
     item[0]['location'] = request.json.get('location', item[0]['location'])
     DB.find_and_update_item(item[0])
@@ -133,9 +134,6 @@ def check_if_item_is_valid(item):
         abort(400)
     if 'price' in request.json and \
             not isinstance(request.json['price'], int):
-        abort(400)
-    if 'seller_id' in request.json and \
-            not isinstance(request.json['seller_id'], int):
         abort(400)
     if 'description' in request.json and \
             not isinstance(request.json['description'], six.string_types):

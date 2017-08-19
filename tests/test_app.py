@@ -7,7 +7,6 @@ from database import TestDB
 ITEM1 = {
     'id': 1,
     'title': u'Nike Shoes AirMax',
-    'seller_id': 12345,
     'price': 15,
     'description': u'Hardly used air maxes. Get em while you can',
     'sold': False,
@@ -16,7 +15,6 @@ ITEM1 = {
 ITEM2 = {
     'id': 2,
     'title': u'MacBook Air mid 2012',
-    'seller_id': 23456,
     'price': 600,
     'description': u'Killer Mac for serious use. You will love it.',
     'sold': False,
@@ -38,8 +36,7 @@ class TestApp(unittest.TestCase):
     def setUp(self):
         app.config['TESTING'] = True
         self.app = app.test_client()
-        self.valid_credentials = base64.b64encode(b'mojo:python').decode('utf-8')
-        self.invalid_credentials = base64.b64encode(b'hopo:python').decode('utf-8')  # invalid username
+        self.valid_credentials = base64.b64encode(b'mojo:best_password_ever').decode('utf-8')
         self.new_item = '{"title":"Almost new pair of socks", "seller_id": 12345, "price": 2, ' \
                         '"pictures": {"1": "IMG_1234.jpeg", "2": "IMG_2345.jpg"}}'
         self.db = TEST_DB

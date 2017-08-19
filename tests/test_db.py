@@ -8,7 +8,6 @@ TEST_USER = "test_user"
 ITEM1 = {
     'id': 1,
     'title': u'Nike Shoes AirMax',
-    'seller_id': 12345,
     'price': 15,
     'description': u'Hardly used air maxes. Get em while you can',
     'sold': False,
@@ -17,7 +16,6 @@ ITEM1 = {
 ITEM2 = {
     'id': 2,
     'title': u'MacBook Air mid 2012',
-    'seller_id': 23456,
     'price': 600,
     'description': u'Killer Mac for serious use. You will love it.',
     'sold': False,
@@ -92,7 +90,6 @@ class TestApp(unittest.TestCase):
         item = {
             'id': 2,
             'title': u'MacBook Air mid 2012',
-            'seller_id': 23456,
             'price': 600,
             'description': u'Killer Mac for serious use. You will love it.',
             'sold': False,
