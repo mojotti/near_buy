@@ -5,7 +5,6 @@ from app import app
 from database import TestDB
 
 ITEM1 = {
-    'id': 1,
     'title': u'Nike Shoes AirMax',
     'price': 15,
     'description': u'Hardly used air maxes. Get em while you can',
@@ -13,12 +12,19 @@ ITEM1 = {
     'location': '-121.45356 46.51119 4392'
     }
 ITEM2 = {
-    'id': 2,
     'title': u'MacBook Air mid 2012',
     'price': 600,
     'description': u'Killer Mac for serious use. You will love it.',
     'sold': False,
     'location': '-121.45356 46.51119 4392'
+    }
+
+NEW_ITEM = {
+    'title': 'Almost new pair of socks',
+    'price': 2,
+    'pictures':
+    {'1': 'IMG_1234.jpeg',
+     '2': 'IMG_2345.jpg'}
     }
 
 TEST_DB = TestDB()
@@ -37,45 +43,53 @@ class TestApp(unittest.TestCase):
         app.config['TESTING'] = True
         self.app = app.test_client()
         self.valid_credentials = base64.b64encode(b'mojo:best_password_ever').decode('utf-8')
-        self.new_item = '{"title":"Almost new pair of socks", "seller_id": 12345, "price": 2, ' \
-                        '"pictures": {"1": "IMG_1234.jpeg", "2": "IMG_2345.jpg"}}'
         self.db = TEST_DB
-        self.db.items.insert(ITEM1)
-        self.db.items.insert(ITEM2)
+        self.create_two_items()
 
     def tearDown(self):
         self.db.items.remove({})
 
-    def test_check_item_2_is_not_sold(self):
+    def create_two_items(self):
+        self.app.post('/todo/api/v1.0/items',
+                      data=json.dumps(ITEM1),
+                      content_type='application/json',
+                      headers={'Authorization': 'Basic ' + self.valid_credentials})
+        self.app.post('/todo/api/v1.0/items',
+                      data=json.dumps(ITEM2),
+                      content_type='application/json',
+                      headers={'Authorization': 'Basic ' + self.valid_credentials})
+
+    def test_given_there_is_two_items_in_db_when_item_two_is_retrieved_then_it_is_not_sold(self):
         response = self.app.get(
-            '/todo/api/v1.0/items/2', headers={'Authorization': 'Basic ' + self.valid_credentials})
+            '/todo/api/v1.0/items/1', headers={'Authorization': 'Basic ' + self.valid_credentials})
         json_resp = json.loads(response.data.decode('utf-8'))
         self.assertFalse(json_resp['item']['sold'])
 
-    def test_when_new_item_is_created_status_code_is_201(self):
+    def test_given_there_is_two_items_in_db_when_new_items_is_added_then_status_code_is_201(self):
         response = self.app.post('/todo/api/v1.0/items',
-                                 data=self.new_item,
+                                 data=json.dumps(NEW_ITEM),
                                  content_type='application/json',
                                  headers={'Authorization': 'Basic ' + self.valid_credentials})
         self.assertEqual(response.status_code, 201)
         self.assertEqual(self.db.items.count(), 3)
 
-    def test_when_new_item_is_created_it_can_be_retrieved(self):
+    def test_given_there_is_two_items_in_db_when_new_item_is_created_then_it_can_be_retrieved(self):
         response = self.app.post('/todo/api/v1.0/items',
-                                 data=self.new_item,
+                                 data=json.dumps(NEW_ITEM),
                                  content_type='application/json',
                                  headers={'Authorization': 'Basic ' + self.valid_credentials})
         json_resp = json.loads(response.data.decode('utf-8'))
         self.assertEqual(json_resp['item']['title'], 'Almost new pair of socks')
         self.assertEqual(json_resp['item']['price'], 2)
+        self.assertEqual(json_resp['item']['seller_id'], 0)
         self.assertEqual(self.db.items.count(), 3)
 
-    def test_when_non_existing_item_is_requested_status_code_is_404(self):
+    def test_given_there_is_two_items_in_db_when_item_number_five_is_requested_then_it_can_not_be_retrieved(self):
         response = self.app.get(
             '/todo/api/v1.0/items/5', headers={'Authorization': 'Basic ' + self.valid_credentials})
         self.assertEqual(response.status_code, 404)
 
-    def test_when_item_is_deleted_it_cannot_be_found(self):
+    def test_given_there_is_two_items_in_db_when_item_number_one_is_deleted_it_cannot_be_found(self):
         self.app.delete(
             '/todo/api/v1.0/items/1', headers={'Authorization': 'Basic ' + self.valid_credentials})
         response = self.app.get(
@@ -84,10 +98,10 @@ class TestApp(unittest.TestCase):
         self.assertEqual(self.db.retrieve_item_with_id(1), None)
         self.assertEqual(self.db.items.count(), 1)
 
-    def test_when_new_item_is_created_without_title_status_code_is_400(self):
-        item = '{"description":"fake_news"}'
+    def test_given_there_is_two_items_in_db_when_invalid_item_is_created_then_status_code_400_is_retrieved(self):
+        item = {'description': 'fake_news'}  # no title or price
         response = self.app.post('/todo/api/v1.0/items',
-                                 data=item,
+                                 data=json.dumps(item),
                                  content_type='application/json',
                                  headers={'Authorization': 'Basic ' + self.valid_credentials})
         self.assertEqual(response.status_code, 400)

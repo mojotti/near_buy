@@ -1,5 +1,8 @@
 import base64
 import unittest
+
+from flask import json
+
 from app import app
 from database import TestDB
 
@@ -20,10 +23,13 @@ ITEM2 = {
     'location': '-121.45356 46.51119 4392'
     }
 
+NEW_ITEM = {'title': 'Read a book'}
+
+
 TEST_DB = TestDB()
 
 
-class TestLogin(unittest.TestCase):
+class TestCredentials(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         TEST_DB.create_two_users_to_db()
@@ -41,7 +47,6 @@ class TestLogin(unittest.TestCase):
         self.valid_credentials = base64.b64encode(b'mojo:best_password_ever').decode('utf-8')
         self.invalid_password = base64.b64encode(b'mojo:wrong_password').decode('utf-8')
         self.invalid_username = base64.b64encode(b'wrong_username:very_good_password').decode('utf-8')
-        self.new_item = '{"title":"Read a book"}'
 
     def test_item_2_can_be_retrieved_when_correct_credentials_are_entered(self):
         response = self.app.get(
@@ -75,13 +80,13 @@ class TestLogin(unittest.TestCase):
 
     def test_when_new_item_is_created_without_credentials_status_code_is_403(self):
         response = self.app.post('todo/api/v1.0/items',
-                                 data=self.new_item,
+                                 data=json.dumps(NEW_ITEM),
                                  content_type='application/json')
         self.assertEqual(response.status_code, 403)
 
     def test_when_new_item_is_created_with_wrong_credentials_status_code_is_403(self):
         response = self.app.post('todo/api/v1.0/items',
-                                 data=self.new_item,
+                                 data=json.dumps(NEW_ITEM),
                                  content_type='application/json',
                                  headers={'Authorization': 'Basic ' + self.invalid_password})
         self.assertEqual(response.status_code, 403)
