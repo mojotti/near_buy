@@ -72,3 +72,16 @@ class TestUser(unittest.TestCase):
                       data=json.dumps(item),
                       content_type='application/json',
                       headers={'Authorization': 'Basic ' + credentials})
+
+    def test_given_when_user_has_no_items_in_db_when_user1_creates_item_then_user2_cannot_modify_that_item(self):
+        self.create_new_item(NEW_ITEM1, VALID_CREDENTIALS1)
+        update = {'sold': True}
+        response = self.app.put('todo/api/v1.0/items/0',
+                                data=json.dumps(update),
+                                content_type='application/json',
+                                headers={'Authorization': 'Basic ' + VALID_CREDENTIALS2})
+        self.assertEqual(response.status_code, 403)
+
+
+
+

@@ -10,7 +10,8 @@ ITEM1 = {
     'price': 15,
     'description': u'Hardly used air maxes. Get em while you can',
     'sold': False,
-    'location': '-121.45356 46.51119 4392'
+    'location': '-121.45356 46.51119 4392',
+    'seller_id': 0
     }
 ITEM2 = {
     'id': 2,
@@ -18,8 +19,9 @@ ITEM2 = {
     'price': 600,
     'description': u'Killer Mac for serious use. You will love it.',
     'sold': False,
-    'location': '-121.45356 46.51119 4392'
-    }
+    'location': '-121.45356 46.51119 4392',
+    'seller_id': 0
+}
 
 VALID_CREDENTIALS = base64.b64encode(b'mojo:best_password_ever').decode('utf-8')
 TEST_DB = TestDB()

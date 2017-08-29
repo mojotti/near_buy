@@ -111,6 +111,8 @@ def update_item(item_id):
     user_id = DB.retrieve_user_id_with_username(auth.username())
     items = DB.retrieve_items()
     item = [item for item in items if item['id'] == item_id]
+    if item[0].get('seller_id') != user_id:
+        abort(403)
     check_if_item_is_valid(item)
     item[0]['title'] = request.json.get('title', item[0]['title'])
     item[0]['description'] = request.json.get('description',
