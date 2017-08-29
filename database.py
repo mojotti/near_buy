@@ -109,6 +109,4 @@ class TestDB(DatabaseHelper):
         self.create_new_user_to_database('mojo', 'best_password_ever')
         self.create_new_user_to_database('kojo', 'very_good_password')
 
-    def remove_all_users_from_db(self):
-        self.users.remove({})
 

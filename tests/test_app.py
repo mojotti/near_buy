@@ -26,7 +26,7 @@ NEW_ITEM = {
     {'1': 'IMG_1234.jpeg',
      '2': 'IMG_2345.jpg'}
     }
-
+VALID_CREDENTIALS = base64.b64encode(b'mojo:best_password_ever').decode('utf-8')
 TEST_DB = TestDB()
 
 
@@ -37,12 +37,11 @@ class TestApp(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        TEST_DB.remove_all_users_from_db()
+        TEST_DB.users.remove({})
 
     def setUp(self):
         app.config['TESTING'] = True
         self.app = app.test_client()
-        self.valid_credentials = base64.b64encode(b'mojo:best_password_ever').decode('utf-8')
         self.db = TEST_DB
         self.create_two_items()
 
@@ -53,15 +52,15 @@ class TestApp(unittest.TestCase):
         self.app.post('/todo/api/v1.0/items',
                       data=json.dumps(ITEM1),
                       content_type='application/json',
-                      headers={'Authorization': 'Basic ' + self.valid_credentials})
+                      headers={'Authorization': 'Basic ' + VALID_CREDENTIALS})
         self.app.post('/todo/api/v1.0/items',
                       data=json.dumps(ITEM2),
                       content_type='application/json',
-                      headers={'Authorization': 'Basic ' + self.valid_credentials})
+                      headers={'Authorization': 'Basic ' + VALID_CREDENTIALS})
 
     def test_given_there_is_two_items_in_db_when_item_two_is_retrieved_then_it_is_not_sold(self):
         response = self.app.get(
-            '/todo/api/v1.0/items/1', headers={'Authorization': 'Basic ' + self.valid_credentials})
+            '/todo/api/v1.0/items/1', headers={'Authorization': 'Basic ' + VALID_CREDENTIALS})
         json_resp = json.loads(response.data.decode('utf-8'))
         self.assertFalse(json_resp['item']['sold'])
 
@@ -69,7 +68,7 @@ class TestApp(unittest.TestCase):
         response = self.app.post('/todo/api/v1.0/items',
                                  data=json.dumps(NEW_ITEM),
                                  content_type='application/json',
-                                 headers={'Authorization': 'Basic ' + self.valid_credentials})
+                                 headers={'Authorization': 'Basic ' + VALID_CREDENTIALS})
         self.assertEqual(response.status_code, 201)
         self.assertEqual(self.db.items.count(), 3)
 
@@ -77,23 +76,23 @@ class TestApp(unittest.TestCase):
         response = self.app.post('/todo/api/v1.0/items',
                                  data=json.dumps(NEW_ITEM),
                                  content_type='application/json',
-                                 headers={'Authorization': 'Basic ' + self.valid_credentials})
+                                 headers={'Authorization': 'Basic ' + VALID_CREDENTIALS})
         json_resp = json.loads(response.data.decode('utf-8'))
         self.assertEqual(json_resp['item']['title'], 'Almost new pair of socks')
         self.assertEqual(json_resp['item']['price'], 2)
-        self.assertEqual(json_resp['item']['seller_id'], 0)
+        self.assertEqual(json_resp['item']['seller_id'], 0)  # user 'mojo' was used to login
         self.assertEqual(self.db.items.count(), 3)
 
     def test_given_there_is_two_items_in_db_when_item_number_five_is_requested_then_it_can_not_be_retrieved(self):
         response = self.app.get(
-            '/todo/api/v1.0/items/5', headers={'Authorization': 'Basic ' + self.valid_credentials})
+            '/todo/api/v1.0/items/5', headers={'Authorization': 'Basic ' + VALID_CREDENTIALS})
         self.assertEqual(response.status_code, 404)
 
     def test_given_there_is_two_items_in_db_when_item_number_one_is_deleted_it_cannot_be_found(self):
         self.app.delete(
-            '/todo/api/v1.0/items/1', headers={'Authorization': 'Basic ' + self.valid_credentials})
+            '/todo/api/v1.0/items/1', headers={'Authorization': 'Basic ' + VALID_CREDENTIALS})
         response = self.app.get(
-            '/todo/api/v1.0/items/1', headers={'Authorization': 'Basic ' + self.valid_credentials})
+            '/todo/api/v1.0/items/1', headers={'Authorization': 'Basic ' + VALID_CREDENTIALS})
         self.assertEqual(response.status_code, 404)
         self.assertEqual(self.db.retrieve_item_with_id(1), None)
         self.assertEqual(self.db.items.count(), 1)
@@ -103,7 +102,7 @@ class TestApp(unittest.TestCase):
         response = self.app.post('/todo/api/v1.0/items',
                                  data=json.dumps(item),
                                  content_type='application/json',
-                                 headers={'Authorization': 'Basic ' + self.valid_credentials})
+                                 headers={'Authorization': 'Basic ' + VALID_CREDENTIALS})
         self.assertEqual(response.status_code, 400)
         self.assertEqual(self.db.items.count(), 2)
 
