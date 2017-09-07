@@ -47,50 +47,50 @@ class TestCredentials(unittest.TestCase):
         app.config['TESTING'] = True
         self.app = app.test_client()
 
-    def test_item_2_can_be_retrieved_when_correct_credentials_are_entered(self):
+    def test_given_there_is_two_items_in_db_when_item_2_is_requested_then_it_is_retrieved(self):
         response = self.app.get(
             '/todo/api/v1.0/items/2', headers={'Authorization': 'Basic ' + VALID_CREDENTIALS})
         self.assertEqual(response.status, '200 OK')
 
-    def test_when_invalid_password_is_entered_item_2_is_not_retrieved(self):
+    def test_given_there_is_two_items_in_db_when_invalid_password_is_entered_then_item_2_is_not_retrieved(self):
         response = self.app.get(
             '/todo/api/v1.0/items/2', headers={'Authorization': 'Basic ' + INVALID_PASSWORD})
         self.assertEqual(response.status, '403 FORBIDDEN')
 
-    def test_when_invalid_username_is_entered_item_2_is_not_retrieved(self):
+    def test_given_there_is_two_items_in_db_when_invalid_username_is_entered_then_item_2_is_not_retrieved(self):
         response = self.app.get(
             '/todo/api/v1.0/items/2', headers={'Authorization': 'Basic ' + INVALID_USERNAME})
         self.assertEqual(response.status, '403 FORBIDDEN')
 
-    def test_all_items_are_retrieved_when_correct_credentials_are_entered(self):
+    def test_given_there_is_two_items_in_db_when_correct_credentials_are_entered_then_all_items_are_retrieved(self):
         response = self.app.get(
             'todo/api/v1.0/items', headers={'Authorization': 'Basic ' + VALID_CREDENTIALS})
         self.assertEqual(response.status, '200 OK')
 
-    def test_when_invalid_password_is_entered_items_are_not_retrieved(self):
+    def test_given_there_is_two_items_in_db_when_invalid_password_is_entered_then_items_are_not_retrieved(self):
         response = self.app.get(
             '/todo/api/v1.0/items', headers={'Authorization': 'Basic ' + INVALID_PASSWORD})
         self.assertEqual(response.status, '403 FORBIDDEN')
 
-    def test_when_invalid_username_is_entered_items_are_not_retrieved(self):
+    def test_given_there_is_two_items_in_db_when_invalid_username_is_entered_then_items_are_not_retrieved(self):
         response = self.app.get(
             '/todo/api/v1.0/items/2', headers={'Authorization': 'Basic ' + INVALID_USERNAME})
         self.assertEqual(response.status, '403 FORBIDDEN')
 
-    def test_when_new_item_is_created_without_credentials_status_code_is_403(self):
+    def test_given_there_is_two_items_in_db_when_new_item_is_created_without_credentials_then_status_code_is_403(self):
         response = self.app.post('todo/api/v1.0/items',
                                  data=json.dumps(NEW_ITEM),
                                  content_type='application/json')
         self.assertEqual(response.status_code, 403)
 
-    def test_when_new_item_is_created_with_wrong_credentials_status_code_is_403(self):
+    def test_given_there_is_two_items_in_db_when_new_item_is_created_with_wrong_password_then_status_code_is_403(self):
         response = self.app.post('todo/api/v1.0/items',
                                  data=json.dumps(NEW_ITEM),
                                  content_type='application/json',
                                  headers={'Authorization': 'Basic ' + INVALID_PASSWORD})
         self.assertEqual(response.status_code, 403)
 
-    def test_when_item_is_updated_with_wrong_password_status_code_is_403(self):
+    def test_given_there_is_two_items_in_db_when_item_is_updated_with_wrong_password_then_status_code_is_403(self):
         update = '{"sold":true}'
         response = self.app.put('todo/api/v1.0/items/2',
                                 data=update,
@@ -98,7 +98,7 @@ class TestCredentials(unittest.TestCase):
                                 headers={'Authorization': 'Basic ' + INVALID_PASSWORD})
         self.assertEqual(response.status_code, 403)
 
-    def test_when_item_is_deleted_with_invalid_credentials_status_code_is_403(self):
+    def test_given_there_is_two_items_in_db_when_item_is_deleted_with_invalid_credentials_then_status_code_is_403(self):
         response = self.app.delete('todo/api/v1.0/items/2',
                                    content_type='application/json',
                                    headers={'Authorization': 'Basic ' + INVALID_PASSWORD})

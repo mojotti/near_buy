@@ -56,7 +56,7 @@ class TestApp(unittest.TestCase):
         self.assertEqual(updated_item['description'], 'Price went up. This Mac is sold.')
         self.assertNotEqual(updated_item['sold'], old_item['sold'])
 
-    def test_when_item_to_update_is_not_different_it_is_not_updated(self):
+    def test_given_there_is_two_items_in_db_when_item_to_update_is_not_different_then_it_is_not_updated(self):
         old_item = self.db.retrieve_item_with_title('Nike Shoes AirMax')
         item = {
             'id': 1,
@@ -72,7 +72,7 @@ class TestApp(unittest.TestCase):
         self.assertEqual(updated_item['sold'], False)
         self.assertEqual(updated_item['sold'], old_item['sold'])
 
-    def test_when_many_fields_of_item_are_updated_all_fields_are_updated(self):
+    def test_given_there_is_two_items_in_db_when_many_fields_of_item_are_updated_then_all_fields_are_updated(self):
         item = {'id': 2, 'sold': True, 'title': 'I am awesome',
                 'description': 'Me hungry'}
         self.db.find_and_update_item(item)
@@ -81,12 +81,12 @@ class TestApp(unittest.TestCase):
         self.assertEqual(updated_item['title'], 'I am awesome')
         self.assertEqual(updated_item['description'], 'Me hungry')
 
-    def test_when_item_with_invalid_id_is_tried_to_be_updated_error_is_raised(self):
+    def test_given_there_is_two_items_in_db_when_item_with_invalid_id_is_tried_to_be_updated_then_error_is_raised(self):
         item = {'id': 6, 'sold': True, 'title': 'I dont exist',
                 'description': 'Oh my gosh'}
         self.assertRaises(ValueError, self.db.find_and_update_item, item)
 
-    def test_when_item_is_deleted_it_cannot_be_found(self):
+    def test_given_there_is_two_items_in_db_when_item_is_deleted_then_it_cannot_be_found(self):
         item = {
             'id': 2,
             'title': u'MacBook Air mid 2012',
@@ -99,35 +99,35 @@ class TestApp(unittest.TestCase):
         self.assertEqual(self.db.items.count(), 1)
         self.assertEqual(self.db.retrieve_item_with_id(2), None)
 
-    def test_when_non_existing_item_is_tried_to_be_removed_error_is_risen(self):
+    def test_given_there_is_two_items_in_db_when_non_existing_item_is_tried_to_be_removed_then_error_is_risen(self):
         item = {'id': 6, 'sold': True, 'title': 'I dont exist',
                 'description': 'Oh my gosh'}
         self.assertRaises(ValueError, self.db.remove_item, item)
 
-    def test_item_is_removed_with_correct_id(self):
+    def test_given_there_is_two_items_in_db_when_item_is_removed_with_correct_id_then_it_is_removed(self):
         self.db.remove_item_by_id(1)
         self.assertEqual(self.db.retrieve_item_with_id(1), None)
         self.assertEqual(self.db.items.count(), 1)
 
-    def test_matching_hash_is_found_from_db(self):
+    def test_given_there_is_no_users_in_db_when_new_user_is_created_then_matching_hash_is_found_from_db(self):
         self.db.create_new_user_to_database(TEST_USER, TEST_PASSWORD)
         self.assertTrue(self.db.check_password_hash_for_user(TEST_USER, TEST_PASSWORD))
 
-    def test_password_does_not_match_to_hash_in_db(self):
+    def test_given_there_is_no_users_in_db_when_user_is_created_with_incorrect_pw_then_there_is_no_matching_hash(self):
         self.db.create_new_user_to_database(TEST_USER, TEST_PASSWORD)
         self.assertFalse(self.db.check_password_hash_for_user(TEST_USER, "incorrect_password"))
 
-    def test_single_user_is_retrieved_from_db(self):
+    def test_given_there_is_no_users_in_db_when_new_user_is_created_then_user_is_retrieved_from_db(self):
         self.db.create_new_user_to_database(TEST_USER, TEST_PASSWORD)
         user = self.db.retrieve_user_by_username(TEST_USER)
         self.assertEqual(user['username'], TEST_USER)
 
-    def test_when_user_exists_already_it_is_not_created(self):
+    def test_given_there_is_no_users_in_db_when_user_is_created_twice_then_user_is_not_created_on_second_time(self):
         self.db.create_new_user_to_database(TEST_USER, TEST_PASSWORD)
         self.db.create_new_user_to_database(TEST_USER, TEST_PASSWORD)
         self.assertEqual(self.db.users.count(), 1)
 
-    def test_when_five_users_are_created_and_four_users_are_removed_then_one_users_in_db(self):
+    def test_given_there_is_no_users_in_db_when_five_users_are_created_and_four_removed_then_one_user_in_db(self):
         for i in range(5):
             self.db.create_new_user_to_database('user' + str(i), 'password' + str(i))
         self.assertEqual(self.db.users.count(), 5)
@@ -135,7 +135,7 @@ class TestApp(unittest.TestCase):
             self.db.remove_user_from_db('user' + str(i))
         self.assertEquals(self.db.users.count(), 1)
 
-    def test_given_there_are_no_users_when_five_users_are_created_then_they_can_be_found(self):
+    def test_given_there_are_no_users_when_five_users_are_created_then_they_all_can_be_found(self):
         for i in range(5):
             self.db.create_new_user_to_database('user' + str(i), 'password' + str(i))
         self.assertEqual(self.db.users.count(), 5)
