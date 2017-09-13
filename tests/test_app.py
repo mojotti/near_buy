@@ -26,6 +26,7 @@ NEW_ITEM = {
     {'1': 'IMG_1234.jpeg',
      '2': 'IMG_2345.jpg'}
     }
+
 VALID_CREDENTIALS = base64.b64encode(b'mojo:best_password_ever').decode('utf-8')
 TEST_DB = TestDB()
 
@@ -59,8 +60,8 @@ class TestApp(unittest.TestCase):
                       headers={'Authorization': 'Basic ' + VALID_CREDENTIALS})
 
     def test_given_there_is_two_items_in_db_when_item_two_is_retrieved_then_it_is_not_sold(self):
-        response = self.app.get(
-            '/todo/api/v1.0/items/1', headers={'Authorization': 'Basic ' + VALID_CREDENTIALS})
+        response = self.app.get('/todo/api/v1.0/items/1',
+                                headers={'Authorization': 'Basic ' + VALID_CREDENTIALS})
         json_resp = json.loads(response.data.decode('utf-8'))
         self.assertFalse(json_resp['item']['sold'])
 

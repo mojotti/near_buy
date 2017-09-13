@@ -18,7 +18,6 @@ else:
 
 @auth.verify_password
 def verify_password(username, password):
-    """Returns a hashed password when password is queried with username."""
     return DB.check_password_hash_for_user(username, password)
 
 
