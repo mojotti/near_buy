@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "react-navigation": "https://github.com/react-community/react-navigation"
+  }
+}

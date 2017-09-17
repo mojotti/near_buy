@@ -39,6 +39,12 @@ def not_found(error):
     return make_response(jsonify({'error': 'Not found'}), 404)
 
 
+@app.route('/todo/api/v1.0/auth', methods=['GET'])
+@auth.login_required
+def check_login():
+    return jsonify({'login': 'success'})
+
+
 def make_public_item(item):
     """"Helper function for get_items(). Collects one item at the time."""
     new_item = {}
