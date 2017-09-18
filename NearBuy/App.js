@@ -1,13 +1,17 @@
 'use strict';
 
-import React from 'react';
-import { StackNavigator } from 'react-navigation';
-import LoginScreen from './Login';
-import HomeScreen from './HomeScreen';
+import React, { Component } from 'react';
+import { AppRegistry } from 'react-native';
+import { Provider } from 'react-redux';
+import Application from './pages/Application';
+import store from './redux';
 
-
-const AppScreens = StackNavigator({
-  Login: { screen: LoginScreen },
-  Home: { screen: HomeScreen },
-});
-export default AppScreens;
+export default class App extends Component {
+  render() {
+      return (
+        <Provider store={store}>
+          <Application />
+        </Provider>
+      );
+    }
+}
