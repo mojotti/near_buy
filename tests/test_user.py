@@ -9,6 +9,7 @@ from database import TestDB
 TEST_DB = TestDB()
 VALID_CREDENTIALS1 = base64.b64encode(b'mojo:best_password_ever').decode('utf-8')
 VALID_CREDENTIALS2 = base64.b64encode(b'kojo:very_good_password').decode('utf-8')
+INVALID_CREDENTIALS = base64.b64encode(b'coyote:totally_wrong_pw').decode('utf-8')
 NEW_ITEM1 = {'title': 'Almost new pair of socks',
              'price':  2,
              'pictures':
@@ -66,6 +67,18 @@ class TestUser(unittest.TestCase):
         self.assertEquals(len(items), 2)
         self.assertEquals(items[0]['title'], 'Almost new pair of socks')
         self.assertEquals(items[1]['title'], 'Great rock n roll album')
+
+    def test_given_user_has_signed_up_when_she_enters_credentials_then_she_can_authenticate(self):
+        rv = self.app.get('/todo/api/v1.0/auth',
+                    content_type='application/json',
+                    headers={'Authorization': 'Basic ' + VALID_CREDENTIALS1})
+        self.assertEquals(rv.status_code, 200)
+
+    def test_given_user_has_not_signed_up_when_she_enters_credentials_then_she_can_not_authenticate(self):
+        rv = self.app.get('/todo/api/v1.0/auth',
+                    content_type='application/json',
+                    headers={'Authorization': 'Basic ' + INVALID_CREDENTIALS})
+        self.assertEquals(rv.status_code, 403)
 
     def create_new_item(self, item, credentials):
         self.app.post('/todo/api/v1.0/items',

@@ -25,8 +25,6 @@ export default class LoginScreen extends React.Component {
   }
   handleLogin() {
     var headers = this.getHeaders();
-    if (1<2)
-    console.log("painoin");
   }
 
   render() {
@@ -52,7 +50,7 @@ export default class LoginScreen extends React.Component {
         <View style={{margin: 7}}/>
         <Button
           title="Login"
-          onPress={() =>  navigate('Home')}
+          onPress={() => navigate('Home')}
         />
     </ScrollView>
     );
