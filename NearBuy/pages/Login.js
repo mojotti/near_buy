@@ -84,22 +84,23 @@ class Login extends Component {
           </View>
 
           <View style={[styles.loginContainer]}>
-            <TextInput
-                placeholder='Username'
-                autoCapitalize='none'
-                autoCorrect={false}
-                autoFocus={true}
-                keyboardType='email-address'
-                value={this.state.username}
-                onChangeText={(text) => this.setState({ username: text })} />
-            <View style={{margin: 4}}/>
-            <TextInput
-                placeholder='Password'
-                autoCapitalize='none'
-                autoCorrect={false}
-                secureTextEntry={true}
-                value={this.state.password}
-                onChangeText={(text) => this.setState({ password: text })} />
+          <TextInput
+              placeholder='Username'
+              autoCapitalize='none'
+              autoCorrect={false}
+              autoFocus={true}
+              keyboardType='email-address'
+              value={this.state.username}
+              onChangeText={(text) => this.setState({ username: text })} />
+          <View style={{margin: 4}}/>
+          <TextInput
+              placeholder='Password'
+              autoCapitalize='none'
+              autoCorrect={false}
+              secureTextEntry={true}
+              value={this.state.password}
+              onChangeText={(text) => this.setState({ password: text })} />
+
             <Text style={{fontSize: 27}}>{this.state.route}</Text>
             <Button onPress={(e) => this.handleLoginRequest(e)} title={this.state.page}/>
             <View style={{marginTop: 55, flexDirection: 'row', justifyContent: 'center'}}>
@@ -137,6 +138,7 @@ const styles = StyleSheet.create({
   welcomeText: {
     fontSize: 24,
     textAlign: 'center',
+    marginTop: 50
   },
   loginHint: {
     fontSize: 12,
@@ -149,6 +151,8 @@ const styles = StyleSheet.create({
   },
   loginContainer: {
     justifyContent: 'center',
+    alignSelf: 'stretch',
+    padding: 80
   },
 });
 
