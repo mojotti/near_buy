@@ -2,10 +2,14 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { ScrollView, Text, TextInput, View, Button, Platform } from 'react-native';
+import { Alert, ScrollView, Text, TextInput, View, Button, Platform, StyleSheet, Image } from 'react-native';
 import { login } from '../redux/actions/auth';
+
 const LOCALHOST = (Platform.OS === 'ios') ? 'localhost' : '10.0.2.2';
 const base64 = require('base-64');
+const loginText = "New user? Press 'Sign up' to register.";
+const registerText = "Existing user? Press 'Login'.";
+
 
 class Login extends Component {
     constructor (props) {
@@ -22,18 +26,16 @@ class Login extends Component {
         e.preventDefault();
     }
 
-    toggleRoute (e) {
-      let alt = (this.state.route === 'Login') ? 'SignUp' : 'Login';
-      this.setState({ route: alt });
-      e.preventDefault();
-    }
-
     togglePage (e) {
-      this.setState({ page: this.alt });
+      this.setState({ page: this.altLoginSignup });
       e.preventDefault();
     }
 
-    get alt () { return (this.state.page === 'Login') ? 'SignUp' : 'Login'; }
+    get altLoginSignup () { return (this.state.page === 'Login')
+          ? 'Sign up' : 'Login'; }
+
+    get helperText () { return (this.state.page === 'Login')
+          ? loginText : registerText; }
 
     getHeaders() {
       var headers = new Headers();
@@ -57,45 +59,57 @@ class Login extends Component {
         console.log(responseJson);
         if (responseJson.login === 'success') {
           this.props.onLogin(this.state.username, this.state.password);
+        } else {
+          Alert.alert('Try again, mate!', 'Invalid credentials.');
+          this.setState({ password: '' });
         }
       })
 
       .catch((error) => {
          console.error(error);
-         this.setState({ username: '', password: '' });
          return;
       });
     }
 
     render () {
-      let alt = (this.state.route === 'Login') ? 'SignUp' : 'Login';
       return (
-        <ScrollView style={{padding: 20}}>
-          <Text style={{fontSize: 27}}>{this.state.route}</Text>
-          <TextInput
-              placeholder='Username'
-              autoCapitalize='none'
-              autoCorrect={false}
-              autoFocus={true}
-              keyboardType='email-address'
-              value={this.state.username}
-              onChangeText={(text) => this.setState({ username: text })} />
-          <TextInput
-              placeholder='Password'
-              autoCapitalize='none'
-              autoCorrect={false}
-              secureTextEntry={true}
-              value={this.state.password}
-              onChangeText={(text) => this.setState({ password: text })} />
-          <View style={{margin: 7}}/>
-          <View style={{margin: 7}}/>
-          <Button onPress={(e) => this.handleLoginRequest(e)} title={this.state.page}/>
-          <View style={{margin: 7, flexDirection: 'row', justifyContent: 'center'}}>
-          <Text onPress={(e) => this.togglePage(e)} style={{fontSize: 12, color: 'blue'}}>
-              {this.alt}
-          </Text>
+        <View style={[styles.container]}>
+          <View style={[styles.logoContainer]}>
+            <Text style={[styles.welcomeText]}>Welcome to NearBuy</Text>
+            <Image
+              resizeMode="contain"
+              style={styles.logo}
+              source={require('./../logo.png')}
+            />
+          </View>
+
+          <View style={[styles.loginContainer]}>
+            <TextInput
+                placeholder='Username'
+                autoCapitalize='none'
+                autoCorrect={false}
+                autoFocus={true}
+                keyboardType='email-address'
+                value={this.state.username}
+                onChangeText={(text) => this.setState({ username: text })} />
+            <View style={{margin: 4}}/>
+            <TextInput
+                placeholder='Password'
+                autoCapitalize='none'
+                autoCorrect={false}
+                secureTextEntry={true}
+                value={this.state.password}
+                onChangeText={(text) => this.setState({ password: text })} />
+            <Text style={{fontSize: 27}}>{this.state.route}</Text>
+            <Button onPress={(e) => this.handleLoginRequest(e)} title={this.state.page}/>
+            <View style={{marginTop: 55, flexDirection: 'row', justifyContent: 'center'}}>
+              <Text onPress={(e) => this.togglePage(e)} style={{fontSize: 14, color: 'blue'}}>
+                  {this.altLoginSignup}
+              </Text>
+            </View>
+            <Text style={[styles.loginHint]}>{this.helperText}</Text>
         </View>
-      </ScrollView>
+      </View>
     );
   }
 }
@@ -113,5 +127,29 @@ const mapDispatchToProps = (dispatch) => {
         onSignUp: (username, password) => { dispatch(signup(username, password)); }
     }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'space-around',
+  },
+  welcomeText: {
+    fontSize: 24,
+    textAlign: 'center',
+  },
+  loginHint: {
+    fontSize: 12,
+    textAlign: 'center',
+    marginTop: 10,
+  },
+  logo: {
+    width: 350,
+    height: 150,
+  },
+  loginContainer: {
+    justifyContent: 'center',
+  },
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
