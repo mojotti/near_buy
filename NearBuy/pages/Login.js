@@ -2,7 +2,8 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Alert, ScrollView, Text, TextInput, View, Button, Platform, StyleSheet, Image } from 'react-native';
+import { Alert, ScrollView, Text, TextInput, View, Button, Platform, StyleSheet,
+  Image, KeyboardAvoidingView } from 'react-native';
 import { login } from '../redux/actions/auth';
 
 const LOCALHOST = (Platform.OS === 'ios') ? 'localhost' : '10.0.2.2';
@@ -34,7 +35,7 @@ class Login extends Component {
     get altLoginSignup () { return (this.state.page === 'Login')
           ? 'Sign up' : 'Login'; }
 
-    get helperText () { return (this.state.page === 'Login')
+    get altHelperText () { return (this.state.page === 'Login')
           ? loginText : registerText; }
 
     getHeaders() {
@@ -73,44 +74,49 @@ class Login extends Component {
 
     render () {
       return (
-        <View style={[styles.container]}>
-          <View style={[styles.logoContainer]}>
-            <Text style={[styles.welcomeText]}>Welcome to NearBuy</Text>
-            <Image
-              resizeMode="contain"
-              style={styles.logo}
-              source={require('./../logo.png')}
-            />
-          </View>
-
-          <View style={[styles.loginContainer]}>
-          <TextInput
-              placeholder='Username'
-              autoCapitalize='none'
-              autoCorrect={false}
-              autoFocus={true}
-              keyboardType='email-address'
-              value={this.state.username}
-              onChangeText={(text) => this.setState({ username: text })} />
-          <View style={{margin: 4}}/>
-          <TextInput
-              placeholder='Password'
-              autoCapitalize='none'
-              autoCorrect={false}
-              secureTextEntry={true}
-              value={this.state.password}
-              onChangeText={(text) => this.setState({ password: text })} />
-
-            <Text style={{fontSize: 27}}>{this.state.route}</Text>
-            <Button onPress={(e) => this.handleLoginRequest(e)} title={this.state.page}/>
-            <View style={{marginTop: 55, flexDirection: 'row', justifyContent: 'center'}}>
-              <Text onPress={(e) => this.togglePage(e)} style={{fontSize: 14, color: 'blue'}}>
-                  {this.altLoginSignup}
-              </Text>
+          <View style={[styles.container]}>
+          <KeyboardAvoidingView
+          behavior='padding'
+          keyboardVerticalOffset={-70}
+          >
+            <View style={[styles.logoContainer]}>
+              <Text style={[styles.welcomeText]}>Welcome to NearBuy</Text>
+              <Image
+                resizeMode="contain"
+                style={styles.logo}
+                source={require('./../logo.png')}
+              />
             </View>
-            <Text style={[styles.loginHint]}>{this.helperText}</Text>
+
+            <View style={[styles.loginContainer]}>
+            <TextInput
+                placeholder='Username'
+                autoCapitalize='none'
+                autoCorrect={false}
+                autoFocus={false}
+                keyboardType='email-address'
+                value={this.state.username}
+                onChangeText={(text) => this.setState({ username: text })} />
+            <View style={{margin: 4}}/>
+            <TextInput
+                placeholder='Password'
+                autoCapitalize='none'
+                autoCorrect={false}
+                secureTextEntry={true}
+                value={this.state.password}
+                onChangeText={(text) => this.setState({ password: text })} />
+
+              <Text style={{fontSize: 27}}>{this.state.route}</Text>
+              <Button onPress={(e) => this.handleLoginRequest(e)} title={this.state.page}/>
+              <View style={{marginTop: 55, flexDirection: 'row', justifyContent: 'center'}}>
+                <Text onPress={(e) => this.togglePage(e)} style={{fontSize: 14, color: 'blue'}}>
+                    {this.altLoginSignup}
+                </Text>
+              </View>
+              <Text style={[styles.loginHint]}>{this.altHelperText}</Text>
+          </View>
+          </KeyboardAvoidingView>
         </View>
-      </View>
     );
   }
 }
