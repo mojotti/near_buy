@@ -107,5 +107,3 @@ class TestApp(unittest.TestCase):
         self.assertEqual(response.status_code, 400)
         self.assertEqual(self.db.items.count(), 2)
 
-if __name__ == '__main__':
-    unittest.main()

@@ -75,10 +75,10 @@ class Login extends Component {
     render () {
       return (
           <View style={[styles.container]}>
-          <KeyboardAvoidingView
-          behavior='padding'
-          keyboardVerticalOffset={-70}
-          >
+            <KeyboardAvoidingView
+            behavior='padding'
+            keyboardVerticalOffset={-70}
+            >
             <View style={[styles.logoContainer]}>
               <Text style={[styles.welcomeText]}>Welcome to NearBuy</Text>
               <Image
