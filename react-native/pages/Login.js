@@ -40,10 +40,14 @@ class Login extends Component {
 
     getHeaders() {
       var headers = new Headers();
-      var credentials = this.state.username + ':' + this.state.password
-      headers.append("Authorization", "Basic " +
-                      base64.encode(credentials));
+      var hash = this.getHash();
+      headers.append("Authorization", "Basic " + hash);
       return headers;
+    }
+    
+    getHash() {
+      var credentials = this.state.username + ':' + this.state.password
+      return base64.encode(credentials);
     }
 
     handleLoginRequest (e) {
@@ -59,7 +63,7 @@ class Login extends Component {
       .then((responseJson) => {
         console.log(responseJson);
         if (responseJson.login === 'success') {
-          this.props.onLogin(this.state.username, this.state.password);
+          this.props.onLogin(this.state.username, this.getHash());
         } else {
           Alert.alert('Try again, mate!', 'Invalid credentials.');
           this.setState({ password: '' });
@@ -130,7 +134,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onLogin: (username, password) => { dispatch(login(username, password)); },
+        onLogin: (username, hash) => { dispatch(login(username, hash)); },
         onSignUp: (username, password) => { dispatch(signup(username, password)); }
     }
 }

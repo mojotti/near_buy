@@ -26,8 +26,8 @@ class HomeScreen extends React.Component {
 
   getHeaders() {
     var headers = new Headers();
-    headers.append("Authorization", "Basic " +
-                    base64.encode("mojo:best_password_ever"));
+    console.log("hash " + this.props.hash);
+    headers.append("Authorization", "Basic " + this.props.hash);
     return headers;
   }
 
@@ -96,7 +96,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        username: state.auth.username
+        username: state.auth.username,
+        hash: state.auth.hash
     };
 }
 
