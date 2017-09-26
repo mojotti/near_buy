@@ -26,7 +26,6 @@ class HomeScreen extends React.Component {
 
   getHeaders() {
     var headers = new Headers();
-    console.log("hash " + this.props.hash);
     headers.append("Authorization", "Basic " + this.props.hash);
     return headers;
   }
