@@ -30,6 +30,8 @@ INVALID_USERNAME = base64.b64encode(b'wrong_username:very_good_password').decode
 
 TEST_DB = TestDB()
 
+app.config.from_object('Config.TestingConfig')
+
 
 class TestCredentials(unittest.TestCase):
     @classmethod

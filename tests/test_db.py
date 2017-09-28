@@ -24,6 +24,8 @@ ITEM2 = {
 
 TEST_DB = TestDB()
 
+app.config.from_object('Config.TestingConfig')
+
 
 class TestApp(unittest.TestCase):
     def setUp(self):

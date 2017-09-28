@@ -1,15 +1,10 @@
 """
 All database related methods are in DatabaseHelper() class.
 """
-import sys
+import app as near_buy
 import bcrypt
 from pymongo import MongoClient
 from pymongo import errors
-
-if sys.argv[0] == 'app.py':
-    ENCRYPTION_ROUNDS = 12
-else:
-    ENCRYPTION_ROUNDS = 4  # if running unit tests
 
 
 class DatabaseHelper(object):
@@ -80,7 +75,7 @@ class DatabaseHelper(object):
         return user['id']
 
     def create_new_user_to_database(self, username, password):
-        hash_ = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt(ENCRYPTION_ROUNDS))
+        hash_ = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt(near_buy.app.config['ENCRYPTION_ROUNDS']))
         user_id = self.users.count()
         user_info = {'username': username, 'hash': hash_, 'id': user_id}
         user = self.retrieve_user_by_username(username)

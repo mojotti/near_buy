@@ -30,6 +30,8 @@ NEW_ITEM = {
 VALID_CREDENTIALS = base64.b64encode(b'mojo:best_password_ever').decode('utf-8')
 TEST_DB = TestDB()
 
+app.config.from_object('Config.TestingConfig')
+
 
 class TestApp(unittest.TestCase):
     @classmethod
@@ -41,7 +43,6 @@ class TestApp(unittest.TestCase):
         TEST_DB.users.remove({})
 
     def setUp(self):
-        app.config['TESTING'] = True
         self.app = app.test_client()
         self.db = TEST_DB
         self.create_two_items()

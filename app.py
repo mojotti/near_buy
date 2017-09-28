@@ -4,16 +4,31 @@
 import sys
 import six
 from flask import Flask, jsonify, abort, request, make_response, url_for
-from flask_httpauth import HTTPBasicAuth
+from flask_httpauth import HTTPBasicAuth, HTTPTokenAuth
 from database import DatabaseHelper, TestDB
 
+
 app = Flask(__name__, static_url_path="")
+app.config.from_object('Config.DevelopmentConfig')
+
 auth = HTTPBasicAuth()
+token_auth = HTTPTokenAuth('NearBuyToken')
 
 if sys.argv[0] == 'app.py':
     DB = DatabaseHelper()
 else:
     DB = TestDB()  # if running unit tests
+
+
+@token_auth.verify_token
+def verify_token(token):
+    return token == 'this-is-the-token!'
+
+
+@app.route('/protected')
+@token_auth.login_required
+def token_auth_route():
+    return 'token_auth'
 
 
 @auth.verify_password

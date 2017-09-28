@@ -21,6 +21,7 @@ NEW_ITEM2 = {'title': 'Great rock n roll album',
                  {'1': 'IMG_100.png',
                   '2': 'IMG_104.png'}
              }
+app.config.from_object('Config.TestingConfig')
 
 
 class TestUser(unittest.TestCase):
@@ -30,7 +31,6 @@ class TestUser(unittest.TestCase):
 
     def setUp(self):
         self.db = TEST_DB
-        app.config['TESTING'] = True
         self.app = app.test_client()
 
     def tearDown(self):

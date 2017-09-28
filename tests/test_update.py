@@ -26,6 +26,8 @@ ITEM2 = {
 VALID_CREDENTIALS = base64.b64encode(b'mojo:best_password_ever').decode('utf-8')
 TEST_DB = TestDB()
 
+app.config.from_object('Config.TestingConfig')
+
 
 class TestApp(unittest.TestCase):
     @classmethod
