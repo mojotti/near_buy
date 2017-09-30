@@ -3,6 +3,7 @@ import json
 import unittest
 from app import app
 from database import TestDB
+from User import User
 
 ITEM1 = {
     'title': u'Nike Shoes AirMax',
@@ -28,7 +29,9 @@ NEW_ITEM = {
     }
 
 VALID_CREDENTIALS = base64.b64encode(b'mojo:best_password_ever').decode('utf-8')
+
 TEST_DB = TestDB()
+user = User(email='test_email', password='test_pw')
 
 app.config.from_object('Config.TestingConfig')
 
@@ -45,6 +48,7 @@ class TestApp(unittest.TestCase):
     def setUp(self):
         self.app = app.test_client()
         self.db = TEST_DB
+        self.token_for_user_id_0 = user.encode_auth_token(0).decode('utf-8')
         self.create_two_items()
 
     def tearDown(self):
@@ -54,15 +58,18 @@ class TestApp(unittest.TestCase):
         self.app.post('/todo/api/v1.0/items',
                       data=json.dumps(ITEM1),
                       content_type='application/json',
-                      headers={'Authorization': 'Basic ' + VALID_CREDENTIALS})
+                      headers={'Authorization':
+                               'Bearer ' + self.token_for_user_id_0})
         self.app.post('/todo/api/v1.0/items',
                       data=json.dumps(ITEM2),
                       content_type='application/json',
-                      headers={'Authorization': 'Basic ' + VALID_CREDENTIALS})
+                      headers={'Authorization':
+                               'Bearer ' + self.token_for_user_id_0})
 
     def test_given_there_is_two_items_in_db_when_item_two_is_retrieved_then_it_is_not_sold(self):
         response = self.app.get('/todo/api/v1.0/items/1',
-                                headers={'Authorization': 'Basic ' + VALID_CREDENTIALS})
+                                headers={'Authorization':
+                                        'Bearer ' + self.token_for_user_id_0})
         json_resp = json.loads(response.data.decode('utf-8'))
         self.assertFalse(json_resp['item']['sold'])
 
@@ -70,7 +77,8 @@ class TestApp(unittest.TestCase):
         response = self.app.post('/todo/api/v1.0/items',
                                  data=json.dumps(NEW_ITEM),
                                  content_type='application/json',
-                                 headers={'Authorization': 'Basic ' + VALID_CREDENTIALS})
+                                 headers={'Authorization':
+                                         'Bearer ' + self.token_for_user_id_0})
         self.assertEqual(response.status_code, 201)
         self.assertEqual(self.db.items.count(), 3)
 
@@ -78,7 +86,8 @@ class TestApp(unittest.TestCase):
         response = self.app.post('/todo/api/v1.0/items',
                                  data=json.dumps(NEW_ITEM),
                                  content_type='application/json',
-                                 headers={'Authorization': 'Basic ' + VALID_CREDENTIALS})
+                                 headers={'Authorization':
+                                         'Bearer ' + self.token_for_user_id_0})
         json_resp = json.loads(response.data.decode('utf-8'))
         self.assertEqual(json_resp['item']['title'], 'Almost new pair of socks')
         self.assertEqual(json_resp['item']['price'], 2)
@@ -87,14 +96,20 @@ class TestApp(unittest.TestCase):
 
     def test_given_there_is_two_items_in_db_when_item_number_five_is_requested_then_it_can_not_be_retrieved(self):
         response = self.app.get(
-            '/todo/api/v1.0/items/5', headers={'Authorization': 'Basic ' + VALID_CREDENTIALS})
+            '/todo/api/v1.0/items/5',
+            headers={'Authorization':
+                    'Bearer ' + str(self.token_for_user_id_0)})
         self.assertEqual(response.status_code, 404)
 
     def test_given_there_is_two_items_in_db_when_item_number_one_is_deleted_it_cannot_be_found(self):
         self.app.delete(
-            '/todo/api/v1.0/items/1', headers={'Authorization': 'Basic ' + VALID_CREDENTIALS})
+            '/todo/api/v1.0/items/1',
+            headers={'Authorization':
+                    'Bearer ' + self.token_for_user_id_0})
         response = self.app.get(
-            '/todo/api/v1.0/items/1', headers={'Authorization': 'Basic ' + VALID_CREDENTIALS})
+            '/todo/api/v1.0/items/1',
+            headers={'Authorization':
+                    'Bearer ' + self.token_for_user_id_0})
         self.assertEqual(response.status_code, 404)
         self.assertEqual(self.db.retrieve_item_with_id(1), None)
         self.assertEqual(self.db.items.count(), 1)
@@ -104,7 +119,8 @@ class TestApp(unittest.TestCase):
         response = self.app.post('/todo/api/v1.0/items',
                                  data=json.dumps(item),
                                  content_type='application/json',
-                                 headers={'Authorization': 'Basic ' + VALID_CREDENTIALS})
+                                 headers={'Authorization':
+                                        'Bearer ' + self.token_for_user_id_0})
         self.assertEqual(response.status_code, 400)
         self.assertEqual(self.db.items.count(), 2)
 

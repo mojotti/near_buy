@@ -1,6 +1,7 @@
 import unittest
 from app import app
 from database import TestDB
+from User import User
 
 TEST_PASSWORD = "test_password123"
 TEST_USER = "test_user"
@@ -34,6 +35,7 @@ class TestApp(unittest.TestCase):
         self.db = TEST_DB
         self.db.items.insert(ITEM1)
         self.db.items.insert(ITEM2)
+        self.user = User(email='test_email', password='test_pw')
 
     def tearDown(self):
         self.db.items.remove({})
@@ -153,6 +155,27 @@ class TestApp(unittest.TestCase):
         self.assertEquals(user['username'], 'user')
         self.assertNotEquals(user['hash'], 'password')
         self.assertTrue('password' not in user and 'hash' in user)
+
+    def test_given_user_exists_in_db_when_token_is_created_it_is_attached_to_user_details(self):
+        self.db.create_new_user_to_database('user', 'password')
+        token = self.user.encode_auth_token(user_id=0)
+        self.db.attach_token_to_user(username='user', token=token)
+        user_info = self.db.retrieve_user_by_username('user')
+        self.assertEquals(token, user_info['token'])
+        self.assertEquals('user', user_info['username'])
+        decoded_token = self.user.decode_auth_token(user_info['token'])
+        self.assertEquals(0, decoded_token)
+
+    def test_given_when_user_exists_when_user_is_searched_by_token_then_user_is_retrieved(self):
+        self.db.create_new_user_to_database('user', 'password')
+        token = self.user.encode_auth_token(user_id=0)
+        self.db.attach_token_to_user(username='user', token=token)
+        user = self.db.retrieve_user_by_token(token=token)
+        self.assertEquals(user['username'], 'user')
+        self.assertEquals(user['token'], token)
+
+
+
 
 
 

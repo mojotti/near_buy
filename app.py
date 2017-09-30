@@ -3,16 +3,17 @@
 """
 import sys
 import six
-from flask import Flask, jsonify, abort, request, make_response, url_for
-from flask_httpauth import HTTPBasicAuth, HTTPTokenAuth
+from flask import Flask, jsonify, abort, request, make_response, url_for, g
+from flask_httpauth import HTTPBasicAuth, HTTPTokenAuth, MultiAuth
 from database import DatabaseHelper, TestDB
-
+from User import User
 
 app = Flask(__name__, static_url_path="")
 app.config.from_object('Config.DevelopmentConfig')
 
-auth = HTTPBasicAuth()
-token_auth = HTTPTokenAuth('NearBuyToken')
+basic_auth = HTTPBasicAuth()
+token_auth = HTTPTokenAuth('Bearer')
+multi_auth = MultiAuth(basic_auth, token_auth)
 
 if sys.argv[0] == 'app.py':
     DB = DatabaseHelper()
@@ -22,21 +23,25 @@ else:
 
 @token_auth.verify_token
 def verify_token(token):
-    return token == 'this-is-the-token!'
+    user = DB.retrieve_user_by_token(token)
+    if not user:
+        return False
+    g.user = user
+    return token == user['token']
 
 
-@app.route('/protected')
-@token_auth.login_required
-def token_auth_route():
-    return 'token_auth'
+@app.route('/todo/api/v1.0/auth', methods=['GET'])
+@basic_auth.login_required
+def check_login():
+    return jsonify({'login': 'success'})
 
 
-@auth.verify_password
+@basic_auth.verify_password
 def verify_password(username, password):
     return DB.check_password_hash_for_user(username, password)
 
 
-@auth.error_handler
+@token_auth.error_handler
 def unauthorized():
     """Return 403 instead of 401 to prevent browsers from displaying the default auth dialog."""
     return make_response(jsonify({'error': 'Unauthorized access'}), 403)
@@ -54,12 +59,6 @@ def not_found(error):
     return make_response(jsonify({'error': 'Not found'}), 404)
 
 
-@app.route('/todo/api/v1.0/auth', methods=['GET'])
-@auth.login_required
-def check_login():
-    return jsonify({'login': 'success'})
-
-
 def make_public_item(item):
     """"Helper function for get_items(). Collects one item at the time."""
     new_item = {}
@@ -73,7 +72,7 @@ def make_public_item(item):
 
 
 @app.route('/todo/api/v1.0/items', methods=['GET'])
-@auth.login_required
+@token_auth.login_required
 def get_items():
     """Get all items."""
     items = DB.retrieve_items()
@@ -81,7 +80,7 @@ def get_items():
 
 
 @app.route('/todo/api/v1.0/items/<int:item_id>', methods=['GET'])
-@auth.login_required
+@token_auth.login_required
 def get_item(item_id):
     """Get one item with id."""
     items = DB.retrieve_items()
@@ -93,10 +92,10 @@ def get_item(item_id):
 
 
 @app.route('/todo/api/v1.0/items', methods=['POST'])
-@auth.login_required
+@token_auth.login_required
 def create_item():
     """Create new item and add it to database."""
-    user_id = DB.retrieve_user_id_with_username(auth.username())
+    user_id = g.user['id']
     items_list = [item for item in DB.retrieve_items()]
     if not request.json or 'title' not in request.json or 'price' not in request.json:
         abort(400)
@@ -125,10 +124,10 @@ def get_item_details(items_list, user_id):
 
 
 @app.route('/todo/api/v1.0/items/<int:item_id>', methods=['PUT'])
-@auth.login_required
+@token_auth.login_required
 def update_item(item_id):
     """Update one item with id."""
-    user_id = DB.retrieve_user_id_with_username(auth.username())
+    user_id = g.user['id']
     items = DB.retrieve_items()
     item = [item for item in items if item['id'] == item_id]
     if item[0].get('seller_id') != user_id:  # to prevent modifying another user's items
@@ -167,7 +166,7 @@ def check_if_item_is_valid(item):
 
 
 @app.route('/todo/api/v1.0/items/<int:item_id>', methods=['DELETE'])
-@auth.login_required
+@token_auth.login_required
 def delete_item(item_id):
     """Delete item with id."""
     items = DB.retrieve_items()
