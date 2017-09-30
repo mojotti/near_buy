@@ -43,7 +43,13 @@ def verify_password(username, password):
 
 @token_auth.error_handler
 def unauthorized():
-    """Return 403 instead of 401 to prevent browsers from displaying the default auth dialog."""
+    """For token_auth. Return 403 instead of 401 to prevent browsers from displaying the default auth dialog."""
+    return make_response(jsonify({'error': 'Unauthorized access'}), 403)
+
+
+@basic_auth.error_handler
+def unauthorized():
+    """For basic_auth. Return 403 instead of 401 to prevent browsers from displaying the default auth dialog."""
     return make_response(jsonify({'error': 'Unauthorized access'}), 403)
 
 

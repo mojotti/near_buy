@@ -3,26 +3,13 @@ from app import app
 from database import TestDB
 from User import User
 
+from samples import items
+
+ITEM1 = items.ITEM1
+ITEM2 = items.ITEM2
+
 TEST_PASSWORD = "test_password123"
 TEST_USER = "test_user"
-
-ITEM1 = {
-    'id': 1,
-    'title': u'Nike Shoes AirMax',
-    'price': 15,
-    'description': u'Hardly used air maxes. Get em while you can',
-    'sold': False,
-    'location': '-121.45356 46.51119 4392'
-    }
-ITEM2 = {
-    'id': 2,
-    'title': u'MacBook Air mid 2012',
-    'price': 600,
-    'description': u'Killer Mac for serious use. You will love it.',
-    'sold': False,
-    'location': '-121.45356 46.51119 4392'
-    }
-
 TEST_DB = TestDB()
 
 app.config.from_object('Config.TestingConfig')
@@ -92,16 +79,17 @@ class TestApp(unittest.TestCase):
 
     def test_given_there_is_two_items_in_db_when_item_is_deleted_then_it_cannot_be_found(self):
         item = {
-            'id': 2,
-            'title': u'MacBook Air mid 2012',
-            'price': 600,
-            'description': u'Killer Mac for serious use. You will love it.',
+            'id': 1,
+            'title': u'Nike Shoes AirMax',
+            'price': 15,
+            'description': u'Hardly used air maxes. Get em while you can',
             'sold': False,
-            'location': '-121.45356 46.51119 4392'
-            }
+            'location': '-121.45356 46.51119 4392',
+            'seller_id': 0
+        }
         self.db.remove_item(item)
         self.assertEqual(self.db.items.count(), 1)
-        self.assertEqual(self.db.retrieve_item_with_id(2), None)
+        self.assertEqual(self.db.retrieve_item_with_id(1), None)
 
     def test_given_there_is_two_items_in_db_when_non_existing_item_is_tried_to_be_removed_then_error_is_risen(self):
         item = {'id': 6, 'sold': True, 'title': 'I dont exist',

@@ -1,26 +1,10 @@
-import base64
 import unittest
-import jwt
 
 from app import app
 from database import TestDB
 from User import User
 
 TEST_DB = TestDB()
-VALID_CREDENTIALS1 = base64.b64encode(b'mojo:best_password_ever').decode('utf-8')
-VALID_CREDENTIALS2 = base64.b64encode(b'kojo:very_good_password').decode('utf-8')
-INVALID_CREDENTIALS = base64.b64encode(b'coyote:totally_wrong_pw').decode('utf-8')
-NEW_ITEM1 = {'title': 'Almost new pair of socks',
-             'price':  2,
-             'pictures':
-                 {'1': 'IMG_1234.jpeg', '2': 'IMG_2345.jpg'}
-             }
-NEW_ITEM2 = {'title': 'Great rock n roll album',
-             'price': 200,
-             'pictures':
-                 {'1': 'IMG_100.png',
-                  '2': 'IMG_104.png'}
-             }
 
 app.config.from_object('Config.TestingConfig')
 

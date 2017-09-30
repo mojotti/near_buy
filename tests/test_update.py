@@ -1,32 +1,23 @@
-import base64
 import json
 import unittest
+from unittest import mock
+
 from app import app
 from database import TestDB
+from User import User
+from samples import items
 
-ITEM1 = {
-    'id': 1,
-    'title': u'Nike Shoes AirMax',
-    'price': 15,
-    'description': u'Hardly used air maxes. Get em while you can',
-    'sold': False,
-    'location': '-121.45356 46.51119 4392',
-    'seller_id': 0
-    }
-ITEM2 = {
-    'id': 2,
-    'title': u'MacBook Air mid 2012',
-    'price': 600,
-    'description': u'Killer Mac for serious use. You will love it.',
-    'sold': False,
-    'location': '-121.45356 46.51119 4392',
-    'seller_id': 0
-}
-
-VALID_CREDENTIALS = base64.b64encode(b'mojo:best_password_ever').decode('utf-8')
+ITEM1 = items.ITEM1
+ITEM2 = items.ITEM2
 TEST_DB = TestDB()
+USER = User(email='test_email', password='test_pw')
 
 app.config.from_object('Config.TestingConfig')
+TOKEN_FOR_USER_ID_0 = USER.encode_auth_token(0).decode('utf-8')
+USER_MOJO = {'hash': items.HASH,
+             'username': 'mojo',
+             'id': 0,
+             'token': TOKEN_FOR_USER_ID_0}
 
 
 class TestApp(unittest.TestCase):
@@ -48,44 +39,54 @@ class TestApp(unittest.TestCase):
     def tearDown(self):
         self.db.items.remove({})
 
-    def test_given_there_is_two_items_in_db_when_item_is_updated_then_it_is_changed(self):
+    @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_MOJO)
+    def test_given_there_is_two_items_in_db_when_item_is_updated_then_it_is_changed(self, mock):
         update = {'sold': True}
         response = self.app.put('todo/api/v1.0/items/2',
                                 data=json.dumps(update),
                                 content_type='application/json',
-                                headers={'Authorization': 'Basic ' + VALID_CREDENTIALS})
+                                headers={'Authorization':
+                                        'Bearer ' + TOKEN_FOR_USER_ID_0})
         json_resp = json.loads(response.data.decode('utf-8'))
         self.assertTrue(json_resp['item']['sold'])
         item_in_db = self.db.retrieve_item_with_title(u'MacBook Air mid 2012')
         self.assertTrue(item_in_db['sold'])
 
-    def test_given_there_is_two_items_in_db_when_item_update_is_not_in_json_then_error_400_is_retrieved(self):
+    @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_MOJO)
+    def test_given_there_is_two_items_in_db_when_item_update_is_not_in_json_then_error_400_is_retrieved(self, mock):
         update = {'sold': True}
         response = self.app.put('todo/api/v1.0/items/2',
                                 data=json.dumps(update),
-                                headers={'Authorization': 'Basic ' + VALID_CREDENTIALS})
+                                headers={'Authorization':
+                                        'Bearer ' + TOKEN_FOR_USER_ID_0})
         self.assertEqual(response.status_code, 400)
 
-    def test_given_item_is_updated_when_item_title_is_not_string_code_then_error_400_is_retrieved(self):
+    @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_MOJO)
+    def test_given_item_is_updated_when_item_title_is_not_string_code_then_error_400_is_retrieved(self, mock):
         update = {'title': 111}
         response = self.app.put('todo/api/v1.0/items/2',
                                 data=json.dumps(update),
                                 content_type='application/json',
-                                headers={'Authorization': 'Basic ' + VALID_CREDENTIALS})
+                                headers={'Authorization':
+                                        'Bearer ' + TOKEN_FOR_USER_ID_0})
         self.assertEqual(response.status_code, 400)
 
-    def test_given_item_is_updated_when_item_update_description_is_not_string_then_error_code_400_is_retrieved(self):
+    @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_MOJO)
+    def test_given_item_is_updated_when_item_update_description_is_not_string_then_error_code_400_is_retrieved(self, mock):
         update = {'description': 1234456789}
         response = self.app.put('todo/api/v1.0/items/2',
                                 data=json.dumps(update),
                                 content_type='application/json',
-                                headers={'Authorization': 'Basic ' + VALID_CREDENTIALS})
+                                headers={'Authorization':
+                                        'Bearer ' + TOKEN_FOR_USER_ID_0})
         self.assertEqual(response.status_code, 400)
 
-    def test_given_item_is_updated_when_sold_is_not_bool_code_then_error_code_400_is_retrieved(self):
+    @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_MOJO)
+    def test_given_item_is_updated_when_sold_is_not_bool_code_then_error_code_400_is_retrieved(self, mock):
         update = {'sold': 'not_bool'}
         response = self.app.put('todo/api/v1.0/items/2',
                                 data=json.dumps(update),
                                 content_type='application/json',
-                                headers={'Authorization': 'Basic ' + VALID_CREDENTIALS})
+                                headers={'Authorization':
+                                        'Bearer ' + TOKEN_FOR_USER_ID_0})
         self.assertEqual(response.status_code, 400)
