@@ -6,7 +6,6 @@ import six
 from flask import Flask, jsonify, abort, request, make_response, url_for, g
 from flask_httpauth import HTTPBasicAuth, HTTPTokenAuth, MultiAuth
 from database import DatabaseHelper, TestDB
-from User import User
 
 app = Flask(__name__, static_url_path="")
 app.config.from_object('Config.DevelopmentConfig')
@@ -38,7 +37,7 @@ def check_login():
 
 @basic_auth.verify_password
 def verify_password(username, password):
-    return DB.check_password_hash_for_user(username, password)
+    return DB.is_valid_hash_for_user(username, password)
 
 
 @token_auth.error_handler
@@ -136,7 +135,7 @@ def update_item(item_id):
     user_id = g.user['id']
     items = DB.retrieve_items()
     item = [item for item in items if item['id'] == item_id]
-    if item[0].get('seller_id') != user_id:  # to prevent modifying another user's items
+    if item[0].get('seller_id') != user_id:  # prevent modifying another user's items
         abort(403)
     check_if_item_is_valid(item)
     item[0]['title'] = request.json.get('title', item[0]['title'])

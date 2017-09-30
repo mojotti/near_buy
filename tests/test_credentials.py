@@ -7,8 +7,6 @@ from flask import json
 from app import app
 from database import TestDB
 from User import User
-
-
 from samples import items
 
 ITEM1 = items.ITEM1

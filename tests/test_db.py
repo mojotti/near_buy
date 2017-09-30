@@ -1,8 +1,8 @@
 import unittest
+
 from app import app
 from database import TestDB
 from User import User
-
 from samples import items
 
 ITEM1 = items.ITEM1
@@ -103,11 +103,11 @@ class TestApp(unittest.TestCase):
 
     def test_given_there_is_no_users_in_db_when_new_user_is_created_then_matching_hash_is_found_from_db(self):
         self.db.create_new_user_to_database(TEST_USER, TEST_PASSWORD)
-        self.assertTrue(self.db.check_password_hash_for_user(TEST_USER, TEST_PASSWORD))
+        self.assertTrue(self.db.is_valid_hash_for_user(TEST_USER, TEST_PASSWORD))
 
     def test_given_there_is_no_users_in_db_when_user_is_created_with_incorrect_pw_then_there_is_no_matching_hash(self):
         self.db.create_new_user_to_database(TEST_USER, TEST_PASSWORD)
-        self.assertFalse(self.db.check_password_hash_for_user(TEST_USER, "incorrect_password"))
+        self.assertFalse(self.db.is_valid_hash_for_user(TEST_USER, "incorrect_password"))
 
     def test_given_there_is_no_users_in_db_when_new_user_is_created_then_user_is_retrieved_from_db(self):
         self.db.create_new_user_to_database(TEST_USER, TEST_PASSWORD)

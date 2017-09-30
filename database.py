@@ -83,7 +83,7 @@ class DatabaseHelper(object):
         if not user:
             self.insert_user_to_db(user_info)
 
-    def check_password_hash_for_user(self, username, password):
+    def is_valid_hash_for_user(self, username, password):
         try:
             user = next(user for user in self.users.find({}, {'_id': 0}) if user['username'] == username)
             return bcrypt.checkpw(password.encode('utf-8'), user['hash'])

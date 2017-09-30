@@ -27,3 +27,5 @@ NEW_ITEM = {
 }
 
 HASH = {b'$2b$04$0NDkor0GmQki6i5zJiqNsu8hNtqGf5UJv3TPWRwLgs51Alo7cJJve'}
+
+HASH_2 = {b'$2b$04$p5VV5hvav5LTFEv0z7hJQupI/Dc6K4lFWXqD2Dv9bQ3rv/hDQe3Ry'}
