@@ -6,6 +6,7 @@ import six
 from flask import Flask, jsonify, abort, request, make_response, url_for, g
 from flask_httpauth import HTTPBasicAuth, HTTPTokenAuth, MultiAuth
 from database import DatabaseHelper, TestDB
+from User import User
 
 app = Flask(__name__, static_url_path="")
 app.config.from_object('Config.DevelopmentConfig')
@@ -31,12 +32,17 @@ def verify_token(token):
 
 @app.route('/todo/api/v1.0/auth', methods=['GET'])
 @basic_auth.login_required
-def check_login():
-    return jsonify({'login': 'success'})
+def check_login_and_return_token():
+    user = User(email=g.username, password=g.password)
+    user_data = DB.retrieve_user_by_username(g.username)
+    token = user.encode_auth_token(user_id=user_data['id'])
+    return jsonify({'username': g.username,
+                    'token': token.decode('utf-8')})
 
 
 @basic_auth.verify_password
 def verify_password(username, password):
+    g.username, g.password = username, password
     return DB.is_valid_hash_for_user(username, password)
 
 

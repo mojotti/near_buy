@@ -101,6 +101,20 @@ class TestUser(unittest.TestCase):
                                          TOKEN_FOR_USER_ID_1})
         self.assertEqual(response.status_code, 403)
 
+    @mock.patch('database.DatabaseHelper.is_valid_hash_for_user', return_value=True)
+    @mock.patch('database.DatabaseHelper.retrieve_user_by_username', return_value=USER_MOJO)
+    def test_given_user_has_signed_up_when_she_enters_credentials_then_she_gets_token_as_response(self, mock, patch):
+        rv = self.app.get('/todo/api/v1.0/auth',
+                          content_type='application/json',
+                          headers={'Authorization':
+                                   'Basic ' +
+                                   VALID_CREDENTIALS1})
+        self.assertEquals(rv.status_code, 200)
+        user = User(email='mojo', password='best_password_ever')
+        token = user.encode_auth_token(0).decode('utf-8')
+        json_resp = json.loads(rv.data.decode('utf-8'))
+        self.assertEquals(json_resp['token'], token)
+
     def create_new_item(self, item, token):
         self.app.post('/todo/api/v1.0/items',
                       data=json.dumps(item),
