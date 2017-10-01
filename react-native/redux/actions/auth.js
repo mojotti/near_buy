@@ -1,8 +1,8 @@
-export const login = (username, hash) => {
+export const login = (username, token) => {
     return {
         type: 'LOGIN',
         username: username,
-        hash: hash
+        token: token
     };
 };
 

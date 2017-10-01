@@ -1,7 +1,7 @@
 const defaultState = {
     isLoggedIn: false,
     username: '',
-    password: ''
+    token: ''
 };
 
 export default function reducer(state = defaultState, action) {
@@ -10,13 +10,13 @@ export default function reducer(state = defaultState, action) {
             return Object.assign({}, state, {
                 isLoggedIn: true,
                 username: action.username,
-                hash: action.hash
+                token: action.token
             });
         case 'LOGOUT':
             return Object.assign({}, state, {
                 isLoggedIn: false,
                 username: '',
-                hash: ''
+                token: ''
             });
         default:
             return state;

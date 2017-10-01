@@ -14,7 +14,6 @@ app.config.from_object('Config.DevelopmentConfig')
 
 basic_auth = HTTPBasicAuth()
 token_auth = HTTPTokenAuth('Bearer')
-multi_auth = MultiAuth(basic_auth, token_auth)
 
 if sys.argv[0] == 'app.py':
     DB = database.DatabaseHelper()
