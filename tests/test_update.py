@@ -30,7 +30,6 @@ class TestApp(unittest.TestCase):
         TEST_DB.users.remove({})
 
     def setUp(self):
-        app.config['TESTING'] = True
         self.app = app.test_client()
         self.db = TEST_DB
         self.db.items.insert(ITEM1)
@@ -42,7 +41,7 @@ class TestApp(unittest.TestCase):
     @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_MOJO)
     def test_given_there_is_two_items_in_db_when_item_is_updated_then_it_is_changed(self, mock):
         update = {'sold': True}
-        response = self.app.put('todo/api/v1.0/items/2',
+        response = self.app.put('api/v1.0/items/2',
                                 data=json.dumps(update),
                                 content_type='application/json',
                                 headers={'Authorization':
@@ -55,7 +54,7 @@ class TestApp(unittest.TestCase):
     @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_MOJO)
     def test_given_there_is_two_items_in_db_when_item_update_is_not_in_json_then_error_400_is_retrieved(self, mock):
         update = {'sold': True}
-        response = self.app.put('todo/api/v1.0/items/2',
+        response = self.app.put('api/v1.0/items/2',
                                 data=json.dumps(update),
                                 headers={'Authorization':
                                         'Bearer ' + TOKEN_FOR_USER_ID_0})
@@ -64,7 +63,7 @@ class TestApp(unittest.TestCase):
     @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_MOJO)
     def test_given_item_is_updated_when_item_title_is_not_string_code_then_error_400_is_retrieved(self, mock):
         update = {'title': 111}
-        response = self.app.put('todo/api/v1.0/items/2',
+        response = self.app.put('api/v1.0/items/2',
                                 data=json.dumps(update),
                                 content_type='application/json',
                                 headers={'Authorization':
@@ -74,7 +73,7 @@ class TestApp(unittest.TestCase):
     @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_MOJO)
     def test_given_item_is_updated_when_item_update_description_is_not_string_then_error_code_400_is_retrieved(self, mock):
         update = {'description': 1234456789}
-        response = self.app.put('todo/api/v1.0/items/2',
+        response = self.app.put('api/v1.0/items/2',
                                 data=json.dumps(update),
                                 content_type='application/json',
                                 headers={'Authorization':
@@ -84,7 +83,7 @@ class TestApp(unittest.TestCase):
     @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_MOJO)
     def test_given_item_is_updated_when_sold_is_not_bool_code_then_error_code_400_is_retrieved(self, mock):
         update = {'sold': 'not_bool'}
-        response = self.app.put('todo/api/v1.0/items/2',
+        response = self.app.put('api/v1.0/items/2',
                                 data=json.dumps(update),
                                 content_type='application/json',
                                 headers={'Authorization':

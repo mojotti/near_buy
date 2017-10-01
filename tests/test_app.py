@@ -41,12 +41,12 @@ class TestApp(unittest.TestCase):
 
     @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_MOJO)
     def create_two_items(self, mock):
-        self.app.post('/todo/api/v1.0/items',
+        self.app.post('/api/v1.0/items',
                       data=json.dumps(ITEM1),
                       content_type='application/json',
                       headers={'Authorization':
                                'Bearer ' + TOKEN_FOR_USER_ID_0})
-        self.app.post('/todo/api/v1.0/items',
+        self.app.post('/api/v1.0/items',
                       data=json.dumps(ITEM2),
                       content_type='application/json',
                       headers={'Authorization':
@@ -54,7 +54,7 @@ class TestApp(unittest.TestCase):
 
     @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_MOJO)
     def test_given_there_is_two_items_in_db_when_item_two_is_retrieved_then_it_is_not_sold(self, mock):
-        response = self.app.get('/todo/api/v1.0/items/1',
+        response = self.app.get('/api/v1.0/items/1',
                                 headers={'Authorization':
                                         'Bearer ' + TOKEN_FOR_USER_ID_0})
         json_resp = json.loads(response.data.decode('utf-8'))
@@ -62,7 +62,7 @@ class TestApp(unittest.TestCase):
 
     @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_MOJO)
     def test_given_there_is_two_items_in_db_when_new_items_is_added_then_status_code_is_201(self, mock):
-        response = self.app.post('/todo/api/v1.0/items',
+        response = self.app.post('/api/v1.0/items',
                                  data=json.dumps(NEW_ITEM),
                                  content_type='application/json',
                                  headers={'Authorization':
@@ -72,7 +72,7 @@ class TestApp(unittest.TestCase):
 
     @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_MOJO)
     def test_given_there_is_two_items_in_db_when_new_item_is_created_then_it_can_be_retrieved(self, mock):
-        response = self.app.post('/todo/api/v1.0/items',
+        response = self.app.post('/api/v1.0/items',
                                  data=json.dumps(NEW_ITEM),
                                  content_type='application/json',
                                  headers={'Authorization':
@@ -87,7 +87,7 @@ class TestApp(unittest.TestCase):
     @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_MOJO)
     def test_given_there_is_two_items_in_db_when_item_number_five_is_requested_then_it_can_not_be_retrieved(self, mock):
         response = self.app.get(
-            '/todo/api/v1.0/items/5',
+            '/api/v1.0/items/5',
             headers={'Authorization':
                     'Bearer ' + str(TOKEN_FOR_USER_ID_0)})
         self.assertEqual(response.status_code, 404)
@@ -95,11 +95,11 @@ class TestApp(unittest.TestCase):
     @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_MOJO)
     def test_given_there_is_two_items_in_db_when_item_number_one_is_deleted_it_cannot_be_found(self, mock):
         self.app.delete(
-            '/todo/api/v1.0/items/1',
+            '/api/v1.0/items/1',
             headers={'Authorization':
                     'Bearer ' + TOKEN_FOR_USER_ID_0})
         response = self.app.get(
-            '/todo/api/v1.0/items/1',
+            '/api/v1.0/items/1',
             headers={'Authorization':
                     'Bearer ' + TOKEN_FOR_USER_ID_0})
         self.assertEqual(response.status_code, 404)
@@ -109,7 +109,7 @@ class TestApp(unittest.TestCase):
     @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_MOJO)
     def test_given_there_is_two_items_in_db_when_invalid_item_is_created_then_status_code_400_is_retrieved(self, mock):
         item = {'description': 'fake_news'}  # no title or price
-        response = self.app.post('/todo/api/v1.0/items',
+        response = self.app.post('/api/v1.0/items',
                                  data=json.dumps(item),
                                  content_type='application/json',
                                  headers={'Authorization':

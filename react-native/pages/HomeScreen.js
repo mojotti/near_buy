@@ -31,7 +31,7 @@ class HomeScreen extends React.Component {
   }
 
   fetchData() {
-    fetch('http://' + LOCALHOST + ':5000/todo/api/v1.0/items/1', {
+    fetch('http://' + LOCALHOST + ':5000/api/v1.0/items/1', {
          method: 'GET',
          headers: this.getHeaders()
       })

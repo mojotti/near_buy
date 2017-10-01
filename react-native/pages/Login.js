@@ -54,7 +54,7 @@ class Login extends Component {
       e.preventDefault();
       var headers = this.getHeaders();
 
-      fetch('http://' + LOCALHOST + ':5000/todo/api/v1.0/auth', {
+      fetch('http://' + LOCALHOST + ':5000/api/v1.0/auth', {
          method: 'GET',
          headers: this.getHeaders()
       })

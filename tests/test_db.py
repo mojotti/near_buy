@@ -17,7 +17,6 @@ app.config.from_object('Config.TestingConfig')
 
 class TestApp(unittest.TestCase):
     def setUp(self):
-        app.config['TESTING'] = True
         self.app = app.test_client()
         self.db = TEST_DB
         self.db.items.insert(ITEM1)

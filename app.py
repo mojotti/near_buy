@@ -5,8 +5,9 @@ import sys
 import six
 from flask import Flask, jsonify, abort, request, make_response, url_for, g
 from flask_httpauth import HTTPBasicAuth, HTTPTokenAuth, MultiAuth
-from database import DatabaseHelper, TestDB
-from User import User
+
+import User as u
+import database
 
 app = Flask(__name__, static_url_path="")
 app.config.from_object('Config.DevelopmentConfig')
@@ -16,9 +17,9 @@ token_auth = HTTPTokenAuth('Bearer')
 multi_auth = MultiAuth(basic_auth, token_auth)
 
 if sys.argv[0] == 'app.py':
-    DB = DatabaseHelper()
+    DB = database.DatabaseHelper()
 else:
-    DB = TestDB()  # if running unit tests
+    DB = database.TestDB()  # if running unit tests
 
 
 @token_auth.verify_token
@@ -30,12 +31,13 @@ def verify_token(token):
     return token == user['token']
 
 
-@app.route('/todo/api/v1.0/auth', methods=['GET'])
+@app.route('/api/v1.0/auth', methods=['GET'])
 @basic_auth.login_required
 def check_login_and_return_token():
-    user = User(email=g.username, password=g.password)
     user_data = DB.retrieve_user_by_username(g.username)
+    user = u.User(email=g.username, password=g.password)
     token = user.encode_auth_token(user_id=user_data['id'])
+    DB.attach_token_to_user(username=g.username, token=token.decode('utf-8'))
     return jsonify({'username': g.username,
                     'token': token.decode('utf-8')})
 
@@ -82,7 +84,7 @@ def make_public_item(item):
     return new_item
 
 
-@app.route('/todo/api/v1.0/items', methods=['GET'])
+@app.route('/api/v1.0/items', methods=['GET'])
 @token_auth.login_required
 def get_items():
     """Get all items."""
@@ -90,7 +92,7 @@ def get_items():
     return jsonify({'items': [make_public_item(item) for item in items]})
 
 
-@app.route('/todo/api/v1.0/items/<int:item_id>', methods=['GET'])
+@app.route('/api/v1.0/items/<int:item_id>', methods=['GET'])
 @token_auth.login_required
 def get_item(item_id):
     """Get one item with id."""
@@ -102,7 +104,7 @@ def get_item(item_id):
     return jsonify({'item': make_public_item(item[0])})
 
 
-@app.route('/todo/api/v1.0/items', methods=['POST'])
+@app.route('/api/v1.0/items', methods=['POST'])
 @token_auth.login_required
 def create_item():
     """Create new item and add it to database."""
@@ -134,7 +136,7 @@ def get_item_details(items_list, user_id):
     }
 
 
-@app.route('/todo/api/v1.0/items/<int:item_id>', methods=['PUT'])
+@app.route('/api/v1.0/items/<int:item_id>', methods=['PUT'])
 @token_auth.login_required
 def update_item(item_id):
     """Update one item with id."""
@@ -176,7 +178,7 @@ def check_if_item_is_valid(item):
         abort(400)
 
 
-@app.route('/todo/api/v1.0/items/<int:item_id>', methods=['DELETE'])
+@app.route('/api/v1.0/items/<int:item_id>', methods=['DELETE'])
 @token_auth.login_required
 def delete_item(item_id):
     """Delete item with id."""

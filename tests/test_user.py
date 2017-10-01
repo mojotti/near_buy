@@ -49,7 +49,7 @@ class TestUser(unittest.TestCase):
     @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_MOJO)
     def test_given_there_is_two_users_when_user_1_puts_item_to_sell_then_item_has_user_1s_id(self, mock):
         self.assertEquals(self.db.items.count(), 0)
-        self.app.post('/todo/api/v1.0/items',
+        self.app.post('/api/v1.0/items',
                       data=json.dumps(NEW_ITEM1),
                       content_type='application/json',
                       headers={'Authorization':
@@ -61,7 +61,7 @@ class TestUser(unittest.TestCase):
     @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_KOJO)
     def test_given_there_is_two_users_when_user_2_puts_item_to_sell_then_item_has_user_2s_id(self, mock):
         self.assertEquals(self.db.items.count(), 0)
-        self.app.post('/todo/api/v1.0/items',
+        self.app.post('/api/v1.0/items',
                       data=json.dumps(NEW_ITEM1),
                       content_type='application/json',
                       headers={'Authorization':
@@ -72,7 +72,7 @@ class TestUser(unittest.TestCase):
 
     @mock.patch('database.DatabaseHelper.is_valid_hash_for_user', return_value=True)
     def test_given_user_has_signed_up_when_she_enters_credentials_then_she_can_authenticate(self, hash):
-        rv = self.app.get('/todo/api/v1.0/auth',
+        rv = self.app.get('/api/v1.0/auth',
                           content_type='application/json',
                           headers={'Authorization':
                                    'Basic ' +
@@ -81,7 +81,7 @@ class TestUser(unittest.TestCase):
 
     @mock.patch('database.DatabaseHelper.is_valid_hash_for_user', return_value=False)
     def test_given_user_has_not_signed_up_when_she_enters_credentials_then_she_can_not_authenticate(self, mock):
-        rv = self.app.get('/todo/api/v1.0/auth',
+        rv = self.app.get('/api/v1.0/auth',
                           content_type='application/json',
                           headers={'Authorization':
                                    'Basic ' +
@@ -93,7 +93,7 @@ class TestUser(unittest.TestCase):
         self.create_new_item(NEW_ITEM1, TOKEN_FOR_USER_ID_0)
         update = {'sold': True}
         database.DatabaseHelper.retrieve_user_by_token.return_value = USER_KOJO
-        response = self.app.put('todo/api/v1.0/items/0',
+        response = self.app.put('api/v1.0/items/0',
                                 data=json.dumps(update),
                                 content_type='application/json',
                                 headers={'Authorization':
@@ -103,8 +103,8 @@ class TestUser(unittest.TestCase):
 
     @mock.patch('database.DatabaseHelper.is_valid_hash_for_user', return_value=True)
     @mock.patch('database.DatabaseHelper.retrieve_user_by_username', return_value=USER_MOJO)
-    def test_given_user_has_signed_up_when_she_enters_credentials_then_she_gets_token_as_response(self, mock, patch):
-        rv = self.app.get('/todo/api/v1.0/auth',
+    def test_given_user_has_signed_up_when_she_logs_in_then_she_gets_token_as_response(self, mock, patch):
+        rv = self.app.get('/api/v1.0/auth',
                           content_type='application/json',
                           headers={'Authorization':
                                    'Basic ' +
@@ -114,12 +114,22 @@ class TestUser(unittest.TestCase):
         token = user.encode_auth_token(0).decode('utf-8')
         json_resp = json.loads(rv.data.decode('utf-8'))
         self.assertEquals(json_resp['token'], token)
+        self.assertEquals(json_resp['username'], 'mojo')
 
     def create_new_item(self, item, token):
-        self.app.post('/todo/api/v1.0/items',
+        self.app.post('/api/v1.0/items',
                       data=json.dumps(item),
                       content_type='application/json',
                       headers={'Authorization': 'Bearer ' + token})
 
-
+    @mock.patch('database.DatabaseHelper.is_valid_hash_for_user', return_value=False)
+    def test_given_user_has_not_signed_up_when_she_logs_in_then_she_gets_error_msg_as_response(self, mock):
+        rv = self.app.get('/api/v1.0/auth',
+                          content_type='application/json',
+                          headers={'Authorization':
+                                   'Basic ' +
+                                   INVALID_CREDENTIALS})
+        self.assertEquals(rv.status_code, 403)
+        json_resp = json.loads(rv.data.decode('utf-8'))
+        self.assertEquals(json_resp['error'], 'Unauthorized access')
 

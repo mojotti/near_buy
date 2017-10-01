@@ -40,3 +40,4 @@ class TestUser(unittest.TestCase):
         invalid_token = 'lol_lol_omg_i_am_not_token_and_i_should_be_decoded_now'
         self.assertTrue(User.decode_auth_token(invalid_token),
                         'Invalid token. Please log in again.')
+

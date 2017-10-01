@@ -5,7 +5,6 @@ import app as near_buy
 import bcrypt
 from pymongo import MongoClient
 from pymongo import errors
-from User import User
 
 
 class DatabaseHelper(object):
@@ -91,8 +90,8 @@ class DatabaseHelper(object):
             return False
 
     def attach_token_to_user(self, username, token):
-        self.users.update({'username': username},
-                          {'$set': {'token': token}})
+        self.users.update_one({'username': username},
+                          {'$set': {'token': token}}, upsert=False)
 
     def retrieve_user_by_token(self, token):
         return self.users.find_one({'token': token}, {'_id': 0})
@@ -111,9 +110,3 @@ class TestDB(DatabaseHelper):
     def create_two_users_to_db(self):
         self.create_new_user_to_database('mojo', 'best_password_ever')
         self.create_new_user_to_database('kojo', 'very_good_password')
-        user1 = User(email='test_email', password='test_pw')
-        user2 = User(email='test_email', password='test_pw')
-        token0 = user1.encode_auth_token(user_id=0).decode('utf-8')
-        token1 = user2.encode_auth_token(user_id=1).decode('utf-8')
-        self.attach_token_to_user(username='mojo', token=token0)
-        self.attach_token_to_user(username='kojo', token=token1)
