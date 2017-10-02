@@ -143,7 +143,7 @@ class TestApp(unittest.TestCase):
         self.assertNotEquals(user['hash'], 'password')
         self.assertTrue('password' not in user and 'hash' in user)
 
-    def test_given_user_exists_in_db_when_token_is_created_it_is_attached_to_user_details(self):
+    def test_given_user_exists_in_db_when_token_is_created_then_it_is_attached_to_user_details(self):
         self.db.create_new_user_to_database('user', 'password')
         token = self.user.encode_auth_token(user_id=0)
         self.db.attach_token_to_user(username='user', token=token)
@@ -153,13 +153,23 @@ class TestApp(unittest.TestCase):
         decoded_token = self.user.decode_auth_token(user_info['token'])
         self.assertEquals(0, decoded_token)
 
-    def test_given_when_user_exists_when_user_is_searched_by_token_then_user_is_retrieved(self):
+    def test_given_does_not_exist_in_db_when_token_is_created_then_it_is_not_attached_to_user_details(self):
+        token = self.user.encode_auth_token(user_id=0)
+        self.db.attach_token_to_user(username='user', token=token)
+        user_info = self.db.retrieve_user_by_username('user')
+        self.assertEquals(user_info, None)
+        all_users = self.db.retrieve_users()
+        for user in all_users:
+            self.assertEquals(user, None)
+
+    def test_given_user_exists_when_user_is_searched_by_token_then_user_is_retrieved(self):
         self.db.create_new_user_to_database('user', 'password')
         token = self.user.encode_auth_token(user_id=0)
         self.db.attach_token_to_user(username='user', token=token)
         user = self.db.retrieve_user_by_token(token=token)
         self.assertEquals(user['username'], 'user')
         self.assertEquals(user['token'], token)
+
 
 
 

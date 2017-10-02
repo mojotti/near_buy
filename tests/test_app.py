@@ -16,11 +16,16 @@ USER = User(email='test_email', password='test_pw')
 
 app.config.from_object('Config.TestingConfig')
 TOKEN_FOR_USER_ID_0 = USER.encode_auth_token(0).decode('utf-8')
+TOKEN_FOR_USER_ID_1 = USER.encode_auth_token(1).decode('utf-8')
+
 USER_MOJO = {'hash': items.HASH,
              'username': 'mojo',
              'id': 0,
              'token': TOKEN_FOR_USER_ID_0}
-
+USER_KOJO = {'hash': items.HASH_2,
+             'username': 'kojo',
+             'id': 1,
+             'token': TOKEN_FOR_USER_ID_1}
 
 class TestApp(unittest.TestCase):
     @classmethod
@@ -89,7 +94,7 @@ class TestApp(unittest.TestCase):
         response = self.app.get(
             '/api/v1.0/items/5',
             headers={'Authorization':
-                    'Bearer ' + str(TOKEN_FOR_USER_ID_0)})
+                    'Bearer ' + TOKEN_FOR_USER_ID_0})
         self.assertEqual(response.status_code, 404)
 
     @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_MOJO)
@@ -116,4 +121,28 @@ class TestApp(unittest.TestCase):
                                         'Bearer ' + TOKEN_FOR_USER_ID_0})
         self.assertEqual(response.status_code, 400)
         self.assertEqual(self.db.items.count(), 2)
+
+    @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_MOJO)
+    def test_given_user_has_two_items_in_db_when_items_are_requested_then_they_are_retrieved(self, mock):
+        response = self.app.get(
+            '/api/v1.0/user/items',
+            headers={'Authorization':
+                    'Bearer ' + TOKEN_FOR_USER_ID_0})
+        self.assertEqual(response.status_code, 200)
+        json_resp = json.loads(response.data.decode('utf-8'))
+        self.assertEquals(len(json_resp['items']), 2)
+        for item in json_resp['items']:
+            self.assertEquals(item['seller_id'], 0)
+
+    @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_KOJO)
+    def test_given_there_is_two_items_in_db_when_user_zeros_item_is_requested_then_it_is_retrieved(self, mock):
+        response = self.app.get(
+            '/api/v1.0/user/items',
+            headers={'Authorization':
+                         'Bearer ' + TOKEN_FOR_USER_ID_1})
+        self.assertEqual(response.status_code, 200)
+        json_resp = json.loads(response.data.decode('utf-8'))
+        self.assertEquals(json_resp['items'], 'no items')
+
+
 

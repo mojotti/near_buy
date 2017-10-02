@@ -4,9 +4,9 @@
 import sys
 import six
 from flask import Flask, jsonify, abort, request, make_response, url_for, g
-from flask_httpauth import HTTPBasicAuth, HTTPTokenAuth, MultiAuth
+from flask_httpauth import HTTPBasicAuth, HTTPTokenAuth
 
-import User as u
+import User as U
 import database
 
 app = Flask(__name__, static_url_path="")
@@ -23,6 +23,8 @@ else:
 
 @token_auth.verify_token
 def verify_token(token):
+    """If token matches with the one stored in DB, verifying is
+    successful."""
     user = DB.retrieve_user_by_token(token)
     if not user:
         return False
@@ -32,9 +34,12 @@ def verify_token(token):
 
 @app.route('/api/v1.0/auth', methods=['GET'])
 @basic_auth.login_required
-def check_login_and_return_token():
+def validate_user_and_update_token_to_db():
+    """Get user id from db, initialize User object, create token
+    & and attach created token to user's details in db. Finally
+    return username and token."""
     user_data = DB.retrieve_user_by_username(g.username)
-    user = u.User(email=g.username, password=g.password)
+    user = U.User(email=g.username, password=g.password)
     token = user.encode_auth_token(user_id=user_data['id'])
     DB.attach_token_to_user(username=g.username, token=token.decode('utf-8'))
     return jsonify({'username': g.username,
@@ -43,6 +48,7 @@ def check_login_and_return_token():
 
 @basic_auth.verify_password
 def verify_password(username, password):
+    """Verify that hash is found for username & password."""
     g.username, g.password = username, password
     return DB.is_valid_hash_for_user(username, password)
 
@@ -81,6 +87,17 @@ def make_public_item(item):
         else:
             new_item[field] = item[field]
     return new_item
+
+
+@app.route('/api/v1.0/user/items', methods=['GET'])
+@token_auth.login_required
+def get_items_for_user():
+    """Get all items that user has."""
+    items = DB.retrieve_items_with_seller_id(g.user['id'])
+    public_items = [make_public_item(item) for item in items]
+    if not public_items:
+        return jsonify({'items': 'no items'})
+    return jsonify({'items': public_items})
 
 
 @app.route('/api/v1.0/items', methods=['GET'])
