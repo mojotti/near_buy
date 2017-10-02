@@ -16,6 +16,10 @@ app.config.from_object('Config.TestingConfig')
 
 
 class TestApp(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        TEST_DB.users.remove({})
+
     def setUp(self):
         self.app = app.test_client()
         self.db = TEST_DB

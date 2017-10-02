@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Image, Platform , StyleSheet,
-        Text, View, ScrollView, Button } from 'react-native';
+        Text, View, ScrollView, Button, ListView } from 'react-native';
 import { logout } from '../redux/actions/auth';
 import { connect } from 'react-redux';
 
@@ -11,13 +11,20 @@ const base64  = require('base-64');
 
 
 class HomeScreen extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dataSource: new ListView.DataSource({
+        rowHasChanged: (row1, row2) => row1 !== row2,
+      }),
+      loaded: false,
+      data: ''
+    };
+  }
+
   userLogout(e) {
       this.props.onLogout();
       e.preventDefault();
-  }
-
-  state = {
-        data: ''
   }
 
   componentDidMount() {
@@ -31,17 +38,17 @@ class HomeScreen extends React.Component {
   }
 
   fetchData() {
-    fetch('http://' + LOCALHOST + ':5000/api/v1.0/items/1', {
+    fetch('http://' + LOCALHOST + ':5000/api/v1.0/user/items', {
          method: 'GET',
          headers: this.getHeaders()
       })
       .then((response) => response.json())
       .then((responseJson) => {
-         console.log(responseJson);
-
          this.setState({
-            data: responseJson.item
-         })
+           dataSource: this.state.dataSource.cloneWithRows(responseJson.items),
+           loaded: true,
+           data: responseJson.items,
+         });
       })
       .catch((error) => {
          console.error(error);
@@ -51,32 +58,57 @@ class HomeScreen extends React.Component {
   render() {
     return (
       <View style={[styles.container]}>
-        <View style={{padding: 20}}>
+        <View style={[styles.welcomeText]}>
           <Text style={{fontSize: 27}}>
-              {`Welcome ${this.props.username}`}
+              {'Welcome ' + this.props.username}
           </Text>
-          <View style={{margin: 20}}/>
+          <Text style={[styles.header]}>
+            Your items:
+          </Text>
         </View>
-        <Text style={[styles.header]}>
-          Your items:
-        </Text>
-        <Text>
-           {"Title: " + this.state.data.title}
-        </Text>
-         <Text>
-            {"Description: " + this.state.data.description}
-         </Text>
-         <Text>
-            {"Price: " + this.state.data.price + " €"}
-         </Text>
-         <Button
-            onPress={(e) => this.userLogout(e)}
-            title="Logout"
-            style = {{margin: 15}}
-          />
+        {this.renderUserData()}
+        <Button
+          onPress={(e) => this.userLogout(e)}
+          title="Logout"
+          style = {{margin: 15}}
+        />
       </View>
     );
+  }
+
+  renderUserData() {
+    if (this.state.data === 'no items') {
+      return (
+        <Text>
+          {"You don't have any items yet. You should start to sell some shit!"}
+        </Text>
+      );
+    } else {
+      return (
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={this.renderItems}
+          renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
+        />
+      );
     }
+  }
+
+  renderItems(item) {
+    return (
+      <View style={styles.item}>
+        <Text>
+           {"Title: " + item.title}
+        </Text>
+        <Text>
+          {"Description: " + item.description}
+        </Text>
+        <Text>
+          {"Price: " + item.price + " €"}
+        </Text>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -84,13 +116,24 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
   },
   header: {
     fontSize: 20,
     textAlign: 'center',
-    marginBottom: 20
+    margin: 20
   },
+  item: {
+    padding: 10,
+    backgroundColor: '#F1F1F1',
+  },
+  separator: {
+    flex: 1,
+    height: StyleSheet.hairlineWidth,
+    backgroundColor: '#8E8E8E',
+  },
+  welcomeText: {
+    paddingTop: 50
+  }
 });
 
 const mapStateToProps = (state, ownProps) => {

@@ -84,6 +84,7 @@ def make_public_item(item):
         if field == 'id':
             new_item['uri'] = url_for('get_item', item_id=item['id'],
                                       _external=True)
+            new_item['id'] = item[field]
         else:
             new_item[field] = item[field]
     return new_item
