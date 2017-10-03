@@ -10,6 +10,7 @@ ITEM2 = items.ITEM2
 
 TEST_PASSWORD = "test_password123"
 TEST_USER = "test_user"
+TEST_EMAIL = "test_email"
 TEST_DB = TestDB()
 
 app.config.from_object('Config.TestingConfig')
@@ -105,26 +106,28 @@ class TestApp(unittest.TestCase):
         self.assertEqual(self.db.items.count(), 1)
 
     def test_given_there_is_no_users_in_db_when_new_user_is_created_then_matching_hash_is_found_from_db(self):
-        self.db.create_new_user_to_database(TEST_USER, TEST_PASSWORD)
+        self.db.create_new_user_to_database(TEST_EMAIL, TEST_USER, TEST_PASSWORD)
         self.assertTrue(self.db.is_valid_hash_for_user(TEST_USER, TEST_PASSWORD))
 
     def test_given_there_is_no_users_in_db_when_user_is_created_with_incorrect_pw_then_there_is_no_matching_hash(self):
-        self.db.create_new_user_to_database(TEST_USER, TEST_PASSWORD)
+        self.db.create_new_user_to_database(TEST_EMAIL, TEST_USER, TEST_PASSWORD)
         self.assertFalse(self.db.is_valid_hash_for_user(TEST_USER, "incorrect_password"))
 
     def test_given_there_is_no_users_in_db_when_new_user_is_created_then_user_is_retrieved_from_db(self):
-        self.db.create_new_user_to_database(TEST_USER, TEST_PASSWORD)
+        self.db.create_new_user_to_database(TEST_EMAIL, TEST_USER, TEST_PASSWORD)
         user = self.db.retrieve_user_by_username(TEST_USER)
         self.assertEqual(user['username'], TEST_USER)
 
     def test_given_there_is_no_users_in_db_when_user_is_created_twice_then_user_is_not_created_on_second_time(self):
-        self.db.create_new_user_to_database(TEST_USER, TEST_PASSWORD)
-        self.db.create_new_user_to_database(TEST_USER, TEST_PASSWORD)
+        self.db.create_new_user_to_database(TEST_EMAIL, TEST_USER, TEST_PASSWORD)
+        self.db.create_new_user_to_database(TEST_EMAIL, TEST_USER, TEST_PASSWORD)
         self.assertEqual(self.db.users.count(), 1)
 
     def test_given_there_is_no_users_in_db_when_five_users_are_created_and_four_removed_then_one_user_in_db(self):
         for i in range(5):
-            self.db.create_new_user_to_database('user' + str(i), 'password' + str(i))
+            self.db.create_new_user_to_database(TEST_EMAIL + str(i),
+                                                'user' + str(i),
+                                                'password' + str(i))
         self.assertEqual(self.db.users.count(), 5)
         for i in range(4):
             self.db.remove_user_from_db('user' + str(i))
@@ -132,7 +135,9 @@ class TestApp(unittest.TestCase):
 
     def test_given_there_are_no_users_when_five_users_are_created_then_they_all_can_be_found(self):
         for i in range(5):
-            self.db.create_new_user_to_database('user' + str(i), 'password' + str(i))
+            self.db.create_new_user_to_database(TEST_EMAIL + str(i),
+                                                'user' + str(i),
+                                                'password' + str(i))
         self.assertEqual(self.db.users.count(), 5)
         users = []
         expected = ['user0', 'user1', 'user2', 'user3', 'user4']
@@ -141,14 +146,14 @@ class TestApp(unittest.TestCase):
         self.assertEquals(users, expected)
 
     def test_given_there_is_user_in_db_when_user_is_retrieved_then_password_is_hashed(self):
-        self.db.create_new_user_to_database('user', 'password')
+        self.db.create_new_user_to_database(TEST_EMAIL, 'user', 'password')
         user = self.db.retrieve_user_by_username('user')
         self.assertEquals(user['username'], 'user')
         self.assertNotEquals(user['hash'], 'password')
         self.assertTrue('password' not in user and 'hash' in user)
 
     def test_given_user_exists_in_db_when_token_is_created_then_it_is_attached_to_user_details(self):
-        self.db.create_new_user_to_database('user', 'password')
+        self.db.create_new_user_to_database(TEST_EMAIL, 'user', 'password')
         token = self.user.encode_auth_token(user_id=0)
         self.db.attach_token_to_user(username='user', token=token)
         user_info = self.db.retrieve_user_by_username('user')
@@ -167,7 +172,7 @@ class TestApp(unittest.TestCase):
             self.assertEquals(user, None)
 
     def test_given_user_exists_when_user_is_searched_by_token_then_user_is_retrieved(self):
-        self.db.create_new_user_to_database('user', 'password')
+        self.db.create_new_user_to_database(TEST_EMAIL, 'user', 'password')
         token = self.user.encode_auth_token(user_id=0)
         self.db.attach_token_to_user(username='user', token=token)
         user = self.db.retrieve_user_by_token(token=token)

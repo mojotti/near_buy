@@ -74,13 +74,28 @@ class DatabaseHelper(object):
         user = self.users.find_one({'username': username}, {'_id': 0})
         return user['id']
 
-    def create_new_user_to_database(self, username, password):
+    def is_username_or_email_taken(self, email, username):
+        user_found_by_email = self.users.find_one({'email': email})
+        if user_found_by_email:
+            return True
+        user_found_by_username = self.users.find_one({'username': username})
+        if user_found_by_username:
+            return True
+        return False
+
+    def create_new_user_to_database(self, email, username, password):
         hash_ = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt(near_buy.app.config['ENCRYPTION_ROUNDS']))
         user_id = self.users.count()
-        user_info = {'username': username, 'hash': hash_, 'id': user_id}
-        user = self.retrieve_user_by_username(username)
-        if not user:
+        user_info = {'email': email,
+                     'username': username,
+                     'hash': hash_,
+                     'id': user_id}
+        is_existing_user = self.is_username_or_email_taken(email,
+                                                           username)
+        if not is_existing_user:
             self.insert_user_to_db(user_info)
+        else:
+            return "user exists already"
 
     def is_valid_hash_for_user(self, username, password):
         try:
@@ -108,5 +123,5 @@ class TestDB(DatabaseHelper):
             print(err)
 
     def create_two_users_to_db(self):
-        self.create_new_user_to_database('mojo', 'best_password_ever')
-        self.create_new_user_to_database('kojo', 'very_good_password')
+        self.create_new_user_to_database('test_email', 'mojo', 'best_password_ever')
+        self.create_new_user_to_database('test_email_2', 'kojo', 'very_good_password')

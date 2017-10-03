@@ -27,6 +27,7 @@ USER_KOJO = {'hash': items.HASH_2,
              'id': 1,
              'token': TOKEN_FOR_USER_ID_1}
 
+
 class TestApp(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -140,6 +141,20 @@ class TestApp(unittest.TestCase):
             '/api/v1.0/user/items',
             headers={'Authorization':
                          'Bearer ' + TOKEN_FOR_USER_ID_1})
+        self.assertEqual(response.status_code, 200)
+        json_resp = json.loads(response.data.decode('utf-8'))
+        self.assertEquals(json_resp['items'], 'no items')
+
+    @unittest.skip
+    def test_given_user_has_valid_user_info_when_user_registers_then_it_is_successful(self):
+        user_info = {
+            'username': 'new_user',
+            'email': 'new_email',
+            'password': 'pw123'
+        }
+        response = self.app.post(
+            '/api/v1.0/user/register',
+            data=json.dumps(user_info))
         self.assertEqual(response.status_code, 200)
         json_resp = json.loads(response.data.decode('utf-8'))
         self.assertEquals(json_resp['items'], 'no items')

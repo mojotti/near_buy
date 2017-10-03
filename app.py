@@ -90,6 +90,15 @@ def make_public_item(item):
     return new_item
 
 
+@app.route('/api/v1.0/user/register', methods=['POST'])
+def new_user():
+    """Register new user and save its details to db."""
+    username = request.json.get('username')
+    email = request.json.get('email')
+    password = request.json.get('password')
+
+
+
 @app.route('/api/v1.0/user/items', methods=['GET'])
 @token_auth.login_required
 def get_items_for_user():
