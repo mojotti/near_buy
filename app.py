@@ -90,7 +90,7 @@ def make_public_item(item):
     return new_item
 
 
-@app.route('/api/v1.0/user/register', methods=['POST'])
+@app.route('/api/v1.0/register', methods=['POST'])
 def new_user():
     """Register new user and save its details to db."""
     username = request.json.get('username')
@@ -98,11 +98,11 @@ def new_user():
     password = request.json.get('password')
     if username is None or email is None or password is None:
         abort(400)
-    db_resp = DB.create_new_user_to_database(username, email, password)
+    db_resp = DB.create_new_user_to_database(email=email, username=username, password=password)
     if db_resp == 'user exists already':
-        return jsonify({'user creation': 'user exists'})
+        return jsonify({'user_creation': 'user exists'})
     else:
-        return jsonify({'user creation': 'success'})
+        return jsonify({'user_creation': 'success'})
 
 
 @app.route('/api/v1.0/user/items', methods=['GET'])

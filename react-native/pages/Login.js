@@ -18,7 +18,8 @@ class Login extends Component {
         this.state = {
             page: 'Login',
             username: '',
-            password: ''
+            password: '',
+            email: ''
         };
     }
 
@@ -49,6 +50,44 @@ class Login extends Component {
       return base64.encode(credentials);
     }
 
+    handleButtonPress(e) {
+      e.preventDefault();
+      if (this.state.page === 'Login') {
+        this.handleLoginRequest(e)
+      } else {
+        this.handleRegisteringRequest()
+      }
+    }
+
+    handleRegisteringRequest () {
+      fetch('http://' + LOCALHOST + ':5000/api/v1.0/register', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          'email': this.state.email,
+          'username': this.state.username,
+          'password': this.state.password
+        })
+      })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        if (responseJson.user_creation === 'success') {
+          Alert.alert('User creation', 'User created successfully!');
+          console.log(responseJson);
+          this.setState({ page: 'Login' });
+        } else {
+          Alert.alert('User creation', 'User exists already!');
+        }
+      })
+      .catch((error) => {
+         console.error(error);
+         return;
+      });
+    }
+
     handleLoginRequest (e) {
       e.preventDefault();
       var headers = this.getHeaders();
@@ -75,6 +114,22 @@ class Login extends Component {
       });
     }
 
+    renderEmailInput() {
+      if (this.state.page === 'Sign up') {
+        return (
+          <TextInput
+            placeholder='Email address'
+            autoCapitalize='none'
+            autoCorrect={false}
+            autoFocus={false}
+            keyboardType='email-address'
+            value={this.state.email}
+            onChangeText={(text) => this.setState({ email: text })}
+          />
+        )
+      }
+    }
+
     render () {
       return (
           <View style={[styles.container]}>
@@ -92,32 +147,34 @@ class Login extends Component {
             </View>
 
             <View style={[styles.loginContainer]}>
-            <TextInput
-                placeholder='Username'
-                autoCapitalize='none'
-                autoCorrect={false}
-                autoFocus={false}
-                keyboardType='email-address'
-                value={this.state.username}
-                onChangeText={(text) => this.setState({ username: text })} />
-            <View style={{margin: 4}}/>
-            <TextInput
-                placeholder='Password'
-                autoCapitalize='none'
-                autoCorrect={false}
-                secureTextEntry={true}
-                value={this.state.password}
-                onChangeText={(text) => this.setState({ password: text })} />
+              {this.renderEmailInput()}
+              <View style={{margin: 4}}></View>
+              <TextInput
+                  placeholder='Username'
+                  autoCapitalize='none'
+                  autoCorrect={false}
+                  autoFocus={false}
+                  keyboardType='email-address'
+                  value={this.state.username}
+                  onChangeText={(text) => this.setState({ username: text })} />
+              <View style={{margin: 4}}></View>
+              <TextInput
+                  placeholder='Password'
+                  autoCapitalize='none'
+                  autoCorrect={false}
+                  secureTextEntry={true}
+                  value={this.state.password}
+                  onChangeText={(text) => this.setState({ password: text })} />
 
-              <Text style={{fontSize: 27}}>{this.state.route}</Text>
-              <Button onPress={(e) => this.handleLoginRequest(e)} title={this.state.page}/>
-              <View style={{marginTop: 55, flexDirection: 'row', justifyContent: 'center'}}>
-                <Text onPress={(e) => this.togglePage(e)} style={{fontSize: 14, color: 'blue'}}>
-                    {this.altLoginSignup}
-                </Text>
-              </View>
-              <Text style={[styles.loginHint]}>{this.altHelperText}</Text>
-          </View>
+                <Text style={{fontSize: 27}}>{this.state.route}</Text>
+                <Button onPress={(e) => this.handleButtonPress(e)} title={this.state.page}/>
+                <View style={{marginTop: 55, flexDirection: 'row', justifyContent: 'center'}}>
+                  <Text onPress={(e) => this.togglePage(e)} style={{fontSize: 14, color: 'blue'}}>
+                      {this.altLoginSignup}
+                  </Text>
+                </View>
+                <Text style={[styles.loginHint]}>{this.altHelperText}</Text>
+            </View>
           </KeyboardAvoidingView>
         </View>
     );
@@ -161,7 +218,7 @@ const styles = StyleSheet.create({
   loginContainer: {
     justifyContent: 'center',
     alignSelf: 'stretch',
-    padding: 80
+    padding: 40
   },
 });
 
