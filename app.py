@@ -96,7 +96,13 @@ def new_user():
     username = request.json.get('username')
     email = request.json.get('email')
     password = request.json.get('password')
-
+    if username is None or email is None or password is None:
+        abort(400)
+    db_resp = DB.create_new_user_to_database(username, email, password)
+    if db_resp == 'user exists already':
+        return jsonify({'user creation': 'user exists'})
+    else:
+        return jsonify({'user creation': 'success'})
 
 
 @app.route('/api/v1.0/user/items', methods=['GET'])
