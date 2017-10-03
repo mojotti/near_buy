@@ -162,7 +162,7 @@ class TestApp(unittest.TestCase):
         self.assertEquals(json_resp['user creation'], 'success')
 
     @mock.patch('database.DatabaseHelper.create_new_user_to_database', return_value='user exists already')
-    def test_given_user_exists_when_user_registers_then_registering_is_not_successful(self, mock):
+    def test_given_user_exists_when_user_registers_then_it_is_not_successful(self, mock):
         user_info = {
             'username': 'new_user',
             'email': 'new_email',
@@ -176,6 +176,18 @@ class TestApp(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         json_resp = json.loads(response.data.decode('utf-8'))
         self.assertEquals(json_resp['user creation'], 'user exists')
+
+    def test_given_user_has_invalid_user_info_when_user_registers_then_it_is_not_successful(self):
+        user_info = {
+            'username': 'new_user',
+            'email': 'new_email',
+        }
+        response = self.app.post(
+            '/api/v1.0/user/register',
+            data=json.dumps(user_info),
+            content_type='application/json'
+        )
+        self.assertEqual(response.status_code, 400)
 
 
 
