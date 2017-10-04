@@ -44,15 +44,27 @@ class HomeScreen extends React.Component {
       })
       .then((response) => response.json())
       .then((responseJson) => {
-         this.setState({
-           dataSource: this.state.dataSource.cloneWithRows(responseJson.items),
-           loaded: true,
-           data: responseJson.items,
-         });
+        this.handleAllItemsRequest(responseJson);
       })
       .catch((error) => {
          console.error(error);
       });
+  }
+
+  handleAllItemsRequest(responseJson) {
+    console.log(responseJson);
+    if (responseJson.items === 'no items') {
+      this.setState({
+        loaded: true,
+        data: responseJson.items,
+      });
+    } else {
+      this.setState({
+        dataSource: this.state.dataSource.cloneWithRows(responseJson.items),
+        loaded: true,
+        data: responseJson.items,
+      });
+    }
   }
 
   render() {
@@ -77,9 +89,16 @@ class HomeScreen extends React.Component {
   }
 
   renderUserData() {
+    while (this.state.loaded === false) {
+      return (
+        <Text style={[styles.infoText]}>
+          {"Loading user data..."}
+        </Text>
+      )
+    }
     if (this.state.data === 'no items') {
       return (
-        <Text>
+        <Text style={[styles.infoText]}>
           {"You don't have any items yet. You should start to sell some shit!"}
         </Text>
       );
@@ -133,6 +152,10 @@ const styles = StyleSheet.create({
   },
   welcomeText: {
     paddingTop: 50
+  },
+  infoText: {
+    textAlign: 'center',
+    padding: 10
   }
 });
 

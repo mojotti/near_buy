@@ -158,7 +158,7 @@ class Login extends Component {
           <View style={[styles.container]}>
             <KeyboardAvoidingView
               behavior='padding'
-              keyboardVerticalOffset={40}
+              keyboardVerticalOffset={64}
             >
             <View>
               {this.renderLogoAndWelcomeText()}
