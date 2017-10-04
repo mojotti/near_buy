@@ -19,7 +19,8 @@ class Login extends Component {
             page: 'Login',
             username: '',
             password: '',
-            email: ''
+            email: '',
+            textFocused: false
         };
     }
 
@@ -52,6 +53,12 @@ class Login extends Component {
 
     handleButtonPress(e) {
       e.preventDefault();
+      if((this.state.username === '' || this.state.password === '' ||
+        (this.state.page === 'Sign up' && this.state.email === '')))
+      {
+        Alert.alert('Invalid values', 'Please enter all the values.');
+        return;
+      }
       if (this.state.page === 'Login') {
         this.handleLoginRequest(e)
       } else {
@@ -124,8 +131,24 @@ class Login extends Component {
             autoFocus={false}
             keyboardType='email-address'
             value={this.state.email}
+            onFocus={() => this.setState({textFocused: true})}
             onChangeText={(text) => this.setState({ email: text })}
           />
+        )
+      }
+    }
+
+    renderLogoAndWelcomeText() {
+      if (this.state.textFocused === false) {
+        return (
+          <View style={[styles.logoContainer]}>
+            <Text style={[styles.welcomeText]}>Welcome to NearBuy</Text>
+            <Image
+              resizeMode="contain"
+              style={styles.logo}
+              source={require('./../logo.png')}
+            />
+          </View>
         )
       }
     }
@@ -134,18 +157,12 @@ class Login extends Component {
       return (
           <View style={[styles.container]}>
             <KeyboardAvoidingView
-            behavior='padding'
-            keyboardVerticalOffset={-70}
+              behavior='padding'
+              keyboardVerticalOffset={40}
             >
-            <View style={[styles.logoContainer]}>
-              <Text style={[styles.welcomeText]}>Welcome to NearBuy</Text>
-              <Image
-                resizeMode="contain"
-                style={styles.logo}
-                source={require('./../logo.png')}
-              />
+            <View>
+              {this.renderLogoAndWelcomeText()}
             </View>
-
             <View style={[styles.loginContainer]}>
               {this.renderEmailInput()}
               <View style={{margin: 4}}></View>
@@ -154,6 +171,7 @@ class Login extends Component {
                   autoCapitalize='none'
                   autoCorrect={false}
                   autoFocus={false}
+                  onFocus={() => this.setState({textFocused: true})}
                   keyboardType='email-address'
                   value={this.state.username}
                   onChangeText={(text) => this.setState({ username: text })} />
@@ -163,13 +181,14 @@ class Login extends Component {
                   autoCapitalize='none'
                   autoCorrect={false}
                   secureTextEntry={true}
+                  onFocus={() => this.setState({textFocused: true})}
                   value={this.state.password}
                   onChangeText={(text) => this.setState({ password: text })} />
 
                 <Text style={{fontSize: 27}}>{this.state.route}</Text>
                 <Button onPress={(e) => this.handleButtonPress(e)} title={this.state.page}/>
-                <View style={{marginTop: 55, flexDirection: 'row', justifyContent: 'center'}}>
-                  <Text onPress={(e) => this.togglePage(e)} style={{fontSize: 14, color: 'blue'}}>
+                <View style={{marginTop: 40, flexDirection: 'row', justifyContent: 'center'}}>
+                  <Text onPress={(e) => this.togglePage(e)} style={{fontSize: 16, color: 'blue'}}>
                       {this.altLoginSignup}
                   </Text>
                 </View>
@@ -219,6 +238,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignSelf: 'stretch',
     padding: 40
+  },
+  logoContainer: {
+    justifyContent: 'center',
+    alignSelf: 'stretch',
+    padding: 0
   },
 });
 
