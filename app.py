@@ -1,6 +1,7 @@
 """
 'app.py' provides a RESTful API for NearBuy app.
 """
+import base64
 import sys
 import six
 from flask import Flask, jsonify, abort, request, make_response, url_for, g
@@ -93,10 +94,10 @@ def make_public_item(item):
 @app.route('/api/v1.0/register', methods=['POST'])
 def new_user():
     """Register new user and save its details to db."""
-    username = request.json.get('username')
-    email = request.json.get('email')
-    password = request.json.get('password')
-    if username is None or email is None or password is None:
+    encoded_msg = request.json.get('user_info')
+    msg = base64.urlsafe_b64decode(encoded_msg).decode('utf-8').split(':')
+    username, email, password = msg[0], msg[1], msg[2]
+    if username is '' or email is '' or password is '':
         abort(400)
     db_resp = DB.create_new_user_to_database(email=email, username=username, password=password)
     if db_resp == 'user exists already':

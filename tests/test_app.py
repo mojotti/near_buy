@@ -6,6 +6,7 @@ from app import app
 from database import TestDB
 from User import User
 from samples import items
+import base64
 
 ITEM1 = items.ITEM1
 ITEM2 = items.ITEM2
@@ -148,9 +149,7 @@ class TestApp(unittest.TestCase):
     @mock.patch('database.DatabaseHelper.create_new_user_to_database', return_value=None)
     def test_given_user_has_valid_user_info_when_user_registers_then_it_is_successful(self, mock):
         user_info = {
-            'username': 'new_user',
-            'email': 'new_email',
-            'password': 'pw123'
+            'user_info': base64.b64encode(b'user:pw:email').decode('utf-8')
         }
         response = self.app.post(
             '/api/v1.0/register',
@@ -164,9 +163,7 @@ class TestApp(unittest.TestCase):
     @mock.patch('database.DatabaseHelper.create_new_user_to_database', return_value='user exists already')
     def test_given_user_exists_when_user_registers_then_it_is_not_successful(self, mock):
         user_info = {
-            'username': 'new_user',
-            'email': 'new_email',
-            'password': 'pw123'
+            'user_info': base64.b64encode(b'user:pw:email').decode('utf-8')
         }
         response = self.app.post(
             '/api/v1.0/register',
@@ -179,8 +176,7 @@ class TestApp(unittest.TestCase):
 
     def test_given_user_has_invalid_user_info_when_user_registers_then_it_is_not_successful(self):
         user_info = {  # missing pw
-            'username': 'new_user',
-            'email': 'new_email',
+            'user_info': base64.b64encode(b'user:pw:').decode('utf-8')
         }
         response = self.app.post(
             '/api/v1.0/register',
