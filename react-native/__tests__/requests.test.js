@@ -3,13 +3,15 @@
 const base64 = require('base-64');
 
 import { generateHeadersForBasicAuth,
-        generateHash } from '../src/request';
+        generateHash,
+        generateHashForLogin } from '../src/request';
 import "isomorphic-fetch";  // for headers, fetch, etc.
 
 const username = "testing";
 const password = "test_pw";
+const email = "test_email";
 const expectedHash = base64.encode(username + ':' + password);
-
+const expectedHashForEmail = base64.encode(username + ':' + password + ':' + email);
 
 it('givenUsernameAndPwAreKnownWhenHashIsGeneratedThenItIsExpected', () => {
   expect(expectedHash).toEqual(generateHash(username, password));
@@ -29,4 +31,12 @@ it('givenUsernameAndPwIsNotKnownWhenHeadersForBasicAuthIsGeneratedThenItIsExpect
   var headers = new Headers();
   headers.append("Authorization", "Basic " + expectedHash);
   expect(headers).not.toEqual(generateHeadersForBasicAuth("random", "enmuista"));
+});
+
+it('givenUsernameEmailAndPwAreKnowWhenHashIsGeneratedThenItIsExpected', () => {
+  expect(expectedHashForEmail).toEqual(generateHashForLogin(username, password, email));
+});
+
+it('givenUsernameEmailAndPwAreNotKnownWhenHashIsGeneratedThenItIsExpected', () => {
+  expect(expectedHashForEmail).not.toEqual(generateHashForLogin("jee", "juu", "ee"));
 });
