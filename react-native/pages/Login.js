@@ -1,13 +1,15 @@
 'use strict';
 
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Alert, ScrollView, Text, TextInput, View, Button, Platform, StyleSheet,
   Image, KeyboardAvoidingView } from 'react-native';
 import { login } from '../redux/actions/auth';
+import { generateHeadersForBasicAuth } from '../src/request';
+
 
 const LOCALHOST = (Platform.OS === 'ios') ? 'localhost' : '10.0.2.2';
-const base64 = require('base-64');
 const loginText = "New user? Press 'Sign up' to register.";
 const registerText = "Existing user? Press 'Login'.";
 
@@ -39,17 +41,6 @@ class Login extends Component {
 
     get altHelperText () { return (this.state.page === 'Login')
           ? loginText : registerText; }
-
-    getHeaders() {
-      var headers = new Headers();
-      headers.append("Authorization", "Basic " + this.getHash());
-      return headers;
-    }
-
-    getHash() {
-      var credentials = this.state.username + ':' + this.state.password
-      return base64.encode(credentials);
-    }
 
     handleButtonPress(e) {
       e.preventDefault();
@@ -97,13 +88,11 @@ class Login extends Component {
 
     handleLoginRequest (e) {
       e.preventDefault();
-      var headers = this.getHeaders();
 
       fetch('http://' + LOCALHOST + ':5000/api/v1.0/auth', {
          method: 'GET',
-         headers: this.getHeaders()
+         headers: generateHeadersForBasicAuth(this.state.username, this.state.password)
       })
-
       .then((response) => response.json())
       .then((responseJson) => {
         console.log(responseJson);
