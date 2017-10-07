@@ -7,7 +7,7 @@ import { Alert, ScrollView, Text, TextInput, View, Button, Platform, StyleSheet,
   Image, KeyboardAvoidingView } from 'react-native';
 import { login } from '../redux/actions/auth';
 import { generateHeadersForBasicAuth,
-  generateHashForLogin } from '../src/request';
+  generateHashForRegistering } from '../src/request';
 
 
 const LOCALHOST = (Platform.OS === 'ios') ? 'localhost' : '10.0.2.2';
@@ -66,7 +66,7 @@ class Login extends Component {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          'user_info': generateHashForLogin(this.state.username,
+          'user_info': generateHashForRegistering(this.state.username,
             this.state.password, this.state.email)
         })
       })

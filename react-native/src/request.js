@@ -15,7 +15,7 @@ function generateHeadersForBasicAuth(username, password) {
   return headers;
 }
 
-function generateHashForLogin(username, password, email) {
+function generateHashForRegistering(username, password, email) {
   const credentials = username + ':' + password + ':' + email;
   return base64.encode(credentials);
 }
@@ -23,4 +23,4 @@ function generateHashForLogin(username, password, email) {
 
 export { generateHeadersForBasicAuth,
         generateHash,
-        generateHashForLogin };
+        generateHashForRegistering };
