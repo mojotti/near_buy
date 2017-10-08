@@ -7,7 +7,6 @@ import { logout } from '../redux/actions/auth';
 import { connect } from 'react-redux';
 
 const LOCALHOST = (Platform.OS === 'ios') ? 'localhost' : '10.0.2.2';
-const base64  = require('base-64');
 
 
 class Items extends React.Component {

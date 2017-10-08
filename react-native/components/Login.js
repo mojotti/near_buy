@@ -1,6 +1,5 @@
 'use strict';
 
-
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Alert, ScrollView, Text, TextInput, View, Button, Platform, StyleSheet,
