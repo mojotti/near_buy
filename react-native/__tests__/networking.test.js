@@ -4,7 +4,7 @@ const base64 = require('base-64');
 
 import { generateHeadersForBasicAuth,
         generateHash,
-        generateHashForRegistering } from '../src/request';
+        generateHashForRegistering } from '../src/networking';
 import "isomorphic-fetch";  // for headers, fetch, etc.
 
 const username = "testing";

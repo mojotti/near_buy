@@ -10,7 +10,7 @@ const LOCALHOST = (Platform.OS === 'ios') ? 'localhost' : '10.0.2.2';
 const base64  = require('base-64');
 
 
-class HomeScreen extends React.Component {
+class Items extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,6 +21,10 @@ class HomeScreen extends React.Component {
       data: ''
     };
   }
+
+  static navigationOptions = {
+    title: 'Your items',
+  };
 
   userLogout(e) {
       this.props.onLogout();
@@ -68,17 +72,16 @@ class HomeScreen extends React.Component {
   }
 
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <View style={[styles.container]}>
-        <View style={[styles.welcomeText]}>
-          <Text style={{fontSize: 27}}>
-              {'Welcome ' + this.props.username}
-          </Text>
-          <Text style={[styles.header]}>
-            Your items:
-          </Text>
-        </View>
         {this.renderUserData()}
+        <Button
+          title="Add new item"
+          onPress={() =>
+            navigate('NewItem')
+          }
+        />
         <Button
           onPress={(e) => this.userLogout(e)}
           title="Logout"
@@ -172,4 +175,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(Items);

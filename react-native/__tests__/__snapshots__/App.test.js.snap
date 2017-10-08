@@ -1,0 +1,221 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "space-around",
+      },
+    ]
+  }
+>
+  <View
+    keyboardVerticalOffset={64}
+    onLayout={[Function]}
+    style={
+      Array [
+        undefined,
+        Object {
+          "paddingBottom": 0,
+        },
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "alignSelf": "stretch",
+            "justifyContent": "center",
+            "padding": 0,
+          },
+        ]
+      }
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {
+              "fontSize": 24,
+              "marginTop": 50,
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        Welcome to NearBuy
+      </Text>
+      <Image
+        resizeMode="contain"
+        source={1}
+        style={
+          Object {
+            "height": 150,
+            "width": 350,
+          }
+        }
+      />
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "alignSelf": "stretch",
+            "justifyContent": "center",
+            "padding": 40,
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          Object {
+            "margin": 4,
+          }
+        }
+      />
+      <TextInput
+        autoCapitalize="none"
+        autoCorrect={false}
+        autoFocus={false}
+        keyboardType="email-address"
+        onChangeText={[Function]}
+        onFocus={[Function]}
+        placeholder="Username"
+        value=""
+      />
+      <View
+        style={
+          Object {
+            "margin": 4,
+          }
+        }
+      />
+      <TextInput
+        autoCapitalize="none"
+        autoCorrect={false}
+        onChangeText={[Function]}
+        onFocus={[Function]}
+        placeholder="Password"
+        secureTextEntry={true}
+        value=""
+      />
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+        style={
+          Object {
+            "fontSize": 27,
+          }
+        }
+      />
+      <View
+        accessibilityComponentType="button"
+        accessibilityLabel={undefined}
+        accessibilityTraits={
+          Array [
+            "button",
+          ]
+        }
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <View
+          style={
+            Array [
+              Object {},
+            ]
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            disabled={false}
+            ellipsizeMode="tail"
+            style={
+              Array [
+                Object {
+                  "color": "#007AFF",
+                  "fontSize": 18,
+                  "padding": 8,
+                  "textAlign": "center",
+                },
+              ]
+            }
+          >
+            Login
+          </Text>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "center",
+            "marginTop": 40,
+          }
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+          onPress={[Function]}
+          style={
+            Object {
+              "color": "blue",
+              "fontSize": 16,
+            }
+          }
+        >
+          Sign up
+        </Text>
+      </View>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {
+              "fontSize": 12,
+              "marginTop": 10,
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        New user? Press 'Sign up' to register.
+      </Text>
+    </View>
+  </View>
+</View>
+`;
