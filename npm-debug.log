@@ -1,12 +1,12 @@
 0 info it worked if it ends with ok
-1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'test' ]
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 't' ]
 2 info using npm@3.10.9
 3 info using node@v6.9.2
 4 verbose stack Error: ENOENT: no such file or directory, open '/Users/ristomatti/PycharmProjects/near_buy/package.json'
 4 verbose stack     at Error (native)
 5 verbose cwd /Users/ristomatti/PycharmProjects/near_buy
 6 error Darwin 16.7.0
-7 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "test"
+7 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "t"
 8 error node v6.9.2
 9 error npm  v3.10.9
 10 error path /Users/ristomatti/PycharmProjects/near_buy/package.json

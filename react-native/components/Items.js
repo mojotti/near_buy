@@ -1,12 +1,13 @@
 'use strict';
 
 import React from 'react';
-import { Image, Platform , StyleSheet,
+import { Image, Platform , StyleSheet, Dimensions,
         Text, View, ScrollView, Button, ListView } from 'react-native';
 import { logout } from '../redux/actions/auth';
 import { connect } from 'react-redux';
 
 const LOCALHOST = (Platform.OS === 'ios') ? 'localhost' : '10.0.2.2';
+const width = Dimensions.get('window').width; //full width
 
 
 class Items extends React.Component {
@@ -146,6 +147,7 @@ const styles = StyleSheet.create({
   item: {
     padding: 10,
     backgroundColor: '#F1F1F1',
+    width: width,
   },
   separator: {
     flex: 1,

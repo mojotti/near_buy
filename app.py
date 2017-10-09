@@ -156,7 +156,7 @@ def get_item_details(items_list, user_id):
     return {
         'id': 0 if not items_list else items_list[-1]['id'] + 1,  # in case there are no items yet created
         'title': request.json['title'],
-        'price': request.json['price'],
+        'price': int(request.json['price']),
         'seller_id': user_id,
         'description': request.json.get('description', ""),
         'sold': False,

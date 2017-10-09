@@ -2,8 +2,8 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Alert, ScrollView, Text, TextInput, View, Button, Platform, StyleSheet,
-  Image, KeyboardAvoidingView } from 'react-native';
+import { Alert, ScrollView, Text, TextInput, View, Button, Platform,
+  Dimensions, StyleSheet, Image, KeyboardAvoidingView } from 'react-native';
 import { login } from '../redux/actions/auth';
 import { generateHeadersForBasicAuth,
   generateHashForRegistering } from '../src/networking';
@@ -12,6 +12,7 @@ import { generateHeadersForBasicAuth,
 const LOCALHOST = (Platform.OS === 'ios') ? 'localhost' : '10.0.2.2';
 const loginText = "New user? Press 'Sign up' to register.";
 const registerText = "Existing user? Press 'Login'.";
+const widthWithThirtyPercentPadding = Dimensions.get('window').width * 0.7;
 
 
 class Login extends Component {
@@ -143,11 +144,11 @@ class Login extends Component {
 
   render () {
     return (
-        <View style={[styles.container]}>
-          <KeyboardAvoidingView
-            behavior='padding'
-            keyboardVerticalOffset={64}
-          >
+      <View style={[styles.container]}>
+        <KeyboardAvoidingView
+          behavior='padding'
+          keyboardVerticalOffset={64}
+        >
           {this.renderLogoAndWelcomeText()}
           <View style={[styles.loginContainer]}>
             {this.renderEmailInput()}
@@ -175,13 +176,13 @@ class Login extends Component {
               <Button onPress={(e) => this.handleButtonPress(e)} title={this.state.page}/>
               <View style={{marginTop: 40, flexDirection: 'row', justifyContent: 'center'}}>
                 <Text onPress={(e) => this.togglePage(e)} style={{fontSize: 16, color: 'blue'}}>
-                    {this.altLoginSignup}
+                  {this.altLoginSignup}
                 </Text>
               </View>
               <Text style={[styles.loginHint]}>{this.altHelperText}</Text>
           </View>
-        </KeyboardAvoidingView>
-      </View>
+      </KeyboardAvoidingView>
+    </View>
     );
   }
 }
@@ -222,8 +223,8 @@ const styles = StyleSheet.create({
   },
   loginContainer: {
     justifyContent: 'center',
-    alignSelf: 'stretch',
-    padding: 40
+    alignSelf: 'center',
+    width: widthWithThirtyPercentPadding,
   },
   logoContainer: {
     justifyContent: 'center',

@@ -2,10 +2,11 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Alert, Button, Platform, StyleSheet, Text, TextInput, View }
-  from 'react-native';
+import { Alert, Button, Dimensions, KeyboardAvoidingView, Platform,
+  StyleSheet, Text, TextInput, View } from 'react-native';
 
 const LOCALHOST = (Platform.OS === 'ios') ? 'localhost' : '10.0.2.2';
+const widthWithThirtyPercentPadding = Dimensions.get('window').width * 0.7;
 
 
 class NewItem extends Component {
@@ -22,7 +23,6 @@ class NewItem extends Component {
     var headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', 'Bearer ' + this.props.token);
-    console.log("vittu"+ headers)
     return headers;
   }
 
@@ -45,9 +45,9 @@ class NewItem extends Component {
     })
     .then((response) => response.json())
     .then((responseJson) => {
-      if (responseJson.user_creation === 'item') {
+      console.log("pure " + responseJson.item.title);
+      if (responseJson.item.title === title) {
         Alert.alert('Item creation', 'Item created successfully!');
-        console.log(responseJson);
       }
     })
     .catch((error) => {
@@ -56,40 +56,68 @@ class NewItem extends Component {
     });
   }
 
+  onPriceChange(text) {
+    let newText = '';
+    let numbers = '0123456789';
+
+    for (var i = 0; i < text.length; i++) {
+      if ( numbers.indexOf(text[i]) > -1 ) {
+        newText = newText + text[i];
+      }
+    }
+    this.setState({price: newText})
+}
+
   static navigationOptions = {
     title: 'Sell item',
   };
 
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <View style={[styles.container]}>
         <TextInput
           placeholder='Title'
-          autoCapitalize='none'
+          autoCapitalize='sentences'
           autoCorrect={false}
-          autoFocus={false}
+          autoFocus={true}
+          maxLength = {20}
           keyboardType='email-address'
           value={this.state.title}
           onChangeText={(text) => this.setState({ title: text })}
+          style={[styles.itemDetails]}
         />
         <TextInput
           placeholder='Description'
-          autoCapitalize='none'
+          autoCapitalize='sentences'
+          maxLength = {60}
           autoCorrect={false}
           autoFocus={false}
           keyboardType='email-address'
           value={this.state.description}
           onChangeText={(text) => this.setState({ description: text })}
+          style={[styles.itemDetails]}
         />
-        <TextInput
-          placeholder='Price'
-          autoCorrect={false}
-          autoFocus={false}
-          keyboardType='numeric'
-          value={this.state.price}
-          onChangeText={(number) => this.setState({ price: number })}
-        />
-        <Button onPress={() => this.handleNewItemCreation()} title={'Submit item'}/>
+        <KeyboardAvoidingView
+          behavior='padding'
+          keyboardVerticalOffset={164}
+        >
+          <TextInput
+            placeholder='Price'
+            autoCorrect={false}
+            autoFocus={false}
+            keyboardType='numeric'
+            maxLength = {5}
+            value = {this.state.price}
+            onChangeText = {(text) => this.onPriceChange(text)}
+            style={[styles.itemDetails]}
+          />
+          <View style = {{paddingTop: 20}}></View>
+          <Button
+            onPress = {() => this.handleNewItemCreation()}
+            title = {'Submit item'}
+          />
+        </KeyboardAvoidingView>
       </View>
     );
   }
@@ -101,6 +129,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
   },
+  itemDetails: {
+    width: widthWithThirtyPercentPadding,
+    alignItems: 'center',
+  }
 });
 
 const mapStateToProps = (state, ownProps) => {
