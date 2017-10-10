@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Alert, Button, Dimensions, KeyboardAvoidingView, Platform,
   StyleSheet, Text, TextInput, View } from 'react-native';
+import { NavigationActions } from 'react-navigation';
 
 const LOCALHOST = (Platform.OS === 'ios') ? 'localhost' : '10.0.2.2';
 const widthWithThirtyPercentPadding = Dimensions.get('window').width * 0.7;
@@ -26,6 +27,16 @@ class NewItem extends Component {
     return headers;
   }
 
+  resetNavigationAndNavigateToRoute(targetRoute) {
+    const resetAction = NavigationActions.reset({
+      index: 0,
+      actions: [
+        NavigationActions.navigate({ routeName: targetRoute }),
+      ],
+    });
+    this.props.navigation.dispatch(resetAction);
+  }
+
   handleNewItemCreation () {
     const { title, price, description } = this.state;
     const { navigate } = this.props.navigation;
@@ -46,8 +57,7 @@ class NewItem extends Component {
     .then((responseJson) => {
       console.log("pure " + responseJson.item.title);
       if (responseJson.item.title === title) {
-        Alert.alert('Item creation', 'Item created successfully!');
-        () => navigate('NewItem')
+        this.resetNavigationAndNavigateToRoute('Items');
       }
     })
     .catch((error) => {

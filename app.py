@@ -97,7 +97,6 @@ def new_user():
     encoded_msg = request.json.get('user_info')
     msg = base64.urlsafe_b64decode(encoded_msg).decode('utf-8').split(':')
     username, email, password = msg[0], msg[1], msg[2]
-    print(username, email, password)
     if username is '' or email is '' or password is '':
         abort(400)
     db_resp = DB.create_new_user_to_database(email=email, username=username, password=password)

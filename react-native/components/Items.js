@@ -24,6 +24,7 @@ class Items extends React.Component {
 
   static navigationOptions = {
     title: 'Your items',
+    headerLeft: null
   };
 
   userLogout(e) {

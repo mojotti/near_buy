@@ -12,8 +12,6 @@ function generateHeadersForBasicAuth(username, password) {
   var headers = new Headers();
   var hash = generateHash(username, password);
   headers.append("Authorization", "Basic " + hash);
-  console.log(username + ' ' + password);
-  console.log('headers ' + headers);
   return headers;
 }
 
