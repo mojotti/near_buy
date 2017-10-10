@@ -140,13 +140,13 @@ const styles = StyleSheet.create({
   },
   item: {
     padding: 10,
-    backgroundColor: '#F1F1F1',
+    backgroundColor: 'azure',
     width: width,
   },
   separator: {
     marginBottom: 1,
     borderBottomWidth: 1,
-    borderBottomColor: 'grey',
+    borderBottomColor: 'gainsboro',
   },
   infoText: {
     textAlign: 'center',
