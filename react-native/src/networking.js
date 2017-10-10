@@ -12,11 +12,13 @@ function generateHeadersForBasicAuth(username, password) {
   var headers = new Headers();
   var hash = generateHash(username, password);
   headers.append("Authorization", "Basic " + hash);
+  console.log(username + ' ' + password);
+  console.log('headers ' + headers);
   return headers;
 }
 
 function generateHashForRegistering(username, password, email) {
-  const credentials = username + ':' + password + ':' + email;
+  const credentials = username + ':' + email + ':' + password;
   return base64.encode(credentials);
 }
 

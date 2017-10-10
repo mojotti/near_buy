@@ -27,9 +27,8 @@ class NewItem extends Component {
   }
 
   handleNewItemCreation () {
-    const title = this.state.title;
-    const price = this.state.price;
-    const description = this.state.description;
+    const { title, price, description } = this.state;
+    const { navigate } = this.props.navigation;
     if (title == '' || price == '' || description == '') {
       Alert.alert('Invalid values', 'Enter at least price, title and description');
       return;
@@ -48,6 +47,7 @@ class NewItem extends Component {
       console.log("pure " + responseJson.item.title);
       if (responseJson.item.title === title) {
         Alert.alert('Item creation', 'Item created successfully!');
+        () => navigate('NewItem')
       }
     })
     .catch((error) => {
