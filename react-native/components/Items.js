@@ -110,16 +110,15 @@ class Items extends React.Component {
       return (
         <ListView
           dataSource={this.state.dataSource}
-          renderRow={this.renderItems}
-          renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
+          renderRow={data => this.renderItem(data)}
         />
       );
     }
   }
 
-  renderItems(item) {
+  renderItem(item) {
     return (
-      <View style={styles.item}>
+      <View style={[styles.item, styles.separator]}>
         <Text>
            {"Title: " + item.title}
         </Text>
@@ -138,12 +137,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-  },
-  header: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 20
   },
   item: {
     padding: 10,
@@ -151,12 +144,9 @@ const styles = StyleSheet.create({
     width: width,
   },
   separator: {
-    flex: 1,
-    height: StyleSheet.hairlineWidth,
-    backgroundColor: '#8E8E8E',
-  },
-  welcomeText: {
-    paddingTop: 50
+    marginBottom: 1,
+    borderBottomWidth: 1,
+    borderBottomColor: 'grey',
   },
   infoText: {
     textAlign: 'center',
