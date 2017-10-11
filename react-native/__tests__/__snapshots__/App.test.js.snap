@@ -67,9 +67,9 @@ exports[`renders correctly 1`] = `
       style={
         Array [
           Object {
-            "alignSelf": "stretch",
+            "alignSelf": "center",
             "justifyContent": "center",
-            "padding": 40,
+            "width": 525,
           },
         ]
       }

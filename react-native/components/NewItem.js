@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import store from '../redux';
 import { Alert, Button, Dimensions, KeyboardAvoidingView, Platform,
   StyleSheet, Text, TextInput, View } from 'react-native';
 import { NavigationActions } from 'react-navigation';
@@ -23,7 +24,7 @@ class NewItem extends Component {
   getHeaders() {
     var headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', 'Bearer ' + this.props.token);
+    headers.append('Authorization', 'Bearer ' + store.getState().auth.token);
     return headers;
   }
 
@@ -56,8 +57,10 @@ class NewItem extends Component {
     .then((response) => response.json())
     .then((responseJson) => {
       console.log("pure " + responseJson.item.title);
-      if (responseJson.item.title === title) {
+      if (responseJson.item && responseJson.item.title === title) {
         this.resetNavigationAndNavigateToRoute('Items');
+      } else {
+        Alert.alert('Item creation failed', 'Something went wrong');
       }
     })
     .catch((error) => {
@@ -145,17 +148,5 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = (state, ownProps) => {
-    return {
-        username: state.auth.username,
-        token: state.auth.token
-    };
-}
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onLogout: () => { dispatch(logout()); }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(NewItem);
+export default NewItem;

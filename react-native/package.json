@@ -23,7 +23,10 @@
   },
   "jest": {
     "testEnvironment": "node",
-    "preset": "react-native"
+    "preset": "react-native",
+    "transformIgnorePatterns": [
+      "node_modules/(?!react-native|react-navigation)/"
+    ]
   },
   "dependencies": {
     "expo": "^20.0.0",

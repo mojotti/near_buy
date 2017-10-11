@@ -11,7 +11,7 @@ const username = "testing";
 const password = "test_pw";
 const email = "test_email";
 const expectedHash = base64.encode(username + ':' + password);
-const expectedHashForEmail = base64.encode(username + ':' + password + ':' + email);
+const expectedHashForEmail = base64.encode(username + ':' + email + ':' + password);
 
 it('givenUsernameAndPwAreKnownWhenHashIsGeneratedThenItIsExpected', () => {
   expect(expectedHash).toEqual(generateHash(username, password));
