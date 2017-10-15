@@ -11,7 +11,7 @@ const LOCALHOST = (Platform.OS === 'ios') ? 'localhost' : '10.0.2.2';
 const widthWithThirtyPercentPadding = Dimensions.get('window').width * 0.7;
 
 
-class NewItem extends Component {
+export class NewItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -86,7 +86,6 @@ class NewItem extends Component {
   };
 
   render() {
-    const { navigate } = this.props.navigation;
     return (
       <View style={[styles.container]}>
         <TextInput

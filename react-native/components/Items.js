@@ -10,7 +10,7 @@ const LOCALHOST = (Platform.OS === 'ios') ? 'localhost' : '10.0.2.2';
 const width = Dimensions.get('window').width; //full width
 
 
-class Items extends React.Component {
+export class Items extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -72,16 +72,18 @@ class Items extends React.Component {
     }
   }
 
-  render() {
+  navigateToNewItem() {
     const { navigate } = this.props.navigation;
+    navigate('NewItem');
+  }
+
+  render() {
     return (
       <View style={[styles.container]}>
         {this.renderUserData()}
         <Button
           title="Add new item"
-          onPress={() =>
-            navigate('NewItem')
-          }
+          onPress={() => this.navigateToNewItem()}
         />
         <Button
           onPress={(e) => this.userLogout(e)}

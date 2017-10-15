@@ -15,7 +15,7 @@ const registerText = "Existing user? Press 'Login'.";
 const widthWithThirtyPercentPadding = Dimensions.get('window').width * 0.7;
 
 
-class Login extends Component {
+export class Login extends Component {
   constructor (props) {
     super(props);
     this.state = {
