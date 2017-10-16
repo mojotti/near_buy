@@ -27,14 +27,12 @@ export class Login extends Component {
     };
   }
 
-  userLogin (e) {
-      this.props.onLogin(this.state.username, this.state.password);
-      e.preventDefault();
+  userLogin () {
+    this.props.onLogin(this.state.username, this.state.password);
   }
 
-  togglePage (e) {
+  togglePage () {
     this.setState({ page: this.altLoginSignup });
-    e.preventDefault();
   }
 
   get altLoginSignup () { return (this.state.page === 'Login')
@@ -43,8 +41,7 @@ export class Login extends Component {
   get altHelperText () { return (this.state.page === 'Login')
         ? loginText : registerText; }
 
-  handleButtonPress(e) {
-    e.preventDefault();
+  handleButtonPress() {
     if((this.state.username === '' || this.state.password === '' ||
       (this.state.page === 'Sign up' && this.state.email === '')))
     {
@@ -52,7 +49,7 @@ export class Login extends Component {
       return;
     }
     if (this.state.page === 'Login') {
-      this.handleLoginRequest(e)
+      this.handleLoginRequest()
     } else {
       this.handleRegisteringRequest()
     }
@@ -86,9 +83,7 @@ export class Login extends Component {
     });
   }
 
-  handleLoginRequest (e) {
-    e.preventDefault();
-
+  handleLoginRequest () {
     fetch('http://' + LOCALHOST + ':5000/api/v1.0/auth', {
        method: 'GET',
        headers: generateHeadersForBasicAuth(this.state.username, this.state.password)
@@ -103,7 +98,6 @@ export class Login extends Component {
         this.setState({ password: '' });
       }
     })
-
     .catch((error) => {
        console.error(error);
        return;
@@ -173,9 +167,9 @@ export class Login extends Component {
                 onChangeText={(text) => this.setState({ password: text })} />
 
               <Text style={{fontSize: 27}}>{this.state.route}</Text>
-              <Button onPress={(e) => this.handleButtonPress(e)} title={this.state.page}/>
+              <Button onPress={() => this.handleButtonPress()} title={this.state.page}/>
               <View style={{marginTop: 40, flexDirection: 'row', justifyContent: 'center'}}>
-                <Text onPress={(e) => this.togglePage(e)} style={{fontSize: 16, color: 'blue'}}>
+                <Text onPress={() => this.togglePage()} style={{fontSize: 16, color: 'blue'}}>
                   {this.altLoginSignup}
                 </Text>
               </View>
