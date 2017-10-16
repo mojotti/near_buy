@@ -38,12 +38,13 @@ export class Items extends React.Component {
 
   getHeaders() {
     let headers = new Headers();
-    headers.append("Authorization", "Bearer " + this.props.token);
+    headers.append('Authorization', `Bearer ${this.props.token}`);
     return headers;
   }
 
   fetchData() {
-    fetch('http://' + LOCALHOST + ':5000/api/v1.0/user/items', {
+    let url = `http://${LOCALHOST}:5000/api/v1.0/user/items`;
+    fetch(url, {
          method: 'GET',
          headers: this.getHeaders()
       })
@@ -82,12 +83,12 @@ export class Items extends React.Component {
       <View style={[styles.container]}>
         {this.renderUserData()}
         <Button
-          title="Add new item"
+          title='Add new item'
           onPress={() => this.navigateToNewItem()}
         />
         <Button
           onPress={() => this.userLogout()}
-          title="Logout"
+          title='Logout'
           style = {{margin: 15}}
         />
       </View>
@@ -98,14 +99,14 @@ export class Items extends React.Component {
     while (this.state.loaded === false) {
       return (
         <Text style={[styles.infoText]}>
-          {"Loading user data..."}
+          {'Loading user data...'}
         </Text>
       )
     }
     if (this.state.data === 'no items') {
       return (
         <Text style={[styles.infoText]}>
-          {"You don't have any items yet. You should start to sell some shit!"}
+          {`You don't have any items yet. You should start to sell some shit!`}
         </Text>
       );
     } else {
@@ -122,13 +123,13 @@ export class Items extends React.Component {
     return (
       <View style={[styles.item, styles.separator]}>
         <Text>
-           {"Title: " + item.title}
+           {`Title: ${item.title}`}
         </Text>
         <Text>
-          {"Description: " + item.description}
+          {`Description: ${item.description}`}
         </Text>
         <Text>
-          {"Price: " + item.price + " €"}
+          {`Price: ${item.price} €`}
         </Text>
       </View>
     );

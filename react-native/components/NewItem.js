@@ -24,7 +24,7 @@ export class NewItem extends Component {
   getHeaders() {
     var headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', 'Bearer ' + store.getState().auth.token);
+    headers.append('Authorization', `Bearer ${store.getState().auth.token}`);
     return headers;
   }
 
@@ -40,12 +40,12 @@ export class NewItem extends Component {
 
   handleNewItemCreation () {
     const { title, price, description } = this.state;
-    const { navigate } = this.props.navigation;
     if (title == '' || price == '' || description == '') {
       Alert.alert('Invalid values', 'Enter at least price, title and description');
       return;
     }
-    fetch('http://' + LOCALHOST + ':5000/api/v1.0/items', {
+    let url = `http://${LOCALHOST}:5000/api/v1.0/items`;
+    fetch(url, {
       method: 'POST',
       body: JSON.stringify({
         'title': title,
@@ -79,7 +79,7 @@ export class NewItem extends Component {
       }
     }
     this.setState({price: newText})
-}
+  }
 
   static navigationOptions = {
     title: 'Sell item',
