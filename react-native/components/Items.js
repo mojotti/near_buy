@@ -7,6 +7,7 @@ import { logout } from '../redux/actions/auth';
 import { connect } from 'react-redux';
 
 const LOCALHOST = (Platform.OS === 'ios') ? 'localhost' : '10.0.2.2';
+
 const width = Dimensions.get('window').width; //full width
 
 
@@ -27,9 +28,8 @@ export class Items extends React.Component {
     headerLeft: null
   };
 
-  userLogout(e) {
+  userLogout() {
       this.props.onLogout();
-      e.preventDefault();
   }
 
   componentDidMount() {
@@ -37,7 +37,7 @@ export class Items extends React.Component {
   }
 
   getHeaders() {
-    var headers = new Headers();
+    let headers = new Headers();
     headers.append("Authorization", "Bearer " + this.props.token);
     return headers;
   }
@@ -86,7 +86,7 @@ export class Items extends React.Component {
           onPress={() => this.navigateToNewItem()}
         />
         <Button
-          onPress={(e) => this.userLogout(e)}
+          onPress={() => this.userLogout()}
           title="Logout"
           style = {{margin: 15}}
         />

@@ -7,6 +7,7 @@ import { Alert, ScrollView, Text, TextInput, View, Button, Platform,
 import { login } from '../redux/actions/auth';
 import { generateHeadersForBasicAuth,
   generateHashForRegistering } from '../src/networking';
+import { NetworkInfo } from 'react-native-network-info';
 
 
 const LOCALHOST = (Platform.OS === 'ios') ? 'localhost' : '10.0.2.2';
@@ -42,13 +43,13 @@ export class Login extends Component {
         ? loginText : registerText; }
 
   handleButtonPress() {
-    if((this.state.username === '' || this.state.password === '' ||
-      (this.state.page === 'Sign up' && this.state.email === '')))
+    const { page, username, password, email } = this.state;
+    if(username === '' || password === '' || (page === 'Sign up' && email === ''))
     {
       Alert.alert('Invalid values', 'Please enter all the values.');
       return;
     }
-    if (this.state.page === 'Login') {
+    if (page === 'Login') {
       this.handleLoginRequest()
     } else {
       this.handleRegisteringRequest()
@@ -56,15 +57,16 @@ export class Login extends Component {
   }
 
   handleRegisteringRequest () {
-    fetch('http://' + LOCALHOST + ':5000/api/v1.0/register', {
+    const { username, password, email } = this.state;
+    let ip_addr = `http://${LOCALHOST}:5000/api/v1.0/register`;
+    fetch(ip_addr, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        'user_info': generateHashForRegistering(this.state.username,
-          this.state.password, this.state.email)
+        'user_info': generateHashForRegistering(username, password, email)
       })
     })
     .then((response) => response.json())
@@ -78,21 +80,24 @@ export class Login extends Component {
       }
     })
     .catch((error) => {
-       console.error(error);
-       return;
+      console.log('error ', error);
+      console.error(error);
+      return;
     });
   }
 
   handleLoginRequest () {
-    fetch('http://' + LOCALHOST + ':5000/api/v1.0/auth', {
+    let ip_addr = `http://${LOCALHOST}:5000/api/v1.0/auth`;
+    const { username, password } = this.state;
+    fetch(ip_addr, {
        method: 'GET',
-       headers: generateHeadersForBasicAuth(this.state.username, this.state.password)
+       headers: generateHeadersForBasicAuth(username, password)
     })
     .then((response) => response.json())
     .then((responseJson) => {
       console.log(responseJson);
-      if (responseJson.username === this.state.username) {
-        this.props.onLogin(this.state.username, responseJson.token);
+      if (responseJson.username === username) {
+        this.props.onLogin(username, responseJson.token);
       } else {
         Alert.alert('Try again, mate!', 'Invalid credentials.');
         this.setState({ password: '' });
