@@ -2,7 +2,7 @@ import React from 'react';
 import { Alert } from 'react-native';
 import { Login } from '../components/Login';
 import { loginText, registerText } from "../src/static/constants";
-import "isomorphic-fetch";  // for headers, fetch, etc.
+import 'isomorphic-fetch';  // for headers, fetch, etc.
 
 
 describe('Login', () => {

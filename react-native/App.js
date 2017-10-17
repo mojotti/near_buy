@@ -1,12 +1,12 @@
 'use strict';
 
-import React, { Component } from 'react';
+import React from 'react';
 import { Provider } from 'react-redux';
 import Application from './components/Application';
 import store from './redux';
 
 
-export default class App extends Component {
+export default class App extends React.Component {
     render() {
         return (
             <Provider store={store}>

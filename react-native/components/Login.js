@@ -1,6 +1,6 @@
 'use strict';
 
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Alert,
     Button,
@@ -18,7 +18,7 @@ import { localhost,
     registerText,
     widthWithThirtyPercentPadding} from '../src/static/constants';
 
-export class Login extends Component {
+export class Login extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
@@ -31,8 +31,8 @@ export class Login extends Component {
     }
 
     togglePage () {
-        let currentPage = this.getAlternativePageTitle(this.state);
-        this.setState({ page: currentPage });
+        let alternativePage = this.getAlternativePageTitle(this.state);
+        this.setState({ page: alternativePage });
     }
 
     getAlternativePageTitle (state) {
@@ -45,7 +45,7 @@ export class Login extends Component {
         return (page === 'Login') ? loginText : registerText;
     }
 
-    handleButtonPress(state) {
+    handleButtonPress (state) {
         const { page, username, password, email } = state;
         if(username === '' || password === '' || (page === 'Sign up' && email === ''))
         {
@@ -53,9 +53,9 @@ export class Login extends Component {
             return;
         }
         if (page === 'Login') {
-            this.handleLoginRequest(state)
+            this.handleLoginRequest(state);
         } else {
-            this.handleRegisteringRequest(state)
+            this.handleRegisteringRequest(state);
         }
     }
 
@@ -145,43 +145,43 @@ export class Login extends Component {
     render () {
         return (
             <View style={[styles.container]}>
-              <KeyboardAvoidingView
-                  behavior='padding'
-                  keyboardVerticalOffset={64}
-              >
-                  {this.renderLogoAndWelcomeText()}
-                <View style={[styles.loginContainer]}>
-                    {this.renderEmailInput()}
-                  <View style={{margin: 4}}></View>
-                  <TextInput
-                      placeholder='Username'
-                      autoCapitalize='none'
-                      autoCorrect={false}
-                      autoFocus={false}
-                      onFocus={() => this.setState({textFocused: true})}
-                      keyboardType='email-address'
-                      value={this.state.username}
-                      onChangeText={(text) => this.setState({ username: text })} />
-                  <View style={{margin: 4}}></View>
-                  <TextInput
-                      placeholder='Password'
-                      autoCapitalize='none'
-                      autoCorrect={false}
-                      secureTextEntry={true}
-                      onFocus={() => this.setState({textFocused: true})}
-                      value={this.state.password}
-                      onChangeText={(text) => this.setState({ password: text })} />
+                <KeyboardAvoidingView
+                    behavior='padding'
+                    keyboardVerticalOffset={64}
+                >
+                    {this.renderLogoAndWelcomeText()}
+                    <View style={[styles.loginContainer]}>
+                        {this.renderEmailInput()}
+                        <View style={{margin: 4}}></View>
+                        <TextInput
+                            placeholder='Username'
+                            autoCapitalize='none'
+                            autoCorrect={false}
+                            autoFocus={false}
+                            onFocus={() => this.setState({textFocused: true})}
+                            keyboardType='email-address'
+                            value={this.state.username}
+                            onChangeText={(text) => this.setState({ username: text })} />
+                        <View style={{margin: 4}}></View>
+                        <TextInput
+                            placeholder='Password'
+                            autoCapitalize='none'
+                            autoCorrect={false}
+                            secureTextEntry={true}
+                            onFocus={() => this.setState({textFocused: true})}
+                            value={this.state.password}
+                            onChangeText={(text) => this.setState({ password: text })} />
 
-                  <Text style={{fontSize: 27}}>{this.state.route}</Text>
-                  <Button onPress={() => this.handleButtonPress(this.state)} title={this.state.page}/>
-                  <View style={{marginTop: 40, flexDirection: 'row', justifyContent: 'center'}}>
-                    <Text onPress={() => this.togglePage()} style={{fontSize: 16, color: 'blue'}}>
-                        {this.getAlternativePageTitle(this.state)}
-                    </Text>
-                  </View>
-                  <Text style={[styles.loginHint]}>{this.getHelperText(this.state)}</Text>
-                </View>
-              </KeyboardAvoidingView>
+                        <Text style={{fontSize: 27}}>{this.state.route}</Text>
+                        <Button onPress={() => this.handleButtonPress(this.state)} title={this.state.page}/>
+                        <View style={{marginTop: 40, flexDirection: 'row', justifyContent: 'center'}}>
+                            <Text onPress={() => this.togglePage()} style={{fontSize: 16, color: 'blue'}}>
+                                {this.getAlternativePageTitle(this.state)}
+                            </Text>
+                        </View>
+                        <Text style={[styles.loginHint]}>{this.getHelperText(this.state)}</Text>
+                    </View>
+                </KeyboardAvoidingView>
             </View>
         );
     }
@@ -192,13 +192,13 @@ const mapStateToProps = (state, ownProps) => {
     return {
         isLoggedIn: state.auth.isLoggedIn
     };
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
     return {
         onLogin: (username, token) => { dispatch(login(username, token)); },
-    }
-}
+    };
+};
 
 const styles = StyleSheet.create({
     container: {

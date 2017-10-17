@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Items from './Items.js'
+import Items from './Items.js';
 import NewItem from './NewItem';
 import { StackNavigator} from 'react-navigation';
 

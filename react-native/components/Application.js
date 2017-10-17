@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import Login from './Login';
 import Secured from './Secured';
 
-class Application extends Component {
+class Application extends React.Component {
     render() {
         if (this.props.isLoggedIn) {
             return <Secured />;
@@ -17,6 +17,6 @@ const mapStateToProps = (state, ownProps) => {
     return {
         isLoggedIn: state.auth.isLoggedIn
     };
-}
+};
 
 export default connect(mapStateToProps)(Application);

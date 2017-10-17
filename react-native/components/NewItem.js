@@ -1,6 +1,6 @@
 'use strict';
 
-import React, { Component } from 'react';
+import React from 'react';
 import store from '../redux';
 import { Alert,
     Button,
@@ -13,7 +13,7 @@ import { localhost,
     widthWithThirtyPercentPadding} from "../src/static/constants";
 
 
-export class NewItem extends Component {
+export class NewItem extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -46,7 +46,7 @@ export class NewItem extends Component {
 
     handleNewItemCreation () {
         const { title, price, description } = this.state;
-        if (title == '' || price == '' || description == '') {
+        if (title === '' || price === '' || description === '') {
             Alert.alert('Invalid values', 'Enter at least price, title and description');
             return;
         }
@@ -71,7 +71,6 @@ export class NewItem extends Component {
             })
             .catch((error) => {
                 console.error(error);
-                return;
             });
     }
 
@@ -79,7 +78,7 @@ export class NewItem extends Component {
         let newText = '';
         let numbers = '0123456789';
 
-        for (var i = 0; i < text.length; i++) {
+        for (let i = 0; i < text.length; i++) {
             if ( numbers.indexOf(text[i]) > -1 ) {
                 newText = newText + text[i];
             }
