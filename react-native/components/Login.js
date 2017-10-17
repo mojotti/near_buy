@@ -31,14 +31,19 @@ export class Login extends Component {
     }
 
     togglePage () {
-        this.setState({ page: this.altLoginSignup });
+        let currentPage = this.getPageTitle(this.state);
+        this.setState({ page: currentPage });
     }
 
-    get altLoginSignup () { return (this.state.page === 'Login')
-        ? 'Sign up' : 'Login'; }
+    getPageTitle (state) {
+        let { page } = state;
+        return (page === 'Login') ? 'Sign up' : 'Login';
+    }
 
-    get altHelperText () { return (this.state.page === 'Login')
-        ? loginText : registerText; }
+    getHelperText (state) {
+        let { page } = state;
+        return (page === 'Login') ? loginText : registerText;
+    }
 
     handleButtonPress(state) {
         const { page, username, password, email } = state;
@@ -171,10 +176,10 @@ export class Login extends Component {
                   <Button onPress={() => this.handleButtonPress(this.state)} title={this.state.page}/>
                   <View style={{marginTop: 40, flexDirection: 'row', justifyContent: 'center'}}>
                     <Text onPress={() => this.togglePage()} style={{fontSize: 16, color: 'blue'}}>
-                        {this.altLoginSignup}
+                        {this.getPageTitle(this.state)}
                     </Text>
                   </View>
-                  <Text style={[styles.loginHint]}>{this.altHelperText}</Text>
+                  <Text style={[styles.loginHint]}>{this.getHelperText(this.state)}</Text>
                 </View>
               </KeyboardAvoidingView>
             </View>
