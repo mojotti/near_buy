@@ -5,38 +5,38 @@ const base64 = require('base-64');
 import { generateHeadersForBasicAuth,
     generateHash,
     generateHashForRegistering } from '../src/networking';
-import "isomorphic-fetch";  // for headers, fetch, etc.
+import 'isomorphic-fetch';  // for headers, fetch, etc.
 
-const username = "testing";
-const password = "test_pw";
-const email = "test_email";
+const username = 'testing';
+const password = 'test_pw';
+const email = 'test_email';
 const expectedHash = base64.encode(username + ':' + password);
 const expectedHashForEmail = base64.encode(username + ':' + email + ':' + password);
 
-it('givenUsernameAndPwAreKnownWhenHashIsGeneratedThenItIsExpected', () => {
+it('given username and pw are known, when hash is generated, then it is expected', () => {
     expect(expectedHash).toEqual(generateHash(username, password));
 });
 
-it('givenUsernameAndPwAreNotKnownWhenHashIsGeneratedThenItIsExpected', () => {
-    expect(expectedHash).not.toEqual(generateHash("mojo", "passu"));
+it('given username and pw are unknown, when hash is generated, then it is expected', () => {
+    expect(expectedHash).not.toEqual(generateHash('mojo', 'passu'));
 });
 
-it('givenUsernameAndPwAreKnownWhenHeadersForBasicAuthIsGeneratedThenItIsExpected', () => {
+it('given username and pw are known, when header is generated, then it is expected', () => {
     let headers = new Headers();
-    headers.append("Authorization", "Basic " + expectedHash);
+    headers.append('Authorization', `Basic ${expectedHash}`);
     expect(headers).toEqual(generateHeadersForBasicAuth(username, password));
 });
 
-it('givenUsernameAndPwIsNotKnownWhenHeadersForBasicAuthIsGeneratedThenItIsExpected', () => {
+it('given username and pw are unknown, when header is generated, then it is expected', () => {
     let headers = new Headers();
-    headers.append("Authorization", "Basic " + expectedHash);
-    expect(headers).not.toEqual(generateHeadersForBasicAuth("random", "enmuista"));
+    headers.append('Authorization', `Basic ${expectedHash}`);
+    expect(headers).not.toEqual(generateHeadersForBasicAuth('foo', 'baz'));
 });
 
-it('givenUsernameEmailAndPwAreKnowWhenHashIsGeneratedThenItIsExpected', () => {
+it('given username and pw are known, when hash is generated, then it is expected', () => {
     expect(expectedHashForEmail).toEqual(generateHashForRegistering(username, password, email));
 });
 
-it('givenUsernameEmailAndPwAreNotKnownWhenHashIsGeneratedThenItIsExpected', () => {
-    expect(expectedHashForEmail).not.toEqual(generateHashForRegistering("jee", "juu", "ee"));
+it('given username and pw are unknown, when hash is generated, then it is expected', () => {
+    expect(expectedHashForEmail).not.toEqual(generateHashForRegistering('foo', 'bar', 'baz'));
 });

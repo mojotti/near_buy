@@ -1,20 +1,15 @@
 'use strict';
 
 import React from 'react';
-import { Platform,
+import { Button,
+    ListView,
     StyleSheet,
-    Dimensions,
     Text,
-    View,
-    Button,
-    ListView } from 'react-native';
+    View } from 'react-native';
 import { logout } from '../redux/actions/auth';
 import { connect } from 'react-redux';
-
-const LOCALHOST = (Platform.OS === 'ios') ? 'localhost' : '10.0.2.2';
-
-const width = Dimensions.get('window').width; //full width
-
+import { localhost,
+    width } from "../src/static/constants";
 
 export class Items extends React.Component {
     constructor(props) {
@@ -48,7 +43,7 @@ export class Items extends React.Component {
     }
 
     fetchData() {
-        let url = `http://${LOCALHOST}:5000/api/v1.0/user/items`;
+        let url = `http://${localhost}:5000/api/v1.0/user/items`;
         fetch(url, {
             method: 'GET',
             headers: this.getHeaders()
@@ -63,7 +58,6 @@ export class Items extends React.Component {
     }
 
     handleAllItemsRequest(responseJson) {
-        console.log(responseJson);
         if (responseJson.items === 'no items') {
         this.setState({
             loaded: true,

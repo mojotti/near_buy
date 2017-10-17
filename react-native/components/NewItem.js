@@ -4,16 +4,13 @@ import React, { Component } from 'react';
 import store from '../redux';
 import { Alert,
     Button,
-    Dimensions,
     KeyboardAvoidingView,
-    Platform,
     StyleSheet,
     TextInput,
     View } from 'react-native';
 import { NavigationActions } from 'react-navigation';
-
-const LOCALHOST = (Platform.OS === 'ios') ? 'localhost' : '10.0.2.2';
-const widthWithThirtyPercentPadding = Dimensions.get('window').width * 0.7;
+import { localhost,
+    widthWithThirtyPercentPadding} from "../src/static/constants";
 
 
 export class NewItem extends Component {
@@ -25,6 +22,10 @@ export class NewItem extends Component {
             description: '',
         };
     }
+
+    static navigationOptions = {
+        title: 'Sell item',
+    };
 
     getHeaders() {
         var headers = new Headers();
@@ -49,7 +50,7 @@ export class NewItem extends Component {
             Alert.alert('Invalid values', 'Enter at least price, title and description');
             return;
         }
-        let url = `http://${LOCALHOST}:5000/api/v1.0/items`;
+        let url = `http://${localhost}:5000/api/v1.0/items`;
         fetch(url, {
             method: 'POST',
             body: JSON.stringify({
@@ -85,10 +86,6 @@ export class NewItem extends Component {
         }
         this.setState({price: newText})
     }
-
-    static navigationOptions = {
-        title: 'Sell item',
-    };
 
     render() {
         return (
