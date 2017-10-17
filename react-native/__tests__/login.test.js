@@ -1,6 +1,7 @@
 import React from 'react';
 import { Alert } from 'react-native';
 import { Login } from '../components/Login';
+import { loginText, registerText } from "../src/static/constants";
 import "isomorphic-fetch";  // for headers, fetch, etc.
 
 
@@ -55,5 +56,27 @@ describe('Login', () => {
         state.email = '';
         login.handleButtonPress(state);
         expect(Alert.alert.mock.calls.length).toBe(0);
+    });
+
+    it('Given current page is login, when page title is requested, then title is Sign up', () => {
+        let altPageTitle = login.getAlternativePageTitle(state);
+        expect(altPageTitle).toBe('Sign up');
+    });
+
+    it('Given current page is sign up, when page title is requested, then title is Login', () => {
+        state.page = 'Sign up';
+        let altPageTitle = login.getAlternativePageTitle(state);
+        expect(altPageTitle).toBe('Login');
+    });
+
+    it('Given current page is login, when helper text is requested, then it is login helper', () => {
+        let helperText = login.getHelperText(state);
+        expect(helperText).toBe(loginText);
+    });
+
+    it('Given current page is sign up, when helper text is requested, then it is sign up helper', () => {
+        state.page = 'Sign up';
+        let helperText = login.getHelperText(state);
+        expect(helperText).toBe(registerText);
     });
 });

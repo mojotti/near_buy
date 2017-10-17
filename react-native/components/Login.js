@@ -31,11 +31,11 @@ export class Login extends Component {
     }
 
     togglePage () {
-        let currentPage = this.getPageTitle(this.state);
+        let currentPage = this.getAlternativePageTitle(this.state);
         this.setState({ page: currentPage });
     }
 
-    getPageTitle (state) {
+    getAlternativePageTitle (state) {
         let { page } = state;
         return (page === 'Login') ? 'Sign up' : 'Login';
     }
@@ -176,7 +176,7 @@ export class Login extends Component {
                   <Button onPress={() => this.handleButtonPress(this.state)} title={this.state.page}/>
                   <View style={{marginTop: 40, flexDirection: 'row', justifyContent: 'center'}}>
                     <Text onPress={() => this.togglePage()} style={{fontSize: 16, color: 'blue'}}>
-                        {this.getPageTitle(this.state)}
+                        {this.getAlternativePageTitle(this.state)}
                     </Text>
                   </View>
                   <Text style={[styles.loginHint]}>{this.getHelperText(this.state)}</Text>
