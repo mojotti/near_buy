@@ -3,8 +3,6 @@ import renderer from 'react-test-renderer';
 import 'isomorphic-fetch'; // for headers, fetch, etc.
 
 import { Alert } from 'react-native';
-import { shallow } from 'enzyme';
-
 import { Login } from '../components/Login';
 
 import {
@@ -23,7 +21,7 @@ describe('Login', () => {
             password: 'bar',
             email: 'foo@bar.com',
         };
-        login = new Login();
+        login = renderer.create(<Login />).getInstance();
         login.handleLoginRequest = jest.genMockFunction();
         login.handleRegisteringRequest = jest.genMockFunction();
         Alert.alert = jest.genMockFunction();
@@ -71,8 +69,8 @@ describe('Login', () => {
     });
 
     it('Given current page is sign up, when page title is requested, then title is Login', () => {
-        state.page = 'Sign up';
-        const altPageTitle = login.getAlternativePageTitle(state);
+        login.state.page = 'Sign up';
+        const altPageTitle = login.getAlternativePageTitle();
         expect(altPageTitle).toBe('Login');
     });
 
@@ -82,17 +80,17 @@ describe('Login', () => {
     });
 
     it('Given current page is sign up, when helper text is requested, then it is sign up helper', () => {
-        state.page = 'Sign up';
+        login.state.page = 'Sign up';
         const helperText = login.getHelperText(state);
         expect(helperText).toBe(registerText);
     });
 
     it('renders sign up details when state is sign up', () => {
-        const loginComp = renderer.create(<Login />);
-        expect(loginComp.getInstance().state.page).toEqual('Login');
-        loginComp.getInstance().togglePage();
-        expect(loginComp.getInstance().state.page).toEqual('Sign up');
-        const tree = loginComp.toJSON();
+        const loginComponent = renderer.create(<Login />);
+        expect(loginComponent.getInstance().state.page).toEqual('Login');
+        loginComponent.getInstance().togglePage();
+        expect(loginComponent.getInstance().state.page).toEqual('Sign up');
+        const tree = loginComponent.toJSON();
         expect(tree).toMatchSnapshot();
     });
 });

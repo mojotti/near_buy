@@ -15,7 +15,7 @@ class Application extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        isLoggedIn: state.auth.isLoggedIn
+        isLoggedIn: state.auth.isLoggedIn,
     };
 };
 

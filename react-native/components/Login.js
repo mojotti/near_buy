@@ -1,5 +1,3 @@
-'use strict';
-
 import React from 'react';
 import { connect } from 'react-redux';
 import { Alert,
@@ -32,18 +30,18 @@ export class Login extends React.Component {
         };
     }
 
-    getAlternativePageTitle(state) {
-        const { page } = state;
+    getAlternativePageTitle() {
+        const { page } = this.state;
         return (page === 'Login') ? 'Sign up' : 'Login';
     }
 
-    getHelperText(state) {
-        const { page } = state;
+    getHelperText() {
+        const { page } = this.state;
         return (page === 'Login') ? loginText : registerText;
     }
 
     togglePage() {
-        const alternativePage = this.getAlternativePageTitle(this.state);
+        const alternativePage = this.getAlternativePageTitle();
         this.setState({ page: alternativePage });
     }
 
@@ -179,10 +177,10 @@ export class Login extends React.Component {
                         <Button onPress={() => this.handleButtonPress(this.state)} title={this.state.page}/>
                         <View style={{marginTop: 40, flexDirection: 'row', justifyContent: 'center'}}>
                             <Text onPress={() => this.togglePage()} style={{fontSize: 16, color: 'blue'}}>
-                                {this.getAlternativePageTitle(this.state)}
+                                {this.getAlternativePageTitle()}
                             </Text>
                         </View>
-                        <Text style={[styles.loginHint]}>{this.getHelperText(this.state)}</Text>
+                        <Text style={[styles.loginHint]}>{this.getHelperText()}</Text>
                     </View>
                 </KeyboardAvoidingView>
             </View>

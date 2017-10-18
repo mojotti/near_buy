@@ -1,16 +1,16 @@
-import reducer from '../redux/reducers/auth.js';
+import reducer from '../redux/reducers/auth';
 
 const testUsername = 'testUsername';
 const testToken = 'testToken';
 const defaultState = {
     isLoggedIn: false,
     username: '',
-    token: ''
+    token: '',
 };
 const loggedInState = {
     isLoggedIn: true,
     username: testUsername,
-    token: testToken
+    token: testToken,
 };
 
 it('return default state when invalid type passed to reducer', () => {
@@ -22,7 +22,7 @@ it('return logged in state when logged in with correct details', () => {
     const login = {
         type: 'LOGIN',
         username: testUsername,
-        token: testToken
+        token: testToken,
     };
     expect(reducer(defaultState, login)).toEqual(loggedInState);
 });
