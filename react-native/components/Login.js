@@ -117,11 +117,11 @@ export class Login extends React.Component {
         if (this.state.page === 'Sign up') {
             return (
                 <TextInput
-                    placeholder='Email address'
-                    autoCapitalize='none'
+                    placeholder="Email address"
+                    autoCapitalize="none"
                     autoCorrect={false}
                     autoFocus={false}
-                    keyboardType='email-address'
+                    keyboardType="email-address"
                     value={this.state.email}
                     onFocus={() => this.setState({textFocused: true})}
                     onChangeText={(text) => this.setState({ email: text })}

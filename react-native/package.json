@@ -33,7 +33,7 @@
   "jest": {
     "testEnvironment": "node",
     "preset": "react-native",
-    "setupTestFrameworkScriptFile": "__tests__/test-setup.js",
+    "setupTestFrameworkScriptFile": "<rootDir>/test-setup.js",
     "transformIgnorePatterns": [
       "node_modules/(?!react-native|react-navigation)/"
     ]

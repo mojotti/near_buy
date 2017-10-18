@@ -15,7 +15,6 @@ import {
 describe('Login', () => {
     let state = {};
     let login;
-    let loginComponent;
 
     beforeEach(() => {
         state = {
@@ -28,7 +27,6 @@ describe('Login', () => {
         login.handleLoginRequest = jest.genMockFunction();
         login.handleRegisteringRequest = jest.genMockFunction();
         Alert.alert = jest.genMockFunction();
-        loginComponent = renderer.create(<Login />).getInstance();
     });
 
     it('Given page is Login, when handleButtonPress is called, then handleLoginRequest is called once', () => {
@@ -89,13 +87,12 @@ describe('Login', () => {
         expect(helperText).toBe(registerText);
     });
 
-    it('changes state of page when togglePage is called', () => {
-        loginComponent.togglePage();
-        expect(loginComponent.state.page).toEqual('Sign up');
-    });
-
-    it('change of state changes the view that is showed', () => {
-        const loginComp = shallow(<Login />);
-        loginComp.setState({ page: 'Login' });
+    it('renders sign up details when state is sign up', () => {
+        const loginComp = renderer.create(<Login />);
+        expect(loginComp.getInstance().state.page).toEqual('Login');
+        loginComp.getInstance().togglePage();
+        expect(loginComp.getInstance().state.page).toEqual('Sign up');
+        const tree = loginComp.toJSON();
+        expect(tree).toMatchSnapshot();
     });
 });
