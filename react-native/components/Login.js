@@ -13,42 +13,45 @@ import { Alert,
 import { login } from '../redux/actions/auth';
 import { generateHeadersForBasicAuth,
     generateHashForRegistering } from '../src/networking';
-import { localhost,
+import {
+    localhost,
     loginText,
     registerText,
-    widthWithThirtyPercentPadding} from '../src/static/constants';
+    widthWithThirtyPercentPadding } from '../src/static/constants';
+
 
 export class Login extends React.Component {
-    constructor (props) {
+    constructor(props) {
         super(props);
         this.state = {
             page: 'Login',
             username: '',
             password: '',
             email: '',
-            textFocused: false
+            textFocused: false,
         };
     }
 
-    togglePage () {
-        let alternativePage = this.getAlternativePageTitle(this.state);
-        this.setState({ page: alternativePage });
-    }
-
-    getAlternativePageTitle (state) {
-        let { page } = state;
+    getAlternativePageTitle(state) {
+        const { page } = state;
         return (page === 'Login') ? 'Sign up' : 'Login';
     }
 
-    getHelperText (state) {
-        let { page } = state;
+    getHelperText(state) {
+        const { page } = state;
         return (page === 'Login') ? loginText : registerText;
     }
 
-    handleButtonPress (state) {
-        const { page, username, password, email } = state;
-        if(username === '' || password === '' || (page === 'Sign up' && email === ''))
-        {
+    togglePage() {
+        const alternativePage = this.getAlternativePageTitle(this.state);
+        this.setState({ page: alternativePage });
+    }
+
+    handleButtonPress(state) {
+        const {
+            page, username, password, email,
+        } = state;
+        if (username === '' || password === '' || (page === 'Sign up' && email === '')) {
             Alert.alert('Invalid values', 'Please enter all the values.');
             return;
         }
@@ -59,55 +62,55 @@ export class Login extends React.Component {
         }
     }
 
-    handleRegisteringRequest (state) {
+    handleRegisteringRequest(state) {
         const { username, password, email } = state;
-        let ip_addr = `http://${localhost}:5000/api/v1.0/register`;
-        fetch(ip_addr, {
+        const ipAddress = `http://${localhost}:5000/api/v1.0/register`;
+        fetch(ipAddress, {
             method: 'POST',
             headers: {
-                'Accept': 'application/json',
+                Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                'user_info': generateHashForRegistering(username, password, email)
+                user_info: generateHashForRegistering(username, password, email)
+            }),
+        })
+            .then(response => response.json())
+            .then((responseJson) => {
+                if (responseJson.user_creation === 'success') {
+                    Alert.alert('User creation', 'User created successfully!');
+                    console.log(responseJson);
+                    this.setState({ page: 'Login' });
+                } else {
+                    Alert.alert('User creation', 'User exists already!');
+                }
             })
-        })
-        .then((response) => response.json())
-        .then((responseJson) => {
-            if (responseJson.user_creation === 'success') {
-                Alert.alert('User creation', 'User created successfully!');
-                console.log(responseJson);
-                this.setState({ page: 'Login' });
-            } else {
-                Alert.alert('User creation', 'User exists already!');
-            }
-        })
-        .catch((error) => {
-            console.log('error ', error);
-            console.error(error);
-        });
+            .catch((error) => {
+                console.log('error ', error);
+                console.error(error);
+            });
     }
 
-    handleLoginRequest (state) {
-        let ip_addr = `http://${localhost}:5000/api/v1.0/auth`;
+    handleLoginRequest(state) {
+        const ipAddress = `http://${localhost}:5000/api/v1.0/auth`;
         const { username, password } = state;
-        fetch(ip_addr, {
+        fetch(ipAddress, {
             method: 'GET',
             headers: generateHeadersForBasicAuth(username, password)
         })
-        .then((response) => response.json())
-        .then((responseJson) => {
-            console.log(responseJson);
-            if (responseJson.username === username) {
-                this.props.onLogin(username, responseJson.token);
-            } else {
-                Alert.alert('Try again, mate!', 'Invalid credentials.');
-                this.setState({ password: '' });
-            }
-        })
-        .catch((error) => {
-            console.error(error);
-        });
+            .then(response => response.json())
+            .then((responseJson) => {
+                console.log(responseJson);
+                if (responseJson.username === username) {
+                    this.props.onLogin(username, responseJson.token);
+                } else {
+                    Alert.alert('Try again, mate!', 'Invalid credentials.');
+                    this.setState({ password: '' });
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     }
 
     renderEmailInput() {
@@ -138,7 +141,7 @@ export class Login extends React.Component {
                       source={require('./../logo.png')}
                   />
                 </View>
-            )
+            );
         }
     }
 
@@ -190,7 +193,7 @@ export class Login extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        isLoggedIn: state.auth.isLoggedIn
+        isLoggedIn: state.auth.isLoggedIn,
     };
 };
 
@@ -228,7 +231,7 @@ const styles = StyleSheet.create({
     logoContainer: {
         justifyContent: 'center',
         alignSelf: 'stretch',
-        padding: 0
+        padding: 0,
     },
 });
 

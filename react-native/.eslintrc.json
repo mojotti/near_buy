@@ -1,12 +1,12 @@
 {
-  "parserOptions": {
-    "ecmaVersion": 6,
-    "sourceType": "module",
-    "ecmaFeatures": {
-      "jsx": true
-    }
-  },
+  "extends": "airbnb",
   "rules": {
-    "semi": 2
-  }
+    "func-names": ["error", "never"],
+    "indent": ["error", 4],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+  },
+  "env": {
+    "jest": true
+  },
+  "globals": { "fetch": false }
 }

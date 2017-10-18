@@ -1,8 +1,9 @@
 import React from 'react';
+import renderer from 'react-test-renderer';
+import 'isomorphic-fetch'; // for headers, fetch, etc.
+
 import { Login } from '../components/Login';
 import { Items } from '../components/Items';
-import renderer from 'react-test-renderer';
-import "isomorphic-fetch";  // for headers, fetch, etc.
 
 
 it('Login renders without crashing', () => {
@@ -18,6 +19,7 @@ it('Login renders correctly', () => {
     ).toJSON();
     expect(tree).toMatchSnapshot();
 });
+
 
 it('Items renders without crashing', () => {
     const rendered = renderer.create(
