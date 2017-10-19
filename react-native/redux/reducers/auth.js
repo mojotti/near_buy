@@ -1,7 +1,7 @@
 const defaultState = {
     isLoggedIn: false,
     username: '',
-    token: ''
+    token: '',
 };
 
 export default function reducer(state = defaultState, action) {

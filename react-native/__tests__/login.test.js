@@ -3,6 +3,8 @@ import renderer from 'react-test-renderer';
 import 'isomorphic-fetch'; // for headers, fetch, etc.
 
 import { Alert } from 'react-native';
+import { shallow } from 'enzyme';
+import sinon from 'sinon';
 
 import { Login } from '../components/Login';
 import {
@@ -21,7 +23,9 @@ describe('Login', () => {
             password: 'bar',
             email: 'foo@bar.com',
         };
-        login = renderer.create(<Login />).getInstance();
+        login = renderer.create(
+            <Login />,
+        ).getInstance();
         login.handleLoginRequest = jest.genMockFunction();
         login.handleRegisteringRequest = jest.genMockFunction();
         Alert.alert = jest.genMockFunction();
@@ -100,5 +104,18 @@ describe('Login', () => {
         loginComponent.getInstance().setState({ textFocused: true });
         const tree = loginComponent.toJSON();
         expect(tree).toMatchSnapshot();
+    });
+
+    it('handles button press correctly, when hitting login button', () => {
+        const wrapper = shallow(<Login />);
+        const render = wrapper.dive();
+
+        const handleButtonPressSpy = sinon.spy(Login.prototype, 'handleButtonPress');
+
+        render.find('Button').forEach((child) => {
+            child.simulate('Press');
+        });
+
+        expect(handleButtonPressSpy.calledOnce).toBeTruthy();
     });
 });
