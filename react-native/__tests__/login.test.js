@@ -3,7 +3,6 @@ import renderer from 'react-test-renderer';
 import 'isomorphic-fetch'; // for headers, fetch, etc.
 
 import { Alert } from 'react-native';
-import { shallow } from 'enzyme';
 
 import { Login } from '../components/Login';
 import {

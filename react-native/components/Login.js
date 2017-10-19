@@ -17,6 +17,8 @@ import {
     registerText,
     widthWithThirtyPercentPadding } from '../src/static/constants';
 
+const logo = require('../src/static/images/logo.png');
+
 
 export class Login extends React.Component {
     constructor(props) {
@@ -136,7 +138,7 @@ export class Login extends React.Component {
                   <Image
                       resizeMode="contain"
                       style={styles.logo}
-                      source={require('./../logo.png')}
+                      source={logo}
                   />
                 </View>
             );
