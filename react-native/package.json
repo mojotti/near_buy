@@ -34,7 +34,6 @@
     "testEnvironment": "node",
     "preset": "react-native",
     "setupTestFrameworkScriptFile": "<rootDir>/test-setup.js",
-    "coverage": "yarn run jest --coverage",
     "transformIgnorePatterns": [
       "node_modules/(?!react-native|react-navigation)/"
     ]

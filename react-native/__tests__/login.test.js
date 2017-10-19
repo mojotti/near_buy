@@ -3,8 +3,9 @@ import renderer from 'react-test-renderer';
 import 'isomorphic-fetch'; // for headers, fetch, etc.
 
 import { Alert } from 'react-native';
-import { Login } from '../components/Login';
+import { shallow } from 'enzyme';
 
+import { Login } from '../components/Login';
 import {
     loginText,
     registerText } from '../src/static/constants';
@@ -90,6 +91,14 @@ describe('Login', () => {
         expect(loginComponent.getInstance().state.page).toEqual('Login');
         loginComponent.getInstance().togglePage();
         expect(loginComponent.getInstance().state.page).toEqual('Sign up');
+        const tree = loginComponent.toJSON();
+        expect(tree).toMatchSnapshot();
+    });
+
+    it('hides logo and welcome text when text is focused', () => {
+        const loginComponent = renderer.create(<Login />);
+        expect(loginComponent.getInstance().state.textFocused).toEqual(false);
+        loginComponent.getInstance().setState({ textFocused: true });
         const tree = loginComponent.toJSON();
         expect(tree).toMatchSnapshot();
     });
