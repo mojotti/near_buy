@@ -47,23 +47,23 @@ export class Login extends React.Component {
         this.setState({ page: alternativePage });
     }
 
-    handleButtonPress(state) {
+    handleButtonPress() {
         const {
             page, username, password, email,
-        } = state;
+        } = this.state;
         if (username === '' || password === '' || (page === 'Sign up' && email === '')) {
             Alert.alert('Invalid values', 'Please enter all the values.');
             return;
         }
         if (page === 'Login') {
-            this.handleLoginRequest(state);
+            this.handleLoginRequest();
         } else {
-            this.handleRegisteringRequest(state);
+            this.handleRegisteringRequest();
         }
     }
 
-    handleRegisteringRequest(state) {
-        const { username, password, email } = state;
+    handleRegisteringRequest() {
+        const { username, password, email } = this.state;
         const ipAddress = `http://${localhost}:5000/api/v1.0/register`;
         fetch(ipAddress, {
             method: 'POST',
@@ -91,9 +91,9 @@ export class Login extends React.Component {
             });
     }
 
-    handleLoginRequest(state) {
+    handleLoginRequest() {
         const ipAddress = `http://${localhost}:5000/api/v1.0/auth`;
-        const { username, password } = state;
+        const { username, password } = this.state;
         fetch(ipAddress, {
             method: 'GET',
             headers: generateHeadersForBasicAuth(username, password)
@@ -176,7 +176,7 @@ export class Login extends React.Component {
                             onChangeText={(text) => this.setState({ password: text })} />
 
                         <Text style={{fontSize: 27}}>{this.state.route}</Text>
-                        <Button onPress={() => this.handleButtonPress(this.state)} title={this.state.page}/>
+                        <Button onPress={() => this.handleButtonPress()} title={this.state.page}/>
                         <View style={{marginTop: 40, flexDirection: 'row', justifyContent: 'center'}}>
                             <Text onPress={() => this.togglePage()} style={{fontSize: 16, color: 'blue'}}>
                                 {this.getAlternativePageTitle()}
