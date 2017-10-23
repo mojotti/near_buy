@@ -26,13 +26,11 @@ exports[`Login hides logo and welcome text when text is focused 1`] = `
   >
     <View
       style={
-        Array [
-          Object {
-            "alignSelf": "center",
-            "justifyContent": "center",
-            "width": 525,
-          },
-        ]
+        Object {
+          "alignSelf": "center",
+          "justifyContent": "center",
+          "width": 525,
+        }
       }
     >
       <View
@@ -148,6 +146,7 @@ exports[`Login hides logo and welcome text when text is focused 1`] = `
           allowFontScaling={true}
           disabled={false}
           ellipsizeMode="tail"
+          id="altPageTitle"
           onPress={[Function]}
           style={
             Object {
@@ -165,13 +164,11 @@ exports[`Login hides logo and welcome text when text is focused 1`] = `
         disabled={false}
         ellipsizeMode="tail"
         style={
-          Array [
-            Object {
-              "fontSize": 12,
-              "marginTop": 10,
-              "textAlign": "center",
-            },
-          ]
+          Object {
+            "fontSize": 12,
+            "marginTop": 10,
+            "textAlign": "center",
+          }
         }
       >
         New user? Press 'Sign up' to register.
@@ -207,13 +204,11 @@ exports[`Login renders sign up details when state is sign up 1`] = `
   >
     <View
       style={
-        Array [
-          Object {
-            "alignSelf": "stretch",
-            "justifyContent": "center",
-            "padding": 0,
-          },
-        ]
+        Object {
+          "alignSelf": "stretch",
+          "justifyContent": "center",
+          "padding": 0,
+        }
       }
     >
       <Text
@@ -222,13 +217,11 @@ exports[`Login renders sign up details when state is sign up 1`] = `
         disabled={false}
         ellipsizeMode="tail"
         style={
-          Array [
-            Object {
-              "fontSize": 24,
-              "marginTop": 50,
-              "textAlign": "center",
-            },
-          ]
+          Object {
+            "fontSize": 24,
+            "marginTop": 50,
+            "textAlign": "center",
+          }
         }
       >
         Welcome to NearBuy
@@ -246,13 +239,11 @@ exports[`Login renders sign up details when state is sign up 1`] = `
     </View>
     <View
       style={
-        Array [
-          Object {
-            "alignSelf": "center",
-            "justifyContent": "center",
-            "width": 525,
-          },
-        ]
+        Object {
+          "alignSelf": "center",
+          "justifyContent": "center",
+          "width": 525,
+        }
       }
     >
       <TextInput
@@ -378,6 +369,7 @@ exports[`Login renders sign up details when state is sign up 1`] = `
           allowFontScaling={true}
           disabled={false}
           ellipsizeMode="tail"
+          id="altPageTitle"
           onPress={[Function]}
           style={
             Object {
@@ -395,13 +387,11 @@ exports[`Login renders sign up details when state is sign up 1`] = `
         disabled={false}
         ellipsizeMode="tail"
         style={
-          Array [
-            Object {
-              "fontSize": 12,
-              "marginTop": 10,
-              "textAlign": "center",
-            },
-          ]
+          Object {
+            "fontSize": 12,
+            "marginTop": 10,
+            "textAlign": "center",
+          }
         }
       >
         Existing user? Press 'Login'.

@@ -133,8 +133,8 @@ export class Login extends React.Component {
     renderLogoAndWelcomeText() {
         if (this.state.textFocused === false) {
             return (
-                <View style={[styles.logoContainer]}>
-                  <Text style={[styles.welcomeText]}>Welcome to NearBuy</Text>
+                <View style={styles.logoContainer}>
+                  <Text style={styles.welcomeText}>Welcome to NearBuy</Text>
                   <Image
                       resizeMode="contain"
                       style={styles.logo}
@@ -153,7 +153,7 @@ export class Login extends React.Component {
                     keyboardVerticalOffset={64}
                 >
                     {this.renderLogoAndWelcomeText()}
-                    <View style={[styles.loginContainer]}>
+                    <View style={styles.loginContainer}>
                         {this.renderEmailInput()}
                         <View style={{margin: 4}}></View>
                         <TextInput
@@ -176,13 +176,20 @@ export class Login extends React.Component {
                             onChangeText={(text) => this.setState({ password: text })} />
 
                         <Text style={{fontSize: 27}}>{this.state.route}</Text>
-                        <Button onPress={() => this.handleButtonPress()} title={this.state.page}/>
-                        <View style={{marginTop: 40, flexDirection: 'row', justifyContent: 'center'}}>
-                            <Text onPress={() => this.togglePage()} style={{fontSize: 16, color: 'blue'}}>
+                        <Button
+                            onPress={() => this.handleButtonPress()}
+                            title={this.state.page}
+                        />
+                        <View style={styles.altPageContainer}>
+                            <Text
+                                id='altPageTitle'
+                                onPress={() => this.togglePage()}
+                                style={{ fontSize: 16, color: 'blue' }}
+                            >
                                 {this.getAlternativePageTitle()}
                             </Text>
                         </View>
-                        <Text style={[styles.loginHint]}>{this.getHelperText()}</Text>
+                        <Text style={styles.loginHint}>{this.getHelperText()}</Text>
                     </View>
                 </KeyboardAvoidingView>
             </View>
@@ -232,6 +239,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignSelf: 'stretch',
         padding: 0,
+    },
+    altPageContainer: {
+        marginTop: 40,
+        flexDirection: 'row',
+        justifyContent: 'center',
     },
 });
 
