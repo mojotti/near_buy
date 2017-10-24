@@ -16,4 +16,4 @@ Running instuctions - back-end:
     python app.py
 
   To deactivate env:
-    deactivate
+    deactivate 
