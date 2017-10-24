@@ -2,31 +2,31 @@
 
 __Running instuctions - back-end:__ 
 
-	Install Python3.4:
-		_https://www.python.org/downloads/_
+	__Install Python3.4:__
+		https://www.python.org/downloads/
     
 	Check you have correct version:
-		_python --version_
+		python --version
 
 	Launch virtualenv:
-		_cd back-end && source py3env/bin/activate_
+		cd back-end && source py3env/bin/activate
  
 	Run app.py:
-		_python app.py_
+		python app.py
 
 	Run unit tests:
-		_cd back-end && python -m unittest discover tests/_
+		cd back-end && python -m unittest discover tests/
 
 	To deactivate env:
-		_deactivate_
+		deactivate
 
 __Running instructions - React Native:__ 
 
 	install npm packages:
-		_cd react-native && npm install_
+		cd react-native && npm install
 
 	run:
-		_npm start_
+		npm start
 
 	run tests: 
-		_npm test_
+		npm test
