@@ -1,4 +1,6 @@
-tests/__pycache__/*
+back-end/tests/__pycache__/*
+back-end/.idea/*
 .idea/*
-__pycache__/*
+/__pycache__/*
+back-end./__pycache__/*
 yarn*
