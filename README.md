@@ -2,7 +2,7 @@
 
 __Running instuctions - back-end:__ 
 
-	__Install Python3.4:__
+	Install Python3.4:
 		https://www.python.org/downloads/
     
 	Check you have correct version:
