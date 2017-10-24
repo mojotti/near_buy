@@ -163,6 +163,7 @@ exports[`Login hides logo and welcome text when text is focused 1`] = `
         allowFontScaling={true}
         disabled={false}
         ellipsizeMode="tail"
+        id="helperText"
         style={
           Object {
             "fontSize": 12,
@@ -386,6 +387,7 @@ exports[`Login renders sign up details when state is sign up 1`] = `
         allowFontScaling={true}
         disabled={false}
         ellipsizeMode="tail"
+        id="helperText"
         style={
           Object {
             "fontSize": 12,

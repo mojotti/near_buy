@@ -338,6 +338,7 @@ exports[`Login renders correctly 1`] = `
         allowFontScaling={true}
         disabled={false}
         ellipsizeMode="tail"
+        id="helperText"
         style={
           Object {
             "fontSize": 12,

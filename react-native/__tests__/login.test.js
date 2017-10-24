@@ -2,7 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import 'isomorphic-fetch'; // for headers, fetch, etc.
 
-import { Alert, Text } from 'react-native';
+import { Alert } from 'react-native';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
@@ -13,11 +13,9 @@ import {
 
 
 describe('Login', () => {
-    let login;
     let wrapper;
 
     beforeEach(() => {
-        login = renderer.create(<Login />).getInstance();
         Alert.alert = jest.genMockFunction();
         wrapper = shallow(<Login />);
     });
@@ -31,7 +29,7 @@ describe('Login', () => {
         });
 
         const render = wrapper.dive();
-        const loginButton = render.find('Button');
+        const loginButton = render.find('[id="loginButton"]');
         loginButton.simulate('Press');
 
         expect(Alert.alert.mock.calls.length).toBe(0);
@@ -46,7 +44,7 @@ describe('Login', () => {
         });
 
         const render = wrapper.dive();
-        const loginButton = render.find('Button');
+        const loginButton = render.find('[id="loginButton"]');
         loginButton.simulate('Press');
 
         expect(Alert.alert.mock.calls.length).toBe(0);
@@ -61,7 +59,7 @@ describe('Login', () => {
         });
 
         const render = wrapper.dive();
-        const loginButton = render.find('Button');
+        const loginButton = render.find('[id="loginButton"]');
         loginButton.simulate('Press');
 
         expect(Alert.alert.mock.calls.length).toBe(1);
@@ -76,7 +74,7 @@ describe('Login', () => {
         });
 
         const render = wrapper.dive();
-        const loginButton = render.find('Button');
+        const loginButton = render.find('[id="loginButton"]');
         loginButton.simulate('Press');
 
         expect(Alert.alert.mock.calls.length).toBe(1);
@@ -91,7 +89,7 @@ describe('Login', () => {
         });
         const render = wrapper.dive();
 
-        const loginButton = render.find('Button');
+        const loginButton = render.find('[id="loginButton"]');
         loginButton.simulate('Press');
 
         expect(Alert.alert.mock.calls.length).toBe(0);
@@ -106,7 +104,7 @@ describe('Login', () => {
         });
         const render = wrapper.dive();
 
-        const loginButton = render.find('Button');
+        const loginButton = render.find('[id="loginButton"]');
         loginButton.simulate('Press');
 
         expect(Alert.alert.mock.calls.length).toBe(1);
@@ -138,15 +136,30 @@ describe('Login', () => {
         expect(button.props().children).toBe('Login');
     });
 
-    test('Given current page is login, when helper text is requested, then test is login helper', () => {
-        const helperText = login.getHelperText();
-        expect(helperText).toBe(loginText);
+    test('Given current page is login, when helper text is requested, then text is login', () => {
+        wrapper.setState({
+            page: 'Login',
+            username: '',
+            password: '',
+            email: '',
+        });
+
+        const render = wrapper.dive();
+        const button = render.find('[id="helperText"]');
+        expect(button.props().children).toBe(loginText);
     });
 
-    test('Given current page is sign up, when helper text is requested, then test is sign up helper', () => {
-        login.state.page = 'Sign up';
-        const helperText = login.getHelperText();
-        expect(helperText).toBe(registerText);
+    test('Given current page is sign up, when helper text is requested, then text is sign up', () => {
+        wrapper.setState({
+            page: 'Sign up',
+            username: '',
+            password: '',
+            email: '',
+        });
+
+        const render = wrapper.dive();
+        const button = render.find('[id="helperText"]');
+        expect(button.props().children).toBe(registerText);
     });
 
     test('renders sign up details when state is sign up', () => {
@@ -174,7 +187,7 @@ describe('Login', () => {
 
         const handleButtonPressSpy = sinon.spy(Login.prototype, 'handleButtonPress');
 
-        const loginButton = render.find('Button');
+        const loginButton = render.find('[id="loginButton"]');
         loginButton.simulate('Press');
 
         expect(handleButtonPressSpy.calledOnce).toBeTruthy();

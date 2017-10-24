@@ -177,6 +177,7 @@ export class Login extends React.Component {
 
                         <Text style={{fontSize: 27}}>{this.state.route}</Text>
                         <Button
+                            id='loginButton'
                             onPress={() => this.handleButtonPress()}
                             title={this.state.page}
                         />
@@ -189,7 +190,10 @@ export class Login extends React.Component {
                                 {this.getAlternativePageTitle()}
                             </Text>
                         </View>
-                        <Text style={styles.loginHint}>{this.getHelperText()}</Text>
+                        <Text
+                            id='helperText'
+                            style={styles.loginHint}
+                        >{this.getHelperText()}</Text>
                     </View>
                 </KeyboardAvoidingView>
             </View>
