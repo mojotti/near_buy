@@ -142,19 +142,18 @@ def get_item(item_id):
 def create_item():
     """Create new item and add it to database."""
     user_id = g.user['id']
-    items_list = [item for item in DB.retrieve_items()]
     if not request.json or 'title' not in request.json or 'price' not in request.json:
         abort(400)
-    item = get_item_details(items_list, user_id)
+    item = get_item_details(user_id)
     DB.add_item_to_db(item)
     item = DB.retrieve_item_with_title(request.json['title'])
     return jsonify({'item': make_public_item(item)}), 201
 
 
-def get_item_details(items_list, user_id):
+def get_item_details(user_id):
     """Get and return all necessary details for item."""
     return {
-        'id': 0 if not items_list else items_list[-1]['id'] + 1,  # in case there are no items yet created
+        'id': DB.get_item_id(),
         'title': request.json['title'],
         'price': int(request.json['price']),
         'seller_id': user_id,

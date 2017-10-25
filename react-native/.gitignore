@@ -54,3 +54,6 @@ fastlane/screenshots
 
 #COVERAGE
 coverage/
+
+#expo
+.expo/
