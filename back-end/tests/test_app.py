@@ -1,12 +1,13 @@
+import base64
 import json
 import unittest
+
 from unittest import mock
 
 from app import app
 from database import TestDB
 from User import User
 from samples import items
-import base64
 
 ITEM1 = items.ITEM1
 ITEM2 = items.ITEM2

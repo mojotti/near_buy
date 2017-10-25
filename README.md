@@ -11,17 +11,23 @@ __Running instuctions - back-end:__
 	Check you have correct python version:
 		python --version (should be 3.4.X)
 
-	Launch virtualenv:
-		cd back-end && source py3env/bin/activate
+	Install pipenv:
+		export LC_ALL=en_US.UTF-8 && pip install pipenv
+
+	Install packages to work area:
+		cd back-end && pipenv install
  
+	Launch pipenv:
+		pipenv shell
+
 	Run app.py:
 		python app.py
 
 	Run unit tests:
-		cd back-end && python -m unittest discover tests/
+		nosetests tests/
 
-	To deactivate env:
-		deactivate
+	To deactivate pipenv (closes current terminal tab/window):
+		exit
 
 __Running instructions - React Native:__ 
 

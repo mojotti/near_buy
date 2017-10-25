@@ -1,5 +1,7 @@
-back-end/tests/__pycache__/*
-back-end/.idea/*
+/back-end/tests/__pycache__/*
+/back-end/.idea/*
 .idea/*
 /__pycache__/*
 yarn*
+/back-end/__pycache__/app.cpython-34.pyc
+/back-end/__pycache__/database.cpython-34.pyc

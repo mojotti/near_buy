@@ -1,2 +1,4 @@
 *.pyc
 /__pycache__/*
+/__pycache__/app.cpython-34.pyc
+/__pycache__/database.cpython-34.pyc

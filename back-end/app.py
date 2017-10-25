@@ -24,8 +24,12 @@ else:
 
 @token_auth.verify_token
 def verify_token(token):
-    """If token matches with the one stored in DB, verifying is
-    successful."""
+    """
+    If token matches with the one stored in DB, verifying is
+    successful.
+    :param: token
+    :return: bool
+    """
     user = DB.retrieve_user_by_token(token)
     if not user:
         return False
@@ -36,9 +40,12 @@ def verify_token(token):
 @app.route('/api/v1.0/auth', methods=['GET'])
 @basic_auth.login_required
 def validate_user_and_update_token_to_db():
-    """Get user id from db, initialize User object, create token
+    """
+    Get user id from db, initialize User object, create token
     & and attach created token to user's details in db. Finally
-    return username and token."""
+    return username and token as jwt-token.
+    :return: json
+    """
     user_data = DB.retrieve_user_by_username(g.username)
     user = U.User(email=g.username, password=g.password)
     token = user.encode_auth_token(user_id=user_data['id'])
@@ -49,7 +56,11 @@ def validate_user_and_update_token_to_db():
 
 @basic_auth.verify_password
 def verify_password(username, password):
-    """Verify that hash is found for username & password."""
+    """
+    Verify that hash is found for username & password.
+    :param: username, password
+    :return: bool
+    """
     g.username, g.password = username, password
     return DB.is_valid_hash_for_user(username, password)
 
@@ -79,7 +90,11 @@ def not_found(error):
 
 
 def make_public_item(item):
-    """"Helper function for get_items(). Collects one item at the time."""
+    """"
+    Helper function for get_items(). Collects one item at the time.
+    :param: item
+    :return: dictionary
+    """
     new_item = {}
     for field in item:
         if field == 'id':
@@ -93,7 +108,10 @@ def make_public_item(item):
 
 @app.route('/api/v1.0/register', methods=['POST'])
 def new_user():
-    """Register new user and save its details to db."""
+    """
+    Register new user and save its details to db.
+    :return: json
+    """
     encoded_msg = request.json.get('user_info')
     msg = base64.urlsafe_b64decode(encoded_msg).decode('utf-8').split(':')
     username, email, password = msg[0], msg[1], msg[2]
@@ -109,7 +127,10 @@ def new_user():
 @app.route('/api/v1.0/user/items', methods=['GET'])
 @token_auth.login_required
 def get_items_for_user():
-    """Get all items that user has."""
+    """
+    Get all items that user has.
+    :return: json
+    """
     items = DB.retrieve_items_with_seller_id(g.user['id'])
     public_items = [make_public_item(item) for item in items]
     if not public_items:
@@ -120,7 +141,10 @@ def get_items_for_user():
 @app.route('/api/v1.0/items', methods=['GET'])
 @token_auth.login_required
 def get_items():
-    """Get all items."""
+    """
+    Get all items.
+    :return: json
+    """
     items = DB.retrieve_items()
     return jsonify({'items': [make_public_item(item) for item in items]})
 
@@ -128,7 +152,11 @@ def get_items():
 @app.route('/api/v1.0/items/<int:item_id>', methods=['GET'])
 @token_auth.login_required
 def get_item(item_id):
-    """Get one item with id."""
+    """
+    Get one item with id.
+    :param: item_id
+    :return: json
+    """
     items = DB.retrieve_items()
     item = [item for item in items if item['id'] == item_id]
     item_length = len(item)
@@ -140,7 +168,10 @@ def get_item(item_id):
 @app.route('/api/v1.0/items', methods=['POST'])
 @token_auth.login_required
 def create_item():
-    """Create new item and add it to database."""
+    """
+    Create new item and add it to database.
+    :return: json, status code
+    """
     user_id = g.user['id']
     if not request.json or 'title' not in request.json or 'price' not in request.json:
         abort(400)
@@ -151,7 +182,10 @@ def create_item():
 
 
 def get_item_details(user_id):
-    """Get and return all necessary details for item."""
+    """Get and return all necessary details for item.
+    :param: user_id
+    :return: dictionary
+    """
     return {
         'id': DB.get_item_id(),
         'title': request.json['title'],
@@ -171,7 +205,10 @@ def get_item_details(user_id):
 @app.route('/api/v1.0/items/<int:item_id>', methods=['PUT'])
 @token_auth.login_required
 def update_item(item_id):
-    """Update one item with id."""
+    """Update one item with id.
+    :param: item_id
+    :return: json
+    """
     user_id = g.user['id']
     items = DB.retrieve_items()
     item = [item for item in items if item['id'] == item_id]
@@ -189,7 +226,10 @@ def update_item(item_id):
 
 
 def check_if_item_is_valid(item):
-    """Check if all necessary conditions are fulfilled for item."""
+    """
+    Check if all necessary conditions are fulfilled for item.
+    :param: item
+    """
     item_length = len(item)
     if item_length == 0:
         abort(404)
@@ -213,7 +253,11 @@ def check_if_item_is_valid(item):
 @app.route('/api/v1.0/items/<int:item_id>', methods=['DELETE'])
 @token_auth.login_required
 def delete_item(item_id):
-    """Delete item with id."""
+    """
+    Delete item with id.
+    :param: item
+    :return: json
+    """
     items = DB.retrieve_items()
     item = [item for item in items if item['id'] == item_id]
     item_length = len(item)
