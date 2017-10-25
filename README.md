@@ -4,9 +4,12 @@ __Running instuctions - back-end:__
 
 	Install Python3.4:
 		https://www.python.org/downloads/
+		
+	Install MongoDB:
+		https://docs.mongodb.com/manual/installation/
     
-	Check you have correct version:
-		python --version
+	Check you have correct python version:
+		python --version (should be 3.4.X)
 
 	Launch virtualenv:
 		cd back-end && source py3env/bin/activate
