@@ -85,7 +85,7 @@ class DatabaseHelper(object):
 
     def create_new_user_to_database(self, email, username, password):
         hash_ = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt(near_buy.app.config['ENCRYPTION_ROUNDS']))
-        user_id = self.get_user_id()
+        user_id = self.get_id_for_new_user()
         user_info = {'email': email,
                      'username': username,
                      'hash': hash_,
@@ -111,11 +111,11 @@ class DatabaseHelper(object):
     def retrieve_user_by_token(self, token):
         return self.users.find_one({'token': token}, {'_id': 0})
 
-    def get_user_id(self):
+    def get_id_for_new_user(self):
         item = self.users.find_one(sort=[("id", -1)])
         return item['id']+1 if item else 0
 
-    def get_item_id(self):
+    def get_id_for_new_item(self):
         item = self.items.find_one(sort=[("id", -1)])
         return item['id']+1 if item else 0
 

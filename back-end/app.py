@@ -187,7 +187,7 @@ def get_item_details(user_id):
     :return: dictionary
     """
     return {
-        'id': DB.get_item_id(),
+        'id': DB.get_id_for_new_item(),
         'title': request.json['title'],
         'price': int(request.json['price']),
         'seller_id': user_id,
