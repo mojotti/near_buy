@@ -20,7 +20,10 @@ describe('Login', () => {
         wrapper = shallow(<Login />);
     });
 
-    test('given state is login, when login-button is pressed, then alert is not raised', () => {
+    it('given state is login, when login-button is pressed, then alert is not raised', async () => {
+        const response = { login: 'success' };
+        fetch.mockResponseSuccess(response);
+
         wrapper.setState({
             page: 'Login',
             username: 'foo',
@@ -36,6 +39,9 @@ describe('Login', () => {
     });
 
     test('given state is sign-up, when sign-up-button is pressed, then alert is not raised', () => {
+        const response = { login: 'success' };
+        fetch.mockResponseSuccess(response);
+
         wrapper.setState({
             page: 'Sign up',
             username: 'foo',
@@ -81,6 +87,9 @@ describe('Login', () => {
     });
 
     test('given email is missing, when login-button is pressed, then alert is not raised', () => {
+        const response = '{"login": "success"}';
+        fetch.mockResponseSuccess(response);
+
         wrapper.setState({
             page: 'Login',
             username: 'foo',

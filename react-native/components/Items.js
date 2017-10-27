@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import { localhost,
     width } from "../src/static/constants";
 
+
 export class Items extends React.Component {
     constructor(props) {
         super(props);

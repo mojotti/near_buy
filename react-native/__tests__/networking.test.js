@@ -1,17 +1,15 @@
-'use strict';
-
-const base64 = require('base-64');
-
+import 'isomorphic-fetch'; // for headers, fetch, etc.
 import { generateHeadersForBasicAuth,
     generateHash,
     generateHashForRegistering } from '../src/networking';
-import 'isomorphic-fetch';  // for headers, fetch, etc.
+
+const base64 = require('base-64');
 
 const username = 'testing';
 const password = 'test_pw';
 const email = 'test_email';
-const expectedHash = base64.encode(username + ':' + password);
-const expectedHashForEmail = base64.encode(username + ':' + email + ':' + password);
+const expectedHash = base64.encode(`${username}:${password}`);
+const expectedHashForEmail = base64.encode(`${username}:${email}:${password}`);
 
 it('given username and pw are known, when hash is generated, then it is expected', () => {
     expect(expectedHash).toEqual(generateHash(username, password));
@@ -22,13 +20,13 @@ it('given username and pw are unknown, when hash is generated, then it is expect
 });
 
 it('given username and pw are known, when header is generated, then it is expected', () => {
-    let headers = new Headers();
+    const headers = new Headers();
     headers.append('Authorization', `Basic ${expectedHash}`);
     expect(headers).toEqual(generateHeadersForBasicAuth(username, password));
 });
 
 it('given username and pw are unknown, when header is generated, then it is expected', () => {
-    let headers = new Headers();
+    const headers = new Headers();
     headers.append('Authorization', `Basic ${expectedHash}`);
     expect(headers).not.toEqual(generateHeadersForBasicAuth('foo', 'baz'));
 });

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Items renders correctly 1`] = `
+exports[`Render Items renders correctly 1`] = `
 <View
   style={
     Array [
@@ -140,7 +140,7 @@ exports[`Items renders correctly 1`] = `
 </View>
 `;
 
-exports[`Login renders correctly 1`] = `
+exports[`Render Login renders correctly 1`] = `
 <View
   style={
     Array [

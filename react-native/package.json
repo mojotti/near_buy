@@ -38,6 +38,9 @@
     "setupTestFrameworkScriptFile": "<rootDir>/test-setup.js",
     "transformIgnorePatterns": [
       "node_modules/(?!react-native|react-navigation)/"
+    ],
+    "setupFiles": [
+      "<rootDir>/.config/jest/globalFetch.js"
     ]
   },
   "dependencies": {

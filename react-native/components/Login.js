@@ -72,7 +72,7 @@ export class Login extends React.Component {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                user_info: generateHashForRegistering(username, password, email)
+                user_info: generateHashForRegistering(username, password, email),
             }),
         })
             .then(response => response.json())
@@ -96,11 +96,10 @@ export class Login extends React.Component {
         const { username, password } = this.state;
         fetch(ipAddress, {
             method: 'GET',
-            headers: generateHeadersForBasicAuth(username, password)
+            headers: generateHeadersForBasicAuth(username, password),
         })
             .then(response => response.json())
             .then((responseJson) => {
-                console.log(responseJson);
                 if (responseJson.username === username) {
                     this.props.onLogin(username, responseJson.token);
                 } else {
