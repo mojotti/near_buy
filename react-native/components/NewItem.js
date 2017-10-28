@@ -20,12 +20,18 @@ export class NewItem extends React.Component {
             title: '',
             price: '',
             description: '',
+            mounted: false,
         };
     }
 
     static navigationOptions = {
         title: 'Sell item',
     };
+
+    componentDidMount() {
+        // work around for testing issue, should be solved when RN version is updated
+        this.setState({ mounted: true });
+    }
 
     getHeaders() {
         var headers = new Headers();
@@ -93,7 +99,7 @@ export class NewItem extends React.Component {
                     placeholder='Title'
                     autoCapitalize='sentences'
                     autoCorrect={false}
-                    autoFocus={true}
+                    autoFocus={this.state.mounted}
                     maxLength = {20}
                     keyboardType='email-address'
                     value={this.state.title}
@@ -105,7 +111,6 @@ export class NewItem extends React.Component {
                     autoCapitalize='sentences'
                     maxLength = {60}
                     autoCorrect={false}
-                    autoFocus={false}
                     keyboardType='email-address'
                     value={this.state.description}
                     onChangeText={(text) => this.setState({ description: text })}

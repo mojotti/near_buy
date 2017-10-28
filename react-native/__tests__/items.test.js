@@ -9,8 +9,12 @@ import { sample } from '../src/static/ItemSample';
 describe('Items', () => {
     it('render correctly when response has items', () => {
         fetch.mockResponseSuccess(sample);
+
         const items = renderer.create(<Items />);
         items.getInstance().handleAllItemsRequest(sample);
+
         expect(items.toJSON()).toMatchSnapshot();
     });
+
+    // add here tests for item manipulation
 });

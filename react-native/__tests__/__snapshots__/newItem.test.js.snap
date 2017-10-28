@@ -1,0 +1,143 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`New Item renders correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "space-around",
+      },
+    ]
+  }
+>
+  <TextInput
+    autoCapitalize="sentences"
+    autoCorrect={false}
+    autoFocus={true}
+    keyboardType="email-address"
+    maxLength={20}
+    onChangeText={[Function]}
+    placeholder="Title"
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "width": 525,
+        },
+      ]
+    }
+    value=""
+  />
+  <TextInput
+    autoCapitalize="sentences"
+    autoCorrect={false}
+    keyboardType="email-address"
+    maxLength={60}
+    onChangeText={[Function]}
+    placeholder="Description"
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "width": 525,
+        },
+      ]
+    }
+    value=""
+  />
+  <View
+    keyboardVerticalOffset={164}
+    onLayout={[Function]}
+    style={
+      Array [
+        undefined,
+        Object {
+          "paddingBottom": 0,
+        },
+      ]
+    }
+  >
+    <TextInput
+      autoCorrect={false}
+      autoFocus={false}
+      keyboardType="numeric"
+      maxLength={5}
+      onChangeText={[Function]}
+      placeholder="Price"
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "width": 525,
+          },
+        ]
+      }
+      value=""
+    />
+    <View
+      style={
+        Object {
+          "paddingTop": 20,
+        }
+      }
+    />
+    <View
+      accessibilityComponentType="button"
+      accessibilityLabel={undefined}
+      accessibilityTraits={
+        Array [
+          "button",
+        ]
+      }
+      accessible={true}
+      collapsable={undefined}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+      testID={undefined}
+      tvParallaxProperties={undefined}
+    >
+      <View
+        style={
+          Array [
+            Object {},
+          ]
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+          style={
+            Array [
+              Object {
+                "color": "#007AFF",
+                "fontSize": 18,
+                "padding": 8,
+                "textAlign": "center",
+              },
+            ]
+          }
+        >
+          Submit item
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
