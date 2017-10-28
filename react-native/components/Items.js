@@ -8,9 +8,8 @@ import { Button,
     View } from 'react-native';
 import { logout } from '../redux/actions/auth';
 import { connect } from 'react-redux';
-import { localhost,
-    width } from "../src/static/constants";
-
+import { localhost } from "../src/static/constants";
+import { ListViewItem } from "./ListViewItem";
 
 export class Items extends React.Component {
     constructor(props) {
@@ -28,15 +27,15 @@ export class Items extends React.Component {
         const { navigate } = navigation;
         return {
             title: 'Your items',
-            headerRight: (
+            headerLeft: (
                 <Text
                     onPress={() => navigate('NewItem')}
-                    style={{ fontSize: 25, marginRight: 10 }}
+                    style={{ margin: 10 }}
                 >
-                    +
+                    New Item
                 </Text>
             ),
-            headerLeft: null,
+            headerRight: null,
         };
     };
 
@@ -115,26 +114,10 @@ export class Items extends React.Component {
             return (
                 <ListView
                     dataSource={this.state.dataSource}
-                    renderRow={data => this.renderItem(data)}
+                    renderRow={data => <ListViewItem item={data}/>}
                 />
             );
         }
-    }
-
-    renderItem(item) {
-        return (
-            <View style={[styles.item, styles.separator]}>
-                <Text>
-                    {`Title: ${item.title}`}
-                </Text>
-                <Text>
-                    {`Description: ${item.description}`}
-                </Text>
-                <Text>
-                    {`Price: ${item.price} €`}
-                </Text>
-            </View>
-        );
     }
 }
 
@@ -142,16 +125,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-    },
-    item: {
-        padding: 10,
-        backgroundColor: 'azure',
-        width: width,
-    },
-    separator: {
-        marginBottom: 1,
-        borderBottomWidth: 1,
-        borderBottomColor: 'gainsboro',
     },
     infoText: {
         textAlign: 'center',

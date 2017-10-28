@@ -5,7 +5,7 @@ import 'isomorphic-fetch'; // for headers, fetch, etc.
 
 import Login from '../components/Login';
 import { Items } from '../components/Items';
-import { sample } from '../src/static/ItemSample';
+import { sample } from '../src/static/samples/ItemSample';
 
 const middlewares = [];
 const mockStore = configureStore(middlewares);

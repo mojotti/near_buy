@@ -3,7 +3,7 @@ import 'isomorphic-fetch'; // for headers, fetch, etc.
 import renderer from 'react-test-renderer';
 
 import { Items } from '../components/Items';
-import { sample } from '../src/static/ItemSample';
+import { sample } from '../src/static/samples/ItemSample';
 
 
 describe('Items', () => {
@@ -15,6 +15,4 @@ describe('Items', () => {
 
         expect(items.toJSON()).toMatchSnapshot();
     });
-
-    // add here tests for item manipulation
 });

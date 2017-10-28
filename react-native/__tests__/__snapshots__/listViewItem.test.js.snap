@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListViewItem renders and shows current details 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "azure",
+        "padding": 10,
+        "width": 750,
+      },
+      Object {
+        "borderBottomColor": "gainsboro",
+        "borderBottomWidth": 1,
+        "marginBottom": 1,
+      },
+    ]
+  }
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+  >
+    Title: Item 1
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+  >
+    Description: Description. Very awesome item.
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+  >
+    Price: 50 €
+  </Text>
+</View>
+`;
