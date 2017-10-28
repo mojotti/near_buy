@@ -5,12 +5,11 @@ import store from '../redux';
 import { Alert,
     Button,
     KeyboardAvoidingView,
-    StyleSheet,
     TextInput,
     View } from 'react-native';
 import { NavigationActions } from 'react-navigation';
-import { localhost,
-    widthWithThirtyPercentPadding} from "../src/static/constants";
+import { localhost } from "../src/static/constants";
+import { styles } from '../src/static/styles/NewItemStyles';
 
 
 export class NewItem extends React.Component {
@@ -140,18 +139,6 @@ export class NewItem extends React.Component {
         );
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'space-around',
-    },
-    itemDetails: {
-        width: widthWithThirtyPercentPadding,
-        alignItems: 'center',
-    }
-});
 
 
 export default NewItem;

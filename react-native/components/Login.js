@@ -4,7 +4,6 @@ import { Alert,
     Button,
     Image,
     KeyboardAvoidingView,
-    StyleSheet,
     Text,
     TextInput,
     View } from 'react-native';
@@ -14,8 +13,8 @@ import { generateHeadersForBasicAuth,
 import {
     localhost,
     loginText,
-    registerText,
-    widthWithThirtyPercentPadding } from '../src/static/constants';
+    registerText } from '../src/static/constants';
+import { styles } from '../src/static/styles/LoginStyles';
 
 const logo = require('../src/static/images/logo.png');
 
@@ -213,41 +212,5 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'space-around',
-    },
-    welcomeText: {
-        fontSize: 24,
-        textAlign: 'center',
-        marginTop: 50
-    },
-    loginHint: {
-        fontSize: 12,
-        textAlign: 'center',
-        marginTop: 10,
-    },
-    logo: {
-        width: 350,
-        height: 150,
-    },
-    loginContainer: {
-        justifyContent: 'center',
-        alignSelf: 'center',
-        width: widthWithThirtyPercentPadding,
-    },
-    logoContainer: {
-        justifyContent: 'center',
-        alignSelf: 'stretch',
-        padding: 0,
-    },
-    altPageContainer: {
-        marginTop: 40,
-        flexDirection: 'row',
-        justifyContent: 'center',
-    },
-});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

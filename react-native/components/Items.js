@@ -3,13 +3,13 @@
 import React from 'react';
 import { Button,
     ListView,
-    StyleSheet,
     Text,
     View } from 'react-native';
 import { logout } from '../redux/actions/auth';
 import { connect } from 'react-redux';
 import { localhost } from "../src/static/constants";
 import { ListViewItem } from "./ListViewItem";
+import { styles } from '../src/static/styles/ItemsStyles';
 
 export class Items extends React.Component {
     constructor(props) {
@@ -120,17 +120,6 @@ export class Items extends React.Component {
         }
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-    },
-    infoText: {
-        textAlign: 'center',
-        padding: 10
-    }
-});
 
 const mapStateToProps = (state, ownProps) => {
     return {
