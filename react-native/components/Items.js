@@ -24,23 +24,34 @@ export class Items extends React.Component {
         };
     }
 
-    static navigationOptions = {
-        title: 'Your items',
-        headerLeft: null
+    static navigationOptions = ({ navigation }) => {
+        const { navigate } = navigation;
+        return {
+            title: 'Your items',
+            headerRight: (
+                <Text
+                    onPress={() => navigate('NewItem')}
+                    style={{ fontSize: 25, marginRight: 10 }}
+                >
+                    +
+                </Text>
+            ),
+            headerLeft: null,
+        };
     };
-
-    userLogout() {
-        this.props.onLogout();
-    }
 
     componentDidMount() {
         this.fetchData();
     }
 
     getHeaders() {
-        let headers = new Headers();
+        const headers = new Headers();
         headers.append('Authorization', `Bearer ${this.props.token}`);
         return headers;
+    }
+
+    userLogout() {
+        this.props.onLogout();
     }
 
     fetchData() {
@@ -73,19 +84,10 @@ export class Items extends React.Component {
         }
     }
 
-    navigateToNewItem() {
-        const { navigate } = this.props.navigation;
-        navigate('NewItem');
-    }
-
     render() {
         return (
             <View style={[styles.container]}>
                 {this.renderUserData()}
-                <Button
-                    title='Add new item'
-                    onPress={() => this.navigateToNewItem()}
-                />
                 <Button
                     onPress={() => this.userLogout()}
                     title='Logout'
