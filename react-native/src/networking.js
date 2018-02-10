@@ -19,6 +19,8 @@ function generateHashForRegistering(username, password, email) {
 }
 
 
-export { generateHeadersForBasicAuth,
+export {
+    generateHeadersForBasicAuth,
     generateHash,
-    generateHashForRegistering };
+    generateHashForRegistering
+};
