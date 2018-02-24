@@ -157,7 +157,7 @@ export class Login extends React.Component {
         if (!this.state.isKeyboardVisible) {
             return (
                 <View style={styles.logoContainer}>
-                    <Text style={styles.welcomeText}>Hi there! Welcome to</Text>
+                    <Text style={styles.welcomeText}>Hi! Welcome to</Text>
                     <Image
                         resizeMode="contain"
                         style={styles.logo}

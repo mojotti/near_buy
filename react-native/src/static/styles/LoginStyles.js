@@ -1,6 +1,8 @@
-import { StyleSheet } from 'react-native';
+import {Dimensions, StyleSheet} from 'react-native';
 import { widthWithThirtyPercentPadding } from '../constants';
 
+const eightyPercentWidth = Dimensions.get('window').width * 0.7;
+const sixteenPercentHeight = Dimensions.get('window').height * 0.16;
 
 export const styles = StyleSheet.create({
     container: {
@@ -19,8 +21,9 @@ export const styles = StyleSheet.create({
         marginTop: 10,
     },
     logo: {
-        width: 350,
-        height: 150,
+        width: eightyPercentWidth,
+        height: sixteenPercentHeight,
+        marginBottom: sixteenPercentHeight,
     },
     loginContainer: {
         justifyContent: 'center',
