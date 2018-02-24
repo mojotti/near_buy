@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
     welcomeText: {
         fontSize: 24,
         textAlign: 'center',
-        marginTop: 50
+        marginTop: 50,
     },
     loginHint: {
         fontSize: 12,
@@ -36,5 +36,11 @@ export const styles = StyleSheet.create({
         marginTop: 40,
         flexDirection: 'row',
         justifyContent: 'center',
+    },
+    textInputStyleSmallMargin: {
+        marginBottom: 4,
+    },
+    textInputStyleLargeMargin: {
+        marginBottom: 4,
     },
 });

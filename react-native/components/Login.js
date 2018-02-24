@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Alert,
     Button,
     Image,
+    Keyboard,
     KeyboardAvoidingView,
     Text,
     TextInput,
@@ -27,8 +28,22 @@ export class Login extends React.Component {
             username: '',
             password: '',
             email: '',
-            textFocused: false,
+            isKeyboardVisible: false,
         };
+        this.keyboardDidHide = this.keyboardDidHide.bind(this);
+        this.keyboardDidShow = this.keyboardDidShow.bind(this);
+    }
+
+    componentWillMount() {
+        this.keyboardDidShowListener =
+            Keyboard.addListener('keyboardDidShow', this.keyboardDidShow);
+        this.keyboardDidHideListener =
+            Keyboard.addListener('keyboardDidHide', this.keyboardDidHide);
+    }
+
+    componentWillUnmount() {
+        this.keyboardDidShowListener.remove();
+        this.keyboardDidHideListener.remove();
     }
 
     getAlternativePageTitle() {
@@ -39,6 +54,14 @@ export class Login extends React.Component {
     getHelperText() {
         const { page } = this.state;
         return (page === 'Login') ? loginText : registerText;
+    }
+
+    keyboardDidShow() {
+        this.setState({ isKeyboardVisible: true });
+    }
+
+    keyboardDidHide() {
+        this.setState({ isKeyboardVisible: false });
     }
 
     togglePage() {
@@ -116,12 +139,12 @@ export class Login extends React.Component {
             return (
                 <TextInput
                     placeholder="Email address"
+                    style={styles.textInputStyleSmallMargin}
                     autoCapitalize="none"
                     autoCorrect={false}
                     autoFocus={false}
                     keyboardType="email-address"
                     value={this.state.email}
-                    onFocus={() => this.setState({textFocused: true})}
                     onChangeText={(text) => this.setState({ email: text })}
                     underlineColorAndroid="transparent"
                 />
@@ -131,18 +154,19 @@ export class Login extends React.Component {
     }
 
     renderLogoAndWelcomeText() {
-        if (this.state.textFocused === false) {
+        if (!this.state.isKeyboardVisible) {
             return (
                 <View style={styles.logoContainer}>
-                  <Text style={styles.welcomeText}>Welcome to NearBuy</Text>
-                  <Image
-                      resizeMode="contain"
-                      style={styles.logo}
-                      source={logo}
-                  />
+                    <Text style={styles.welcomeText}>Welcome to NearBuy</Text>
+                    <Image
+                        resizeMode="contain"
+                        style={styles.logo}
+                        source={logo}
+                    />
                 </View>
             );
         }
+        return null;
     }
 
     render () {
@@ -155,25 +179,23 @@ export class Login extends React.Component {
                     {this.renderLogoAndWelcomeText()}
                     <View style={styles.loginContainer}>
                         {this.renderEmailInput()}
-                        <View style={{margin: 4}}></View>
                         <TextInput
                             placeholder='Username'
+                            style={styles.textInputStyleSmallMargin}
                             autoCapitalize='none'
                             autoCorrect={false}
                             autoFocus={false}
-                            onFocus={() => this.setState({textFocused: true})}
                             keyboardType='email-address'
                             value={this.state.username}
                             underlineColorAndroid="transparent"
                             onChangeText={(text) => this.setState({ username: text })} />
-                        <View style={{margin: 4}}></View>
                         <TextInput
                             placeholder='Password'
                             autoCapitalize='none'
+                            style={styles.textInputStyleLargeMargin}
                             autoCorrect={false}
                             secureTextEntry={true}
                             underlineColorAndroid="transparent"
-                            onFocus={() => this.setState({textFocused: true})}
                             value={this.state.password}
                             onChangeText={(text) => this.setState({ password: text })} />
 
