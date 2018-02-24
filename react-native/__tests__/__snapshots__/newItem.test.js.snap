@@ -13,6 +13,7 @@ exports[`New Item renders correctly 1`] = `
   }
 >
   <TextInput
+    allowFontScaling={true}
     autoCapitalize="sentences"
     autoCorrect={false}
     autoFocus={true}
@@ -31,6 +32,7 @@ exports[`New Item renders correctly 1`] = `
     value=""
   />
   <TextInput
+    allowFontScaling={true}
     autoCapitalize="sentences"
     autoCorrect={false}
     keyboardType="email-address"
@@ -60,6 +62,7 @@ exports[`New Item renders correctly 1`] = `
     }
   >
     <TextInput
+      allowFontScaling={true}
       autoCorrect={false}
       autoFocus={false}
       keyboardType="numeric"
@@ -93,6 +96,7 @@ exports[`New Item renders correctly 1`] = `
       }
       accessible={true}
       collapsable={undefined}
+      hasTVPreferredFocus={undefined}
       hitSlop={undefined}
       isTVSelectable={true}
       nativeID={undefined}
@@ -121,7 +125,7 @@ exports[`New Item renders correctly 1`] = `
         <Text
           accessible={true}
           allowFontScaling={true}
-          disabled={false}
+          disabled={undefined}
           ellipsizeMode="tail"
           style={
             Array [

@@ -41,6 +41,7 @@ exports[`Login hides logo and welcome text when text is focused 1`] = `
         }
       />
       <TextInput
+        allowFontScaling={true}
         autoCapitalize="none"
         autoCorrect={false}
         autoFocus={false}
@@ -58,6 +59,7 @@ exports[`Login hides logo and welcome text when text is focused 1`] = `
         }
       />
       <TextInput
+        allowFontScaling={true}
         autoCapitalize="none"
         autoCorrect={false}
         onChangeText={[Function]}
@@ -69,7 +71,6 @@ exports[`Login hides logo and welcome text when text is focused 1`] = `
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
         style={
           Object {
@@ -87,6 +88,7 @@ exports[`Login hides logo and welcome text when text is focused 1`] = `
         }
         accessible={true}
         collapsable={undefined}
+        hasTVPreferredFocus={undefined}
         hitSlop={undefined}
         isTVSelectable={true}
         nativeID={undefined}
@@ -115,7 +117,7 @@ exports[`Login hides logo and welcome text when text is focused 1`] = `
           <Text
             accessible={true}
             allowFontScaling={true}
-            disabled={false}
+            disabled={undefined}
             ellipsizeMode="tail"
             style={
               Array [
@@ -144,7 +146,6 @@ exports[`Login hides logo and welcome text when text is focused 1`] = `
         <Text
           accessible={true}
           allowFontScaling={true}
-          disabled={false}
           ellipsizeMode="tail"
           id="altPageTitle"
           onPress={[Function]}
@@ -161,7 +162,6 @@ exports[`Login hides logo and welcome text when text is focused 1`] = `
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
         id="helperText"
         style={
@@ -215,7 +215,6 @@ exports[`Login renders sign up details when state is sign up 1`] = `
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
         style={
           Object {
@@ -229,7 +228,11 @@ exports[`Login renders sign up details when state is sign up 1`] = `
       </Text>
       <Image
         resizeMode="contain"
-        source={1}
+        source={
+          Object {
+            "testUri": "../../../src/static/images/logo.png",
+          }
+        }
         style={
           Object {
             "height": 150,
@@ -248,6 +251,7 @@ exports[`Login renders sign up details when state is sign up 1`] = `
       }
     >
       <TextInput
+        allowFontScaling={true}
         autoCapitalize="none"
         autoCorrect={false}
         autoFocus={false}
@@ -265,6 +269,7 @@ exports[`Login renders sign up details when state is sign up 1`] = `
         }
       />
       <TextInput
+        allowFontScaling={true}
         autoCapitalize="none"
         autoCorrect={false}
         autoFocus={false}
@@ -282,6 +287,7 @@ exports[`Login renders sign up details when state is sign up 1`] = `
         }
       />
       <TextInput
+        allowFontScaling={true}
         autoCapitalize="none"
         autoCorrect={false}
         onChangeText={[Function]}
@@ -293,7 +299,6 @@ exports[`Login renders sign up details when state is sign up 1`] = `
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
         style={
           Object {
@@ -311,6 +316,7 @@ exports[`Login renders sign up details when state is sign up 1`] = `
         }
         accessible={true}
         collapsable={undefined}
+        hasTVPreferredFocus={undefined}
         hitSlop={undefined}
         isTVSelectable={true}
         nativeID={undefined}
@@ -339,7 +345,7 @@ exports[`Login renders sign up details when state is sign up 1`] = `
           <Text
             accessible={true}
             allowFontScaling={true}
-            disabled={false}
+            disabled={undefined}
             ellipsizeMode="tail"
             style={
               Array [
@@ -368,7 +374,6 @@ exports[`Login renders sign up details when state is sign up 1`] = `
         <Text
           accessible={true}
           allowFontScaling={true}
-          disabled={false}
           ellipsizeMode="tail"
           id="altPageTitle"
           onPress={[Function]}
@@ -385,7 +390,6 @@ exports[`Login renders sign up details when state is sign up 1`] = `
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
         id="helperText"
         style={

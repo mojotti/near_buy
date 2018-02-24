@@ -20,7 +20,6 @@ exports[`ListViewItem renders and shows current details 1`] = `
   <Text
     accessible={true}
     allowFontScaling={true}
-    disabled={false}
     ellipsizeMode="tail"
   >
     Title: Item 1
@@ -28,7 +27,6 @@ exports[`ListViewItem renders and shows current details 1`] = `
   <Text
     accessible={true}
     allowFontScaling={true}
-    disabled={false}
     ellipsizeMode="tail"
   >
     Description: Description. Very awesome item.
@@ -36,7 +34,6 @@ exports[`ListViewItem renders and shows current details 1`] = `
   <Text
     accessible={true}
     allowFontScaling={true}
-    disabled={false}
     ellipsizeMode="tail"
   >
     Price: 50 €
