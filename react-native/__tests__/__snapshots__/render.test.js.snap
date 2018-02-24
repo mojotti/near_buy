@@ -130,7 +130,7 @@ exports[`Render Login renders correctly 1`] = `
           }
         }
       >
-        Hi there! Welcome to
+        Hi! Welcome to
       </Text>
       <Image
         resizeMode="contain"
@@ -141,8 +141,9 @@ exports[`Render Login renders correctly 1`] = `
         }
         style={
           Object {
-            "height": 150,
-            "width": 350,
+            "height": 213.44,
+            "marginBottom": 213.44,
+            "width": 525,
           }
         }
       />
