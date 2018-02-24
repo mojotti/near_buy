@@ -123,9 +123,11 @@ export class Login extends React.Component {
                     value={this.state.email}
                     onFocus={() => this.setState({textFocused: true})}
                     onChangeText={(text) => this.setState({ email: text })}
+                    underlineColorAndroid="transparent"
                 />
-            )
+            );
         }
+        return null;
     }
 
     renderLogoAndWelcomeText() {
@@ -162,6 +164,7 @@ export class Login extends React.Component {
                             onFocus={() => this.setState({textFocused: true})}
                             keyboardType='email-address'
                             value={this.state.username}
+                            underlineColorAndroid="transparent"
                             onChangeText={(text) => this.setState({ username: text })} />
                         <View style={{margin: 4}}></View>
                         <TextInput
@@ -169,6 +172,7 @@ export class Login extends React.Component {
                             autoCapitalize='none'
                             autoCorrect={false}
                             secureTextEntry={true}
+                            underlineColorAndroid="transparent"
                             onFocus={() => this.setState({textFocused: true})}
                             value={this.state.password}
                             onChangeText={(text) => this.setState({ password: text })} />
