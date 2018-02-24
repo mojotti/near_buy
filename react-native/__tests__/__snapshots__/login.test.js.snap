@@ -49,6 +49,7 @@ exports[`Login hides logo and welcome text when text is focused 1`] = `
         onChangeText={[Function]}
         onFocus={[Function]}
         placeholder="Username"
+        underlineColorAndroid="transparent"
         value=""
       />
       <View
@@ -66,6 +67,7 @@ exports[`Login hides logo and welcome text when text is focused 1`] = `
         onFocus={[Function]}
         placeholder="Password"
         secureTextEntry={true}
+        underlineColorAndroid="transparent"
         value=""
       />
       <Text
@@ -259,6 +261,7 @@ exports[`Login renders sign up details when state is sign up 1`] = `
         onChangeText={[Function]}
         onFocus={[Function]}
         placeholder="Email address"
+        underlineColorAndroid="transparent"
         value=""
       />
       <View
@@ -277,6 +280,7 @@ exports[`Login renders sign up details when state is sign up 1`] = `
         onChangeText={[Function]}
         onFocus={[Function]}
         placeholder="Username"
+        underlineColorAndroid="transparent"
         value=""
       />
       <View
@@ -294,6 +298,7 @@ exports[`Login renders sign up details when state is sign up 1`] = `
         onFocus={[Function]}
         placeholder="Password"
         secureTextEntry={true}
+        underlineColorAndroid="transparent"
         value=""
       />
       <Text

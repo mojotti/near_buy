@@ -172,6 +172,7 @@ exports[`Render Login renders correctly 1`] = `
         onChangeText={[Function]}
         onFocus={[Function]}
         placeholder="Username"
+        underlineColorAndroid="transparent"
         value=""
       />
       <View
@@ -189,6 +190,7 @@ exports[`Render Login renders correctly 1`] = `
         onFocus={[Function]}
         placeholder="Password"
         secureTextEntry={true}
+        underlineColorAndroid="transparent"
         value=""
       />
       <Text
