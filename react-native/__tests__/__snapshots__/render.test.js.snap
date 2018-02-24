@@ -156,13 +156,6 @@ exports[`Render Login renders correctly 1`] = `
         }
       }
     >
-      <View
-        style={
-          Object {
-            "margin": 4,
-          }
-        }
-      />
       <TextInput
         allowFontScaling={true}
         autoCapitalize="none"
@@ -170,26 +163,27 @@ exports[`Render Login renders correctly 1`] = `
         autoFocus={false}
         keyboardType="email-address"
         onChangeText={[Function]}
-        onFocus={[Function]}
         placeholder="Username"
-        underlineColorAndroid="transparent"
-        value=""
-      />
-      <View
         style={
           Object {
-            "margin": 4,
+            "marginBottom": 4,
           }
         }
+        underlineColorAndroid="transparent"
+        value=""
       />
       <TextInput
         allowFontScaling={true}
         autoCapitalize="none"
         autoCorrect={false}
         onChangeText={[Function]}
-        onFocus={[Function]}
         placeholder="Password"
         secureTextEntry={true}
+        style={
+          Object {
+            "marginBottom": 4,
+          }
+        }
         underlineColorAndroid="transparent"
         value=""
       />

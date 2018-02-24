@@ -182,11 +182,12 @@ describe('Login', () => {
         expect(tree).toMatchSnapshot();
     });
 
-    test('hides logo and welcome text when text is focused', () => {
+    test('Logo is hidden when keyboard is visible', () => {
         const loginComponent = renderer.create(<Login />);
-        expect(loginComponent.getInstance().state.textFocused).toEqual(false);
+        loginComponent.getInstance().keyboardDidShow();
 
-        loginComponent.getInstance().setState({ textFocused: true });
+        expect(loginComponent.getInstance().state.isKeyboardVisible).toBeTruthy();
+
         const tree = loginComponent.toJSON();
         expect(tree).toMatchSnapshot();
     });
@@ -214,14 +215,12 @@ describe('Login', () => {
         expect(togglePageSpy.calledOnce).toBeTruthy();
     });
 
-    test('handles textInput press correctly and sets textFocused to true', () => {
-        expect(wrapper.state('textFocused')).toBeFalsy();
+    test('isKeyboardVisible is set to false when keyboard is hidden', () => {
+        expect(wrapper.state('isKeyboardVisible')).toBeFalsy();
 
-        const render = wrapper.dive();
-        render.find('TextInput').forEach((child) => {
-            child.simulate('Focus');
-        });
+        wrapper.setState({ isKeyboardVisible: true });
+        wrapper.instance().keyboardDidHide();
 
-        expect(wrapper.state('textFocused')).toBeTruthy();
+        expect(wrapper.state('isKeyboardVisible')).toBeFalsy();
     });
 });
