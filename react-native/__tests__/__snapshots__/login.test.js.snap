@@ -58,21 +58,11 @@ exports[`Login Logo is hidden when keyboard is visible 1`] = `
         secureTextEntry={true}
         style={
           Object {
-            "marginBottom": 4,
+            "marginBottom": 16,
           }
         }
         underlineColorAndroid="transparent"
         value=""
-      />
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        style={
-          Object {
-            "fontSize": 27,
-          }
-        }
       />
       <View
         accessibilityComponentType="button"
@@ -220,7 +210,7 @@ exports[`Login renders sign up details when state is sign up 1`] = `
           }
         }
       >
-        Welcome to NearBuy
+        Hi there! Welcome to
       </Text>
       <Image
         resizeMode="contain"
@@ -287,21 +277,11 @@ exports[`Login renders sign up details when state is sign up 1`] = `
         secureTextEntry={true}
         style={
           Object {
-            "marginBottom": 4,
+            "marginBottom": 16,
           }
         }
         underlineColorAndroid="transparent"
         value=""
-      />
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        style={
-          Object {
-            "fontSize": 27,
-          }
-        }
       />
       <View
         accessibilityComponentType="button"
