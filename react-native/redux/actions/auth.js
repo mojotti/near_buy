@@ -2,13 +2,13 @@ export const login = (username, token) => {
     return {
         type: 'LOGIN',
         username: username,
-        token: token
+        token: token,
     };
 };
 
 export const logout = () => {
     return {
-        type: 'LOGOUT'
+        type: 'LOGOUT',
     };
 };
 

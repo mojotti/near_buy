@@ -9,47 +9,53 @@ import sinon from 'sinon';
 import { Login } from '../components/Login';
 import {
     loginText,
-    registerText } from '../src/static/constants';
-
+    registerText,
+} from '../src/static/constants';
+import {
+    successfulRegisteringResponse,
+    successfulLoginResponse,
+    unsuccessfulLoginResponse,
+    userExistsRegisteringResponse,
+} from '../src/static/samples/loginAndRegisteringSamples';
 
 describe('Login', () => {
-    let wrapper;
+    let loginComponent;
 
     beforeEach(() => {
-        Alert.alert = jest.genMockFunction();
-        wrapper = shallow(<Login />);
+        Alert.alert = jest.fn(() => {
+            return Promise.resolve('alert');
+        });
+        loginComponent = shallow(<Login />);
     });
 
-    it('given state is login, when login-button is pressed, then alert is not raised', async () => {
-        const response = { login: 'success' };
-        fetch.mockResponseSuccess(response);
+    test('given state is login, when login-button is pressed, then alert is not raised', async () => {
+        fetch.mockResponseSuccess(unsuccessfulLoginResponse);
 
-        wrapper.setState({
+        loginComponent.setState({
             page: 'Login',
             username: 'foo',
             password: 'bar',
             email: 'foo@bar.com',
         });
 
-        const render = wrapper.dive();
+        const render = loginComponent.dive();
         const loginButton = render.find('[id="loginButton"]');
         loginButton.simulate('Press');
 
         expect(Alert.alert.mock.calls.length).toBe(0);
     });
 
-    test('given state is sign-up, when sign-up-button is pressed, then alert is not raised', () => {
-        const response = { login: 'success' };
-        fetch.mockResponseSuccess(response);
+    test('given state is sign-up, when sign-up-button is pressed, then alert is not raised', async () => {
+        fetch.mockResponseSuccess(successfulRegisteringResponse);
 
-        wrapper.setState({
+        loginComponent.setState({
             page: 'Sign up',
             username: 'foo',
             password: 'bar',
             email: 'foo@bar.com',
         });
 
-        const render = wrapper.dive();
+        const render = loginComponent.dive();
         const loginButton = render.find('[id="loginButton"]');
         loginButton.simulate('Press');
 
@@ -57,46 +63,65 @@ describe('Login', () => {
     });
 
     test('given username is missing, when login-button is pressed, then alert is raised', () => {
-        wrapper.setState({
+        loginComponent.setState({
             page: 'Login',
             username: '',
             password: 'bar',
             email: 'foo@bar.com',
         });
 
-        const render = wrapper.dive();
+        const render = loginComponent.dive();
         const loginButton = render.find('[id="loginButton"]');
         loginButton.simulate('Press');
 
         expect(Alert.alert.mock.calls.length).toBe(1);
     });
 
-    test('given email is missing,, when sign-up-button is pressed, then alert is raised', () => {
-        wrapper.setState({
+    test('given email is missing, when sign-up-button is pressed, then alert is raised', () => {
+        loginComponent.setState({
             page: 'Sign up',
             username: 'foo',
             password: 'bar',
             email: '',
         });
 
-        const render = wrapper.dive();
+        const render = loginComponent.dive();
         const loginButton = render.find('[id="loginButton"]');
         loginButton.simulate('Press');
 
         expect(Alert.alert.mock.calls.length).toBe(1);
     });
 
-    test('given email is missing, when login-button is pressed, then alert is not raised', () => {
-        const response = '{"login": "success"}';
-        fetch.mockResponseSuccess(response);
+    test.skip('given user exists, when registering with existing creds, alert is raised', () => {
+        fetch.mockResponseSuccess(userExistsRegisteringResponse);
 
-        wrapper.setState({
+        loginComponent.setState({
+            page: 'Sign up',
+            username: 'foo',
+            password: 'bar',
+            email: 'foobar',
+        });
+
+        const render = loginComponent.dive();
+        const loginButton = render.find('[id="loginButton"]');
+
+        loginButton.simulate('Press');
+        // return new Promise(() => {
+        //     loginButton.simulate('Press');
+        // })
+        //     .then(expect(Alert.alert.mock.calls.length).toBe(0));
+    });
+
+    test('given email is missing, when login-button is pressed, then alert is not raised', async () => {
+        fetch.mockResponseSuccess(successfulLoginResponse);
+
+        loginComponent.setState({
             page: 'Login',
             username: 'foo',
             password: 'bar',
             email: '',
         });
-        const render = wrapper.dive();
+        const render = loginComponent.dive();
 
         const loginButton = render.find('[id="loginButton"]');
         loginButton.simulate('Press');
@@ -105,13 +130,13 @@ describe('Login', () => {
     });
 
     test('given all details are missing, when login-button is pressed, then alert is raised', () => {
-        wrapper.setState({
+        loginComponent.setState({
             page: 'Login',
             username: '',
             password: '',
             email: '',
         });
-        const render = wrapper.dive();
+        const render = loginComponent.dive();
 
         const loginButton = render.find('[id="loginButton"]');
         loginButton.simulate('Press');
@@ -120,53 +145,53 @@ describe('Login', () => {
     });
 
     test('Given current page is login, when page title is requested, then title is Sign up', () => {
-        wrapper.setState({
+        loginComponent.setState({
             page: 'Login',
             username: '',
             password: '',
             email: '',
         });
 
-        const render = wrapper.dive();
+        const render = loginComponent.dive();
         const button = render.find('[id="altPageTitle"]');
         expect(button.props().children).toBe('Sign up');
     });
 
     test('Given current page is sign up, when page title is requested, then title is Login', () => {
-        wrapper.setState({
+        loginComponent.setState({
             page: 'Sign up',
             username: '',
             password: '',
             email: '',
         });
 
-        const render = wrapper.dive();
+        const render = loginComponent.dive();
         const button = render.find('[id="altPageTitle"]');
         expect(button.props().children).toBe('Login');
     });
 
     test('Given current page is login, when helper text is requested, then text is login', () => {
-        wrapper.setState({
+        loginComponent.setState({
             page: 'Login',
             username: '',
             password: '',
             email: '',
         });
 
-        const render = wrapper.dive();
+        const render = loginComponent.dive();
         const button = render.find('[id="helperText"]');
         expect(button.props().children).toBe(loginText);
     });
 
     test('Given current page is sign up, when helper text is requested, then text is sign up', () => {
-        wrapper.setState({
+        loginComponent.setState({
             page: 'Sign up',
             username: '',
             password: '',
             email: '',
         });
 
-        const render = wrapper.dive();
+        const render = loginComponent.dive();
         const button = render.find('[id="helperText"]');
         expect(button.props().children).toBe(registerText);
     });
@@ -193,7 +218,7 @@ describe('Login', () => {
     });
 
     test('handles button press correctly, when hitting login button', () => {
-        const render = wrapper.dive();
+        const render = loginComponent.dive();
 
         const handleButtonPressSpy = sinon.spy(Login.prototype, 'handleButtonPress');
 
@@ -204,7 +229,7 @@ describe('Login', () => {
     });
 
     test('handles button press correctly, when hitting SignUp/Login Text', () => {
-        const render = wrapper.dive();
+        const render = loginComponent.dive();
 
         const togglePageSpy = sinon.spy(Login.prototype, 'togglePage');
 
@@ -216,11 +241,11 @@ describe('Login', () => {
     });
 
     test('isKeyboardVisible is set to false when keyboard is hidden', () => {
-        expect(wrapper.state('isKeyboardVisible')).toBeFalsy();
+        expect(loginComponent.state('isKeyboardVisible')).toBeFalsy();
 
-        wrapper.setState({ isKeyboardVisible: true });
-        wrapper.instance().keyboardDidHide();
+        loginComponent.setState({ isKeyboardVisible: true });
+        loginComponent.instance().keyboardDidHide();
 
-        expect(wrapper.state('isKeyboardVisible')).toBeFalsy();
+        expect(loginComponent.state('isKeyboardVisible')).toBeFalsy();
     });
 });

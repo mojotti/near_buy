@@ -9,15 +9,19 @@ import { Alert,
     TextInput,
     View } from 'react-native';
 import { login } from '../redux/actions/auth';
-import { generateHeadersForBasicAuth,
-    generateHashForRegistering } from '../src/networking';
+import {
+    generateHeadersForBasicAuth,
+    generateHashForRegistering,
+} from '../src/networking';
 import {
     localhost,
     loginText,
-    registerText } from '../src/static/constants';
+    logo,
+    registerText,
+} from '../src/static/constants';
 import { styles } from '../src/static/styles/LoginStyles';
 
-const logo = require('../src/static/images/logo.png');
+const LOGO = logo;
 
 
 export class Login extends React.Component {
@@ -101,10 +105,9 @@ export class Login extends React.Component {
             .then((responseJson) => {
                 if (responseJson.user_creation === 'success') {
                     Alert.alert('User creation', 'User created successfully!');
-                    console.log(responseJson);
                     this.setState({ page: 'Login' });
                 } else {
-                    Alert.alert('User creation', 'User exists already!');
+                    return Alert.alert('User creation', 'User exists already!');
                 }
             })
             .catch((error) => {
@@ -161,7 +164,7 @@ export class Login extends React.Component {
                     <Image
                         resizeMode="contain"
                         style={styles.logo}
-                        source={logo}
+                        source={LOGO}
                     />
                 </View>
             );

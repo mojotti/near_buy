@@ -1,4 +1,7 @@
-import {Dimensions, StyleSheet} from 'react-native';
+import {
+    Dimensions,
+    StyleSheet,
+} from 'react-native';
 import { widthWithThirtyPercentPadding } from '../constants';
 
 const eightyPercentWidth = Dimensions.get('window').width * 0.7;
