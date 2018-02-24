@@ -41,6 +41,10 @@ export const styles = StyleSheet.create({
         marginBottom: 4,
     },
     textInputStyleLargeMargin: {
-        marginBottom: 4,
+        marginBottom: 16,
+    },
+    altPageTitle: {
+        fontSize: 16,
+        color: 'blue',
     },
 });

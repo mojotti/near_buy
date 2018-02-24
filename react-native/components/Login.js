@@ -157,7 +157,7 @@ export class Login extends React.Component {
         if (!this.state.isKeyboardVisible) {
             return (
                 <View style={styles.logoContainer}>
-                    <Text style={styles.welcomeText}>Welcome to NearBuy</Text>
+                    <Text style={styles.welcomeText}>Hi there! Welcome to</Text>
                     <Image
                         resizeMode="contain"
                         style={styles.logo}
@@ -188,7 +188,8 @@ export class Login extends React.Component {
                             keyboardType='email-address'
                             value={this.state.username}
                             underlineColorAndroid="transparent"
-                            onChangeText={(text) => this.setState({ username: text })} />
+                            onChangeText={(text) => this.setState({ username: text })}
+                        />
                         <TextInput
                             placeholder='Password'
                             autoCapitalize='none'
@@ -197,9 +198,9 @@ export class Login extends React.Component {
                             secureTextEntry={true}
                             underlineColorAndroid="transparent"
                             value={this.state.password}
-                            onChangeText={(text) => this.setState({ password: text })} />
+                            onChangeText={(text) => this.setState({ password: text })}
+                        />
 
-                        <Text style={{fontSize: 27}}>{this.state.route}</Text>
                         <Button
                             id='loginButton'
                             onPress={() => this.handleButtonPress()}
@@ -209,7 +210,7 @@ export class Login extends React.Component {
                             <Text
                                 id='altPageTitle'
                                 onPress={() => this.togglePage()}
-                                style={{ fontSize: 16, color: 'blue' }}
+                                style={styles.altPageTitle}
                             >
                                 {this.getAlternativePageTitle()}
                             </Text>
@@ -217,7 +218,9 @@ export class Login extends React.Component {
                         <Text
                             id='helperText'
                             style={styles.loginHint}
-                        >{this.getHelperText()}</Text>
+                        >
+                            {this.getHelperText()}
+                        </Text>
                     </View>
                 </KeyboardAvoidingView>
             </View>
