@@ -11,12 +11,14 @@ import { Alert,
 import { login } from '../redux/actions/auth';
 import {
     generateHeadersForBasicAuth,
+    getHeadersForRegistering,
     generateHashForRegistering,
 } from '../src/networking';
 import {
     localhost,
     loginText,
     logo,
+    networkErrorAlert,
     registerText,
 } from '../src/static/constants';
 import { styles } from '../src/static/styles/LoginStyles';
@@ -34,11 +36,16 @@ export class Login extends React.Component {
             email: '',
             isKeyboardVisible: false,
         };
+
         this.keyboardDidHide = this.keyboardDidHide.bind(this);
         this.keyboardDidShow = this.keyboardDidShow.bind(this);
+        this.handleLoginRequest = this.handleLoginRequest.bind(this);
+        this.handleRegisteringRequest = this.handleRegisteringRequest.bind(this);
+        this.handleRegisteringResponse = this.handleRegisteringResponse.bind(this);
+        this.handleError = this.handleError.bind(this);
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.keyboardDidShowListener =
             Keyboard.addListener('keyboardDidShow', this.keyboardDidShow);
         this.keyboardDidHideListener =
@@ -77,7 +84,10 @@ export class Login extends React.Component {
         const {
             page, username, password, email,
         } = this.state;
-        if (username === '' || password === '' || (page === 'Sign up' && email === '')) {
+        const hasInvalidUserDetails =
+            (username === '' || password === '' || (page === 'Sign up' && email === ''));
+
+        if (hasInvalidUserDetails) {
             Alert.alert('Invalid values', 'Please enter all the values.');
             return;
         }
@@ -91,29 +101,36 @@ export class Login extends React.Component {
     handleRegisteringRequest() {
         const { username, password, email } = this.state;
         const ipAddress = `http://${localhost}:5000/api/v1.0/register`;
+
         fetch(ipAddress, {
             method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
+            headers: getHeadersForRegistering(),
             body: JSON.stringify({
                 user_info: generateHashForRegistering(username, password, email),
             }),
         })
             .then(response => response.json())
             .then((responseJson) => {
-                if (responseJson.user_creation === 'success') {
-                    Alert.alert('User creation', 'User created successfully!');
-                    this.setState({ page: 'Login' });
-                } else {
-                    return Alert.alert('User creation', 'User exists already!');
-                }
+                this.handleRegisteringResponse(responseJson);
             })
             .catch((error) => {
-                console.log('error ', error);
-                console.error(error);
+                this.handleError(error);
             });
+    }
+
+    handleRegisteringResponse(response) {
+        if (response.user_creation === 'success') {
+            Alert.alert('User creation', 'User created successfully!');
+            this.setState({ page: 'Login' });
+        } else {
+            Alert.alert('User creation', 'User exists already!');
+        }
+    }
+
+    handleError(error) {
+        if (error.message === 'Network request failed') {
+            Alert.alert('Oops!', networkErrorAlert);
+        }
     }
 
     handleLoginRequest() {
@@ -125,22 +142,27 @@ export class Login extends React.Component {
         })
             .then(response => response.json())
             .then((responseJson) => {
-                if (responseJson.username === username) {
-                    this.props.onLogin(username, responseJson.token);
-                } else {
-                    Alert.alert('Try again, mate!', 'Invalid credentials.');
-                    this.setState({ password: '' });
-                }
+                this.handleLoginResponse(responseJson);
             })
             .catch((error) => {
-                console.error(error);
+                this.handleError(error);
             });
+    }
+
+    handleLoginResponse(response) {
+        if (response.username === this.state.username) {
+            this.props.onLogin(this.state.username, response.token);
+        } else {
+            Alert.alert('Try again, mate!', 'Invalid credentials.');
+            this.setState({ password: '' });
+        }
     }
 
     renderEmailInput() {
         if (this.state.page === 'Sign up') {
             return (
                 <TextInput
+                    id='emailTextInput'
                     placeholder="Email address"
                     style={styles.textInputStyleSmallMargin}
                     autoCapitalize="none"
@@ -172,7 +194,7 @@ export class Login extends React.Component {
         return null;
     }
 
-    render () {
+    render() {
         return (
             <View style={[styles.container]}>
                 <KeyboardAvoidingView
@@ -183,6 +205,7 @@ export class Login extends React.Component {
                     <View style={styles.loginContainer}>
                         {this.renderEmailInput()}
                         <TextInput
+                            id='usernameTextInput'
                             placeholder='Username'
                             style={styles.textInputStyleSmallMargin}
                             autoCapitalize='none'
@@ -194,6 +217,7 @@ export class Login extends React.Component {
                             onChangeText={(text) => this.setState({ username: text })}
                         />
                         <TextInput
+                            id='passwordTextInput'
                             placeholder='Password'
                             autoCapitalize='none'
                             style={styles.textInputStyleLargeMargin}

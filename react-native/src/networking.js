@@ -1,26 +1,33 @@
 const base64 = require('base-64');
 
-
-function generateHash(username, password) {
-    const credentials = `${username}:${password}`;
-    return base64.encode(credentials);
+const registeringHeaders = {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
 }
 
-function generateHeadersForBasicAuth(username, password) {
+const generateHash = (username, password) => {
+    const credentials = `${username}:${password}`;
+    return base64.encode(credentials);
+};
+
+const generateHeadersForBasicAuth = (username, password) => {
     const headers = new Headers();
     const hash = generateHash(username, password);
     headers.append('Authorization', `Basic ${hash}`);
     return headers;
-}
+};
 
-function generateHashForRegistering(username, password, email) {
+const generateHashForRegistering = (username, password, email) => {
     const credentials = `${username}:${email}:${password}`;
     return base64.encode(credentials);
-}
+};
+
+const getHeadersForRegistering = () => registeringHeaders;
 
 
 export {
     generateHeadersForBasicAuth,
     generateHash,
-    generateHashForRegistering
+    generateHashForRegistering,
+    getHeadersForRegistering,
 };
