@@ -9,13 +9,19 @@ const networkErrorAlert =
   'Check your network connection. If that does not help, try again later.';
 const widthWithThirtyPercentPadding = Dimensions.get('window').width * 0.7;
 const width = Dimensions.get('window').width;
-
+const userHasNoItemsText = `You have no items yet. Add one by clicking 'New item'`;
+const alertInvalidValuesNewItem = [
+  'Invalid values',
+  'Enter at least price, title and description',
+];
 export {
+  alertInvalidValuesNewItem,
   localhost,
   loginText,
   logo,
   networkErrorAlert,
   registerText,
+  userHasNoItemsText,
   widthWithThirtyPercentPadding,
   width,
 };

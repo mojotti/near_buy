@@ -12,45 +12,8 @@ exports[`New Item renders correctly 1`] = `
     ]
   }
 >
-  <TextInput
-    allowFontScaling={true}
-    autoCapitalize="sentences"
-    autoCorrect={false}
-    autoFocus={true}
-    keyboardType="email-address"
-    maxLength={20}
-    onChangeText={[Function]}
-    placeholder="Title"
-    style={
-      Array [
-        Object {
-          "alignItems": "center",
-          "width": 525,
-        },
-      ]
-    }
-    value=""
-  />
-  <TextInput
-    allowFontScaling={true}
-    autoCapitalize="sentences"
-    autoCorrect={false}
-    keyboardType="email-address"
-    maxLength={60}
-    onChangeText={[Function]}
-    placeholder="Description"
-    style={
-      Array [
-        Object {
-          "alignItems": "center",
-          "width": 525,
-        },
-      ]
-    }
-    value=""
-  />
   <View
-    keyboardVerticalOffset={164}
+    keyboardVerticalOffset={64}
     onLayout={[Function]}
     style={
       Array [
@@ -60,7 +23,63 @@ exports[`New Item renders correctly 1`] = `
         },
       ]
     }
+  />
+  <View
+    style={
+      Object {
+        "backgroundColor": "#fff",
+        "borderColor": "black",
+        "borderWidth": 1,
+        "elevation": 1,
+        "flex": 0.5,
+        "justifyContent": "space-around",
+        "width": NaN,
+      }
+    }
   >
+    <TextInput
+      allowFontScaling={true}
+      autoCapitalize="sentences"
+      autoCorrect={false}
+      autoFocus={true}
+      keyboardType="email-address"
+      maxLength={40}
+      onChangeText={[Function]}
+      placeholder="Title"
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "marginLeft": 15,
+            "marginRight": 15,
+            "width": 525,
+          },
+        ]
+      }
+      underlineColorAndroid="transparent"
+      value=""
+    />
+    <TextInput
+      allowFontScaling={true}
+      autoCapitalize="sentences"
+      autoCorrect={false}
+      keyboardType="email-address"
+      maxLength={60}
+      onChangeText={[Function]}
+      placeholder="Description"
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "marginLeft": 15,
+            "marginRight": 15,
+            "width": 525,
+          },
+        ]
+      }
+      underlineColorAndroid="transparent"
+      value=""
+    />
     <TextInput
       allowFontScaling={true}
       autoCorrect={false}
@@ -73,74 +92,70 @@ exports[`New Item renders correctly 1`] = `
         Array [
           Object {
             "alignItems": "center",
+            "marginLeft": 15,
+            "marginRight": 15,
             "width": 525,
           },
         ]
       }
+      underlineColorAndroid="transparent"
       value=""
     />
+  </View>
+  <View
+    accessibilityComponentType="button"
+    accessibilityLabel={undefined}
+    accessibilityTraits={
+      Array [
+        "button",
+      ]
+    }
+    accessible={true}
+    collapsable={undefined}
+    hasTVPreferredFocus={undefined}
+    hitSlop={undefined}
+    isTVSelectable={true}
+    nativeID={undefined}
+    onLayout={undefined}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "opacity": 1,
+      }
+    }
+    testID={undefined}
+    tvParallaxProperties={undefined}
+  >
     <View
       style={
-        Object {
-          "paddingTop": 20,
-        }
-      }
-    />
-    <View
-      accessibilityComponentType="button"
-      accessibilityLabel={undefined}
-      accessibilityTraits={
         Array [
-          "button",
+          Object {},
         ]
       }
-      accessible={true}
-      collapsable={undefined}
-      hasTVPreferredFocus={undefined}
-      hitSlop={undefined}
-      isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Object {
-          "opacity": 1,
-        }
-      }
-      testID={undefined}
-      tvParallaxProperties={undefined}
     >
-      <View
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={undefined}
+        ellipsizeMode="tail"
         style={
           Array [
-            Object {},
+            Object {
+              "color": "#007AFF",
+              "fontSize": 18,
+              "padding": 8,
+              "textAlign": "center",
+            },
           ]
         }
       >
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          disabled={undefined}
-          ellipsizeMode="tail"
-          style={
-            Array [
-              Object {
-                "color": "#007AFF",
-                "fontSize": 18,
-                "padding": 8,
-                "textAlign": "center",
-              },
-            ]
-          }
-        >
-          Submit item
-        </Text>
-      </View>
+        Submit item
+      </Text>
     </View>
   </View>
 </View>

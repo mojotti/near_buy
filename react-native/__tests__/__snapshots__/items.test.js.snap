@@ -7,6 +7,7 @@ exports[`Items render correctly when response has items 1`] = `
       Object {
         "backgroundColor": "#fff",
         "flex": 1,
+        "justifyContent": "space-between",
       },
     ]
   }
