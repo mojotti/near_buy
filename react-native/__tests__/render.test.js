@@ -10,40 +10,36 @@ import { sample } from '../src/static/samples/ItemSample';
 const middlewares = [];
 const mockStore = configureStore(middlewares);
 const initialState = {
-    auth: {
-        isLoggedIn: false,
-        username: '',
-        token: '',
-    },
+  auth: {
+    isLoggedIn: false,
+    username: '',
+    token: '',
+  },
 };
 const store = mockStore(initialState);
 
 describe('Render', () => {
-    test('Login renders without crashing', () => {
-        const rendered = renderer
-            .create(<Login store={store} />)
-            .toJSON();
-        expect(rendered).toBeTruthy();
-    });
+  test('Login renders without crashing', () => {
+    const rendered = renderer.create(<Login store={store} />).toJSON();
+    expect(rendered).toBeTruthy();
+  });
 
-    test('Login renders correctly', () => {
-        const tree = renderer
-            .create(<Login store={store} />)
-            .toJSON();
-        expect(tree).toMatchSnapshot();
-    });
+  test('Login renders correctly', () => {
+    const tree = renderer.create(<Login store={store} />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 
-    test('Items renders without crashing', () => {
-        fetch.mockResponseSuccess(sample);
+  test('Items renders without crashing', () => {
+    fetch.mockResponseSuccess(sample);
 
-        const rendered = renderer.create(<Items />).toJSON();
-        expect(rendered).toBeTruthy();
-    });
+    const rendered = renderer.create(<Items />).toJSON();
+    expect(rendered).toBeTruthy();
+  });
 
-    test('Items renders correctly', () => {
-        fetch.mockResponseSuccess(sample);
+  test('Items renders correctly', () => {
+    fetch.mockResponseSuccess(sample);
 
-        const tree = renderer.create(<Items />).toJSON();
-        expect(tree).toMatchSnapshot();
-    });
+    const tree = renderer.create(<Items />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 });
