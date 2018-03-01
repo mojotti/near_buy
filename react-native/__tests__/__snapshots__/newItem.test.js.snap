@@ -2,34 +2,28 @@
 
 exports[`New Item renders correctly 1`] = `
 <View
+  keyboardVerticalOffset={64}
+  onLayout={[Function]}
   style={
     Array [
+      Array [
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "space-around",
+        },
+      ],
       Object {
-        "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "space-around",
+        "paddingBottom": 0,
       },
     ]
   }
 >
   <View
-    keyboardVerticalOffset={64}
-    onLayout={[Function]}
-    style={
-      Array [
-        undefined,
-        Object {
-          "paddingBottom": 0,
-        },
-      ]
-    }
-  />
-  <View
     style={
       Object {
         "backgroundColor": "#fff",
-        "borderColor": "black",
-        "borderWidth": 1,
+        "borderRadius": 10,
         "elevation": 1,
         "flex": 0.5,
         "justifyContent": "space-around",
@@ -64,7 +58,8 @@ exports[`New Item renders correctly 1`] = `
       autoCapitalize="sentences"
       autoCorrect={false}
       keyboardType="email-address"
-      maxLength={60}
+      maxLength={160}
+      multiline={true}
       onChangeText={[Function]}
       placeholder="Description"
       style={

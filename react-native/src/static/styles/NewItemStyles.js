@@ -12,9 +12,8 @@ export const styles = StyleSheet.create({
     backgroundColor: '#fff',
     width: Dimensions * 0.85,
     justifyContent: 'space-around',
-    borderWidth: 1,
-    borderColor: 'black',
     elevation: 1,
+    borderRadius: 10,
   },
   itemDetails: {
     width: widthWithThirtyPercentPadding,
@@ -25,6 +24,7 @@ export const styles = StyleSheet.create({
   submitButton: {
     flex: 0.05,
     marginTop: 20,
-    width: widthWithThirtyPercentPadding,
+    elevation: 1,
+    borderRadius: 10,
   },
 });

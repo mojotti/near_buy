@@ -6,7 +6,6 @@ import {
   Alert,
   Button,
   KeyboardAvoidingView,
-  Platform,
   TextInput,
   View,
 } from 'react-native';
@@ -78,7 +77,7 @@ export class NewItem extends React.Component {
       });
   }
 
-  onPriceChange(text) {
+  handlePriceChange(text) {
     let newText = '';
     let numbers = '0123456789';
 
@@ -108,10 +107,11 @@ export class NewItem extends React.Component {
         <TextInput
           placeholder="Description"
           autoCapitalize="sentences"
-          maxLength={60}
+          maxLength={160}
           autoCorrect={false}
           keyboardType="email-address"
           value={this.state.description}
+          multiline={true}
           onChangeText={text => this.setState({ description: text })}
           style={[styles.itemDetails]}
           underlineColorAndroid="transparent"
@@ -123,7 +123,7 @@ export class NewItem extends React.Component {
           keyboardType="numeric"
           maxLength={5}
           value={this.state.price}
-          onChangeText={text => this.onPriceChange(text)}
+          onChangeText={text => this.handlePriceChange(text)}
           style={[styles.itemDetails]}
           underlineColorAndroid="transparent"
         />
@@ -133,15 +133,18 @@ export class NewItem extends React.Component {
 
   render() {
     return (
-      <View style={[styles.container]}>
-        <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={64} />
+      <KeyboardAvoidingView
+        style={[styles.container]}
+        behavior="padding"
+        keyboardVerticalOffset={64}
+      >
         {this.renderTextInputs()}
         <Button
           onPress={() => this.handleNewItemCreation()}
           title={'Submit item'}
           style={styles.submitButton}
         />
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 }
