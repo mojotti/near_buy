@@ -1,19 +1,36 @@
 import { Dimensions, StyleSheet } from 'react-native';
 import { widthWithThirtyPercentPadding } from '../constants';
 
+const { width } = Dimensions.get('window');
+
+const itemContainer = {
+  backgroundColor: '#fff',
+  width: width * 0.85,
+  elevation: 1,
+  borderRadius: 10,
+  marginBottom: 10,
+};
+
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'space-around',
+    marginTop: 15,
+  },
+  itemDetailsHeader: {
+    fontSize: 20,
+    marginBottom: 15,
+    textAlign: 'left',
+    alignSelf: 'stretch',
+    marginLeft: width * 0.075,
   },
   itemDetailContainer: {
-    flex: 0.5,
-    backgroundColor: '#fff',
-    width: Dimensions * 0.85,
-    justifyContent: 'space-around',
-    elevation: 1,
-    borderRadius: 10,
+    flex: 0.15,
+    ...itemContainer,
+  },
+  itemDescriptionContainer: {
+    flex: 0.3,
+    ...itemContainer,
   },
   itemDetails: {
     width: widthWithThirtyPercentPadding,

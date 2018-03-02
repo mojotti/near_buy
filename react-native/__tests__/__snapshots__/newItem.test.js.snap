@@ -10,7 +10,7 @@ exports[`New Item renders correctly 1`] = `
         Object {
           "alignItems": "center",
           "flex": 1,
-          "justifyContent": "space-around",
+          "marginTop": 15,
         },
       ],
       Object {
@@ -19,83 +19,127 @@ exports[`New Item renders correctly 1`] = `
     ]
   }
 >
-  <View
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
     style={
       Object {
-        "backgroundColor": "#fff",
-        "borderRadius": 10,
-        "elevation": 1,
-        "flex": 0.5,
-        "justifyContent": "space-around",
-        "width": NaN,
+        "alignSelf": "stretch",
+        "fontSize": 20,
+        "marginBottom": 15,
+        "marginLeft": 56.25,
+        "textAlign": "left",
       }
     }
   >
-    <TextInput
-      allowFontScaling={true}
-      autoCapitalize="sentences"
-      autoCorrect={false}
-      autoFocus={true}
-      keyboardType="email-address"
-      maxLength={40}
-      onChangeText={[Function]}
-      placeholder="Title"
+    Item Details
+  </Text>
+  <View>
+    <View
       style={
-        Array [
-          Object {
-            "alignItems": "center",
-            "marginLeft": 15,
-            "marginRight": 15,
-            "width": 525,
-          },
-        ]
+        Object {
+          "backgroundColor": "#fff",
+          "borderRadius": 10,
+          "elevation": 1,
+          "flex": 0.15,
+          "marginBottom": 10,
+          "width": 637.5,
+        }
       }
-      underlineColorAndroid="transparent"
-      value=""
-    />
-    <TextInput
-      allowFontScaling={true}
-      autoCapitalize="sentences"
-      autoCorrect={false}
-      keyboardType="email-address"
-      maxLength={160}
-      multiline={true}
-      onChangeText={[Function]}
-      placeholder="Description"
+    >
+      <TextInput
+        allowFontScaling={true}
+        autoCapitalize="sentences"
+        autoCorrect={false}
+        autoFocus={true}
+        keyboardType="email-address"
+        maxLength={40}
+        onChangeText={[Function]}
+        placeholder="Title"
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "marginLeft": 15,
+              "marginRight": 15,
+              "width": 525,
+            },
+          ]
+        }
+        underlineColorAndroid="transparent"
+        value=""
+      />
+    </View>
+    <View
       style={
-        Array [
-          Object {
-            "alignItems": "center",
-            "marginLeft": 15,
-            "marginRight": 15,
-            "width": 525,
-          },
-        ]
+        Object {
+          "backgroundColor": "#fff",
+          "borderRadius": 10,
+          "elevation": 1,
+          "flex": 0.3,
+          "marginBottom": 10,
+          "width": 637.5,
+        }
       }
-      underlineColorAndroid="transparent"
-      value=""
-    />
-    <TextInput
-      allowFontScaling={true}
-      autoCorrect={false}
-      autoFocus={false}
-      keyboardType="numeric"
-      maxLength={5}
-      onChangeText={[Function]}
-      placeholder="Price"
+    >
+      <TextInput
+        allowFontScaling={true}
+        autoCapitalize="sentences"
+        autoCorrect={false}
+        keyboardType="email-address"
+        maxLength={160}
+        multiline={true}
+        onChangeText={[Function]}
+        placeholder="Description"
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "marginLeft": 15,
+              "marginRight": 15,
+              "width": 525,
+            },
+          ]
+        }
+        underlineColorAndroid="transparent"
+        value=""
+      />
+    </View>
+    <View
       style={
-        Array [
-          Object {
-            "alignItems": "center",
-            "marginLeft": 15,
-            "marginRight": 15,
-            "width": 525,
-          },
-        ]
+        Object {
+          "backgroundColor": "#fff",
+          "borderRadius": 10,
+          "elevation": 1,
+          "flex": 0.15,
+          "marginBottom": 10,
+          "width": 637.5,
+        }
       }
-      underlineColorAndroid="transparent"
-      value=""
-    />
+    >
+      <TextInput
+        allowFontScaling={true}
+        autoCorrect={false}
+        autoFocus={false}
+        keyboardType="numeric"
+        maxLength={5}
+        onChangeText={[Function]}
+        placeholder="Price"
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "marginLeft": 15,
+              "marginRight": 15,
+              "width": 525,
+            },
+          ]
+        }
+        underlineColorAndroid="transparent"
+        value=""
+      />
+    </View>
   </View>
   <View
     accessibilityComponentType="button"

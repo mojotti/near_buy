@@ -6,6 +6,7 @@ import {
   Alert,
   Button,
   KeyboardAvoidingView,
+  Text,
   TextInput,
   View,
 } from 'react-native';
@@ -91,42 +92,48 @@ export class NewItem extends React.Component {
 
   renderTextInputs = () => {
     return (
-      <View style={styles.itemDetailContainer}>
-        <TextInput
-          placeholder="Title"
-          autoCapitalize="sentences"
-          autoCorrect={false}
-          autoFocus={this.state.mounted}
-          maxLength={40}
-          keyboardType="email-address"
-          value={this.state.title}
-          onChangeText={text => this.setState({ title: text })}
-          style={[styles.itemDetails]}
-          underlineColorAndroid="transparent"
-        />
-        <TextInput
-          placeholder="Description"
-          autoCapitalize="sentences"
-          maxLength={160}
-          autoCorrect={false}
-          keyboardType="email-address"
-          value={this.state.description}
-          multiline={true}
-          onChangeText={text => this.setState({ description: text })}
-          style={[styles.itemDetails]}
-          underlineColorAndroid="transparent"
-        />
-        <TextInput
-          placeholder="Price"
-          autoCorrect={false}
-          autoFocus={false}
-          keyboardType="numeric"
-          maxLength={5}
-          value={this.state.price}
-          onChangeText={text => this.handlePriceChange(text)}
-          style={[styles.itemDetails]}
-          underlineColorAndroid="transparent"
-        />
+      <View>
+        <View style={styles.itemDetailContainer}>
+          <TextInput
+            placeholder="Title"
+            autoCapitalize="sentences"
+            autoCorrect={false}
+            autoFocus={this.state.mounted}
+            maxLength={40}
+            keyboardType="email-address"
+            value={this.state.title}
+            onChangeText={text => this.setState({ title: text })}
+            style={[styles.itemDetails]}
+            underlineColorAndroid="transparent"
+          />
+        </View>
+        <View style={styles.itemDescriptionContainer}>
+          <TextInput
+            placeholder="Description"
+            autoCapitalize="sentences"
+            maxLength={160}
+            autoCorrect={false}
+            keyboardType="email-address"
+            value={this.state.description}
+            multiline={true}
+            onChangeText={text => this.setState({ description: text })}
+            style={[styles.itemDetails]}
+            underlineColorAndroid="transparent"
+          />
+        </View>
+        <View style={styles.itemDetailContainer}>
+          <TextInput
+            placeholder="Price"
+            autoCorrect={false}
+            autoFocus={false}
+            keyboardType="numeric"
+            maxLength={5}
+            value={this.state.price}
+            onChangeText={text => this.handlePriceChange(text)}
+            style={[styles.itemDetails]}
+            underlineColorAndroid="transparent"
+          />
+        </View>
       </View>
     );
   };
@@ -138,6 +145,7 @@ export class NewItem extends React.Component {
         behavior="padding"
         keyboardVerticalOffset={64}
       >
+        <Text style={styles.itemDetailsHeader}>Item Details</Text>
         {this.renderTextInputs()}
         <Button
           onPress={() => this.handleNewItemCreation()}
