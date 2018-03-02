@@ -1,5 +1,6 @@
 import { Dimensions, StyleSheet } from 'react-native';
 import { widthWithThirtyPercentPadding } from '../constants';
+import { baseFont } from './baseStyles';
 
 const { width } = Dimensions.get('window');
 
@@ -18,11 +19,12 @@ export const styles = StyleSheet.create({
     marginTop: 15,
   },
   itemDetailsHeader: {
-    fontSize: 20,
+    fontSize: 22,
     marginBottom: 15,
     textAlign: 'left',
     alignSelf: 'stretch',
     marginLeft: width * 0.075,
+    fontFamily: baseFont,
   },
   itemDetailContainer: {
     flex: 0.15,

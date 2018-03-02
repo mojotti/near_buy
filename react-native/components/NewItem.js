@@ -145,7 +145,7 @@ export class NewItem extends React.Component {
         behavior="padding"
         keyboardVerticalOffset={64}
       >
-        <Text style={styles.itemDetailsHeader}>Item Details</Text>
+        <Text style={styles.itemDetailsHeader}>Item details</Text>
         {this.renderTextInputs()}
         <Button
           onPress={() => this.handleNewItemCreation()}

@@ -1,5 +1,6 @@
 import { Dimensions, StyleSheet } from 'react-native';
 import { widthWithThirtyPercentPadding } from '../constants';
+import { baseFont } from './baseStyles';
 
 const eightyPercentWidth = Dimensions.get('window').width * 0.7;
 const sixteenPercentHeight = Dimensions.get('window').height * 0.16;
@@ -11,6 +12,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-around',
   },
   welcomeText: {
+    fontFamily: baseFont,
     fontSize: 24,
     textAlign: 'center',
     marginTop: 50,
@@ -19,6 +21,7 @@ export const styles = StyleSheet.create({
     fontSize: 12,
     textAlign: 'center',
     marginTop: 10,
+    fontFamily: baseFont,
   },
   logo: {
     width: eightyPercentWidth,
@@ -49,5 +52,18 @@ export const styles = StyleSheet.create({
   altPageTitle: {
     fontSize: 16,
     color: 'blue',
+  },
+  loginButton: {
+    elevation: 1,
+    borderRadius: 30,
+    backgroundColor: '#4d4dff',
+    paddingTop: 10,
+    paddingBottom: 10,
+    alignItems: 'center',
+  },
+  loginText: {
+    fontFamily: baseFont,
+    color: 'white',
+    fontSize: 16,
   },
 });

@@ -8,9 +8,11 @@ import {
   KeyboardAvoidingView,
   Text,
   TextInput,
+  TouchableHighlight,
   View,
 } from 'react-native';
 import { login } from '../redux/actions/auth';
+import { baseFont } from '../src/static/styles/baseStyles';
 import {
   generateHeadersForBasicAuth,
   getHeadersForRegistering,
@@ -226,11 +228,13 @@ export class Login extends React.Component {
               onChangeText={text => this.setState({ password: text })}
             />
 
-            <Button
+            <TouchableHighlight
               id="loginButton"
               onPress={() => this.handleButtonPress()}
-              title={this.state.page}
-            />
+              style={styles.loginButton}
+            >
+              <Text style={styles.loginText}>{this.state.page}</Text>
+            </TouchableHighlight>
             <View style={styles.altPageContainer}>
               <Text
                 id="altPageTitle"
