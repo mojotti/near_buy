@@ -41,9 +41,18 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   submitButton: {
-    flex: 0.05,
-    marginTop: 20,
     elevation: 1,
-    borderRadius: 10,
+    borderRadius: 30,
+    backgroundColor: '#4d4dff',
+    paddingTop: 8,
+    paddingBottom: 8,
+    alignItems: 'center',
+    width: width * 0.7,
+  },
+  submitText: {
+    fontFamily: baseFont,
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });

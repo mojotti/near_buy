@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {
   Alert,
-  Button,
   Image,
   Keyboard,
   KeyboardAvoidingView,
@@ -12,7 +11,6 @@ import {
   View,
 } from 'react-native';
 import { login } from '../redux/actions/auth';
-import { baseFont } from '../src/static/styles/baseStyles';
 import {
   generateHeadersForBasicAuth,
   getHeadersForRegistering,

@@ -2,7 +2,7 @@ import { Dimensions, StyleSheet } from 'react-native';
 import { widthWithThirtyPercentPadding } from '../constants';
 import { baseFont } from './baseStyles';
 
-const eightyPercentWidth = Dimensions.get('window').width * 0.7;
+const eightyPercentWidth = Dimensions.get('window').width * 0.8;
 const sixteenPercentHeight = Dimensions.get('window').height * 0.16;
 
 export const styles = StyleSheet.create({
@@ -57,13 +57,14 @@ export const styles = StyleSheet.create({
     elevation: 1,
     borderRadius: 30,
     backgroundColor: '#4d4dff',
-    paddingTop: 10,
-    paddingBottom: 10,
+    paddingTop: 8,
+    paddingBottom: 8,
     alignItems: 'center',
   },
   loginText: {
     fontFamily: baseFont,
     color: 'white',
     fontSize: 16,
+    fontWeight: 'bold',
   },
 });

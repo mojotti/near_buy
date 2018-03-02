@@ -4,10 +4,10 @@ import React from 'react';
 import store from '../redux';
 import {
   Alert,
-  Button,
   KeyboardAvoidingView,
   Text,
   TextInput,
+  TouchableHighlight,
   View,
 } from 'react-native';
 import { NavigationActions } from 'react-navigation';
@@ -147,11 +147,13 @@ export class NewItem extends React.Component {
       >
         <Text style={styles.itemDetailsHeader}>Item details</Text>
         {this.renderTextInputs()}
-        <Button
+        <TouchableHighlight
+          id="SubmitButton"
           onPress={() => this.handleNewItemCreation()}
-          title={'Submit item'}
           style={styles.submitButton}
-        />
+        >
+          <Text style={styles.submitText}>{'Submit item'}</Text>
+        </TouchableHighlight>
       </KeyboardAvoidingView>
     );
   }
