@@ -26,14 +26,15 @@ exports[`New Item renders correctly 1`] = `
     style={
       Object {
         "alignSelf": "stretch",
-        "fontSize": 20,
+        "fontFamily": "San Francisco",
+        "fontSize": 22,
         "marginBottom": 15,
         "marginLeft": 56.25,
         "textAlign": "left",
       }
     }
   >
-    Item Details
+    Item details
   </Text>
   <View>
     <View
@@ -142,15 +143,10 @@ exports[`New Item renders correctly 1`] = `
     </View>
   </View>
   <View
-    accessibilityComponentType="button"
+    accessibilityComponentType={undefined}
     accessibilityLabel={undefined}
-    accessibilityTraits={
-      Array [
-        "button",
-      ]
-    }
+    accessibilityTraits={undefined}
     accessible={true}
-    collapsable={undefined}
     hasTVPreferredFocus={undefined}
     hitSlop={undefined}
     isTVSelectable={true}
@@ -164,38 +160,33 @@ exports[`New Item renders correctly 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Object {
-        "opacity": 1,
+        "alignItems": "center",
+        "backgroundColor": "#4d4dff",
+        "borderRadius": 30,
+        "elevation": 1,
+        "paddingBottom": 8,
+        "paddingTop": 8,
+        "width": 525,
       }
     }
     testID={undefined}
     tvParallaxProperties={undefined}
   >
-    <View
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
       style={
-        Array [
-          Object {},
-        ]
+        Object {
+          "color": "white",
+          "fontFamily": "San Francisco",
+          "fontSize": 16,
+          "fontWeight": "bold",
+        }
       }
     >
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        disabled={undefined}
-        ellipsizeMode="tail"
-        style={
-          Array [
-            Object {
-              "color": "#007AFF",
-              "fontSize": 18,
-              "padding": 8,
-              "textAlign": "center",
-            },
-          ]
-        }
-      >
-        Submit item
-      </Text>
-    </View>
+      Submit item
+    </Text>
   </View>
 </View>
 `;

@@ -125,6 +125,7 @@ exports[`Render Login renders correctly 1`] = `
         ellipsizeMode="tail"
         style={
           Object {
+            "fontFamily": "San Francisco",
             "fontSize": 24,
             "marginTop": 50,
             "textAlign": "center",
@@ -144,7 +145,7 @@ exports[`Render Login renders correctly 1`] = `
           Object {
             "height": 213.44,
             "marginBottom": 213.44,
-            "width": 525,
+            "width": 600,
           }
         }
       />
@@ -192,15 +193,10 @@ exports[`Render Login renders correctly 1`] = `
         value=""
       />
       <View
-        accessibilityComponentType="button"
+        accessibilityComponentType={undefined}
         accessibilityLabel={undefined}
-        accessibilityTraits={
-          Array [
-            "button",
-          ]
-        }
+        accessibilityTraits={undefined}
         accessible={true}
-        collapsable={undefined}
         hasTVPreferredFocus={undefined}
         hitSlop={undefined}
         isTVSelectable={true}
@@ -214,38 +210,32 @@ exports[`Render Login renders correctly 1`] = `
         onStartShouldSetResponder={[Function]}
         style={
           Object {
-            "opacity": 1,
+            "alignItems": "center",
+            "backgroundColor": "#4d4dff",
+            "borderRadius": 30,
+            "elevation": 1,
+            "paddingBottom": 8,
+            "paddingTop": 8,
           }
         }
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <View
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
           style={
-            Array [
-              Object {},
-            ]
+            Object {
+              "color": "white",
+              "fontFamily": "San Francisco",
+              "fontSize": 16,
+              "fontWeight": "bold",
+            }
           }
         >
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            disabled={undefined}
-            ellipsizeMode="tail"
-            style={
-              Array [
-                Object {
-                  "color": "#007AFF",
-                  "fontSize": 18,
-                  "padding": 8,
-                  "textAlign": "center",
-                },
-              ]
-            }
-          >
-            Login
-          </Text>
-        </View>
+          Login
+        </Text>
       </View>
       <View
         style={
@@ -279,6 +269,7 @@ exports[`Render Login renders correctly 1`] = `
         id="helperText"
         style={
           Object {
+            "fontFamily": "San Francisco",
             "fontSize": 12,
             "marginTop": 10,
             "textAlign": "center",

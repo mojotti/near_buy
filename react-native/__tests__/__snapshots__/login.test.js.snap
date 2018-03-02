@@ -67,15 +67,10 @@ exports[`Login Logo is hidden when keyboard is visible 1`] = `
         value=""
       />
       <View
-        accessibilityComponentType="button"
+        accessibilityComponentType={undefined}
         accessibilityLabel={undefined}
-        accessibilityTraits={
-          Array [
-            "button",
-          ]
-        }
+        accessibilityTraits={undefined}
         accessible={true}
-        collapsable={undefined}
         hasTVPreferredFocus={undefined}
         hitSlop={undefined}
         isTVSelectable={true}
@@ -89,38 +84,32 @@ exports[`Login Logo is hidden when keyboard is visible 1`] = `
         onStartShouldSetResponder={[Function]}
         style={
           Object {
-            "opacity": 1,
+            "alignItems": "center",
+            "backgroundColor": "#4d4dff",
+            "borderRadius": 30,
+            "elevation": 1,
+            "paddingBottom": 8,
+            "paddingTop": 8,
           }
         }
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <View
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
           style={
-            Array [
-              Object {},
-            ]
+            Object {
+              "color": "white",
+              "fontFamily": "San Francisco",
+              "fontSize": 16,
+              "fontWeight": "bold",
+            }
           }
         >
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            disabled={undefined}
-            ellipsizeMode="tail"
-            style={
-              Array [
-                Object {
-                  "color": "#007AFF",
-                  "fontSize": 18,
-                  "padding": 8,
-                  "textAlign": "center",
-                },
-              ]
-            }
-          >
-            Login
-          </Text>
-        </View>
+          Login
+        </Text>
       </View>
       <View
         style={
@@ -154,6 +143,7 @@ exports[`Login Logo is hidden when keyboard is visible 1`] = `
         id="helperText"
         style={
           Object {
+            "fontFamily": "San Francisco",
             "fontSize": 12,
             "marginTop": 10,
             "textAlign": "center",
@@ -206,6 +196,7 @@ exports[`Login renders sign up details when state is sign up 1`] = `
         ellipsizeMode="tail"
         style={
           Object {
+            "fontFamily": "San Francisco",
             "fontSize": 24,
             "marginTop": 50,
             "textAlign": "center",
@@ -225,7 +216,7 @@ exports[`Login renders sign up details when state is sign up 1`] = `
           Object {
             "height": 213.44,
             "marginBottom": 213.44,
-            "width": 525,
+            "width": 600,
           }
         }
       />
@@ -290,15 +281,10 @@ exports[`Login renders sign up details when state is sign up 1`] = `
         value=""
       />
       <View
-        accessibilityComponentType="button"
+        accessibilityComponentType={undefined}
         accessibilityLabel={undefined}
-        accessibilityTraits={
-          Array [
-            "button",
-          ]
-        }
+        accessibilityTraits={undefined}
         accessible={true}
-        collapsable={undefined}
         hasTVPreferredFocus={undefined}
         hitSlop={undefined}
         isTVSelectable={true}
@@ -312,38 +298,32 @@ exports[`Login renders sign up details when state is sign up 1`] = `
         onStartShouldSetResponder={[Function]}
         style={
           Object {
-            "opacity": 1,
+            "alignItems": "center",
+            "backgroundColor": "#4d4dff",
+            "borderRadius": 30,
+            "elevation": 1,
+            "paddingBottom": 8,
+            "paddingTop": 8,
           }
         }
         testID={undefined}
         tvParallaxProperties={undefined}
       >
-        <View
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
           style={
-            Array [
-              Object {},
-            ]
+            Object {
+              "color": "white",
+              "fontFamily": "San Francisco",
+              "fontSize": 16,
+              "fontWeight": "bold",
+            }
           }
         >
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            disabled={undefined}
-            ellipsizeMode="tail"
-            style={
-              Array [
-                Object {
-                  "color": "#007AFF",
-                  "fontSize": 18,
-                  "padding": 8,
-                  "textAlign": "center",
-                },
-              ]
-            }
-          >
-            Sign up
-          </Text>
-        </View>
+          Sign up
+        </Text>
       </View>
       <View
         style={
@@ -377,6 +357,7 @@ exports[`Login renders sign up details when state is sign up 1`] = `
         id="helperText"
         style={
           Object {
+            "fontFamily": "San Francisco",
             "fontSize": 12,
             "marginTop": 10,
             "textAlign": "center",
