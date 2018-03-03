@@ -2,7 +2,7 @@ import { Dimensions, StyleSheet } from 'react-native';
 import { widthWithThirtyPercentPadding } from '../constants';
 import { baseFont } from './baseStyles';
 
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 const itemContainer = {
   backgroundColor: '#fff',
@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 15,
   },
-  itemDetailsHeader: {
+  headerText: {
     fontSize: 22,
     marginBottom: 15,
     textAlign: 'left',
@@ -27,11 +27,11 @@ export const styles = StyleSheet.create({
     fontFamily: baseFont,
   },
   itemDetailContainer: {
-    flex: 0.15,
+    height: height * 0.06,
     ...itemContainer,
   },
   itemDescriptionContainer: {
-    flex: 0.3,
+    height: height * 0.2,
     ...itemContainer,
   },
   itemDetails: {
@@ -41,6 +41,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   submitButton: {
+    marginTop: 15,
     elevation: 1,
     borderRadius: 30,
     backgroundColor: '#4d4dff',

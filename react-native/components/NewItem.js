@@ -4,10 +4,11 @@ import React from 'react';
 import store from '../redux';
 import {
   Alert,
-  KeyboardAvoidingView,
+  ScrollView,
   Text,
   TextInput,
   TouchableHighlight,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import { NavigationActions } from 'react-navigation';
@@ -111,7 +112,7 @@ export class NewItem extends React.Component {
           <TextInput
             placeholder="Description"
             autoCapitalize="sentences"
-            maxLength={160}
+            maxLength={400}
             autoCorrect={false}
             keyboardType="email-address"
             value={this.state.description}
@@ -140,21 +141,20 @@ export class NewItem extends React.Component {
 
   render() {
     return (
-      <KeyboardAvoidingView
-        style={[styles.container]}
-        behavior="padding"
-        keyboardVerticalOffset={64}
-      >
-        <Text style={styles.itemDetailsHeader}>Item details</Text>
-        {this.renderTextInputs()}
-        <TouchableHighlight
-          id="SubmitButton"
-          onPress={() => this.handleNewItemCreation()}
-          style={styles.submitButton}
-        >
-          <Text style={styles.submitText}>{'Submit item'}</Text>
-        </TouchableHighlight>
-      </KeyboardAvoidingView>
+      <ScrollView>
+        <View style={styles.container}>
+          <Text style={styles.headerText}>Item details</Text>
+          {this.renderTextInputs()}
+          <Text style={styles.headerText}>Add pictures</Text>
+          <TouchableHighlight
+            id="SubmitButton"
+            onPress={() => this.handleNewItemCreation()}
+            style={styles.submitButton}
+          >
+            <Text style={styles.submitText}>{'Submit item'}</Text>
+          </TouchableHighlight>
+        </View>
+      </ScrollView>
     );
   }
 }
