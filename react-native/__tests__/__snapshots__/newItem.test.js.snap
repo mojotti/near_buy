@@ -196,6 +196,53 @@ exports[`New Item renders correctly 1`] = `
             }
           }
         >
+          Add photo
+        </Text>
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        hasTVPreferredFocus={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#4d4dff",
+            "borderRadius": 30,
+            "elevation": 1,
+            "marginTop": 15,
+            "paddingBottom": 8,
+            "paddingTop": 8,
+            "width": 525,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "white",
+              "fontFamily": "San Francisco",
+              "fontSize": 16,
+              "fontWeight": "bold",
+            }
+          }
+        >
           Submit item
         </Text>
       </View>
