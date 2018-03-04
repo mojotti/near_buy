@@ -1,3 +1,5 @@
+'use strict';
+
 import React from 'react';
 import { Provider } from 'react-redux';
 import Application from './components/Application';

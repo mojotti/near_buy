@@ -1,192 +1,205 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`New Item renders correctly 1`] = `
-<View
-  keyboardVerticalOffset={64}
-  onLayout={[Function]}
-  style={
-    Array [
-      Array [
-        Object {
-          "alignItems": "center",
-          "flex": 1,
-          "marginTop": 15,
-        },
-      ],
-      Object {
-        "paddingBottom": 0,
-      },
-    ]
-  }
->
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-    style={
-      Object {
-        "alignSelf": "stretch",
-        "fontFamily": "San Francisco",
-        "fontSize": 22,
-        "marginBottom": 15,
-        "marginLeft": 56.25,
-        "textAlign": "left",
-      }
-    }
-  >
-    Item details
-  </Text>
+<RCTScrollView>
   <View>
     <View
       style={
         Object {
-          "backgroundColor": "#fff",
-          "borderRadius": 10,
-          "elevation": 1,
-          "flex": 0.15,
-          "marginBottom": 10,
-          "width": 637.5,
+          "alignItems": "center",
+          "flex": 1,
+          "marginTop": 15,
         }
       }
     >
-      <TextInput
+      <Text
+        accessible={true}
         allowFontScaling={true}
-        autoCapitalize="sentences"
-        autoCorrect={false}
-        autoFocus={true}
-        keyboardType="email-address"
-        maxLength={40}
-        onChangeText={[Function]}
-        placeholder="Title"
+        ellipsizeMode="tail"
         style={
-          Array [
+          Object {
+            "alignSelf": "stretch",
+            "fontFamily": "San Francisco",
+            "fontSize": 22,
+            "marginBottom": 15,
+            "marginLeft": 56.25,
+            "textAlign": "left",
+          }
+        }
+      >
+        Item details
+      </Text>
+      <View>
+        <View
+          style={
             Object {
-              "alignItems": "center",
-              "marginLeft": 15,
-              "marginRight": 15,
-              "width": 525,
-            },
-          ]
-        }
-        underlineColorAndroid="transparent"
-        value=""
-      />
-    </View>
-    <View
-      style={
-        Object {
-          "backgroundColor": "#fff",
-          "borderRadius": 10,
-          "elevation": 1,
-          "flex": 0.3,
-          "marginBottom": 10,
-          "width": 637.5,
-        }
-      }
-    >
-      <TextInput
+              "backgroundColor": "#fff",
+              "borderRadius": 10,
+              "elevation": 1,
+              "height": 80.03999999999999,
+              "marginBottom": 10,
+              "width": 637.5,
+            }
+          }
+        >
+          <TextInput
+            allowFontScaling={true}
+            autoCapitalize="sentences"
+            autoCorrect={false}
+            autoFocus={true}
+            keyboardType="email-address"
+            maxLength={40}
+            onChangeText={[Function]}
+            placeholder="Title"
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "marginLeft": 15,
+                  "marginRight": 15,
+                  "width": 525,
+                },
+              ]
+            }
+            underlineColorAndroid="transparent"
+            value=""
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "backgroundColor": "#fff",
+              "borderRadius": 10,
+              "elevation": 1,
+              "height": 266.8,
+              "marginBottom": 10,
+              "width": 637.5,
+            }
+          }
+        >
+          <TextInput
+            allowFontScaling={true}
+            autoCapitalize="sentences"
+            autoCorrect={false}
+            keyboardType="email-address"
+            maxLength={400}
+            multiline={true}
+            onChangeText={[Function]}
+            placeholder="Description"
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "marginLeft": 15,
+                  "marginRight": 15,
+                  "width": 525,
+                },
+              ]
+            }
+            underlineColorAndroid="transparent"
+            value=""
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "backgroundColor": "#fff",
+              "borderRadius": 10,
+              "elevation": 1,
+              "height": 80.03999999999999,
+              "marginBottom": 10,
+              "width": 637.5,
+            }
+          }
+        >
+          <TextInput
+            allowFontScaling={true}
+            autoCorrect={false}
+            autoFocus={false}
+            keyboardType="numeric"
+            maxLength={5}
+            onChangeText={[Function]}
+            placeholder="Price"
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "marginLeft": 15,
+                  "marginRight": 15,
+                  "width": 525,
+                },
+              ]
+            }
+            underlineColorAndroid="transparent"
+            value=""
+          />
+        </View>
+      </View>
+      <Text
+        accessible={true}
         allowFontScaling={true}
-        autoCapitalize="sentences"
-        autoCorrect={false}
-        keyboardType="email-address"
-        maxLength={160}
-        multiline={true}
-        onChangeText={[Function]}
-        placeholder="Description"
+        ellipsizeMode="tail"
         style={
-          Array [
-            Object {
-              "alignItems": "center",
-              "marginLeft": 15,
-              "marginRight": 15,
-              "width": 525,
-            },
-          ]
+          Object {
+            "alignSelf": "stretch",
+            "fontFamily": "San Francisco",
+            "fontSize": 22,
+            "marginBottom": 15,
+            "marginLeft": 56.25,
+            "textAlign": "left",
+          }
         }
-        underlineColorAndroid="transparent"
-        value=""
-      />
-    </View>
-    <View
-      style={
-        Object {
-          "backgroundColor": "#fff",
-          "borderRadius": 10,
-          "elevation": 1,
-          "flex": 0.15,
-          "marginBottom": 10,
-          "width": 637.5,
-        }
-      }
-    >
-      <TextInput
-        allowFontScaling={true}
-        autoCorrect={false}
-        autoFocus={false}
-        keyboardType="numeric"
-        maxLength={5}
-        onChangeText={[Function]}
-        placeholder="Price"
+      >
+        Add pictures
+      </Text>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        hasTVPreferredFocus={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
         style={
-          Array [
-            Object {
-              "alignItems": "center",
-              "marginLeft": 15,
-              "marginRight": 15,
-              "width": 525,
-            },
-          ]
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#4d4dff",
+            "borderRadius": 30,
+            "elevation": 1,
+            "marginTop": 15,
+            "paddingBottom": 8,
+            "paddingTop": 8,
+            "width": 525,
+          }
         }
-        underlineColorAndroid="transparent"
-        value=""
-      />
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "white",
+              "fontFamily": "San Francisco",
+              "fontSize": 16,
+              "fontWeight": "bold",
+            }
+          }
+        >
+          Submit item
+        </Text>
+      </View>
     </View>
   </View>
-  <View
-    accessibilityComponentType={undefined}
-    accessibilityLabel={undefined}
-    accessibilityTraits={undefined}
-    accessible={true}
-    hasTVPreferredFocus={undefined}
-    hitSlop={undefined}
-    isTVSelectable={true}
-    nativeID={undefined}
-    onLayout={undefined}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    style={
-      Object {
-        "alignItems": "center",
-        "backgroundColor": "#4d4dff",
-        "borderRadius": 30,
-        "elevation": 1,
-        "paddingBottom": 8,
-        "paddingTop": 8,
-        "width": 525,
-      }
-    }
-    testID={undefined}
-    tvParallaxProperties={undefined}
-  >
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-      style={
-        Object {
-          "color": "white",
-          "fontFamily": "San Francisco",
-          "fontSize": 16,
-          "fontWeight": "bold",
-        }
-      }
-    >
-      Submit item
-    </Text>
-  </View>
-</View>
+</RCTScrollView>
 `;
