@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import store from '../redux';
+import store from '../../redux/index';
 import {
   Alert,
   ScrollView,
@@ -12,8 +12,12 @@ import {
 } from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
 import { NavigationActions } from 'react-navigation';
-import { alertInvalidValuesNewItem, localhost } from '../src/static/constants';
-import { styles } from '../src/static/styles/NewItemStyles';
+import {
+  alertInvalidValuesNewItem,
+  localhost,
+} from '../../src/static/constants';
+import { styles } from '../../src/static/styles/NewItemStyles';
+import { ItemDetails } from './ItemDetails';
 
 export class NewItem extends React.Component {
   constructor(props) {
@@ -24,6 +28,10 @@ export class NewItem extends React.Component {
       description: '',
       mounted: false,
     };
+
+    this.handleTitleChange = this.handleTitleChange.bind(this);
+    this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
+    this.handlePriceChange = this.handlePriceChange.bind(this);
   }
 
   static navigationOptions = {
@@ -79,66 +87,6 @@ export class NewItem extends React.Component {
       });
   }
 
-  handlePriceChange(text) {
-    let newText = '';
-    let numbers = '0123456789';
-
-    for (let i = 0; i < text.length; i++) {
-      if (numbers.indexOf(text[i]) > -1) {
-        newText = newText + text[i];
-      }
-    }
-    this.setState({ price: newText });
-  }
-
-  renderTextInputs = () => {
-    return (
-      <View>
-        <View style={styles.itemDetailContainer}>
-          <TextInput
-            placeholder="Title"
-            autoCapitalize="sentences"
-            autoCorrect={false}
-            autoFocus={this.state.mounted}
-            maxLength={40}
-            keyboardType="email-address"
-            value={this.state.title}
-            onChangeText={text => this.setState({ title: text })}
-            style={[styles.itemDetails]}
-            underlineColorAndroid="transparent"
-          />
-        </View>
-        <View style={styles.itemDescriptionContainer}>
-          <TextInput
-            placeholder="Description"
-            autoCapitalize="sentences"
-            maxLength={400}
-            autoCorrect={false}
-            keyboardType="email-address"
-            value={this.state.description}
-            multiline={true}
-            onChangeText={text => this.setState({ description: text })}
-            style={[styles.itemDetails]}
-            underlineColorAndroid="transparent"
-          />
-        </View>
-        <View style={styles.itemDetailContainer}>
-          <TextInput
-            placeholder="Price"
-            autoCorrect={false}
-            autoFocus={false}
-            keyboardType="numeric"
-            maxLength={5}
-            value={this.state.price}
-            onChangeText={text => this.handlePriceChange(text)}
-            style={[styles.itemDetails]}
-            underlineColorAndroid="transparent"
-          />
-        </View>
-      </View>
-    );
-  };
-
   renderSubmitButton() {
     return (
       <TouchableHighlight
@@ -173,12 +121,29 @@ export class NewItem extends React.Component {
     });
   }
 
+  handleTitleChange(text) {
+    this.setState({ title: text });
+  }
+
+  handleDescriptionChange(text) {
+    this.setState({ description: text });
+  }
+
+  handlePriceChange(text) {
+    this.setState({ price: text });
+  }
+
   render() {
+    const itemDetailsProps = {
+      onTitleChange: this.handleTitleChange,
+      onDescriptionChange: this.handleDescriptionChange,
+      onPriceChange: this.handlePriceChange,
+    };
     return (
       <ScrollView>
         <View style={styles.container}>
           <Text style={styles.headerText}>Item details</Text>
-          {this.renderTextInputs()}
+          <ItemDetails {...itemDetailsProps} />
           <Text style={styles.headerText}>Add pictures</Text>
           {this.showImagePicker()}
           {this.renderSubmitButton()}
