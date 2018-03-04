@@ -5,6 +5,7 @@ import {
   Image,
   Keyboard,
   KeyboardAvoidingView,
+  Platform,
   Text,
   TextInput,
   TouchableHighlight,
@@ -169,7 +170,7 @@ export class Login extends React.Component {
         <TextInput
           id="emailTextInput"
           placeholder="Email address"
-          style={styles.textInputStyleSmallMargin}
+          style={styles.textInputStyleNegativeMargin}
           autoCapitalize="none"
           autoCorrect={false}
           autoFocus={false}
@@ -196,20 +197,20 @@ export class Login extends React.Component {
   }
 
   render() {
+    const behavior = Platform.OS === 'ios' ? 'padding' : null;
     return (
       <View style={[styles.container]}>
-        <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={64}>
+        <KeyboardAvoidingView behavior={behavior} keyboardVerticalOffset={64}>
           {this.renderLogoAndWelcomeText()}
           <View style={styles.loginContainer}>
             {this.renderEmailInput()}
             <TextInput
               id="usernameTextInput"
               placeholder="Username"
-              style={styles.textInputStyleSmallMargin}
+              style={styles.textInputStyleNegativeMargin}
               autoCapitalize="none"
               autoCorrect={false}
               autoFocus={false}
-              keyboardType="email-address"
               value={this.state.username}
               underlineColorAndroid="transparent"
               onChangeText={text => this.setState({ username: text })}

@@ -26,8 +26,8 @@ export class Items extends React.Component {
       title: 'Your items',
       headerLeft: null,
       headerRight: (
-        <Text onPress={() => navigate('NewItem')} style={{ margin: 10 }}>
-          New Item
+        <Text onPress={() => navigate('NewItem')} style={styles.newItem}>
+          New item
         </Text>
       ),
     };

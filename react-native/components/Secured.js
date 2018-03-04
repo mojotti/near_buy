@@ -4,17 +4,10 @@ import { StackNavigator } from 'react-navigation';
 import Items from './Items.js';
 import NewItem from './NewItem';
 
-const App = StackNavigator(
-  {
-    Items: { screen: Items },
-    NewItem: { screen: NewItem },
-  },
-  {
-    cardStyle: {
-      paddingTop: Platform.OS === 'ios' ? 0 : StatusBar.currentHeight,
-    },
-  },
-);
+const App = StackNavigator({
+  Items: { screen: Items },
+  NewItem: { screen: NewItem },
+});
 
 class Secured extends Component {
   render() {
