@@ -39,12 +39,11 @@ exports[`Login Logo is hidden when keyboard is visible 1`] = `
         autoCorrect={false}
         autoFocus={false}
         id="usernameTextInput"
-        keyboardType="email-address"
         onChangeText={[Function]}
         placeholder="Username"
         style={
           Object {
-            "marginBottom": 4,
+            "marginBottom": -12,
           }
         }
         underlineColorAndroid="transparent"
@@ -241,7 +240,7 @@ exports[`Login renders sign up details when state is sign up 1`] = `
         placeholder="Email address"
         style={
           Object {
-            "marginBottom": 4,
+            "marginBottom": -12,
           }
         }
         underlineColorAndroid="transparent"
@@ -253,12 +252,11 @@ exports[`Login renders sign up details when state is sign up 1`] = `
         autoCorrect={false}
         autoFocus={false}
         id="usernameTextInput"
-        keyboardType="email-address"
         onChangeText={[Function]}
         placeholder="Username"
         style={
           Object {
-            "marginBottom": 4,
+            "marginBottom": -12,
           }
         }
         underlineColorAndroid="transparent"
