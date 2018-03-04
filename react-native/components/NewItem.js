@@ -8,9 +8,9 @@ import {
   Text,
   TextInput,
   TouchableHighlight,
-  TouchableOpacity,
   View,
 } from 'react-native';
+import ImagePicker from 'react-native-image-crop-picker';
 import { NavigationActions } from 'react-navigation';
 import { alertInvalidValuesNewItem, localhost } from '../src/static/constants';
 import { styles } from '../src/static/styles/NewItemStyles';
@@ -139,6 +139,40 @@ export class NewItem extends React.Component {
     );
   };
 
+  renderSubmitButton() {
+    return (
+      <TouchableHighlight
+        id="SubmitButton"
+        onPress={() => this.handleNewItemCreation()}
+        style={styles.submitButton}
+      >
+        <Text style={styles.submitText}>{'Submit item'}</Text>
+      </TouchableHighlight>
+    );
+  }
+
+  showImagePicker() {
+    return (
+      <TouchableHighlight
+        id="AddImageButton"
+        onPress={() => this.openPicker()}
+        style={styles.submitButton}
+      >
+        <Text style={styles.submitText}>{'Add photo'}</Text>
+      </TouchableHighlight>
+    );
+  }
+
+  openPicker() {
+    ImagePicker.openPicker({
+      width: 400,
+      height: 400,
+      cropping: true,
+    }).then(image => {
+      console.log(image);
+    });
+  }
+
   render() {
     return (
       <ScrollView>
@@ -146,13 +180,8 @@ export class NewItem extends React.Component {
           <Text style={styles.headerText}>Item details</Text>
           {this.renderTextInputs()}
           <Text style={styles.headerText}>Add pictures</Text>
-          <TouchableHighlight
-            id="SubmitButton"
-            onPress={() => this.handleNewItemCreation()}
-            style={styles.submitButton}
-          >
-            <Text style={styles.submitText}>{'Submit item'}</Text>
-          </TouchableHighlight>
+          {this.showImagePicker()}
+          {this.renderSubmitButton()}
         </View>
       </ScrollView>
     );
