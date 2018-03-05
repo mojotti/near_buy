@@ -10,7 +10,6 @@ import {
   View,
 } from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { NavigationActions } from 'react-navigation';
 import {
   alertInvalidValuesNewItem,
@@ -18,6 +17,7 @@ import {
 } from '../../src/static/constants';
 import { styles } from '../../src/static/styles/NewItemStyles';
 import { ItemDetails } from './ItemDetails';
+import { ImageRow } from './ImageRow';
 
 export class NewItem extends React.Component {
   constructor(props) {
@@ -27,6 +27,10 @@ export class NewItem extends React.Component {
       price: '',
       description: '',
       mounted: false,
+      image1: null,
+      image2: null,
+      image3: null,
+      image4: null,
     };
 
     this.handleTitleChange = this.handleTitleChange.bind(this);
@@ -99,17 +103,20 @@ export class NewItem extends React.Component {
     );
   }
 
-  showImagePicker() {
-    return (
-      <MaterialIcons.Button
-        name={'add_a_photo'}
-        backgroundColor={'white'}
-        color={'gray'}
-        onPress={() => Alert.alert('You pressed me')}
-      >
-        {'Add Photo'}
-      </MaterialIcons.Button>
-    );
+  setNewImageOne(image) {
+    this.setState({ image1: image });
+  }
+
+  setNewImageTwo(image) {
+    this.setState({ image2: image });
+  }
+
+  setNewImageThree(image) {
+    this.setState({ image3: image });
+  }
+
+  setNewImageFour(image) {
+    this.setState({ image4: image });
   }
 
   openPicker() {
@@ -118,7 +125,7 @@ export class NewItem extends React.Component {
       height: 400,
       cropping: true,
     }).then(image => {
-      console.log(image);
+      this.handleNewImage(image);
     });
   }
 
@@ -140,13 +147,25 @@ export class NewItem extends React.Component {
       onDescriptionChange: this.handleDescriptionChange,
       onPriceChange: this.handlePriceChange,
     };
+
+    const firstImageRowProps = {
+      onLeftImageSelected: this.setNewImageOne,
+      onRightImageSelected: this.setNewImageTwo,
+    };
+
+    const secondImageRowProps = {
+      onLeftImageSelected: this.setNewImageThree,
+      onRightImageSelected: this.setNewImageFour,
+    };
+
     return (
       <ScrollView>
         <View style={styles.container}>
           <Text style={styles.headerText}>Item details</Text>
           <ItemDetails {...itemDetailsProps} />
           <Text style={styles.headerText}>Add pictures</Text>
-          {this.showImagePicker()}
+          <ImageRow {...firstImageRowProps} style={styles.imageRowMargin} />
+          <ImageRow {...secondImageRowProps} style={styles.imageRowMargin} />
           {this.renderSubmitButton()}
         </View>
       </ScrollView>

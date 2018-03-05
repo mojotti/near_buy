@@ -51,19 +51,26 @@ export const styles = StyleSheet.create({
     backgroundColor: '#4d4dff',
   },
   addPhotoButton: {
-    marginTop: 15,
-    elevation: 1,
-    borderRadius: 30,
-    paddingTop: 8,
-    paddingBottom: 8,
-    alignItems: 'center',
     width: width * 0.3,
     height: width * 0.3,
+    margin: 10,
+    elevation: 1,
+    flex: 0.4,
+    backgroundColor: 'white',
   },
   submitText: {
     fontFamily: baseFont,
     color: 'white',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  imageRow: {
+    flexDirection: 'row',
+    flex: 1,
+    backgroundColor: 'transparent',
+  },
+  imageRowMargin: {
+    marginBottom: 10,
+    marginTop: 10,
   },
 });
