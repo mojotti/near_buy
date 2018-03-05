@@ -6,11 +6,11 @@ import {
   Alert,
   ScrollView,
   Text,
-  TextInput,
   TouchableHighlight,
   View,
 } from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { NavigationActions } from 'react-navigation';
 import {
   alertInvalidValuesNewItem,
@@ -64,7 +64,7 @@ export class NewItem extends React.Component {
       Alert.alert(...alertInvalidValuesNewItem);
       return;
     }
-    let url = `http://${localhost}:5000/api/v1.0/items`;
+    const url = `http://${localhost}:5000/api/v1.0/items`;
     fetch(url, {
       method: 'POST',
       body: JSON.stringify({
@@ -101,13 +101,14 @@ export class NewItem extends React.Component {
 
   showImagePicker() {
     return (
-      <TouchableHighlight
-        id="AddImageButton"
-        onPress={() => this.openPicker()}
-        style={styles.submitButton}
+      <MaterialIcons.Button
+        name={'add_a_photo'}
+        backgroundColor={'white'}
+        color={'gray'}
+        onPress={() => Alert.alert('You pressed me')}
       >
-        <Text style={styles.submitText}>{'Add photo'}</Text>
-      </TouchableHighlight>
+        {'Add Photo'}
+      </MaterialIcons.Button>
     );
   }
 
