@@ -58,6 +58,13 @@ export const styles = StyleSheet.create({
     flex: 0.4,
     backgroundColor: 'white',
   },
+  photoStyles: {
+    width: width * 0.3,
+    height: width * 0.3,
+    margin: 10,
+    flex: 0.4,
+  },
+
   submitText: {
     fontFamily: baseFont,
     color: 'white',

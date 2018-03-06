@@ -9,7 +9,6 @@ import {
   TouchableHighlight,
   View,
 } from 'react-native';
-import ImagePicker from 'react-native-image-crop-picker';
 import { NavigationActions } from 'react-navigation';
 import {
   alertInvalidValuesNewItem,
@@ -19,6 +18,16 @@ import { styles } from '../../src/static/styles/NewItemStyles';
 import { ItemDetails } from './ItemDetails';
 import { ImageRow } from './ImageRow';
 
+const UPPER_BUTTON_IDS = {
+  leftButtonId: 0,
+  rightButtonId: 1,
+};
+
+const LOWER_BUTTON_IDS = {
+  leftButtonId: 2,
+  rightButtonId: 3,
+};
+
 export class NewItem extends React.Component {
   constructor(props) {
     super(props);
@@ -27,15 +36,13 @@ export class NewItem extends React.Component {
       price: '',
       description: '',
       mounted: false,
-      image1: null,
-      image2: null,
-      image3: null,
-      image4: null,
+      images: [null, null, null, null],
     };
 
     this.handleTitleChange = this.handleTitleChange.bind(this);
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
     this.handlePriceChange = this.handlePriceChange.bind(this);
+    this.setNewImage = this.setNewImage.bind(this);
   }
 
   static navigationOptions = {
@@ -103,30 +110,14 @@ export class NewItem extends React.Component {
     );
   }
 
-  setNewImageOne(image) {
-    this.setState({ image1: image });
-  }
-
-  setNewImageTwo(image) {
-    this.setState({ image2: image });
-  }
-
-  setNewImageThree(image) {
-    this.setState({ image3: image });
-  }
-
-  setNewImageFour(image) {
-    this.setState({ image4: image });
-  }
-
-  openPicker() {
-    ImagePicker.openPicker({
-      width: 400,
-      height: 400,
-      cropping: true,
-    }).then(image => {
-      this.handleNewImage(image);
+  setNewImage(image, id) {
+    this.setState(prevState => {
+      let images = prevState.images;
+      images[id] = image;
+      return images;
     });
+    console.log('setting new image: ', image, id);
+    console.log(this.state.images);
   }
 
   handleTitleChange(text) {
@@ -149,13 +140,15 @@ export class NewItem extends React.Component {
     };
 
     const firstImageRowProps = {
-      onLeftImageSelected: this.setNewImageOne,
-      onRightImageSelected: this.setNewImageTwo,
+      onImageSelected: this.setNewImage,
+      ...UPPER_BUTTON_IDS,
+      images: this.state.images.slice(0, 2),
     };
 
     const secondImageRowProps = {
-      onLeftImageSelected: this.setNewImageThree,
-      onRightImageSelected: this.setNewImageFour,
+      onImageSelected: this.setNewImage,
+      ...LOWER_BUTTON_IDS,
+      images: this.state.images.slice(2),
     };
 
     return (
