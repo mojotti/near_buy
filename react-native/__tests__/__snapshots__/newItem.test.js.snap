@@ -208,9 +208,10 @@ exports[`New Item renders correctly 1`] = `
                   "backgroundColor": "white",
                   "elevation": 1,
                   "flex": 0.4,
-                  "height": 225,
+                  "height": 300,
+                  "justifyContent": "center",
                   "margin": 10,
-                  "width": 225,
+                  "width": 300,
                 },
               ]
             }
@@ -224,7 +225,7 @@ exports[`New Item renders correctly 1`] = `
                 Array [
                   Object {
                     "color": "gray",
-                    "fontSize": 100,
+                    "fontSize": 225,
                   },
                   Object {
                     "marginRight": 10,
@@ -288,9 +289,10 @@ exports[`New Item renders correctly 1`] = `
                   "backgroundColor": "white",
                   "elevation": 1,
                   "flex": 0.4,
-                  "height": 225,
+                  "height": 300,
+                  "justifyContent": "center",
                   "margin": 10,
-                  "width": 225,
+                  "width": 300,
                 },
               ]
             }
@@ -304,7 +306,7 @@ exports[`New Item renders correctly 1`] = `
                 Array [
                   Object {
                     "color": "gray",
-                    "fontSize": 100,
+                    "fontSize": 225,
                   },
                   Object {
                     "marginRight": 10,
@@ -378,9 +380,10 @@ exports[`New Item renders correctly 1`] = `
                   "backgroundColor": "white",
                   "elevation": 1,
                   "flex": 0.4,
-                  "height": 225,
+                  "height": 300,
+                  "justifyContent": "center",
                   "margin": 10,
-                  "width": 225,
+                  "width": 300,
                 },
               ]
             }
@@ -394,7 +397,7 @@ exports[`New Item renders correctly 1`] = `
                 Array [
                   Object {
                     "color": "gray",
-                    "fontSize": 100,
+                    "fontSize": 225,
                   },
                   Object {
                     "marginRight": 10,
@@ -458,9 +461,10 @@ exports[`New Item renders correctly 1`] = `
                   "backgroundColor": "white",
                   "elevation": 1,
                   "flex": 0.4,
-                  "height": 225,
+                  "height": 300,
+                  "justifyContent": "center",
                   "margin": 10,
-                  "width": 225,
+                  "width": 300,
                 },
               ]
             }
@@ -474,7 +478,7 @@ exports[`New Item renders correctly 1`] = `
                 Array [
                   Object {
                     "color": "gray",
-                    "fontSize": 100,
+                    "fontSize": 225,
                   },
                   Object {
                     "marginRight": 10,
@@ -514,7 +518,7 @@ exports[`New Item renders correctly 1`] = `
             "backgroundColor": "#4d4dff",
             "borderRadius": 30,
             "elevation": 1,
-            "marginTop": 15,
+            "margin": 15,
             "paddingBottom": 8,
             "paddingTop": 8,
             "width": 525,
