@@ -10,7 +10,7 @@ import { sample } from '../src/static/samples/ItemSample';
 const middlewares = [];
 const mockStore = configureStore(middlewares);
 const initialState = {
-  auth: {
+  authorizationReducer: {
     isLoggedIn: false,
     username: '',
     token: '',
@@ -29,14 +29,14 @@ describe('Render', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  test('Items renders without crashing', () => {
+  test('items renders without crashing', () => {
     fetch.mockResponseSuccess(sample);
 
     const rendered = renderer.create(<Items />).toJSON();
     expect(rendered).toBeTruthy();
   });
 
-  test('Items renders correctly', () => {
+  test('items renders correctly', () => {
     fetch.mockResponseSuccess(sample);
 
     const tree = renderer.create(<Items />).toJSON();

@@ -22,7 +22,7 @@ export class ImageRow extends React.Component {
       [
         {
           text: 'Cancel',
-          onPress: () => console.log('Cancel Pressed'),
+          onPress: () => {},
           style: 'cancel',
         },
         {
@@ -72,7 +72,7 @@ export class ImageRow extends React.Component {
     const index = buttonId % 2 === 0 ? 0 : 1;
     return (
       <TouchableHighlight
-        onPress={() => this.handleImageSelection(this.props.leftButtonId)}
+        onPress={() => this.handleImageSelection(buttonId)}
       >
         <Image
           style={styles.photoStyles}

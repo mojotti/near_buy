@@ -255,7 +255,7 @@ export class Login extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    isLoggedIn: state.auth.isLoggedIn,
+    isLoggedIn: state.authorizationReducer.isLoggedIn,
   };
 };
 

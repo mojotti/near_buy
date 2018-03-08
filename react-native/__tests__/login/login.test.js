@@ -6,18 +6,18 @@ import { Alert } from 'react-native';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
-import { Login } from '../components/Login';
+import { Login } from '../../components/Login';
 import {
   loginText,
   networkErrorAlert,
   registerText,
-} from '../src/static/constants';
+} from '../../src/static/constants';
 import {
   successfulRegisteringResponse,
   successfulLoginResponse,
   unsuccessfulLoginResponse,
   userExistsRegisteringResponse,
-} from '../src/static/samples/loginAndRegisteringSamples';
+} from '../../src/static/samples/loginAndRegisteringSamples';
 
 const SUCCESSFUL_REGISTRATION_ALERT = [
   ['User creation', 'User created successfully!'],

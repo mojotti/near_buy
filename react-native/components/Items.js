@@ -109,8 +109,8 @@ export class Items extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    username: state.auth.username,
-    token: state.auth.token,
+    username: state.authorizationReducer.username,
+    token: state.authorizationReducer.token,
   };
 };
 
