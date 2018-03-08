@@ -1,4 +1,4 @@
-import reducer from '../redux/reducers/auth';
+import { authorizationReducer } from '../../redux/reducers/auth';
 
 const testUsername = 'testUsername';
 const testToken = 'testToken';
@@ -13,9 +13,9 @@ const loggedInState = {
   token: testToken,
 };
 
-test('return default state when invalid type passed to reducer', () => {
+test('return default state when invalid type passed to authorizationReducer', () => {
   const invalidActionType = { type: 'invalid' };
-  expect(reducer(defaultState, invalidActionType)).toBe(defaultState);
+  expect(authorizationReducer(defaultState, invalidActionType)).toEqual(defaultState);
 });
 
 test('return logged in state when logged in with correct details', () => {
@@ -24,12 +24,12 @@ test('return logged in state when logged in with correct details', () => {
     username: testUsername,
     token: testToken,
   };
-  expect(reducer(defaultState, login)).toEqual(loggedInState);
+  expect(authorizationReducer(defaultState, login)).toEqual(loggedInState);
 });
 
 test('return logged out state when logging out with correct details', () => {
   const logout = {
     type: 'LOGOUT',
   };
-  expect(reducer(loggedInState, logout)).toEqual(defaultState);
+  expect(authorizationReducer(loggedInState, logout)).toEqual(defaultState);
 });
