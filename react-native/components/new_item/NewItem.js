@@ -116,8 +116,6 @@ export class NewItem extends React.Component {
       images[id] = image;
       return images;
     });
-    console.log('setting new image: ', image, id);
-    console.log(this.state.images);
   }
 
   handleTitleChange(text) {

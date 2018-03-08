@@ -38,7 +38,7 @@ export class ItemDetails extends React.Component {
     }
 
     this.setState({ price: newText });
-    this.props.onPriceChange(this.state.price);
+    this.props.onPriceChange(newText);
   }
 
   render() {

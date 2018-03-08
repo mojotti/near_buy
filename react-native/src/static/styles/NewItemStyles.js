@@ -4,6 +4,7 @@ import { baseFont } from './baseStyles';
 
 const { width, height } = Dimensions.get('window');
 
+export const cameraIconSize = width * 0.3;
 const itemContainer = {
   backgroundColor: '#fff',
   width: width * 0.85,
@@ -41,7 +42,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   submitButton: {
-    marginTop: 15,
+    margin: 15,
     elevation: 1,
     borderRadius: 30,
     paddingTop: 8,
@@ -51,20 +52,20 @@ export const styles = StyleSheet.create({
     backgroundColor: '#4d4dff',
   },
   addPhotoButton: {
-    width: width * 0.3,
-    height: width * 0.3,
+    width: width * 0.4,
+    height: width * 0.4,
     margin: 10,
     elevation: 1,
     flex: 0.4,
     backgroundColor: 'white',
+    justifyContent: 'center',
   },
   photoStyles: {
-    width: width * 0.3,
-    height: width * 0.3,
+    width: width * 0.4,
+    height: width * 0.4,
     margin: 10,
     flex: 0.4,
   },
-
   submitText: {
     fontFamily: baseFont,
     color: 'white',
