@@ -71,9 +71,7 @@ export class ImageRow extends React.Component {
   renderImageButton(buttonId) {
     const index = buttonId % 2 === 0 ? 0 : 1;
     return (
-      <TouchableHighlight
-        onPress={() => this.handleImageSelection(buttonId)}
-      >
+      <TouchableHighlight onPress={() => this.handleImageSelection(buttonId)}>
         <Image
           style={styles.photoStyles}
           source={{ uri: this.props.images[index].path }}

@@ -6,8 +6,8 @@ import { ImageRow } from '../../../components/new_item/ImageRow';
 
 jest.mock('react-native-image-crop-picker', () => {
   return {
-    openPicker: jest.fn(() => Promise.resolve()),
-    openCamera: jest.fn(() => Promise.resolve()),
+    openPicker: jest.fn(() => Promise.resolve('./image.jpg')),
+    openCamera: jest.fn(() => Promise.resolve('./image.jpg')),
   };
 });
 
@@ -64,11 +64,29 @@ describe('<ImageRow />', () => {
       .simulate('Press');
 
     expect(handleImageSelectionSpy.callCount).toEqual(1);
+    handleImageSelectionSpy.restore();
   });
 
-  test('onImageSelected is called when selecting camera image', () => {
+  test('onImageSelected is called when selecting camera image', async () => {
+    const onImageSelectedSpy = sinon.spy();
     const props = {
-      onImageSelected: sinon.spy(),
+      onImageSelected: onImageSelectedSpy,
+      leftButtonId: 0,
+      rightButtonId: 1,
+      images: [null, null, null, null],
+    };
+
+    const imageRowComponent = shallow(<ImageRow {...props} />);
+    const imageId = 0;
+
+    await imageRowComponent.instance().handleNewImage(imageId);
+    expect(onImageSelectedSpy.callCount).toEqual(1);
+  });
+
+  test('onImageSelected is called when selecting gallery image', async () => {
+    const onImageSelectedSpy = sinon.spy();
+    const props = {
+      onImageSelected: onImageSelectedSpy,
       leftButtonId: 0,
       rightButtonId: 1,
       images: [{ path: 'foo/bar.png' }, { path: 'baz/foo.png' }],
@@ -77,6 +95,7 @@ describe('<ImageRow />', () => {
     const imageRowComponent = shallow(<ImageRow {...props} />);
     const imageId = 0;
 
-    imageRowComponent.instance().handleNewImage(imageId);
+    await imageRowComponent.instance().handleGalleryImage(imageId);
+    expect(onImageSelectedSpy.callCount).toEqual(1);
   });
 });
