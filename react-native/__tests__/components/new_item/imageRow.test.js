@@ -1,7 +1,15 @@
 import React from 'react';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
+import 'react-native-image-crop-picker';
 import { ImageRow } from '../../../components/new_item/ImageRow';
+
+jest.mock('react-native-image-crop-picker', () => {
+  return {
+    openPicker: jest.fn(() => Promise.resolve()),
+    openCamera: jest.fn(() => Promise.resolve()),
+  };
+});
 
 const PROPS_NO_IMAGES = {
   onImageSelected: () => {},
@@ -56,5 +64,19 @@ describe('<ImageRow />', () => {
       .simulate('Press');
 
     expect(handleImageSelectionSpy.callCount).toEqual(1);
+  });
+
+  test('onImageSelected is called when selecting camera image', () => {
+    const props = {
+      onImageSelected: sinon.spy(),
+      leftButtonId: 0,
+      rightButtonId: 1,
+      images: [{ path: 'foo/bar.png' }, { path: 'baz/foo.png' }],
+    };
+
+    const imageRowComponent = shallow(<ImageRow {...props} />);
+    const imageId = 0;
+
+    imageRowComponent.instance().handleNewImage(imageId);
   });
 });

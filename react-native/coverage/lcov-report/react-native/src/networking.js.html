@@ -22,7 +22,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>9/9</span>
+        <span class='fraction'>15/15</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -32,12 +32,12 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>3/3</span>
+        <span class='fraction'>4/4</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>9/9</span>
+        <span class='fraction'>14/14</span>
       </div>
     </div>
   </div>
@@ -69,65 +69,83 @@
 24
 25
 26
-27</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+27
+28
+29
+30
+31
+32
+33</td><td class="line-coverage quiet"><span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const base64 = require('base-64');
 &nbsp;
-const base64 = require('base-64');
+const registeringHeaders = {
+  Accept: 'application/json',
+  'Content-Type': 'application/json',
+};
 &nbsp;
+const generateHash = (username, password) =&gt; {
+  const credentials = `${username}:${password}`;
+  return base64.encode(credentials);
+};
 &nbsp;
-function generateHash(username, password) {
-    let credentials = `${username}:${password}`;
-    return base64.encode(credentials);
-}
+const generateHeadersForBasicAuth = (username, password) =&gt; {
+  const headers = new Headers();
+  const hash = generateHash(username, password);
+  headers.append('Authorization', `Basic ${hash}`);
+  return headers;
+};
 &nbsp;
-function generateHeadersForBasicAuth(username, password) {
-    let headers = new Headers();
-    let hash = generateHash(username, password);
-    headers.append('Authorization', `Basic ${hash}`);
-    return headers;
-}
+const generateHashForRegistering = (username, password, email) =&gt; {
+  const credentials = `${username}:${email}:${password}`;
+  return base64.encode(credentials);
+};
 &nbsp;
-function generateHashForRegistering(username, password, email) {
-    let credentials = `${username}:${email}:${password}`;
-    return base64.encode(credentials);
-}
+const getHeadersForRegistering = () =&gt; registeringHeaders;
 &nbsp;
-&nbsp;
-export { generateHeadersForBasicAuth,
-    generateHash,
-    generateHashForRegistering };
+export {
+  generateHeadersForBasicAuth,
+  generateHash,
+  generateHashForRegistering,
+  getHeadersForRegistering,
+};
 &nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Oct 18 2017 21:32:17 GMT+0300 (EEST)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Mar 08 2018 19:21:09 GMT+0200 (EET)
 </div>
 </div>
 <script src="../../prettify.js"></script>
