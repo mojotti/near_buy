@@ -49,7 +49,6 @@ export class ItemDetails extends React.Component {
             placeholder="Title"
             autoCapitalize="sentences"
             autoCorrect={false}
-            autoFocus={this.state.mounted}
             maxLength={40}
             keyboardType="email-address"
             value={this.state.title}
