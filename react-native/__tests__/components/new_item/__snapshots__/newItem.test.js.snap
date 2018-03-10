@@ -1,6 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`New Item renders correctly 1`] = `
+exports[`<New Item /> gets correct header 1`] = `
+Headers {
+  "_headers": Object {
+    "authorization": Array [
+      "Bearer jippii",
+    ],
+    "content-type": Array [
+      "application/json",
+    ],
+  },
+}
+`;
+
+exports[`<New Item /> renders correctly 1`] = `
 <RCTScrollView>
   <View>
     <View

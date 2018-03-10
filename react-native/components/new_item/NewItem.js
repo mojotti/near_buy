@@ -35,7 +35,6 @@ export class NewItem extends React.Component {
       title: '',
       price: '',
       description: '',
-      mounted: false,
       images: [null, null, null, null],
     };
 
@@ -48,11 +47,6 @@ export class NewItem extends React.Component {
   static navigationOptions = {
     title: 'Add item',
   };
-
-  componentDidMount() {
-    // work around for testing issue, should be solved when RN version is updated
-    this.setState({ mounted: true });
-  }
 
   getHeaders() {
     const headers = new Headers();
@@ -87,15 +81,19 @@ export class NewItem extends React.Component {
     })
       .then(response => response.json())
       .then(responseJson => {
-        if (responseJson.item && responseJson.item.title === title) {
-          this.resetNavigationAndNavigateToRoute('Items');
-        } else {
-          Alert.alert('Item creation failed', 'Something went wrong');
-        }
+        this.handleResponse(responseJson)
       })
       .catch(error => {
         console.error(error);
       });
+  }
+
+  handleResponse(responseJson) {
+    if (responseJson.item && responseJson.item.title === this.state.title) {
+      this.resetNavigationAndNavigateToRoute('Items');
+    } else {
+      Alert.alert('Item creation failed', 'Something went wrong');
+    }
   }
 
   renderSubmitButton() {
