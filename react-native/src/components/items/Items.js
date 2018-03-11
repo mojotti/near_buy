@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Button, ListView, Text, View } from 'react-native';
-import { logout } from '../../../redux/actions/auth';
+import { logout } from '../../redux/actions/AuthorizationAction';
 import { connect } from 'react-redux';
 import { localhost, userHasNoItemsText } from '../../static/constants';
 import { ListViewItem } from './ListViewItem';

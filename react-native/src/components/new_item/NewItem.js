@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import store from '../../../redux/index';
+import store from '../../redux/ReduxStore';
 import {
   Alert,
   ScrollView,

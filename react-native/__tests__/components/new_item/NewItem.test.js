@@ -4,7 +4,7 @@ import { Alert } from 'react-native';
 import renderer from 'react-test-renderer';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
-import store from '../../../redux/index';
+import store from '../../../src/redux/ReduxStore';
 import { NewItem } from '../../../src/components/new_item/NewItem';
 
 const token = {

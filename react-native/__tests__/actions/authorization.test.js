@@ -1,5 +1,5 @@
-import { login, logout } from '../../redux/actions/auth';
-import { LOGIN, LOGOUT } from '../../redux/constants/actionTypes/ActionTypes';
+import { login, logout } from '../../src/redux/actions/AuthorizationAction';
+import { LOGIN, LOGOUT } from '../../src/redux/constants/actionTypes/ActionTypes';
 
 describe('authorization actions', () => {
   it('should login with username and token', () => {

@@ -11,7 +11,7 @@ import {
   TouchableHighlight,
   View,
 } from 'react-native';
-import { login } from '../../redux/actions/auth';
+import { login } from '../redux/actions/AuthorizationAction';
 import {
   generateHeadersForBasicAuth,
   getHeadersForRegistering,

@@ -36,7 +36,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:/home/risto-matti/rm_projects/near_buy/react-native/redux/index.js
+SF:/home/risto-matti/rm_projects/near_buy/react-native/redux/RootReducer.js
 FNF:0
 FNH:0
 DA:4,1
@@ -46,7 +46,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:/home/risto-matti/rm_projects/near_buy/react-native/redux/actions/auth.js
+SF:/home/risto-matti/rm_projects/near_buy/react-native/redux/actions/AuthorizationAction.js
 FN:1,(anonymous_0)
 FN:9,(anonymous_1)
 FNF:2
@@ -74,7 +74,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:/home/risto-matti/rm_projects/near_buy/react-native/redux/reducers/auth.js
+SF:/home/risto-matti/rm_projects/near_buy/react-native/redux/reducers/AuthorizationAction.js
 FN:7,(anonymous_0)
 FNF:1
 FNH:1
@@ -95,7 +95,7 @@ BRF:4
 BRH:4
 end_of_record
 TN:
-SF:/home/risto-matti/rm_projects/near_buy/react-native/redux/reducers/index.js
+SF:/home/risto-matti/rm_projects/near_buy/react-native/redux/reducers/RootReducer.js
 FNF:0
 FNH:0
 DA:4,1

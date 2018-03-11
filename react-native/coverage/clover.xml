@@ -25,14 +25,14 @@
       </package>
       <package name="react-native.redux">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <file name="index.js" path="/home/risto-matti/rm_projects/near_buy/react-native/redux/index.js">
+        <file name="RootReducer.js" path="/home/risto-matti/rm_projects/near_buy/react-native/redux/RootReducer.js">
           <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
           <line num="4" count="1" type="stmt"/>
         </file>
       </package>
       <package name="react-native.redux.actions">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
-        <file name="auth.js" path="/home/risto-matti/rm_projects/near_buy/react-native/redux/actions/auth.js">
+        <file name="AuthorizationAction.js" path="/home/risto-matti/rm_projects/near_buy/react-native/redux/actions/AuthorizationAction.js">
           <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
           <line num="1" count="4" type="stmt"/>
           <line num="2" count="1" type="stmt"/>
@@ -50,7 +50,7 @@
       </package>
       <package name="react-native.redux.reducers">
         <metrics statements="7" coveredstatements="7" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
-        <file name="auth.js" path="/home/risto-matti/rm_projects/near_buy/react-native/redux/reducers/auth.js">
+        <file name="AuthorizationAction.js" path="/home/risto-matti/rm_projects/near_buy/react-native/redux/reducers/AuthorizationAction.js">
           <metrics statements="6" coveredstatements="6" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
           <line num="1" count="2" type="stmt"/>
           <line num="7" count="2" type="cond" truecount="1" falsecount="0"/>
@@ -59,7 +59,7 @@
           <line num="16" count="1" type="stmt"/>
           <line num="22" count="4" type="stmt"/>
         </file>
-        <file name="index.js" path="/home/risto-matti/rm_projects/near_buy/react-native/redux/reducers/index.js">
+        <file name="RootReducer.js" path="/home/risto-matti/rm_projects/near_buy/react-native/redux/reducers/RootReducer.js">
           <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
           <line num="4" count="1" type="stmt"/>
         </file>

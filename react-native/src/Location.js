@@ -1,5 +1,6 @@
 export const getCurrentLocation = () => {
   console.log('getting location...');
+
   navigator.geolocation.getCurrentPosition(
     position => {
       console.log(

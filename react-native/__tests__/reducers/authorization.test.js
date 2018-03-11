@@ -1,4 +1,4 @@
-import { authorizationReducer } from '../../redux/reducers/auth';
+import { authorizationReducer } from '../../src/redux/reducers/AuthorizationReducer';
 
 const testUsername = 'testUsername';
 const testToken = 'testToken';

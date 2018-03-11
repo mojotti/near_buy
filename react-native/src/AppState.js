@@ -7,4 +7,5 @@ export const handleAppStateChange = nextAppState => {
     console.log('app is active now');
     getCurrentLocation();
   }
+  appState = nextAppState;
 };
