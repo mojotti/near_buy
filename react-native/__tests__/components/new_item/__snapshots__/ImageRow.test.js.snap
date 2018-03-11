@@ -21,10 +21,11 @@ exports[`<ImageRow /> when there are images, images are rendered 1`] = `
       }
       style={
         Object {
+          "borderRadius": 10,
           "flex": 0.4,
-          "height": 300,
+          "height": 262.5,
           "margin": 10,
-          "width": 300,
+          "width": 262.5,
         }
       }
     />
@@ -40,10 +41,11 @@ exports[`<ImageRow /> when there are images, images are rendered 1`] = `
       }
       style={
         Object {
+          "borderRadius": 10,
           "flex": 0.4,
-          "height": 300,
+          "height": 262.5,
           "margin": 10,
-          "width": 300,
+          "width": 262.5,
         }
       }
     />
@@ -66,16 +68,17 @@ exports[`<ImageRow /> when there is no images, empty image buttons are rendered 
     color="gray"
     name="add-a-photo"
     onPress={[Function]}
-    size={225}
+    size={210.00000000000003}
     style={
       Object {
         "backgroundColor": "white",
+        "borderRadius": 10,
         "elevation": 1,
         "flex": 0.4,
-        "height": 300,
+        "height": 262.5,
         "justifyContent": "center",
-        "margin": 10,
-        "width": 300,
+        "margin": 14,
+        "width": 262.5,
       }
     }
   />
@@ -84,16 +87,17 @@ exports[`<ImageRow /> when there is no images, empty image buttons are rendered 
     color="gray"
     name="add-a-photo"
     onPress={[Function]}
-    size={225}
+    size={210.00000000000003}
     style={
       Object {
         "backgroundColor": "white",
+        "borderRadius": 10,
         "elevation": 1,
         "flex": 0.4,
-        "height": 300,
+        "height": 262.5,
         "justifyContent": "center",
-        "margin": 10,
-        "width": 300,
+        "margin": 14,
+        "width": 262.5,
       }
     }
   />

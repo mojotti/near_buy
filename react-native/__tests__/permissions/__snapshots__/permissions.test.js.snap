@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`permission tests it does not throw error when permissions are granted 1`] = `"granted"`;
+
+exports[`permission tests throws error when permissions are not granted 1`] = `[Error: Storage permissions are not granted]`;

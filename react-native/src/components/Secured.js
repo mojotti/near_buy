@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { Platform, StatusBar } from 'react-native';
+import { AppState } from 'react-native';
 import { StackNavigator } from 'react-navigation';
-import Items from './items/Items.js';
+import Items from './items/Items';
 import NewItem from './new_item/NewItem';
+import { handleAppStateChange } from '../AppState';
+import { runAppStartEvents } from '../AppStartEvents';
 
 const App = StackNavigator({
   Items: { screen: Items },
@@ -10,6 +12,15 @@ const App = StackNavigator({
 });
 
 class Secured extends Component {
+  componentDidMount() {
+    runAppStartEvents();
+    AppState.addEventListener('change', handleAppStateChange);
+  }
+
+  componentWillUnmount() {
+    AppState.removeEventListener('change', handleAppStateChange);
+  }
+
   render() {
     return <App />;
   }

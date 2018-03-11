@@ -21,7 +21,7 @@ exports[`<New Item /> renders correctly 1`] = `
         Object {
           "alignItems": "center",
           "flex": 1,
-          "marginTop": 15,
+          "marginTop": 5,
         }
       }
     >
@@ -36,6 +36,7 @@ exports[`<New Item /> renders correctly 1`] = `
             "fontSize": 22,
             "marginBottom": 15,
             "marginLeft": 56.25,
+            "marginTop": 10,
             "textAlign": "left",
           }
         }
@@ -158,6 +159,7 @@ exports[`<New Item /> renders correctly 1`] = `
             "fontSize": 22,
             "marginBottom": 15,
             "marginLeft": 56.25,
+            "marginTop": 10,
             "textAlign": "left",
           }
         }
@@ -218,12 +220,13 @@ exports[`<New Item /> renders correctly 1`] = `
                 },
                 Object {
                   "backgroundColor": "white",
+                  "borderRadius": 10,
                   "elevation": 1,
                   "flex": 0.4,
-                  "height": 300,
+                  "height": 262.5,
                   "justifyContent": "center",
-                  "margin": 10,
-                  "width": 300,
+                  "margin": 14,
+                  "width": 262.5,
                 },
               ]
             }
@@ -237,7 +240,7 @@ exports[`<New Item /> renders correctly 1`] = `
                 Array [
                   Object {
                     "color": "gray",
-                    "fontSize": 225,
+                    "fontSize": 210.00000000000003,
                   },
                   Object {
                     "marginRight": 10,
@@ -299,12 +302,13 @@ exports[`<New Item /> renders correctly 1`] = `
                 },
                 Object {
                   "backgroundColor": "white",
+                  "borderRadius": 10,
                   "elevation": 1,
                   "flex": 0.4,
-                  "height": 300,
+                  "height": 262.5,
                   "justifyContent": "center",
-                  "margin": 10,
-                  "width": 300,
+                  "margin": 14,
+                  "width": 262.5,
                 },
               ]
             }
@@ -318,7 +322,7 @@ exports[`<New Item /> renders correctly 1`] = `
                 Array [
                   Object {
                     "color": "gray",
-                    "fontSize": 225,
+                    "fontSize": 210.00000000000003,
                   },
                   Object {
                     "marginRight": 10,
@@ -390,12 +394,13 @@ exports[`<New Item /> renders correctly 1`] = `
                 },
                 Object {
                   "backgroundColor": "white",
+                  "borderRadius": 10,
                   "elevation": 1,
                   "flex": 0.4,
-                  "height": 300,
+                  "height": 262.5,
                   "justifyContent": "center",
-                  "margin": 10,
-                  "width": 300,
+                  "margin": 14,
+                  "width": 262.5,
                 },
               ]
             }
@@ -409,7 +414,7 @@ exports[`<New Item /> renders correctly 1`] = `
                 Array [
                   Object {
                     "color": "gray",
-                    "fontSize": 225,
+                    "fontSize": 210.00000000000003,
                   },
                   Object {
                     "marginRight": 10,
@@ -471,12 +476,13 @@ exports[`<New Item /> renders correctly 1`] = `
                 },
                 Object {
                   "backgroundColor": "white",
+                  "borderRadius": 10,
                   "elevation": 1,
                   "flex": 0.4,
-                  "height": 300,
+                  "height": 262.5,
                   "justifyContent": "center",
-                  "margin": 10,
-                  "width": 300,
+                  "margin": 14,
+                  "width": 262.5,
                 },
               ]
             }
@@ -490,7 +496,7 @@ exports[`<New Item /> renders correctly 1`] = `
                 Array [
                   Object {
                     "color": "gray",
-                    "fontSize": 225,
+                    "fontSize": 210.00000000000003,
                   },
                   Object {
                     "marginRight": 10,
