@@ -3,8 +3,8 @@ import renderer from 'react-test-renderer';
 import configureStore from 'redux-mock-store';
 import 'isomorphic-fetch'; // for headers, fetch, etc.
 
-import Login from '../components/Login';
-import { Items } from '../components/Items';
+import Login from '../src/components/Login';
+import { Items } from '../src/components/items/Items';
 import { sample } from '../src/static/samples/ItemSample';
 
 const middlewares = [];

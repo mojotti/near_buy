@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import { styles } from '../src/static/styles/ListViewItemStyle';
+import { styles } from '../../static/styles/ListViewItemStyle';
 
 export class ListViewItem extends React.Component {
   render() {

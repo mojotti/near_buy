@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import store from '../../redux/index';
+import store from '../../../redux/index';
 import {
   Alert,
   ScrollView,
@@ -13,8 +13,8 @@ import { NavigationActions } from 'react-navigation';
 import {
   alertInvalidValuesNewItem,
   localhost,
-} from '../../src/static/constants';
-import { styles } from '../../src/static/styles/NewItemStyles';
+} from '../../static/constants';
+import { styles } from '../../static/styles/NewItemStyles';
 import { ItemDetails } from './ItemDetails';
 import { ImageRow } from './ImageRow';
 
@@ -51,7 +51,10 @@ export class NewItem extends React.Component {
   getHeaders() {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', `Bearer ${store.getState().auth.token}`);
+    headers.append(
+      'Authorization',
+      `Bearer ${store.getState().authorizationReducer.token}`,
+    );
     return headers;
   }
 
@@ -81,7 +84,7 @@ export class NewItem extends React.Component {
     })
       .then(response => response.json())
       .then(responseJson => {
-        this.handleResponse(responseJson)
+        this.handleResponse(responseJson);
       })
       .catch(error => {
         console.error(error);

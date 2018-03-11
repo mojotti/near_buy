@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Platform, StatusBar } from 'react-native';
 import { StackNavigator } from 'react-navigation';
-import Items from './Items.js';
+import Items from './items/Items.js';
 import NewItem from './new_item/NewItem';
 
 const App = StackNavigator({

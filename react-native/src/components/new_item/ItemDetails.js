@@ -1,7 +1,7 @@
 import React from 'react';
 import { TextInput, View } from 'react-native';
 import PropTypes from 'prop-types';
-import { styles } from '../../src/static/styles/NewItemStyles';
+import { styles } from '../../static/styles/NewItemStyles';
 
 export class ItemDetails extends React.Component {
   constructor(props) {

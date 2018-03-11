@@ -2,11 +2,11 @@
 
 import React from 'react';
 import { Button, ListView, Text, View } from 'react-native';
-import { logout } from '../redux/actions/auth';
+import { logout } from '../../../redux/actions/auth';
 import { connect } from 'react-redux';
-import { localhost, userHasNoItemsText } from '../src/static/constants';
+import { localhost, userHasNoItemsText } from '../../static/constants';
 import { ListViewItem } from './ListViewItem';
-import { styles } from '../src/static/styles/ItemsStyles';
+import { styles } from '../../static/styles/ItemsStyles';
 
 export class Items extends React.Component {
   constructor(props) {

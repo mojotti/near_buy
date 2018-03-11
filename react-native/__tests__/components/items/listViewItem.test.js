@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import { ListViewItem } from '../../../components/ListViewItem';
+import { ListViewItem } from '../../../src/components/items/ListViewItem';
 import { mockedListViewItem } from '../../../src/static/samples/mockedListViewItem';
 
 describe('ListViewItem', () => {

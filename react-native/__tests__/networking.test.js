@@ -3,7 +3,7 @@ import {
   generateHeadersForBasicAuth,
   generateHash,
   generateHashForRegistering,
-} from '../src/networking';
+} from '../src/networking/networking';
 
 const base64 = require('base-64');
 

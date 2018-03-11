@@ -6,7 +6,7 @@ import { Alert } from 'react-native';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
-import { Login } from '../../components/Login';
+import { Login } from '../../src/components/Login';
 import {
   loginText,
   networkErrorAlert,

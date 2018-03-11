@@ -3,7 +3,7 @@ import { Alert, Image, TouchableHighlight, View } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import PropTypes from 'prop-types';
 import ImagePicker from 'react-native-image-crop-picker';
-import { cameraIconSize, styles } from '../../src/static/styles/NewItemStyles';
+import { cameraIconSize, styles } from '../../static/styles/NewItemStyles';
 
 export class ImageRow extends React.Component {
   constructor(props) {

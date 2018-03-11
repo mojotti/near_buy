@@ -11,20 +11,20 @@ import {
   TouchableHighlight,
   View,
 } from 'react-native';
-import { login } from '../redux/actions/auth';
+import { login } from '../../redux/actions/auth';
 import {
   generateHeadersForBasicAuth,
   getHeadersForRegistering,
   generateHashForRegistering,
-} from '../src/networking';
+} from '../networking/networking';
 import {
   localhost,
   loginText,
   logo,
   networkErrorAlert,
   registerText,
-} from '../src/static/constants';
-import { styles } from '../src/static/styles/LoginStyles';
+} from '../static/constants';
+import { styles } from '../static/styles/LoginStyles';
 
 const LOGO = logo;
 

@@ -2,7 +2,7 @@ import React from 'react';
 import 'isomorphic-fetch'; // for headers, fetch, etc.
 import renderer from 'react-test-renderer';
 
-import { Items } from '../../../components/Items';
+import { Items } from '../../../src/components/items/Items';
 import { sample } from '../../../src/static/samples/ItemSample';
 
 describe('Items', () => {
