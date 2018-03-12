@@ -19,7 +19,6 @@ describe('Location reducer', () => {
       type: UPDATE_LOCATION,
       ...NEW_COORDS,
     };
-
     const expectedCoords = {
       latitude: 25.0,
       longitude: 60.0,

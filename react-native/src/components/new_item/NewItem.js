@@ -167,7 +167,6 @@ export class NewItem extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  console.log(state);
   const { latitude, longitude } = state.locationReducer;
   return { latitude, longitude };
 };
