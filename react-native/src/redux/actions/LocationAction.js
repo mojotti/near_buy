@@ -1,6 +1,7 @@
-export const updateLocation = (coords) => {
+export const updateLocationAction = (coords) => {
   return {
     type: 'UPDATE_LOCATION',
     coords,
   };
 };
+

@@ -10,10 +10,9 @@ import {
   View,
 } from 'react-native';
 import { NavigationActions } from 'react-navigation';
-import {
-  alertInvalidValuesNewItem,
-  localhost,
-} from '../../static/constants';
+import { connect } from 'react-redux';
+
+import { alertInvalidValuesNewItem, localhost } from '../../static/constants';
 import { styles } from '../../static/styles/NewItemStyles';
 import { ItemDetails } from './ItemDetails';
 import { ImageRow } from './ImageRow';
@@ -79,6 +78,8 @@ export class NewItem extends React.Component {
         title: title,
         price: price,
         description: description,
+        latitude: this.props.latitude,
+        longitude: this.props.longitude,
       }),
       headers: this.getHeaders(),
     })
@@ -165,4 +166,10 @@ export class NewItem extends React.Component {
   }
 }
 
-export default NewItem;
+const mapStateToProps = (state, ownProps) => {
+  console.log(state);
+  const { latitude, longitude } = state.locationReducer;
+  return { latitude, longitude };
+};
+
+export default connect(mapStateToProps, null)(NewItem);

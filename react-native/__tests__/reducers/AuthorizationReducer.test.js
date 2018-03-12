@@ -15,7 +15,9 @@ const loggedInState = {
 
 test('return default state when invalid type passed to authorizationReducer', () => {
   const invalidActionType = { type: 'invalid' };
-  expect(authorizationReducer(defaultState, invalidActionType)).toEqual(defaultState);
+  expect(authorizationReducer(defaultState, invalidActionType)).toEqual(
+    defaultState,
+  );
 });
 
 test('return logged in state when logged in with correct details', () => {

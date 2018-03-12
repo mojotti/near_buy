@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { AppState } from 'react-native';
 import { StackNavigator } from 'react-navigation';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
 import Items from './items/Items';
 import NewItem from './new_item/NewItem';
 import { handleAppStateChange } from '../AppState';
@@ -13,7 +16,7 @@ const App = StackNavigator({
 
 class Secured extends Component {
   componentDidMount() {
-    runAppStartEvents();
+    runAppStartEvents(this.props.dispatch);
     AppState.addEventListener('change', handleAppStateChange);
   }
 
@@ -26,4 +29,13 @@ class Secured extends Component {
   }
 }
 
-export default Secured;
+const mapStateToProps = (state, ownProps) => {
+  return {};
+};
+
+Secured.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+};
+
+
+export default connect(mapStateToProps, null)(Secured);

@@ -1,10 +1,10 @@
-const defaultState = {
+const initialState = {
   isLoggedIn: false,
   username: '',
   token: '',
 };
 
-export const authorizationReducer = (state = defaultState, action) => {
+export const authorizationReducer = (state = initialState, action) => {
   switch (action.type) {
   case 'LOGIN':
     return Object.assign({}, state, {

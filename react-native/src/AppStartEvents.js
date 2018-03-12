@@ -1,6 +1,6 @@
 import { getCurrentLocation } from './Location';
 import { requestPermissions } from './Permissions';
 
-export const runAppStartEvents = () => {
-  requestPermissions().then(() => getCurrentLocation());
+export const runAppStartEvents = (dispatch) => {
+  requestPermissions().then(() => getCurrentLocation(dispatch));
 };
