@@ -50,10 +50,7 @@ export class NewItem extends React.Component {
   getHeaders() {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    headers.append(
-      'Authorization',
-      `Bearer ${store.getState().authorizationReducer.token}`,
-    );
+    headers.append('Authorization', `Bearer ${this.props.token}`);
     return headers;
   }
 
@@ -168,7 +165,8 @@ export class NewItem extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   const { latitude, longitude } = state.locationReducer;
-  return { latitude, longitude };
+  const token = state.authorizationReducer.token;
+  return { latitude, longitude, token };
 };
 
 export default connect(mapStateToProps, null)(NewItem);

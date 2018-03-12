@@ -37,5 +37,4 @@ Secured.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
-
 export default connect(mapStateToProps, null)(Secured);
