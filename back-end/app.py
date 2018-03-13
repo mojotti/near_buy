@@ -112,7 +112,7 @@ def new_user():
     Register new user and save its details to db.
     :return: json
     """
-    encoded_msg = request.json.get('user_info')
+    encoded_msg = request.get_json().get('user_info')
     msg = base64.urlsafe_b64decode(encoded_msg).decode('utf-8').split(':')
     username, email, password = msg[0], msg[1], msg[2]
     if username is '' or email is '' or password is '':
@@ -173,11 +173,12 @@ def create_item():
     :return: json, status code
     """
     user_id = g.user['id']
-    if not request.json or 'title' not in request.json or 'price' not in request.json:
+    if not request.get_json() or 'title' not in request.get_json() or 'price' not in request.get_json():
         abort(400)
     item = get_item_details(user_id)
+    print('item', item)
     DB.add_item_to_db(item)
-    item = DB.retrieve_item_with_title(request.json['title'])
+    item = DB.retrieve_item_with_title(request.get_json()['title'])
     return jsonify({'item': make_public_item(item)}), 201
 
 
@@ -188,16 +189,16 @@ def get_item_details(user_id):
     """
     return {
         'id': DB.get_id_for_new_item(),
-        'title': request.json['title'],
-        'price': int(request.json['price']),
+        'title': request.get_json()['title'],
+        'price': int(request.get_json()['price']),
         'seller_id': user_id,
-        'description': request.json.get('description', ""),
+        'description': request.get_json().get('description', ""),
         'sold': False,
-        'location': request.json.get('location', None),
+        'location': request.get_json().get('location', None),
         'pictures': {
-                '1': request.json.get('pictures', {}).get('1'),
-                '2': request.json.get('pictures', {}).get('2'),
-                '3': request.json.get('pictures', {}).get('3')
+                '1': request.get_json().get('pictures', {}).get('1'),
+                '2': request.get_json().get('pictures', {}).get('2'),
+                '3': request.get_json().get('pictures', {}).get('3')
         }
     }
 
@@ -215,12 +216,12 @@ def update_item(item_id):
     if item[0].get('seller_id') != user_id:  # prevent modifying another user's items
         abort(403)
     check_if_item_is_valid(item)
-    item[0]['title'] = request.json.get('title', item[0]['title'])
-    item[0]['description'] = request.json.get('description',
+    item[0]['title'] = request.get_json().get('title', item[0]['title'])
+    item[0]['description'] = request.get_json().get('description',
                                               item[0]['description'])
     item[0]['seller_id'] = user_id
-    item[0]['sold'] = request.json.get('sold', item[0]['sold'])
-    item[0]['location'] = request.json.get('location', item[0]['location'])
+    item[0]['sold'] = request.get_json().get('sold', item[0]['sold'])
+    item[0]['location'] = request.get_json().get('location', item[0]['location'])
     DB.find_and_update_item(item[0])
     return jsonify({'item': make_public_item(item[0])})
 
@@ -233,20 +234,20 @@ def check_if_item_is_valid(item):
     item_length = len(item)
     if item_length == 0:
         abort(404)
-    if not request.json:
+    if not request.get_json():
         abort(400)
-    if 'title' in request.json and \
-            not isinstance(request.json['title'], six.string_types):
+    if 'title' in request.get_json() and \
+            not isinstance(request.get_json()['title'], six.string_types):
         abort(400)
-    if 'price' in request.json and \
-            not isinstance(request.json['price'], int):
+    if 'price' in request.get_json() and \
+            not isinstance(request.get_json()['price'], int):
         abort(400)
-    if 'description' in request.json and \
-            not isinstance(request.json['description'], six.string_types):
+    if 'description' in request.get_json() and \
+            not isinstance(request.get_json()['description'], six.string_types):
         abort(400)
-    if 'sold' in request.json and not isinstance(request.json['sold'], bool):
+    if 'sold' in request.get_json() and not isinstance(request.get_json()['sold'], bool):
         abort(400)
-    if 'location' in request.json and not isinstance(request.json['location'], six.string_types):
+    if 'location' in request.get_json() and not isinstance(request.json['location'], six.string_types):
         abort(400)
 
 

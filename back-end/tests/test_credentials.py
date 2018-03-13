@@ -30,13 +30,13 @@ class TestCredentials(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         TEST_DB.create_two_users_to_db()
-        TEST_DB.items.insert(ITEM1)
-        TEST_DB.items.insert(ITEM2)
+        TEST_DB.items.insert_one(ITEM1)
+        TEST_DB.items.insert_one(ITEM2)
 
     @classmethod
     def tearDownClass(cls):
-        TEST_DB.users.remove({})
-        TEST_DB.items.remove({})
+        TEST_DB.users.delete_many({})
+        TEST_DB.items.delete_many({})
 
     def setUp(self):
         self.app = app.test_client()

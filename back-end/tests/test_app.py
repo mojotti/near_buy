@@ -37,7 +37,7 @@ class TestApp(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        TEST_DB.users.remove({})
+        TEST_DB.users.delete_many({})
 
     def setUp(self):
         self.app = app.test_client()
@@ -45,7 +45,7 @@ class TestApp(unittest.TestCase):
         self.create_two_items()
 
     def tearDown(self):
-        self.db.items.remove({})
+        self.db.items.delete_many({})
 
     @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_MOJO)
     def create_two_items(self, mock):
@@ -86,7 +86,7 @@ class TestApp(unittest.TestCase):
                                  headers={'Authorization':
                                          'Bearer ' + TOKEN_FOR_USER_ID_0})
         json_resp = json.loads(response.data.decode('utf-8'))
-        self.assertEquals(response.status_code, 201)
+        self.assertEqual(response.status_code, 201)
         self.assertEqual(json_resp['item']['title'], 'Almost new pair of socks')
         self.assertEqual(json_resp['item']['price'], 2)
         self.assertEqual(json_resp['item']['seller_id'], 0)  # user 'mojo' was used to login
@@ -133,9 +133,9 @@ class TestApp(unittest.TestCase):
                     'Bearer ' + TOKEN_FOR_USER_ID_0})
         self.assertEqual(response.status_code, 200)
         json_resp = json.loads(response.data.decode('utf-8'))
-        self.assertEquals(len(json_resp['items']), 2)
+        self.assertEqual(len(json_resp['items']), 2)
         for item in json_resp['items']:
-            self.assertEquals(item['seller_id'], 0)
+            self.assertEqual(item['seller_id'], 0)
 
     @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_KOJO)
     def test_given_there_is_two_items_in_db_when_user_zeros_item_is_requested_then_it_is_retrieved(self, mock):
@@ -145,7 +145,7 @@ class TestApp(unittest.TestCase):
                          'Bearer ' + TOKEN_FOR_USER_ID_1})
         self.assertEqual(response.status_code, 200)
         json_resp = json.loads(response.data.decode('utf-8'))
-        self.assertEquals(json_resp['items'], 'no items')
+        self.assertEqual(json_resp['items'], 'no items')
 
     @mock.patch('database.DatabaseHelper.create_new_user_to_database', return_value=None)
     def test_given_user_has_valid_user_info_when_user_registers_then_it_is_successful(self, mock):
@@ -159,7 +159,7 @@ class TestApp(unittest.TestCase):
         )
         self.assertEqual(response.status_code, 200)
         json_resp = json.loads(response.data.decode('utf-8'))
-        self.assertEquals(json_resp['user_creation'], 'success')
+        self.assertEqual(json_resp['user_creation'], 'success')
 
     @mock.patch('database.DatabaseHelper.create_new_user_to_database', return_value='user exists already')
     def test_given_user_exists_when_user_registers_then_it_is_not_successful(self, mock):
@@ -173,7 +173,7 @@ class TestApp(unittest.TestCase):
         )
         self.assertEqual(response.status_code, 200)
         json_resp = json.loads(response.data.decode('utf-8'))
-        self.assertEquals(json_resp['user_creation'], 'user exists')
+        self.assertEqual(json_resp['user_creation'], 'user exists')
 
     def test_given_user_has_invalid_user_info_when_user_registers_then_it_is_not_successful(self):
         user_info = {  # missing pw

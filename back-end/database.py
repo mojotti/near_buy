@@ -42,18 +42,18 @@ class DatabaseHelper(object):
         for key, value in item_to_change.items():
             for k, new_value in item.items():
                 if key == k and value != new_value:
-                    self.items.update({'id': id_}, {'$set': {key: new_value}})
+                    self.items.update_one({'id': id_}, {'$set': {key: new_value}})
 
     def remove_item(self, item):
         id_ = item['id']
         item_to_remove = self.retrieve_item_with_id(id_)
         if item_to_remove == item:
-            self.items.remove({'id': id_})
+            self.items.delete_many({'id': id_})
         else:
             raise ValueError("Task was not found!")
 
     def remove_item_by_id(self, id_):
-        self.items.remove({'id': id_})
+        self.items.delete_one({'id': id_})
 
     def add_item_to_db(self, item):
         self.items.insert_one(item)
@@ -62,7 +62,7 @@ class DatabaseHelper(object):
         self.users.insert_one(user_info)
 
     def remove_user_from_db(self, username):
-        self.users.remove({'username': username})
+        self.users.delete_one({'username': username})
 
     def retrieve_users(self):
         return self.users.find({}, {'_id': 0})

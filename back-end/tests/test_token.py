@@ -34,7 +34,7 @@ class TestUser(unittest.TestCase):
     def test_given_user_exists_when_token_is_decoded_then_it_retrieves_correct_user_id(self):
         auth_token = self.user.encode_auth_token(666)
         self.assertTrue(isinstance(auth_token, bytes))
-        self.assertEquals(User.decode_auth_token(auth_token), 666)
+        self.assertEqual(User.decode_auth_token(auth_token), 666)
 
     def test_given_user_exists_when_invalid_token_is_decoded_then_error_is_retrieved(self):
         invalid_token = 'lol_lol_omg_i_am_not_token_and_i_should_be_decoded_now'

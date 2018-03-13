@@ -27,16 +27,16 @@ class TestApp(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        TEST_DB.users.remove({})
+        TEST_DB.users.delete_many({})
 
     def setUp(self):
         self.app = app.test_client()
         self.db = TEST_DB
-        self.db.items.insert(ITEM1)
-        self.db.items.insert(ITEM2)
+        self.db.items.insert_one(ITEM1)
+        self.db.items.insert_one(ITEM2)
 
     def tearDown(self):
-        self.db.items.remove({})
+        self.db.items.delete_many({})
 
     @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_MOJO)
     def test_given_there_is_two_items_in_db_when_item_is_updated_then_it_is_changed(self, mock):

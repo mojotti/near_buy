@@ -39,7 +39,8 @@ class User:
         :return: integer|string
         """
         try:
-            payload = jwt.decode(auth_token, near_buy.app.config.get('SECRET_KEY'))
+            # using the verify=False to silence the warning
+            payload = jwt.decode(auth_token, near_buy.app.config.get('SECRET_KEY'), False)
             return payload['sub']
         except jwt.ExpiredSignatureError:
             return 'Signature expired. Please log in again.'

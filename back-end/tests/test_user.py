@@ -44,11 +44,11 @@ class TestUser(unittest.TestCase):
         self.app = app.test_client()
 
     def tearDown(self):
-        self.db.items.remove({})
+        self.db.items.delete_many({})
 
     @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_MOJO)
     def test_given_there_is_two_users_when_user_1_puts_item_to_sell_then_item_has_user_1s_id(self, mock):
-        self.assertEquals(self.db.items.count(), 0)
+        self.assertEqual(self.db.items.count(), 0)
         self.app.post('/api/v1.0/items',
                       data=json.dumps(NEW_ITEM1),
                       content_type='application/json',
@@ -56,11 +56,11 @@ class TestUser(unittest.TestCase):
                                'Bearer ' + TOKEN_FOR_USER_ID_0})
         self.assertEqual(self.db.items.count(), 1)
         for item in self.db.retrieve_items():  # only one item in db
-            self.assertEquals(item['seller_id'], 0)
+            self.assertEqual(item['seller_id'], 0)
 
     @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_KOJO)
     def test_given_there_is_two_users_when_user_2_puts_item_to_sell_then_item_has_user_2s_id(self, mock):
-        self.assertEquals(self.db.items.count(), 0)
+        self.assertEqual(self.db.items.count(), 0)
         self.app.post('/api/v1.0/items',
                       data=json.dumps(NEW_ITEM1),
                       content_type='application/json',
@@ -68,7 +68,7 @@ class TestUser(unittest.TestCase):
                                'Bearer ' + TOKEN_FOR_USER_ID_1})
         self.assertEqual(self.db.items.count(), 1)
         for item in self.db.retrieve_items():  # only one item in db
-            self.assertEquals(item['seller_id'], 1)  # id = 1, because user 'kojo' was used to login
+            self.assertEqual(item['seller_id'], 1)  # id = 1, because user 'kojo' was used to login
 
     @mock.patch('database.DatabaseHelper.is_valid_hash_for_user', return_value=True)
     def test_given_user_has_signed_up_when_she_enters_credentials_then_she_can_authenticate(self, hash):
@@ -77,7 +77,7 @@ class TestUser(unittest.TestCase):
                           headers={'Authorization':
                                    'Basic ' +
                                    VALID_CREDENTIALS1})
-        self.assertEquals(rv.status_code, 200)
+        self.assertEqual(rv.status_code, 200)
 
     @mock.patch('database.DatabaseHelper.is_valid_hash_for_user', return_value=False)
     def test_given_user_has_not_signed_up_when_she_enters_credentials_then_she_can_not_authenticate(self, mock):
@@ -86,7 +86,7 @@ class TestUser(unittest.TestCase):
                           headers={'Authorization':
                                    'Basic ' +
                                    INVALID_CREDENTIALS})
-        self.assertEquals(rv.status_code, 403)
+        self.assertEqual(rv.status_code, 403)
 
     @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_MOJO)
     def test_given_when_user_has_no_items_in_db_when_user1_creates_item_then_user2_cannot_modify_that_item(self, mock):
@@ -109,12 +109,12 @@ class TestUser(unittest.TestCase):
                           headers={'Authorization':
                                    'Basic ' +
                                    VALID_CREDENTIALS1})
-        self.assertEquals(rv.status_code, 200)
+        self.assertEqual(rv.status_code, 200)
         user = User(email='mojo', password='best_password_ever')
         token = user.encode_auth_token(0).decode('utf-8')
         json_resp = json.loads(rv.data.decode('utf-8'))
-        self.assertEquals(json_resp['token'], token)
-        self.assertEquals(json_resp['username'], 'mojo')
+        self.assertEqual(json_resp['token'], token)
+        self.assertEqual(json_resp['username'], 'mojo')
 
     def create_new_item(self, item, token):
         self.app.post('/api/v1.0/items',
@@ -129,7 +129,7 @@ class TestUser(unittest.TestCase):
                           headers={'Authorization':
                                    'Basic ' +
                                    INVALID_CREDENTIALS})
-        self.assertEquals(rv.status_code, 403)
+        self.assertEqual(rv.status_code, 403)
         json_resp = json.loads(rv.data.decode('utf-8'))
-        self.assertEquals(json_resp['error'], 'Unauthorized access')
+        self.assertEqual(json_resp['error'], 'Unauthorized access')
 

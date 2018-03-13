@@ -19,18 +19,18 @@ app.config.from_object('Config.TestingConfig')
 class TestApp(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        TEST_DB.users.remove({})
+        TEST_DB.users.delete_many({})
 
     def setUp(self):
         self.app = app.test_client()
         self.db = TEST_DB
-        self.db.items.insert(ITEM1)
-        self.db.items.insert(ITEM2)
+        self.db.items.insert_one(ITEM1)
+        self.db.items.insert_one(ITEM2)
         self.user = User(email='test_email', password='test_pw')
 
     def tearDown(self):
-        self.db.items.remove({})
-        self.db.users.remove({})
+        self.db.items.delete_many({})
+        self.db.users.delete_many({})
 
     def test_when_item_is_updated_it_is_changed_in_db(self):
         old_item = self.db.retrieve_item_with_title('MacBook Air mid 2012')
@@ -131,7 +131,7 @@ class TestApp(unittest.TestCase):
         self.assertEqual(self.db.users.count(), 5)
         for i in range(4):
             self.db.remove_user_from_db('user' + str(i))
-        self.assertEquals(self.db.users.count(), 1)
+        self.assertEqual(self.db.users.count(), 1)
 
     def test_given_there_are_no_users_when_five_users_are_created_then_they_all_can_be_found(self):
         for i in range(5):
@@ -143,13 +143,13 @@ class TestApp(unittest.TestCase):
         expected = ['user0', 'user1', 'user2', 'user3', 'user4']
         for user in self.db.retrieve_users():
             users.append(user['username'])
-        self.assertEquals(users, expected)
+        self.assertEqual(users, expected)
 
     def test_given_there_is_user_in_db_when_user_is_retrieved_then_password_is_hashed(self):
         self.db.create_new_user_to_database(TEST_EMAIL, 'user', 'password')
         user = self.db.retrieve_user_by_username('user')
-        self.assertEquals(user['username'], 'user')
-        self.assertNotEquals(user['hash'], 'password')
+        self.assertEqual(user['username'], 'user')
+        self.assertNotEqual(user['hash'], 'password')
         self.assertTrue('password' not in user and 'hash' in user)
 
     def test_given_user_exists_in_db_when_token_is_created_then_it_is_attached_to_user_details(self):
@@ -157,27 +157,27 @@ class TestApp(unittest.TestCase):
         token = self.user.encode_auth_token(user_id=0)
         self.db.attach_token_to_user(username='user', token=token)
         user_info = self.db.retrieve_user_by_username('user')
-        self.assertEquals(token, user_info['token'])
-        self.assertEquals('user', user_info['username'])
+        self.assertEqual(token, user_info['token'])
+        self.assertEqual('user', user_info['username'])
         decoded_token = self.user.decode_auth_token(user_info['token'])
-        self.assertEquals(0, decoded_token)
+        self.assertEqual(0, decoded_token)
 
     def test_given_does_not_exist_in_db_when_token_is_created_then_it_is_not_attached_to_user_details(self):
         token = self.user.encode_auth_token(user_id=0)
         self.db.attach_token_to_user(username='user', token=token)
         user_info = self.db.retrieve_user_by_username('user')
-        self.assertEquals(user_info, None)
+        self.assertEqual(user_info, None)
         all_users = self.db.retrieve_users()
         for user in all_users:
-            self.assertEquals(user, None)
+            self.assertEqual(user, None)
 
     def test_given_user_exists_when_user_is_searched_by_token_then_user_is_retrieved(self):
         self.db.create_new_user_to_database(TEST_EMAIL, 'user', 'password')
         token = self.user.encode_auth_token(user_id=0)
         self.db.attach_token_to_user(username='user', token=token)
         user = self.db.retrieve_user_by_token(token=token)
-        self.assertEquals(user['username'], 'user')
-        self.assertEquals(user['token'], token)
+        self.assertEqual(user['username'], 'user')
+        self.assertEqual(user['token'], token)
 
 
 
