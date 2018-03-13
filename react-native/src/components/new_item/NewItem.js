@@ -27,7 +27,7 @@ const LOWER_BUTTON_IDS = {
   rightButtonId: 3,
 };
 
-export class NewItem extends React.Component {
+export class _NewItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -164,9 +164,11 @@ export class NewItem extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
+  console.log('props', state);
   const { latitude, longitude } = state.locationReducer;
   const token = state.authorizationReducer.token;
   return { latitude, longitude, token };
 };
 
-export default connect(mapStateToProps, null)(NewItem);
+const NewItem = connect(mapStateToProps, null)(_NewItem);
+export default NewItem;

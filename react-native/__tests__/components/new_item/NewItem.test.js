@@ -4,15 +4,8 @@ import { Alert } from 'react-native';
 import renderer from 'react-test-renderer';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
-import store from '../../../src/redux/ReduxStore';
-import { NewItem } from '../../../src/components/new_item/NewItem';
+import NewItem, { _NewItem } from '../../../src/components/new_item/NewItem';
 
-const token = {
-  authorizationReducer: {
-    token: 'jippii',
-  },
-};
-store.getState = jest.fn(() => token);
 jest.mock('react-navigation', () => {
   return {
     NavigationActions: {
@@ -22,21 +15,24 @@ jest.mock('react-navigation', () => {
   };
 });
 
-describe('<New Item />', () => {
+describe('<_NewItem />', () => {
   beforeEach(() => {
     Alert.alert = jest.fn();
   });
 
   test('renders correctly', () => {
-    const newItem = renderer.create(<NewItem />);
+    const newItem = renderer.create(<_NewItem />);
 
     expect(newItem.toJSON()).toMatchSnapshot();
   });
 
   test('calls handle new item when submit is pressed', () => {
-    const handleNewItem = sinon.spy(NewItem.prototype, 'handleNewItemCreation');
+    const handleNewItem = sinon.spy(
+      _NewItem.prototype,
+      'handleNewItemCreation',
+    );
 
-    const newItemComponent = shallow(<NewItem />);
+    const newItemComponent = shallow(<_NewItem />);
 
     newItemComponent
       .find('ScrollView')
@@ -48,7 +44,7 @@ describe('<New Item />', () => {
   });
 
   test('set new image changes state', () => {
-    const newItemComponent = shallow(<NewItem />);
+    const newItemComponent = shallow(<_NewItem />);
     const newItemInstance = newItemComponent.instance();
 
     const image = { path: 'picture_of_me.png' };
@@ -59,7 +55,7 @@ describe('<New Item />', () => {
   });
 
   test('sets state correctly', () => {
-    const newItemComponent = shallow(<NewItem />);
+    const newItemComponent = shallow(<_NewItem />);
     const newItemInstance = newItemComponent.instance();
 
     const title = 'foo';
@@ -76,7 +72,10 @@ describe('<New Item />', () => {
   });
 
   test('gets correct header', () => {
-    const newItemComponent = shallow(<NewItem />);
+    const props = {
+      token: 'jippii',
+    };
+    const newItemComponent = shallow(<_NewItem {...props} />);
     const newItemInstance = newItemComponent.instance();
 
     const header = newItemInstance.getHeaders();
@@ -86,7 +85,7 @@ describe('<New Item />', () => {
   test('handles new item creation', () => {
     fetch.mockResponseSuccess('foo');
 
-    const newItemComponent = shallow(<NewItem />);
+    const newItemComponent = shallow(<_NewItem />);
     const newItemInstance = newItemComponent.instance();
 
     newItemComponent.setState({ title: 'title' });
@@ -98,12 +97,12 @@ describe('<New Item />', () => {
 
   test('handles new item creation response', () => {
     const navigateSpy = sinon.spy(
-      NewItem.prototype,
+      _NewItem.prototype,
       'resetNavigationAndNavigateToRoute',
     );
 
     const navigation = { dispatch: jest.fn() };
-    const newItemComponent = shallow(<NewItem navigation={navigation} />);
+    const newItemComponent = shallow(<_NewItem navigation={navigation} />);
     const newItemInstance = newItemComponent.instance();
 
     newItemComponent.setState({ title: 'title' });
@@ -117,7 +116,7 @@ describe('<New Item />', () => {
   });
 
   test('handles new item creation response', () => {
-    const newItemComponent = shallow(<NewItem />);
+    const newItemComponent = shallow(<_NewItem />);
     const newItemInstance = newItemComponent.instance();
 
     const response = {
