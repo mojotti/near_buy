@@ -7,7 +7,7 @@ Headers {
       "Bearer jippii",
     ],
     "content-type": Array [
-      "application/json",
+      "multipart/form-data",
     ],
   },
 }

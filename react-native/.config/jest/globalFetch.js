@@ -13,3 +13,8 @@ fetch.mockResponseSuccess = body => {
 fetch.mockResponseFailure = error => {
   fetch.mockImplementationOnce(() => Promise.reject(error));
 };
+
+function FormDataMock() {
+  this.append = jest.fn();
+}
+global.FormData = FormDataMock;

@@ -1,7 +1,6 @@
 'use strict';
 
 import React from 'react';
-import store from '../../redux/ReduxStore';
 import {
   Alert,
   ScrollView,
@@ -41,6 +40,8 @@ export class _NewItem extends React.Component {
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
     this.handlePriceChange = this.handlePriceChange.bind(this);
     this.setNewImage = this.setNewImage.bind(this);
+    this.getNewItemData = this.getNewItemData.bind(this);
+    this.isValidItem = this.isValidItem.bind(this);
   }
 
   static navigationOptions = {
@@ -49,7 +50,7 @@ export class _NewItem extends React.Component {
 
   getHeaders() {
     const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
+    headers.append('Content-Type', 'multipart/form-data');
     headers.append('Authorization', `Bearer ${this.props.token}`);
     return headers;
   }
@@ -62,22 +63,45 @@ export class _NewItem extends React.Component {
     this.props.navigation.dispatch(resetAction);
   }
 
-  handleNewItemCreation() {
+  getNewItemData() {
+    const data = new FormData();
+    const location = {
+      latitude: this.props.latitude,
+      longitude: this.props.longitude,
+    };
+    data.append('title', this.state.title);
+    data.append('price', this.state.price);
+    data.append('description', this.state.description);
+    data.append('location', location);
+    this.state.images.forEach((image, i) => {
+      if (image !== null) {
+        data.append('picture' + i, {
+          uri: image.uri,
+          type: image.mime,
+          modificationDate: image.modificationDate,
+        });
+      }
+    });
+    return data;
+  }
+
+  isValidItem() {
     const { title, price, description } = this.state;
     if (title === '' || price === '' || description === '') {
       Alert.alert(...alertInvalidValuesNewItem);
+      return false;
+    }
+    return true;
+  }
+
+  handleNewItemCreation() {
+    if (!this.isValidItem()) {
       return;
     }
     const url = `http://${localhost}:5000/api/v1.0/items`;
     fetch(url, {
       method: 'POST',
-      body: JSON.stringify({
-        title: title,
-        price: price,
-        description: description,
-        latitude: this.props.latitude,
-        longitude: this.props.longitude,
-      }),
+      body: this.getNewItemData(),
       headers: this.getHeaders(),
     })
       .then(response => response.json())

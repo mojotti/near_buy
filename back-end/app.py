@@ -173,10 +173,10 @@ def create_item():
     :return: json, status code
     """
     user_id = g.user['id']
+    print(request.get_json())
     if not request.get_json() or 'title' not in request.get_json() or 'price' not in request.get_json():
         abort(400)
     item = get_item_details(user_id)
-    print('item', item)
     DB.add_item_to_db(item)
     item = DB.retrieve_item_with_title(request.get_json()['title'])
     return jsonify({'item': make_public_item(item)}), 201
@@ -196,6 +196,7 @@ def get_item_details(user_id):
         'sold': False,
         'location': request.get_json().get('location', None),
         'pictures': {
+                '0': request.get_json().get('pictures', {}).get('0'),
                 '1': request.get_json().get('pictures', {}).get('1'),
                 '2': request.get_json().get('pictures', {}).get('2'),
                 '3': request.get_json().get('pictures', {}).get('3')
