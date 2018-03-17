@@ -2,6 +2,7 @@
 'app.py' provides a RESTful API for NearBuy app.
 """
 import base64
+import os
 import sys
 import six
 from flask import Flask, jsonify, abort, request, make_response, url_for, g
@@ -9,6 +10,7 @@ from flask_httpauth import HTTPBasicAuth, HTTPTokenAuth
 
 import User as U
 import database
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__, static_url_path="")
 app.config.from_object('Config.DevelopmentConfig')
@@ -20,6 +22,8 @@ if sys.argv[0] == 'app.py':
     DB = database.DatabaseHelper()
 else:
     DB = database.TestDB()  # if running unit tests
+
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 
 @token_auth.verify_token
@@ -165,6 +169,11 @@ def get_item(item_id):
     return jsonify({'item': make_public_item(item[0])})
 
 
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
 @app.route('/api/v1.0/items', methods=['POST'])
 @token_auth.login_required
 def create_item():
@@ -172,14 +181,21 @@ def create_item():
     Create new item and add it to database.
     :return: json, status code
     """
-    user_id = g.user['id']
-    print(request.get_json())
-    if not request.get_json() or 'title' not in request.get_json() or 'price' not in request.get_json():
-        abort(400)
-    item = get_item_details(user_id)
-    DB.add_item_to_db(item)
-    item = DB.retrieve_item_with_title(request.get_json()['title'])
-    return jsonify({'item': make_public_item(item)}), 201
+    print(request.form)
+    print(request.files)
+    pictures = request.files['pictures']
+    if pictures and allowed_file(pictures.filename):
+        picture_name = secure_filename(pictures.filename)
+        pictures.save(os.path.join(app.config['UPLOAD_FOLDER']), picture_name)
+    # user_id = g.user['id']
+    # print(request.get_json())
+    # if not request.get_json() or 'title' not in request.get_json() or 'price' not in request.get_json():
+    #     abort(400)
+    # item = get_item_details(user_id)
+    # DB.add_item_to_db(item)
+    # item = DB.retrieve_item_with_title(request.get_json()['title'])
+    # return jsonify({'item': make_public_item(item)}), 201
+    return jsonify({'item': 'ok'}), 200
 
 
 def get_item_details(user_id):

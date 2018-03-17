@@ -50,6 +50,7 @@ export class _NewItem extends React.Component {
 
   getHeaders() {
     const headers = new Headers();
+    headers.append('Accept', 'application/json');
     headers.append('Content-Type', 'multipart/form-data');
     headers.append('Authorization', `Bearer ${this.props.token}`);
     return headers;
@@ -65,23 +66,22 @@ export class _NewItem extends React.Component {
 
   getNewItemData() {
     const data = new FormData();
-    const location = {
-      latitude: this.props.latitude,
-      longitude: this.props.longitude,
-    };
     data.append('title', this.state.title);
     data.append('price', this.state.price);
     data.append('description', this.state.description);
-    data.append('location', location);
-    this.state.images.forEach((image, i) => {
-      if (image !== null) {
-        data.append('picture' + i, {
-          uri: image.uri,
+    data.append('latitude', this.props.latitude);
+    data.append('longitude', this.props.longitude);
+    console.log(this.state.images[0]);
+    this.state.images.forEach(image => {
+      if (image) {
+        data.append('picture[]', {
+          path: image.path,
           type: image.mime,
           modificationDate: image.modificationDate,
         });
       }
     });
+    console.log('dataa', data);
     return data;
   }
 
@@ -173,7 +173,7 @@ export class _NewItem extends React.Component {
     };
 
     return (
-      <ScrollView>
+      <ScrollView keyboardShouldPersistTaps="handled">
         <View style={styles.container}>
           <Text style={styles.headerText}>Item details</Text>
           <ItemDetails {...itemDetailsProps} />
