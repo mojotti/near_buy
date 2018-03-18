@@ -83,8 +83,6 @@ describe('<_NewItem />', () => {
   });
 
   test('handles new item creation', () => {
-    fetch.mockResponseSuccess('foo');
-
     const newItemComponent = shallow(<_NewItem />);
     const newItemInstance = newItemComponent.instance();
 

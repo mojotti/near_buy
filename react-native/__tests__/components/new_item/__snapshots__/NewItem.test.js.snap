@@ -3,6 +3,9 @@
 exports[`<_NewItem /> gets correct header 1`] = `
 Headers {
   "_headers": Object {
+    "accept": Array [
+      "application/json",
+    ],
     "authorization": Array [
       "Bearer jippii",
     ],
@@ -14,7 +17,9 @@ Headers {
 `;
 
 exports[`<_NewItem /> renders correctly 1`] = `
-<RCTScrollView>
+<RCTScrollView
+  keyboardShouldPersistTaps="handled"
+>
   <View>
     <View
       style={

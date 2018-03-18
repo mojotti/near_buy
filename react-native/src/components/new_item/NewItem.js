@@ -82,8 +82,6 @@ export class _NewItem extends React.Component {
 
   getNewItemData() {
     const images = this.getImages();
-    console.log(this.state.images);
-    console.log(images);
     return [
       ...images,
       {
@@ -130,25 +128,6 @@ export class _NewItem extends React.Component {
         console.error(error);
       });
   }
-
-  // handleNewItemCreation() {
-  //   if (!this.isValidItem()) {
-  //     return;
-  //   }
-  //   const url = `http://${localhost}:5000/api/v1.0/items`;
-  //   fetch(url, {
-  //     method: 'POST',
-  //     body: this.getNewItemData(),
-  //     headers: this.getHeaders(),
-  //   })
-  //     .then(response => response.json())
-  //     .then(responseJson => {
-  //       this.handleResponse(responseJson);
-  //     })
-  //     .catch(error => {
-  //       console.error(error);
-  //     });
-  // }
 
   handleResponse(responseJson) {
     if (responseJson.item && responseJson.item.title === this.state.title) {

@@ -1,4 +1,5 @@
 import 'isomorphic-fetch';
+import 'react-native-fetch-blob';
 const realFetch = require('node-fetch');
 
 global.fetch = jest.fn();
@@ -13,6 +14,14 @@ fetch.mockResponseSuccess = body => {
 fetch.mockResponseFailure = error => {
   fetch.mockImplementationOnce(() => Promise.reject(error));
 };
+
+jest.mock('react-native-fetch-blob', () => {
+  return {
+    DocumentDir: () => {},
+    polyfill: () => {},
+    fetch: () => Promise.resolve({ json: () => Promise.resolve('success') }),
+  };
+});
 
 function FormDataMock() {
   this.append = jest.fn();
