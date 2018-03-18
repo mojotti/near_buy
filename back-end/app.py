@@ -1,6 +1,7 @@
 """
 'app.py' provides a RESTful API for NearBuy app.
 """
+import ast
 import base64
 import os
 import sys
@@ -182,47 +183,45 @@ def create_item():
     :return: json, status code
     """
     print('form', request.form['info'])
-    user_data = request.form['info']
+    user_data = ast.literal_eval(request.form['info'])
+
     pictures = request.files.getlist('pictures[]')
     if pictures:
-        for picture in pictures:
-            if allowed_file(picture.filename):
-                picture_name = secure_filename(picture.filename)
-                id_ = DB.get_id_for_new_item()
-                directory = app.config['UPLOAD_FOLDER'] + str(id_) + '/'
-                if not os.path.exists(directory):
-                    os.makedirs(directory)
-                picture.save(os.path.join(directory + picture_name))
-
-    # user_id = g.user['id']
-    # if not request.get_json() or 'title' not in request.get_json() or 'price' not in request.get_json():
-    #     abort(400)
-    # item = get_item_details(user_id)
-    # DB.add_item_to_db(item)
-    # item = DB.retrieve_item_with_title(request.get_json()['title'])
-    # return jsonify({'item': make_public_item(item)}), 201
-    return jsonify({'item': 'ok'}), 201
+        save_pictures(pictures)
+    if not user_data or 'title' not in user_data or 'price' not in user_data:
+        abort(400)
+    item = get_item_details(user_data)
+    DB.add_item_to_db(item)
+    item = DB.retrieve_item_with_title(user_data.get('title'))
+    return jsonify({'item': make_public_item(item)}), 201
 
 
-def get_item_details(user_id):
+def save_pictures(pictures):
+    for picture in pictures:
+        if allowed_file(picture.filename):
+            picture_name = secure_filename(picture.filename)
+            id_ = DB.get_id_for_new_item()
+            directory = app.config['UPLOAD_FOLDER'] + str(id_) + '/'
+            if not os.path.exists(directory):
+                os.makedirs(directory)
+            picture.save(os.path.join(directory + picture_name))
+
+
+def get_item_details(user_data):
     """Get and return all necessary details for item.
-    :param: user_id
+    :param: user_data
     :return: dictionary
     """
+    user_id = g.user['id']
     return {
         'id': DB.get_id_for_new_item(),
-        'title': request.get_json()['title'],
-        'price': int(request.get_json()['price']),
+        'title': user_data.get('title'),
+        'price': int(user_data.get('price')),
         'seller_id': user_id,
-        'description': request.get_json().get('description', ""),
+        'description': user_data.get('description'),
         'sold': False,
-        'location': request.get_json().get('location', None),
-        'pictures': {
-                '0': request.get_json().get('pictures', {}).get('0'),
-                '1': request.get_json().get('pictures', {}).get('1'),
-                '2': request.get_json().get('pictures', {}).get('2'),
-                '3': request.get_json().get('pictures', {}).get('3')
-        }
+        'latitude': user_data.get('latitude'),
+        'longitude': user_data.get('longitude')
     }
 
 
