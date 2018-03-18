@@ -49,14 +49,6 @@ export class _NewItem extends React.Component {
     title: 'Add item',
   };
 
-  getHeaders() {
-    const headers = new Headers();
-    headers.append('Accept', 'application/json');
-    headers.append('Content-Type', 'multipart/form-data');
-    headers.append('Authorization', `Bearer ${this.props.token}`);
-    return headers;
-  }
-
   resetNavigationAndNavigateToRoute(targetRoute) {
     const resetAction = NavigationActions.reset({
       index: 0,
@@ -106,27 +98,22 @@ export class _NewItem extends React.Component {
     return true;
   }
 
+  getHeaders() {
+    return {
+      Authorization: `Bearer ${this.props.token}`,
+      'Content-Type': 'multipart/form-data',
+    };
+  }
+
   handleNewItemCreation() {
     if (!this.isValidItem()) {
       return;
     }
     const url = `http://${localhost}:5000/api/v1.0/items`;
-    RNFetchBlob.fetch(
-      'POST',
-      url,
-      {
-        Authorization: `Bearer ${this.props.token}`,
-        'Content-Type': 'multipart/form-data',
-      },
-      this.getNewItemData(),
-    )
+    RNFetchBlob.fetch('POST', url, this.getHeaders(), this.getNewItemData())
       .then(response => response.json())
-      .then(responseJson => {
-        this.handleResponse(responseJson);
-      })
-      .catch(error => {
-        console.error(error);
-      });
+      .then(responseJson => this.handleResponse(responseJson))
+      .catch(error => console.error(error));
   }
 
   handleResponse(responseJson) {

@@ -20,6 +20,7 @@ jest.mock('react-native-fetch-blob', () => {
     DocumentDir: () => {},
     polyfill: () => {},
     fetch: () => Promise.resolve({ json: () => Promise.resolve('success') }),
+    wrap: () => '12345',
   };
 });
 

@@ -1,19 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<_NewItem /> gets correct header 1`] = `
-Headers {
-  "_headers": Object {
-    "accept": Array [
-      "application/json",
-    ],
-    "authorization": Array [
-      "Bearer jippii",
-    ],
-    "content-type": Array [
-      "multipart/form-data",
-    ],
-  },
+Object {
+  "Authorization": "Bearer jippii",
+  "Content-Type": "multipart/form-data",
 }
+`;
+
+exports[`<_NewItem /> images are added if they exist 1`] = `
+Array [
+  Object {
+    "data": "12345",
+    "filename": "image0.jpg",
+    "name": "pictures[]",
+    "type": "image/foo",
+  },
+  Object {
+    "data": "12345",
+    "filename": "image2.jpg",
+    "name": "pictures[]",
+    "type": "image/foo",
+  },
+]
 `;
 
 exports[`<_NewItem /> renders correctly 1`] = `

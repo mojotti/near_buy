@@ -130,4 +130,17 @@ describe('<_NewItem />', () => {
     expect(Alert.alert.mock.calls.length).toBe(1);
     expect(Alert.alert.mock.calls).toEqual(expectedAlert);
   });
+
+  test('images are added if they exist', () => {
+    const newItemComponent = shallow(<_NewItem />);
+    const newItemInstance = newItemComponent.instance();
+
+    const image = { mime: 'image/foo', path: 'path/to/file' };
+    const mockedImages = [image, null, image, null];
+    newItemComponent.setState({ images: mockedImages });
+
+    const imagesToSend = newItemInstance.getImages();
+
+    expect(imagesToSend).toMatchSnapshot();
+  });
 });
