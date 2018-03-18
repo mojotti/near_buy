@@ -133,7 +133,7 @@ def new_user():
 @token_auth.login_required
 def get_items_for_user():
     """
-    Get all items that user has.
+    Get all items that user<id> has.
     :return: json
     """
     items = DB.retrieve_items_with_seller_id(g.user['id'])
@@ -170,16 +170,12 @@ def get_item(item_id):
     return jsonify({'item': make_public_item(item[0])})
 
 
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-
 @app.route('/api/v1.0/items', methods=['POST'])
 @token_auth.login_required
 def create_item():
     """
     Create new item and add it to database.
+    Save pictures to file system, if there are pictures with item.
     :return: json, status code
     """
     user_data = ast.literal_eval(request.form['info'])
@@ -194,7 +190,22 @@ def create_item():
     return jsonify({'item': make_public_item(item)}), 201
 
 
+def allowed_file(filename):
+    """
+     Helper for create_item().
+     Check if file to be saved is in allowed format.
+     :param: filename
+     """
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
 def save_pictures(pictures):
+    """
+    Helper for create_item().
+    Save item's pictures to file system.
+    :param: pictures
+    """
     for picture in pictures:
         if allowed_file(picture.filename):
             picture_name = secure_filename(picture.filename)
@@ -206,7 +217,9 @@ def save_pictures(pictures):
 
 
 def get_item_details(user_data):
-    """Get and return all necessary details for item.
+    """
+    Helper for create_item().
+    Get and return all necessary details for item.
     :param: user_data
     :return: dictionary
     """
@@ -226,7 +239,8 @@ def get_item_details(user_data):
 @app.route('/api/v1.0/items/<int:item_id>', methods=['PUT'])
 @token_auth.login_required
 def update_item(item_id):
-    """Update one item with id.
+    """
+    Update one item with id.
     :param: item_id
     :return: json
     """
@@ -248,6 +262,7 @@ def update_item(item_id):
 
 def check_if_item_is_valid(item):
     """
+    Helper for update_item()
     Check if all necessary conditions are fulfilled for item.
     :param: item
     """
