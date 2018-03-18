@@ -84,10 +84,7 @@ class TestApp(unittest.TestCase):
     @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_MOJO)
     def test_given_there_is_two_items_in_db_when_new_items_is_added_then_status_code_is_201(self, mock):
         data = {'name': 'this is a name', 'age': '12'}
-        data['picture0'] = (io.BytesIO(b"abcdef"), 'test0.jpg')
-        data['picture1'] = (io.BytesIO(b"abcdef"), 'test1.jpg')
-        data['picture2'] = (io.BytesIO(b"abcdef"), 'test2.jpg')
-        data['picture3'] = (io.BytesIO(b"abcdef"), 'test3.jpg')
+        data['pictures[]'] = (io.BytesIO(b"abcdef"), 'test0.jpg')
 
         response = self.app.post('/api/v1.0/items',
                                  data=data,

@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
+import RNFetchBlob from 'react-native-fetch-blob';
 
 import { alertInvalidValuesNewItem, localhost } from '../../static/constants';
 import { styles } from '../../static/styles/NewItemStyles';
@@ -64,25 +65,38 @@ export class _NewItem extends React.Component {
     this.props.navigation.dispatch(resetAction);
   }
 
-  getNewItemData() {
-    const data = new FormData();
-    data.append('title', this.state.title);
-    data.append('price', this.state.price);
-    data.append('description', this.state.description);
-    data.append('latitude', this.props.latitude);
-    data.append('longitude', this.props.longitude);
-    console.log(this.state.images[0]);
-    this.state.images.forEach(image => {
+  getImages() {
+    let images = [];
+    this.state.images.forEach((image, i) => {
       if (image) {
-        data.append('picture[]', {
-          path: image.path,
+        images.push({
+          name: 'pictures[]',
+          filename: 'image' + i + '.jpg',
           type: image.mime,
-          modificationDate: image.modificationDate,
+          data: RNFetchBlob.wrap(image.path),
         });
       }
     });
-    console.log('dataa', data);
-    return data;
+    return images;
+  }
+
+  getNewItemData() {
+    const images = this.getImages();
+    console.log(this.state.images);
+    console.log(images);
+    return [
+      ...images,
+      {
+        name: 'info',
+        data: JSON.stringify({
+          longitude: this.props.longitude,
+          latitude: this.props.latitude,
+          title: this.state.title,
+          price: this.state.price,
+          description: this.state.description,
+        }),
+      },
+    ];
   }
 
   isValidItem() {
@@ -99,11 +113,15 @@ export class _NewItem extends React.Component {
       return;
     }
     const url = `http://${localhost}:5000/api/v1.0/items`;
-    fetch(url, {
-      method: 'POST',
-      body: this.getNewItemData(),
-      headers: this.getHeaders(),
-    })
+    RNFetchBlob.fetch(
+      'POST',
+      url,
+      {
+        Authorization: `Bearer ${this.props.token}`,
+        'Content-Type': 'multipart/form-data',
+      },
+      this.getNewItemData(),
+    )
       .then(response => response.json())
       .then(responseJson => {
         this.handleResponse(responseJson);
@@ -112,6 +130,25 @@ export class _NewItem extends React.Component {
         console.error(error);
       });
   }
+
+  // handleNewItemCreation() {
+  //   if (!this.isValidItem()) {
+  //     return;
+  //   }
+  //   const url = `http://${localhost}:5000/api/v1.0/items`;
+  //   fetch(url, {
+  //     method: 'POST',
+  //     body: this.getNewItemData(),
+  //     headers: this.getHeaders(),
+  //   })
+  //     .then(response => response.json())
+  //     .then(responseJson => {
+  //       this.handleResponse(responseJson);
+  //     })
+  //     .catch(error => {
+  //       console.error(error);
+  //     });
+  // }
 
   handleResponse(responseJson) {
     if (responseJson.item && responseJson.item.title === this.state.title) {

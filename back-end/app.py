@@ -181,21 +181,27 @@ def create_item():
     Create new item and add it to database.
     :return: json, status code
     """
-    print(request.form)
-    print(request.files)
-    pictures = request.files['pictures']
-    if pictures and allowed_file(pictures.filename):
-        picture_name = secure_filename(pictures.filename)
-        pictures.save(os.path.join(app.config['UPLOAD_FOLDER']), picture_name)
+    print('form', request.form['info'])
+    user_data = request.form['info']
+    pictures = request.files.getlist('pictures[]')
+    if pictures:
+        for picture in pictures:
+            if allowed_file(picture.filename):
+                picture_name = secure_filename(picture.filename)
+                id_ = DB.get_id_for_new_item()
+                directory = app.config['UPLOAD_FOLDER'] + str(id_) + '/'
+                if not os.path.exists(directory):
+                    os.makedirs(directory)
+                picture.save(os.path.join(directory + picture_name))
+
     # user_id = g.user['id']
-    # print(request.get_json())
     # if not request.get_json() or 'title' not in request.get_json() or 'price' not in request.get_json():
     #     abort(400)
     # item = get_item_details(user_id)
     # DB.add_item_to_db(item)
     # item = DB.retrieve_item_with_title(request.get_json()['title'])
     # return jsonify({'item': make_public_item(item)}), 201
-    return jsonify({'item': 'ok'}), 200
+    return jsonify({'item': 'ok'}), 201
 
 
 def get_item_details(user_id):

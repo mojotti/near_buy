@@ -1,4 +1,4 @@
-upload_folder = '~/Pictures'
+upload_folder = '/home/risto-matti/test_pics/'
 
 class Config(object):
     DEBUG = False
