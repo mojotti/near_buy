@@ -30,8 +30,7 @@ ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 @token_auth.verify_token
 def verify_token(token):
     """
-    If token matches with the one stored in DB, verifying is
-    successful.
+    If token matches with the one stored in DB, verifying is successful.
     :param: token
     :return: bool
     """
