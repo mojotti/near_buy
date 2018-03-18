@@ -182,9 +182,7 @@ def create_item():
     Create new item and add it to database.
     :return: json, status code
     """
-    print('form', request.form['info'])
     user_data = ast.literal_eval(request.form['info'])
-
     pictures = request.files.getlist('pictures[]')
     if pictures:
         save_pictures(pictures)

@@ -5,8 +5,8 @@ from database import TestDB
 from User import User
 from samples import items
 
-ITEM1 = items.ITEM1
-ITEM2 = items.ITEM2
+ITEM1 = items.DB_ITEM1
+ITEM2 = items.DB_ITEM2
 
 TEST_PASSWORD = "test_password123"
 TEST_USER = "test_user"
@@ -42,7 +42,7 @@ class TestApp(unittest.TestCase):
             'description': u'Price went up. This Mac is sold.',
             'sold': True,
             'location': '46.51119 4392 -121.45356'
-            }
+        }
         self.db.find_and_update_item(item)
         updated_item = self.db.retrieve_item_with_title('SOLD! MacBook Air mid 2012')
         self.assertEqual(updated_item['id'], 2)

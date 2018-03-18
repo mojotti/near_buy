@@ -39,6 +39,7 @@ class TestApp(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
         TEST_DB.users.delete_many({})
+        items.rm_test_pictures()
 
     def setUp(self):
         self.app = app.test_client()
@@ -50,14 +51,18 @@ class TestApp(unittest.TestCase):
 
     @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_MOJO)
     def create_two_items(self, mock):
+        data = {'info': ITEM1}
+        data['pictures[]'] = [(io.BytesIO(b"abcdef"), 'test0.jpg'), (io.BytesIO(b"abcdef"), 'test1.jpg')]
         self.app.post('/api/v1.0/items',
-                      data=json.dumps(ITEM1),
-                      content_type='application/json',
+                      data=data,
+                      content_type='multipart/form-data',
                       headers={'Authorization':
                                'Bearer ' + TOKEN_FOR_USER_ID_0})
+        data = {'info': ITEM2}
+        data['pictures[]'] = [(io.BytesIO(b"ghijkl"), 'test2.jpg'), (io.BytesIO(b"ghijkl"), 'test3.jpg')]
         self.app.post('/api/v1.0/items',
-                      data=json.dumps(ITEM2),
-                      content_type='application/json',
+                      data=data,
+                      content_type='multipart/form-data',
                       headers={'Authorization':
                                'Bearer ' + TOKEN_FOR_USER_ID_0})
 
@@ -65,46 +70,36 @@ class TestApp(unittest.TestCase):
     def test_given_there_is_two_items_in_db_when_item_two_is_retrieved_then_it_is_not_sold(self, mock):
         response = self.app.get('/api/v1.0/items/1',
                                 headers={'Authorization':
-                                        'Bearer ' + TOKEN_FOR_USER_ID_0})
+                                         'Bearer ' + TOKEN_FOR_USER_ID_0})
         json_resp = json.loads(response.data.decode('utf-8'))
         self.assertFalse(json_resp['item']['sold'])
 
-    # data = {'name': 'this is a name', 'age': 12}
-    # data = {key: str(value) for key, value in data.items()}
-    # data['file'] = (io.BytesIO(b"abcdef"), 'test.jpg')
-    # self.login()
-    # response = self.client.post(
-    #     url_for('adverts.save'), data=data, follow_redirects=True,
-    #     content_type='multipart/form-data'
-    # )
-    # self.assertIn(b'Your item has been saved.', response.data)
-    # advert = Item.query.get(1)
-    # self.assertIsNotNone(item.logo)
-
     @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_MOJO)
-    def test_given_there_is_two_items_in_db_when_new_items_is_added_then_status_code_is_201(self, mock):
-        data = {'name': 'this is a name', 'age': '12'}
-        data['pictures[]'] = (io.BytesIO(b"abcdef"), 'test0.jpg')
-
+    @mock.patch('database.DatabaseHelper.get_id_for_new_item', return_value=100)
+    def test_given_there_is_two_items_in_db_when_new_items_is_added_then_status_code_is_201(self, mock, mockk):
+        data =  {'info': NEW_ITEM}
+        data['pictures[]'] = [(io.BytesIO(b"abcdef"), 'test0.jpg'), (io.BytesIO(b"abcdef"), 'test1.jpg')]
         response = self.app.post('/api/v1.0/items',
                                  data=data,
                                  content_type='multipart/form-data',
                                  headers={'Authorization':
-                                         'Bearer ' + TOKEN_FOR_USER_ID_0})
-        # self.assertEqual(response.status_code, 201)
-        # self.assertEqual(self.db.items.count(), 3)
+                                          'Bearer ' + TOKEN_FOR_USER_ID_0})
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(self.db.items.count(), 3)
 
     @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_MOJO)
     def test_given_there_is_two_items_in_db_when_new_item_is_created_then_it_can_be_retrieved(self, mock):
+        data =  {'info': NEW_ITEM}
+        data['pictures[]'] = [(io.BytesIO(b"abcdef"), 'test0.jpg'), (io.BytesIO(b"abcdef"), 'test1.jpg')]
         response = self.app.post('/api/v1.0/items',
-                                 data=json.dumps(NEW_ITEM),
-                                 content_type='application/json',
+                                 data=data,
+                                 content_type='multipart/form-data',
                                  headers={'Authorization':
-                                         'Bearer ' + TOKEN_FOR_USER_ID_0})
+                                          'Bearer ' + TOKEN_FOR_USER_ID_0})
         json_resp = json.loads(response.data.decode('utf-8'))
         self.assertEqual(response.status_code, 201)
-        self.assertEqual(json_resp['item']['title'], 'Almost new pair of socks')
-        self.assertEqual(json_resp['item']['price'], 2)
+        self.assertEqual(json_resp['item']['title'], 'new_item')
+        self.assertEqual(json_resp['item']['price'], 100)
         self.assertEqual(json_resp['item']['seller_id'], 0)  # user 'mojo' was used to login
         self.assertEqual(self.db.items.count(), 3)
 

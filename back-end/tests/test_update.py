@@ -7,8 +7,8 @@ from database import TestDB
 from User import User
 from samples import items
 
-ITEM1 = items.ITEM1
-ITEM2 = items.ITEM2
+ITEM1 = items.DB_ITEM1
+ITEM2 = items.DB_ITEM2
 TEST_DB = TestDB()
 USER = User(email='test_email', password='test_pw')
 
