@@ -38,8 +38,14 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+  <key>NSPhotoLibraryUsageDescription</key>
+  <string>NearBuy requires access to the photo library.</string>
+  <key>NSMicrophoneUsageDescription</key>
+  <string>NearBuy does not require access to the microphone.</string>
+  <key>NSCameraUsageDescription</key>
+  <string>NearBuy requires access to the camera.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+	<string>NearBuy requires access to location.</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSExceptionDomains</key>

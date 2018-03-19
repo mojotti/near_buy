@@ -1,9 +1,10 @@
-import { Dimensions, StyleSheet } from 'react-native';
+import { Dimensions, Platform, StyleSheet } from 'react-native';
 import { widthWithThirtyPercentPadding } from '../constants';
 import { baseFont } from './baseStyles';
 
 const eightyPercentWidth = Dimensions.get('window').width * 0.8;
 const sixteenPercentHeight = Dimensions.get('window').height * 0.16;
+const margin = Platform.OS === 'ios' ? 12 : -12
 
 export const styles = StyleSheet.create({
   container: {
@@ -44,7 +45,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   textInputStyleNegativeMargin: {
-    marginBottom: -12,
+    marginBottom: margin,
   },
   textInputStyleLargeMargin: {
     marginBottom: 16,

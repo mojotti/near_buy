@@ -1,9 +1,9 @@
-import { Dimensions, StyleSheet } from 'react-native';
+import { Dimensions, Platform, StyleSheet } from 'react-native';
 import { widthWithThirtyPercentPadding } from '../constants';
 import { baseFont } from './baseStyles';
 
 const { width, height } = Dimensions.get('window');
-
+const textInputPadding = Platform.OS === 'ios' ? 5 : 0;
 export const cameraIconSize = width * 0.28;
 const itemContainer = {
   backgroundColor: '#fff',
@@ -27,6 +27,7 @@ export const styles = StyleSheet.create({
     alignSelf: 'stretch',
     marginLeft: width * 0.075,
     fontFamily: baseFont,
+    color: '#848484',
   },
   itemDetailContainer: {
     height: height * 0.06,
@@ -41,6 +42,7 @@ export const styles = StyleSheet.create({
     marginLeft: 15,
     marginRight: 15,
     alignItems: 'center',
+    padding: textInputPadding
   },
   submitButton: {
     margin: 15,

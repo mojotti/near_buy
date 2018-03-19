@@ -1,6 +1,6 @@
 import { Platform } from 'react-native';
 
 const baseFontAndroid = 'sans-serif-light';
-const baseFontIos = 'San Francisco';
+const baseFontIos = null;
 
 export const baseFont = Platform.OS === 'ios' ? baseFontIos : baseFontAndroid;
