@@ -23,7 +23,7 @@ export class UserItems extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { navigate } = navigation;
     return {
-      title: 'Your user_items',
+      title: 'Your items',
       headerLeft: null,
       headerRight: (
         <Text onPress={() => navigate('NewItem')} style={styles.newItem}>
