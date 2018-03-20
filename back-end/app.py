@@ -3,6 +3,7 @@
 """
 import ast
 import base64
+import imghdr
 import os
 import sys
 import six
@@ -24,7 +25,7 @@ if sys.argv[0] == 'app.py':
 else:
     DB = database.TestDB()  # if running unit tests
 
-ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif', 'pbm', 'bmp'])
 
 
 @token_auth.verify_token
@@ -189,14 +190,14 @@ def create_item():
     return jsonify({'item': make_public_item(item)}), 201
 
 
-def allowed_file(filename):
+def is_allowed_file(picture):
     """
      Helper for create_item().
      Check if file to be saved is in allowed format.
      :param: filename
      """
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+    is_valid_image = imghdr.what(picture) in ALLOWED_EXTENSIONS
+    return '.' in picture.filename and is_valid_image
 
 
 def save_pictures(pictures):
@@ -206,7 +207,7 @@ def save_pictures(pictures):
     :param: pictures
     """
     for picture in pictures:
-        if allowed_file(picture.filename):
+        if is_allowed_file(picture):
             picture_name = secure_filename(picture.filename)
             id_ = DB.get_id_for_new_item()
             directory = app.config['UPLOAD_FOLDER'] + str(id_) + '/'

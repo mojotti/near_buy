@@ -50,7 +50,8 @@ class TestApp(unittest.TestCase):
         self.db.items.delete_many({})
 
     @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_MOJO)
-    def create_two_items(self, mock):
+    @mock.patch('app.is_allowed_file', return_value=True)
+    def create_two_items(self, mock, rock):
         data = {'info': ITEM1}
         data['pictures[]'] = [(io.BytesIO(b"abcdef"), 'test0.jpg'), (io.BytesIO(b"abcdef"), 'test1.jpg')]
         self.app.post('/api/v1.0/items',
@@ -76,7 +77,8 @@ class TestApp(unittest.TestCase):
 
     @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_MOJO)
     @mock.patch('database.DatabaseHelper.get_id_for_new_item', return_value=100)
-    def test_given_there_is_two_items_in_db_when_new_items_is_added_then_status_code_is_201(self, mock, mockk):
+    @mock.patch('app.is_allowed_file', return_value=True)
+    def test_given_there_is_two_items_in_db_when_new_items_is_added_then_status_code_is_201(self, mock, mockk, rock):
         data =  {'info': NEW_ITEM}
         data['pictures[]'] = [(io.BytesIO(b"abcdef"), 'test0.jpg'), (io.BytesIO(b"abcdef"), 'test1.jpg')]
         response = self.app.post('/api/v1.0/items',
@@ -88,7 +90,8 @@ class TestApp(unittest.TestCase):
         self.assertEqual(self.db.items.count(), 3)
 
     @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_MOJO)
-    def test_given_there_is_two_items_in_db_when_new_item_is_created_then_it_can_be_retrieved(self, mock):
+    @mock.patch('app.is_allowed_file', return_value=True)
+    def test_given_there_is_two_items_in_db_when_new_item_is_created_then_it_can_be_retrieved(self, mock, rock):
         data =  {'info': NEW_ITEM}
         data['pictures[]'] = [(io.BytesIO(b"abcdef"), 'test0.jpg'), (io.BytesIO(b"abcdef"), 'test1.jpg')]
         response = self.app.post('/api/v1.0/items',
@@ -196,6 +199,7 @@ class TestApp(unittest.TestCase):
             content_type='application/json'
         )
         self.assertEqual(response.status_code, 400)
+
 
 
 
