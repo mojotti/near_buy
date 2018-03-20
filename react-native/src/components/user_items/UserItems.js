@@ -8,7 +8,7 @@ import { localhost, userHasNoItemsText } from '../../static/constants';
 import { ListViewItem } from './ListViewItem';
 import { styles } from '../../static/styles/ItemsStyles';
 
-export class Items extends React.Component {
+export class UserItems extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,7 +23,7 @@ export class Items extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { navigate } = navigation;
     return {
-      title: 'Your items',
+      title: 'Your user_items',
       headerLeft: null,
       headerRight: (
         <Text onPress={() => navigate('NewItem')} style={styles.newItem}>
@@ -63,7 +63,7 @@ export class Items extends React.Component {
   }
 
   handleAllItemsRequest(responseJson) {
-    if (responseJson.items === 'no items') {
+    if (responseJson.items === 'no user_items') {
       this.setState({
         loaded: true,
         data: responseJson.items,
@@ -81,7 +81,7 @@ export class Items extends React.Component {
     if (this.state.loaded === false) {
       return <Text style={[styles.infoText]}>{'Loading user data...'}</Text>;
     }
-    if (this.state.data === 'no items') {
+    if (this.state.data === 'no user_items') {
       return <Text style={[styles.infoText]}>{userHasNoItemsText}</Text>;
     } else {
       return (
@@ -122,4 +122,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Items);
+export default connect(mapStateToProps, mapDispatchToProps)(UserItems);

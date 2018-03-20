@@ -13,7 +13,7 @@ export const sample = {
       seller_id: 2,
       sold: false,
       title: 'Item 1',
-      uri: 'http://localhost:5000/api/v1.0/items/2',
+      uri: 'http://localhost:5000/api/v1.0/user_items/2',
     },
     {
       description: 'Description 600',
@@ -28,7 +28,7 @@ export const sample = {
       seller_id: 2,
       sold: false,
       title: 'New item 500',
-      uri: 'http://localhost:5000/api/v1.0/items/3',
+      uri: 'http://localhost:5000/api/v1.0/user_items/3',
     },
     {
       description: 'LOl',
@@ -43,7 +43,7 @@ export const sample = {
       seller_id: 2,
       sold: false,
       title: 'Jee',
-      uri: 'http://localhost:5000/api/v1.0/items/4',
+      uri: 'http://localhost:5000/api/v1.0/user_items/4',
     },
     {
       description: 'Jees',
@@ -58,7 +58,7 @@ export const sample = {
       seller_id: 2,
       sold: false,
       title: 'JEees Jeees',
-      uri: 'http://localhost:5000/api/v1.0/items/6',
+      uri: 'http://localhost:5000/api/v1.0/user_items/6',
     },
     {
       description: 'Otoaeeontaonaoooenotaontaoenoteaoneoanoao',
@@ -73,7 +73,7 @@ export const sample = {
       seller_id: 2,
       sold: false,
       title: 'Neoa',
-      uri: 'http://localhost:5000/api/v1.0/items/7',
+      uri: 'http://localhost:5000/api/v1.0/user_items/7',
     },
     {
       description: 'JEeeeeabaeoaneo',
@@ -88,7 +88,7 @@ export const sample = {
       seller_id: 2,
       sold: false,
       title: 'Jees',
-      uri: 'http://localhost:5000/api/v1.0/items/8',
+      uri: 'http://localhost:5000/api/v1.0/user_items/8',
     },
   ],
 };

@@ -45,7 +45,8 @@ exports[`<_NewItem /> renders correctly 1`] = `
         style={
           Object {
             "alignSelf": "stretch",
-            "fontFamily": "San Francisco",
+            "color": "#848484",
+            "fontFamily": null,
             "fontSize": 22,
             "marginBottom": 15,
             "marginLeft": 56.25,
@@ -81,8 +82,10 @@ exports[`<_NewItem /> renders correctly 1`] = `
               Array [
                 Object {
                   "alignItems": "center",
+                  "fontSize": 16,
                   "marginLeft": 15,
                   "marginRight": 15,
+                  "padding": 5,
                   "width": 525,
                 },
               ]
@@ -116,8 +119,10 @@ exports[`<_NewItem /> renders correctly 1`] = `
               Array [
                 Object {
                   "alignItems": "center",
+                  "fontSize": 16,
                   "marginLeft": 15,
                   "marginRight": 15,
+                  "padding": 5,
                   "width": 525,
                 },
               ]
@@ -150,8 +155,10 @@ exports[`<_NewItem /> renders correctly 1`] = `
               Array [
                 Object {
                   "alignItems": "center",
+                  "fontSize": 16,
                   "marginLeft": 15,
                   "marginRight": 15,
+                  "padding": 5,
                   "width": 525,
                 },
               ]
@@ -168,7 +175,8 @@ exports[`<_NewItem /> renders correctly 1`] = `
         style={
           Object {
             "alignSelf": "stretch",
-            "fontFamily": "San Francisco",
+            "color": "#848484",
+            "fontFamily": null,
             "fontSize": 22,
             "marginBottom": 15,
             "marginLeft": 56.25,
@@ -565,7 +573,7 @@ exports[`<_NewItem /> renders correctly 1`] = `
           style={
             Object {
               "color": "white",
-              "fontFamily": "San Francisco",
+              "fontFamily": null,
               "fontSize": 16,
               "fontWeight": "bold",
             }

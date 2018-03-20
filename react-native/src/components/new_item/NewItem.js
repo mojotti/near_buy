@@ -118,7 +118,7 @@ export class _NewItem extends React.Component {
 
   handleResponse(responseJson) {
     if (responseJson.item && responseJson.item.title === this.state.title) {
-      this.resetNavigationAndNavigateToRoute('Items');
+      this.resetNavigationAndNavigateToRoute('UserItems');
     } else {
       Alert.alert('Item creation failed', 'Something went wrong');
     }

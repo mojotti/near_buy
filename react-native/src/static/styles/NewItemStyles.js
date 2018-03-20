@@ -42,7 +42,8 @@ export const styles = StyleSheet.create({
     marginLeft: 15,
     marginRight: 15,
     alignItems: 'center',
-    padding: textInputPadding
+    padding: 5,
+    fontSize: 16,
   },
   submitButton: {
     margin: 15,

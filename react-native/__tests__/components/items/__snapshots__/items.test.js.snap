@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Items render correctly when response has items 1`] = `
+exports[`UserItems render correctly when response has user_items 1`] = `
 <View
   style={
     Array [

@@ -39,7 +39,7 @@ exports[`Render Login renders correctly 1`] = `
         ellipsizeMode="tail"
         style={
           Object {
-            "fontFamily": "San Francisco",
+            "fontFamily": null,
             "fontSize": 24,
             "marginTop": 50,
             "textAlign": "center",
@@ -83,7 +83,7 @@ exports[`Render Login renders correctly 1`] = `
         placeholder="Username"
         style={
           Object {
-            "marginBottom": -12,
+            "marginBottom": 12,
           }
         }
         underlineColorAndroid="transparent"
@@ -141,7 +141,7 @@ exports[`Render Login renders correctly 1`] = `
           style={
             Object {
               "color": "white",
-              "fontFamily": "San Francisco",
+              "fontFamily": null,
               "fontSize": 16,
               "fontWeight": "bold",
             }
@@ -182,7 +182,7 @@ exports[`Render Login renders correctly 1`] = `
         id="helperText"
         style={
           Object {
-            "fontFamily": "San Francisco",
+            "fontFamily": null,
             "fontSize": 12,
             "marginTop": 10,
             "textAlign": "center",
@@ -196,7 +196,7 @@ exports[`Render Login renders correctly 1`] = `
 </View>
 `;
 
-exports[`Render items renders correctly 1`] = `
+exports[`Render user_items renders correctly 1`] = `
 <View
   style={
     Array [

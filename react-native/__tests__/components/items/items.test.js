@@ -2,14 +2,14 @@ import React from 'react';
 import 'isomorphic-fetch'; // for headers, fetch, etc.
 import renderer from 'react-test-renderer';
 
-import { Items } from '../../../src/components/items/Items';
+import { UserItems } from '../../../src/components/user_items/UserItems';
 import { sample } from '../../../src/static/samples/ItemSample';
 
-describe('Items', () => {
-  it('render correctly when response has items', () => {
+describe('UserItems', () => {
+  it('render correctly when response has user_items', () => {
     fetch.mockResponseSuccess(sample);
 
-    const items = renderer.create(<Items />);
+    const items = renderer.create(<UserItems />);
     items.getInstance().handleAllItemsRequest(sample);
 
     expect(items.toJSON()).toMatchSnapshot();

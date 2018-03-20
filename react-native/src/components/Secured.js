@@ -4,13 +4,13 @@ import { StackNavigator } from 'react-navigation';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import Items from './items/Items';
+import UserItems from './user_items/UserItems';
 import NewItem from './new_item/NewItem';
 import { handleAppStateChange } from '../AppState';
 import { runAppStartEvents } from '../AppStartEvents';
 
 const App = StackNavigator({
-  Items: { screen: Items },
+  UserItems: { screen: UserItems },
   NewItem: { screen: NewItem },
 });
 

@@ -43,7 +43,7 @@ exports[`Login Logo is hidden when keyboard is visible 1`] = `
         placeholder="Username"
         style={
           Object {
-            "marginBottom": -12,
+            "marginBottom": 12,
           }
         }
         underlineColorAndroid="transparent"
@@ -101,7 +101,7 @@ exports[`Login Logo is hidden when keyboard is visible 1`] = `
           style={
             Object {
               "color": "white",
-              "fontFamily": "San Francisco",
+              "fontFamily": null,
               "fontSize": 16,
               "fontWeight": "bold",
             }
@@ -142,7 +142,7 @@ exports[`Login Logo is hidden when keyboard is visible 1`] = `
         id="helperText"
         style={
           Object {
-            "fontFamily": "San Francisco",
+            "fontFamily": null,
             "fontSize": 12,
             "marginTop": 10,
             "textAlign": "center",
@@ -195,7 +195,7 @@ exports[`Login renders sign up details when state is sign up 1`] = `
         ellipsizeMode="tail"
         style={
           Object {
-            "fontFamily": "San Francisco",
+            "fontFamily": null,
             "fontSize": 24,
             "marginTop": 50,
             "textAlign": "center",
@@ -240,7 +240,7 @@ exports[`Login renders sign up details when state is sign up 1`] = `
         placeholder="Email address"
         style={
           Object {
-            "marginBottom": -12,
+            "marginBottom": 12,
           }
         }
         underlineColorAndroid="transparent"
@@ -256,7 +256,7 @@ exports[`Login renders sign up details when state is sign up 1`] = `
         placeholder="Username"
         style={
           Object {
-            "marginBottom": -12,
+            "marginBottom": 12,
           }
         }
         underlineColorAndroid="transparent"
@@ -314,7 +314,7 @@ exports[`Login renders sign up details when state is sign up 1`] = `
           style={
             Object {
               "color": "white",
-              "fontFamily": "San Francisco",
+              "fontFamily": null,
               "fontSize": 16,
               "fontWeight": "bold",
             }
@@ -355,7 +355,7 @@ exports[`Login renders sign up details when state is sign up 1`] = `
         id="helperText"
         style={
           Object {
-            "fontFamily": "San Francisco",
+            "fontFamily": null,
             "fontSize": 12,
             "marginTop": 10,
             "textAlign": "center",

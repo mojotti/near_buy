@@ -11,5 +11,5 @@ export const mockedListViewItem = {
   seller_id: 2,
   sold: false,
   title: 'Item 1',
-  uri: 'http://localhost:5000/api/v1.0/items/2',
+  uri: 'http://localhost:5000/api/v1.0/user_items/2',
 };

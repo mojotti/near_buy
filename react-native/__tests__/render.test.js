@@ -4,7 +4,7 @@ import configureStore from 'redux-mock-store';
 import 'isomorphic-fetch'; // for headers, fetch, etc.
 
 import Login from '../src/components/Login';
-import { Items } from '../src/components/items/Items';
+import { UserItems } from '../src/components/user_items/UserItems';
 import { sample } from '../src/static/samples/ItemSample';
 
 const middlewares = [];
@@ -29,17 +29,17 @@ describe('Render', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  test('items renders without crashing', () => {
+  test('user_items renders without crashing', () => {
     fetch.mockResponseSuccess(sample);
 
-    const rendered = renderer.create(<Items />).toJSON();
+    const rendered = renderer.create(<UserItems />).toJSON();
     expect(rendered).toBeTruthy();
   });
 
-  test('items renders correctly', () => {
+  test('user_items renders correctly', () => {
     fetch.mockResponseSuccess(sample);
 
-    const tree = renderer.create(<Items />).toJSON();
+    const tree = renderer.create(<UserItems />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 });
