@@ -1,9 +1,9 @@
 'use strict';
 
 import React from 'react';
-import { Button, ListView, Text, View } from 'react-native';
-import { logout } from '../../redux/actions/AuthorizationAction';
+import { Button, ListView, Text, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import { localhost, userHasNoItemsText } from '../../static/constants';
 import { ListViewItem } from './ListViewItem';
 import { styles } from '../../static/styles/ItemsStyles';
@@ -23,8 +23,14 @@ export class UserItems extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { navigate } = navigation;
     return {
-      title: 'Your items',
-      headerLeft: null,
+      title: 'My items',
+      headerLeft: (
+        <View style={{ paddingHorizontal: 10 }}>
+          <TouchableOpacity onPress={() => navigation.navigate('DrawerOpen')}>
+            <Icon name="menu" size={30} color="blue" />
+          </TouchableOpacity>
+        </View>
+      ),
       headerRight: (
         <Text onPress={() => navigate('NewItem')} style={styles.newItem}>
           New item
@@ -41,10 +47,6 @@ export class UserItems extends React.Component {
     const headers = new Headers();
     headers.append('Authorization', `Bearer ${this.props.token}`);
     return headers;
-  }
-
-  userLogout() {
-    this.props.onLogout();
   }
 
   fetchData() {
@@ -94,16 +96,7 @@ export class UserItems extends React.Component {
   }
 
   render() {
-    return (
-      <View style={[styles.container]}>
-        {this.renderUserData()}
-        <Button
-          onPress={() => this.userLogout()}
-          title="Logout"
-          style={{ margin: 15 }}
-        />
-      </View>
-    );
+    return <View style={[styles.container]}>{this.renderUserData()}</View>;
   }
 }
 
@@ -114,12 +107,4 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onLogout: () => {
-      dispatch(logout());
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(UserItems);
+export default connect(mapStateToProps, null)(UserItems);
