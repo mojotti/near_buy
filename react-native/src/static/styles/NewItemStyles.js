@@ -1,6 +1,6 @@
 import { Dimensions, Platform, StyleSheet } from 'react-native';
 import { widthWithThirtyPercentPadding } from '../constants';
-import { baseFont } from './baseStyles';
+import { baseFont } from './BaseStyles';
 
 const { width, height } = Dimensions.get('window');
 const textInputPadding = Platform.OS === 'ios' ? 5 : 0;

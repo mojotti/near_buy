@@ -9,14 +9,19 @@ import NewItem from './new_item/NewItem';
 import ItemExplorer from './item_explorer/ItemExplorer';
 import { handleAppStateChange } from '../AppState';
 import { runAppStartEvents } from '../AppStartEvents';
-import { baseFont } from '../static/styles/baseStyles';
+import { baseFont } from '../static/styles/BaseStyles';
 import DrawerMenu from './drawer/DrawerMenu';
 
 const App = StackNavigator(
   {
     ItemExplorer: { screen: ItemExplorer },
     UserItems: { screen: UserItems },
-    NewItem: { screen: NewItem },
+    NewItem: {
+      screen: NewItem,
+      navigationOptions: ({ navigation }) => ({
+        drawerLockMode: 'locked-closed',
+      }),
+    },
   },
   {
     navigationOptions: {
@@ -33,7 +38,7 @@ const Drawer = DrawerNavigator(
   },
   {
     contentComponent: DrawerMenu,
-    drawerWidth: Dimensions.get('window').width * 0.5,
+    drawerWidth: Dimensions.get('window').width * 0.6,
   },
 );
 

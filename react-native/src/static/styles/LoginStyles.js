@@ -1,6 +1,6 @@
 import { Dimensions, Platform, StyleSheet } from 'react-native';
 import { widthWithThirtyPercentPadding } from '../constants';
-import { baseFont } from './baseStyles';
+import { baseFont } from './BaseStyles';
 
 const eightyPercentWidth = Dimensions.get('window').width * 0.8;
 const sixteenPercentHeight = Dimensions.get('window').height * 0.16;

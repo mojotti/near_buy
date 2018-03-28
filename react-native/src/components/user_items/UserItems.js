@@ -27,7 +27,7 @@ export class UserItems extends React.Component {
       headerLeft: (
         <View style={{ paddingHorizontal: 10 }}>
           <TouchableOpacity onPress={() => navigation.navigate('DrawerOpen')}>
-            <Icon name="menu" size={30} color="blue" />
+            <Icon name="menu" size={30} color='#4d4dff' />
           </TouchableOpacity>
         </View>
       ),
