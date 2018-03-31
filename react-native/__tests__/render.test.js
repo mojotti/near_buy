@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 import configureStore from 'redux-mock-store';
 import 'isomorphic-fetch'; // for headers, fetch, etc.
 
-import Login from '../src/components/Login';
+import Login from '../src/components/login/Login';
 import { UserItems } from '../src/components/user_items/UserItems';
 import { sample } from '../src/static/samples/ItemSample';
 

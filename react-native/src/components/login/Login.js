@@ -11,20 +11,22 @@ import {
   TouchableHighlight,
   View,
 } from 'react-native';
-import { login } from '../redux/actions/AuthorizationAction';
+import { login } from '../../redux/actions/AuthorizationAction';
 import {
   generateHeadersForBasicAuth,
   getHeadersForRegistering,
   generateHashForRegistering,
-} from '../networking/networking';
+} from '../../networking/networking';
 import {
   localhost,
   loginText,
   logo,
   networkErrorAlert,
   registerText,
-} from '../static/constants';
-import { styles } from '../static/styles/LoginStyles';
+} from '../../static/constants';
+import { styles } from '../../static/styles/LoginStyles';
+import CredentialsEntry from './CredentialsEntry';
+import EmailEntry from './EmailEntry';
 
 const LOGO = logo;
 
@@ -45,6 +47,8 @@ export class Login extends React.Component {
     this.handleRegisteringRequest = this.handleRegisteringRequest.bind(this);
     this.handleRegisteringResponse = this.handleRegisteringResponse.bind(this);
     this.handleError = this.handleError.bind(this);
+    this.handleCredentialChange = this.handleCredentialChange.bind(this);
+    this.handleEmailChange = this.handleEmailChange.bind(this);
   }
 
   componentDidMount() {
@@ -164,26 +168,6 @@ export class Login extends React.Component {
     }
   }
 
-  renderEmailInput() {
-    if (this.state.page === 'Sign up') {
-      return (
-        <TextInput
-          id="emailTextInput"
-          placeholder="Email address"
-          style={styles.textInputStyleNegativeMargin}
-          autoCapitalize="none"
-          autoCorrect={false}
-          autoFocus={false}
-          keyboardType="email-address"
-          value={this.state.email}
-          onChangeText={text => this.setState({ email: text })}
-          underlineColorAndroid="transparent"
-        />
-      );
-    }
-    return null;
-  }
-
   renderLogoAndWelcomeText() {
     if (!this.state.isKeyboardVisible) {
       return (
@@ -193,40 +177,40 @@ export class Login extends React.Component {
         </View>
       );
     }
-    return null;
+  }
+
+  handleCredentialChange(newCreds) {
+    if (newCreds.username !== null) {
+      this.setState(() => ({ username: newCreds.username }));
+    }
+    if (newCreds.password !== null) {
+      this.setState(() => ({ password: newCreds.password }));
+    }
+  }
+
+  handleEmailChange(newEmail) {
+    this.setState(() => ({ email: newEmail }));
   }
 
   render() {
     const behavior = Platform.OS === 'ios' ? 'padding' : null;
+
     return (
       <View style={[styles.container]}>
         <KeyboardAvoidingView behavior={behavior} keyboardVerticalOffset={64}>
           {this.renderLogoAndWelcomeText()}
           <View style={styles.loginContainer}>
-            {this.renderEmailInput()}
-            <TextInput
-              id="usernameTextInput"
-              placeholder="Username"
-              style={styles.textInputStyleNegativeMargin}
-              autoCapitalize="none"
-              autoCorrect={false}
-              autoFocus={false}
-              value={this.state.username}
-              underlineColorAndroid="transparent"
-              onChangeText={text => this.setState({ username: text })}
+            {this.state.page === 'Sign up' && (
+              <EmailEntry
+                email={this.state.email}
+                handleEmailChange={this.handleEmailChange}
+              />
+            )}
+            <CredentialsEntry
+              username={this.state.username}
+              password={this.state.password}
+              handleCredentialChange={this.handleCredentialChange}
             />
-            <TextInput
-              id="passwordTextInput"
-              placeholder="Password"
-              autoCapitalize="none"
-              style={styles.textInputStyleLargeMargin}
-              autoCorrect={false}
-              secureTextEntry={true}
-              underlineColorAndroid="transparent"
-              value={this.state.password}
-              onChangeText={text => this.setState({ password: text })}
-            />
-
             <TouchableHighlight
               id="loginButton"
               onPress={() => this.handleButtonPress()}

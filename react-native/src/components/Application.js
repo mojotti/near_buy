@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Login from './Login';
+import Login from './login/Login';
 import Secured from './Secured';
 
 class Application extends React.Component {
