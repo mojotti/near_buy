@@ -1,52 +1,35 @@
 import React, { Component } from 'react';
-import { Text, TouchableHighlight, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableHighlight, View } from 'react-native';
 import { connect } from 'react-redux';
-import { NavigationActions } from 'react-navigation';
+import PropTypes from 'prop-types';
+
 import { logout } from '../../redux/actions/AuthorizationAction';
 import { styles } from '../../static/styles/DrawerStyles';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import MenuItem from './MenuItem';
 
 class DrawerMenu extends Component {
-  _navigate(route) {
-    return this.props.navigation.dispatch(
-      NavigationActions.reset({
-        index: 0,
-        actions: [NavigationActions.navigate({ routeName: `${route}` })],
-      }),
-    );
-  }
   render() {
+    const myItemProps = {
+      itemName: 'My items',
+      iconName: 'account-circle',
+      iconSize: 27,
+      navigationRoute: 'UserItems',
+      navigation: this.props.navigation,
+    };
+
+    const allItemsProps = {
+      itemName: 'All items',
+      iconName: 'public',
+      iconSize: 27,
+      navigationRoute: 'ItemExplorer',
+      navigation: this.props.navigation,
+    };
+
     return (
       <View style={styles.container}>
         <View>
-          <TouchableOpacity
-            style={styles.menuItem}
-            onPress={() =>
-              this._navigate('UserItems', { isStatusBarHidden: false })
-            }
-          >
-            <Icon
-              name="account-circle"
-              size={27}
-              color="#232c44"
-              style={styles.iconStyles}
-            />
-            <Text style={styles.menuItemText}>My items</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.menuItem}
-            onPress={() =>
-              this._navigate('ItemExplorer', { isStatusBarHidden: false })
-            }
-          >
-            <Icon
-              name="public"
-              size={27}
-              color="#232c44"
-              style={styles.iconStyles}
-            />
-            <Text style={styles.menuItemText}>All items</Text>
-          </TouchableOpacity>
+          <MenuItem {...myItemProps} />
+          <MenuItem {...allItemsProps} />
         </View>
 
         <TouchableHighlight
@@ -66,6 +49,13 @@ const mapDispatchToProps = dispatch => {
       dispatch(logout());
     },
   };
+};
+
+DrawerMenu.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+  onLogout: PropTypes.func.isRequired,
 };
 
 export default connect(null, mapDispatchToProps)(DrawerMenu);
