@@ -15,10 +15,15 @@ import {
   generateHashForRegistering,
 } from '../../networking/networking';
 import {
+  INVALID_CREDS_ALERT,
   localhost,
   loginText,
+  MISSING_USER_DETAILS_ALERT,
+  NETWORK_ERROR_ALERT,
   networkErrorAlert,
   registerText,
+  SUCCESSFUL_REGISTRATION_ALERT,
+  USER_EXISTS_ALERT,
 } from '../../static/constants';
 import { styles } from '../../static/styles/LoginStyles';
 import CredentialsEntry from './CredentialsEntry';
@@ -87,7 +92,7 @@ export class Login extends React.Component {
       (page === 'Sign up' && email === '');
 
     if (hasInvalidUserDetails) {
-      Alert.alert('Invalid values', 'Please enter all the values.');
+      Alert.alert(...MISSING_USER_DETAILS_ALERT);
       return;
     }
     if (page === 'Login') {
@@ -119,16 +124,16 @@ export class Login extends React.Component {
 
   handleRegisteringResponse(response) {
     if (response.user_creation === 'success') {
-      Alert.alert('User creation', 'User created successfully!');
+      Alert.alert(...SUCCESSFUL_REGISTRATION_ALERT);
       this.setState({ page: 'Login' });
     } else {
-      Alert.alert('User creation', 'User exists already!');
+      Alert.alert(...USER_EXISTS_ALERT);
     }
   }
 
   handleError(error) {
     if (error.message === 'Network request failed') {
-      Alert.alert('Oops!', networkErrorAlert);
+      Alert.alert(...NETWORK_ERROR_ALERT);
     }
   }
 
@@ -152,7 +157,7 @@ export class Login extends React.Component {
     if (response.username === this.state.username) {
       this.props.onLogin(this.state.username, response.token);
     } else {
-      Alert.alert('Try again, mate!', 'Invalid credentials.');
+      Alert.alert(...INVALID_CREDS_ALERT);
       this.setState(() => ({ password: '' }));
     }
   }

@@ -9,8 +9,13 @@ import sinon from 'sinon';
 import { Login } from '../../src/components/login/Login';
 import {
   loginText,
-  networkErrorAlert,
   registerText,
+  SUCCESSFUL_REGISTRATION_ALERT,
+  USER_EXISTS_ALERT,
+  MISSING_USER_DETAILS_ALERT,
+  NETWORK_ERROR_ALERT,
+  INVALID_CREDS_ALERT,
+  NETWORK_ERROR,
 } from '../../src/static/constants';
 import {
   successfulRegisteringResponse,
@@ -18,17 +23,6 @@ import {
   unsuccessfulLoginResponse,
   userExistsRegisteringResponse,
 } from '../../src/static/samples/loginAndRegisteringSamples';
-
-const SUCCESSFUL_REGISTRATION_ALERT = [
-  ['User creation', 'User created successfully!'],
-];
-const USER_EXISTS_ALERT = [['User creation', 'User exists already!']];
-const MISSING_USER_DETAILS_ALERT = [
-  ['Invalid values', 'Please enter all the values.'],
-];
-const INVALID_CREDS_ALERT = [['Try again, mate!', 'Invalid credentials.']];
-const NETWORK_ERROR_ALERT = [['Oops!', networkErrorAlert]];
-const NETWORK_ERROR = 'network error!';
 
 const onLoginSpy = sinon.spy();
 const mockedProps = {
@@ -56,7 +50,7 @@ describe('Login', () => {
     loginButton.simulate('Press');
 
     expect(Alert.alert.mock.calls.length).toBe(1);
-    expect(Alert.alert.mock.calls).toEqual(MISSING_USER_DETAILS_ALERT);
+    expect(Alert.alert.mock.calls).toEqual([MISSING_USER_DETAILS_ALERT]);
   });
 
   test('given email is missing, when sign-up-button is pressed, then alert is shown', () => {
@@ -72,7 +66,7 @@ describe('Login', () => {
     loginButton.simulate('Press');
 
     expect(Alert.alert.mock.calls.length).toBe(1);
-    expect(Alert.alert.mock.calls).toEqual(MISSING_USER_DETAILS_ALERT);
+    expect(Alert.alert.mock.calls).toEqual([MISSING_USER_DETAILS_ALERT]);
   });
 
   test('given pw is missing, when sign-up-button is pressed, then alert is shown', () => {
@@ -88,7 +82,7 @@ describe('Login', () => {
     loginButton.simulate('Press');
 
     expect(Alert.alert.mock.calls.length).toBe(1);
-    expect(Alert.alert.mock.calls).toEqual(MISSING_USER_DETAILS_ALERT);
+    expect(Alert.alert.mock.calls).toEqual([MISSING_USER_DETAILS_ALERT]);
   });
 
   test('given username is missing, when login-button is pressed, then alert is shown', () => {
@@ -104,7 +98,7 @@ describe('Login', () => {
     loginButton.simulate('Press');
 
     expect(Alert.alert.mock.calls.length).toBe(1);
-    expect(Alert.alert.mock.calls).toEqual(MISSING_USER_DETAILS_ALERT);
+    expect(Alert.alert.mock.calls).toEqual([MISSING_USER_DETAILS_ALERT]);
   });
 
   test('alert is raised when network error occurs', () => {
@@ -114,7 +108,7 @@ describe('Login', () => {
     loginComponent.instance().handleError(error);
 
     expect(Alert.alert.mock.calls.length).toBe(1);
-    expect(Alert.alert.mock.calls).toEqual(NETWORK_ERROR_ALERT);
+    expect(Alert.alert.mock.calls).toEqual([NETWORK_ERROR_ALERT]);
   });
 
   test('given pw is missing, when login-button is pressed, then alert is shown', () => {
@@ -131,7 +125,7 @@ describe('Login', () => {
     loginButton.simulate('Press');
 
     expect(Alert.alert.mock.calls.length).toBe(1);
-    expect(Alert.alert.mock.calls).toEqual(MISSING_USER_DETAILS_ALERT);
+    expect(Alert.alert.mock.calls).toEqual([MISSING_USER_DETAILS_ALERT]);
   });
 
   test('given all details are missing, when login-button is pressed, then alert is shown', () => {
@@ -147,7 +141,7 @@ describe('Login', () => {
     loginButton.simulate('Press');
 
     expect(Alert.alert.mock.calls.length).toBe(1);
-    expect(Alert.alert.mock.calls).toEqual(MISSING_USER_DETAILS_ALERT);
+    expect(Alert.alert.mock.calls).toEqual([MISSING_USER_DETAILS_ALERT]);
   });
 
   test('given state is login, when login-button is pressed, then alert is not shown', () => {
@@ -193,7 +187,7 @@ describe('Login', () => {
 
     expect(loginComponent.state('page')).toEqual('Login');
     expect(Alert.alert.mock.calls.length).toBe(1);
-    expect(Alert.alert.mock.calls).toEqual(SUCCESSFUL_REGISTRATION_ALERT);
+    expect(Alert.alert.mock.calls).toEqual([SUCCESSFUL_REGISTRATION_ALERT]);
   });
 
   test('when existing user is tried to be registered, alert is shown and registration fails', () => {
@@ -220,7 +214,7 @@ describe('Login', () => {
 
     expect(loginComponent.state('page')).toEqual('Sign up');
     expect(Alert.alert.mock.calls.length).toBe(1);
-    expect(Alert.alert.mock.calls).toEqual(USER_EXISTS_ALERT);
+    expect(Alert.alert.mock.calls).toEqual([USER_EXISTS_ALERT]);
   });
 
   test('when error is risen in registering, it is handled', () => {
@@ -242,7 +236,7 @@ describe('Login', () => {
   });
 
   test('when error is risen in login, it is handled', () => {
-    fetch.mockResponseFailure(NETWORK_ERROR);
+    fetch.mockResponseFailure([NETWORK_ERROR]);
 
     loginComponent.setState({
       page: 'Login',
@@ -279,7 +273,7 @@ describe('Login', () => {
 
     expect(loginComponent.state('password')).toEqual('');
     expect(Alert.alert.mock.calls.length).toBe(1);
-    expect(Alert.alert.mock.calls).toEqual(INVALID_CREDS_ALERT);
+    expect(Alert.alert.mock.calls).toEqual([INVALID_CREDS_ALERT]);
   });
 
   test('when logging in with correct creds, user is logged in', () => {
