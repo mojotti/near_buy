@@ -51,7 +51,7 @@ describe('Login', () => {
       email: 'foo@bar.com',
     });
 
-    const render = loginComponent.dive();
+    const render = loginComponent.find('LoginAndRegisterButton').dive();
     const loginButton = render.find('[id="loginButton"]');
     loginButton.simulate('Press');
 
@@ -67,7 +67,7 @@ describe('Login', () => {
       email: '',
     });
 
-    const render = loginComponent.dive();
+    const render = loginComponent.find('LoginAndRegisterButton').dive();
     const loginButton = render.find('[id="loginButton"]');
     loginButton.simulate('Press');
 
@@ -83,7 +83,7 @@ describe('Login', () => {
       email: 'foo@bar.com',
     });
 
-    const render = loginComponent.dive();
+    const render = loginComponent.find('LoginAndRegisterButton').dive();
     const loginButton = render.find('[id="loginButton"]');
     loginButton.simulate('Press');
 
@@ -99,7 +99,7 @@ describe('Login', () => {
       email: 'foo@bar.com',
     });
 
-    const render = loginComponent.dive();
+    const render = loginComponent.find('LoginAndRegisterButton').dive();
     const loginButton = render.find('[id="loginButton"]');
     loginButton.simulate('Press');
 
@@ -125,7 +125,7 @@ describe('Login', () => {
       username: 'foo',
       password: '',
     });
-    const render = loginComponent.dive();
+    const render = loginComponent.find('LoginAndRegisterButton').dive();
 
     const loginButton = render.find('[id="loginButton"]');
     loginButton.simulate('Press');
@@ -141,7 +141,7 @@ describe('Login', () => {
       password: '',
       email: '',
     });
-    const render = loginComponent.dive();
+    const render = loginComponent.find('LoginAndRegisterButton').dive();
 
     const loginButton = render.find('[id="loginButton"]');
     loginButton.simulate('Press');
@@ -161,7 +161,7 @@ describe('Login', () => {
       email: 'foo@bar.com',
     });
 
-    const render = loginComponent.dive();
+    const render = loginComponent.find('LoginAndRegisterButton').dive();
     const loginButton = render.find('[id="loginButton"]');
     loginButton.simulate('Press');
 
@@ -180,7 +180,7 @@ describe('Login', () => {
     });
 
     loginComponent.update();
-    const render = loginComponent.dive();
+    const render = loginComponent.find('LoginAndRegisterButton').dive();
     const loginButton = render.find('[id="loginButton"]');
 
     // just to see if errors in fetch
@@ -207,7 +207,7 @@ describe('Login', () => {
     });
 
     loginComponent.update();
-    const render = loginComponent.dive();
+    const render = loginComponent.find('LoginAndRegisterButton').dive();
     const loginButton = render.find('[id="loginButton"]');
 
     // just to see if errors in fetch
@@ -234,7 +234,7 @@ describe('Login', () => {
     });
 
     loginComponent.update();
-    const render = loginComponent.dive();
+    const render = loginComponent.find('LoginAndRegisterButton').dive();
     const loginButton = render.find('[id="loginButton"]');
 
     // just to see if errors in fetch
@@ -251,7 +251,7 @@ describe('Login', () => {
     });
 
     loginComponent.update();
-    const render = loginComponent.dive();
+    const render = loginComponent.find('LoginAndRegisterButton').dive();
     const loginButton = render.find('[id="loginButton"]');
 
     // just to see if errors in fetch
@@ -268,7 +268,7 @@ describe('Login', () => {
       email: 'foobar',
     });
 
-    const render = loginComponent.dive();
+    const render = loginComponent.find('LoginAndRegisterButton').dive();
     const loginButton = render.find('[id="loginButton"]');
 
     // just to see if errors in fetch
@@ -292,7 +292,7 @@ describe('Login', () => {
       email: 'foobar',
     });
 
-    const render = loginComponent.dive();
+    const render = loginComponent.find('LoginAndRegisterButton').dive();
     const loginButton = render.find('[id="loginButton"]');
 
     // just to see if errors in fetch
@@ -315,7 +315,7 @@ describe('Login', () => {
       email: '',
     });
 
-    const render = loginComponent.dive();
+    const render = loginComponent.find('AltPage').dive();
     const button = render.find('[id="altPageTitle"]');
     expect(button.props().children).toBe('Sign up');
   });
@@ -328,7 +328,7 @@ describe('Login', () => {
       email: '',
     });
 
-    const render = loginComponent.dive();
+    const render = loginComponent.find('AltPage').dive();
     const button = render.find('[id="altPageTitle"]');
     expect(button.props().children).toBe('Login');
   });
@@ -341,7 +341,7 @@ describe('Login', () => {
       email: '',
     });
 
-    const render = loginComponent.dive();
+    const render = loginComponent.find('AltPage').dive();
     const button = render.find('[id="helperText"]');
     expect(button.props().children).toBe(loginText);
   });
@@ -354,13 +354,13 @@ describe('Login', () => {
       email: '',
     });
 
-    const render = loginComponent.dive();
+    const render = loginComponent.find('AltPage').dive();
     const button = render.find('[id="helperText"]');
     expect(button.props().children).toBe(registerText);
   });
 
   test('renders sign up details when state is sign up', () => {
-    const loginComp = renderer.create(<Login />);
+    const loginComp = renderer.create(<Login {...mockedProps} />);
     expect(loginComp.getInstance().state.page).toEqual('Login');
 
     loginComp.getInstance().togglePage();
@@ -371,39 +371,13 @@ describe('Login', () => {
   });
 
   test('Logo is hidden when keyboard is visible', () => {
-    const loginComp = renderer.create(<Login />);
+    const loginComp = renderer.create(<Login {...mockedProps} />);
     loginComp.getInstance().keyboardDidShow();
 
     expect(loginComp.getInstance().state.isKeyboardVisible).toBeTruthy();
 
     const tree = loginComp.toJSON();
     expect(tree).toMatchSnapshot();
-  });
-
-  test('handleButtonPress is called, when hitting login button', () => {
-    const render = loginComponent.dive();
-
-    const handleButtonPressSpy = sinon.spy(
-      Login.prototype,
-      'handleButtonPress',
-    );
-
-    const loginButton = render.find('[id="loginButton"]');
-    loginButton.simulate('Press');
-
-    expect(handleButtonPressSpy.calledOnce).toBeTruthy();
-  });
-
-  test('handles button press correctly, when hitting SignUp/Login Text', () => {
-    const render = loginComponent.dive();
-
-    const togglePageSpy = sinon.spy(Login.prototype, 'togglePage');
-
-    render.find('Text').forEach(child => {
-      child.simulate('Press');
-    });
-
-    expect(togglePageSpy.calledOnce).toBeTruthy();
   });
 
   test('isKeyboardVisible is set to false when keyboard is hidden', () => {
@@ -413,5 +387,32 @@ describe('Login', () => {
     loginComponent.instance().keyboardDidHide();
 
     expect(loginComponent.state('isKeyboardVisible')).toBeFalsy();
+  });
+
+  test('credential change is handled correctly', () => {
+    expect(loginComponent.state('username')).toEqual('');
+    expect(loginComponent.state('password')).toEqual('');
+
+    loginComponent
+      .instance()
+      .handleCredentialChange({ username: 'foo', password: null });
+
+    expect(loginComponent.state('username')).toEqual('foo');
+    expect(loginComponent.state('password')).toEqual('');
+
+    loginComponent
+      .instance()
+      .handleCredentialChange({ username: null, password: 'bar' });
+
+    expect(loginComponent.state('username')).toEqual('foo');
+    expect(loginComponent.state('password')).toEqual('bar');
+  });
+
+  test('email is changed', () => {
+    expect(loginComponent.state('email')).toEqual('');
+
+    loginComponent.instance().handleEmailChange('foo@bar.com');
+
+    expect(loginComponent.state('email')).toEqual('foo@bar.com');
   });
 });

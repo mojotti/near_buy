@@ -33,38 +33,40 @@ exports[`Login Logo is hidden when keyboard is visible 1`] = `
         }
       }
     >
-      <TextInput
-        allowFontScaling={true}
-        autoCapitalize="none"
-        autoCorrect={false}
-        autoFocus={false}
-        id="usernameTextInput"
-        onChangeText={[Function]}
-        placeholder="Username"
-        style={
-          Object {
-            "marginBottom": 12,
+      <View>
+        <TextInput
+          allowFontScaling={true}
+          autoCapitalize="none"
+          autoCorrect={false}
+          autoFocus={false}
+          id="usernameTextInput"
+          onChangeText={[Function]}
+          placeholder="Username"
+          style={
+            Object {
+              "marginBottom": 12,
+            }
           }
-        }
-        underlineColorAndroid="transparent"
-        value=""
-      />
-      <TextInput
-        allowFontScaling={true}
-        autoCapitalize="none"
-        autoCorrect={false}
-        id="passwordTextInput"
-        onChangeText={[Function]}
-        placeholder="Password"
-        secureTextEntry={true}
-        style={
-          Object {
-            "marginBottom": 16,
+          underlineColorAndroid="transparent"
+          value=""
+        />
+        <TextInput
+          allowFontScaling={true}
+          autoCapitalize="none"
+          autoCorrect={false}
+          id="passwordTextInput"
+          onChangeText={[Function]}
+          placeholder="Password"
+          secureTextEntry={true}
+          style={
+            Object {
+              "marginBottom": 16,
+            }
           }
-        }
-        underlineColorAndroid="transparent"
-        value=""
-      />
+          underlineColorAndroid="transparent"
+          value=""
+        />
+      </View>
       <View
         accessibilityComponentType={undefined}
         accessibilityLabel={undefined}
@@ -110,47 +112,49 @@ exports[`Login Logo is hidden when keyboard is visible 1`] = `
           Login
         </Text>
       </View>
-      <View
-        style={
-          Object {
-            "flexDirection": "row",
-            "justifyContent": "center",
-            "marginTop": 40,
+      <View>
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "marginTop": 40,
+            }
           }
-        }
-      >
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            id="altPageTitle"
+            onPress={[Function]}
+            style={
+              Object {
+                "color": "blue",
+                "fontSize": 16,
+              }
+            }
+          >
+            Sign up
+          </Text>
+        </View>
         <Text
           accessible={true}
           allowFontScaling={true}
           ellipsizeMode="tail"
-          id="altPageTitle"
-          onPress={[Function]}
+          id="helperText"
           style={
             Object {
-              "color": "blue",
-              "fontSize": 16,
+              "fontFamily": null,
+              "fontSize": 12,
+              "marginTop": 10,
+              "textAlign": "center",
             }
           }
         >
-          Sign up
+          New user? Press 'Sign up' to register.
         </Text>
       </View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        id="helperText"
-        style={
-          Object {
-            "fontFamily": null,
-            "fontSize": 12,
-            "marginTop": 10,
-            "textAlign": "center",
-          }
-        }
-      >
-        New user? Press 'Sign up' to register.
-      </Text>
     </View>
   </View>
 </View>
@@ -229,55 +233,59 @@ exports[`Login renders sign up details when state is sign up 1`] = `
         }
       }
     >
-      <TextInput
-        allowFontScaling={true}
-        autoCapitalize="none"
-        autoCorrect={false}
-        autoFocus={false}
-        id="emailTextInput"
-        keyboardType="email-address"
-        onChangeText={[Function]}
-        placeholder="Email address"
-        style={
-          Object {
-            "marginBottom": 12,
+      <View>
+        <TextInput
+          allowFontScaling={true}
+          autoCapitalize="none"
+          autoCorrect={false}
+          autoFocus={false}
+          id="emailTextInput"
+          keyboardType="email-address"
+          onChangeText={[Function]}
+          placeholder="Email address"
+          style={
+            Object {
+              "marginBottom": 12,
+            }
           }
-        }
-        underlineColorAndroid="transparent"
-        value=""
-      />
-      <TextInput
-        allowFontScaling={true}
-        autoCapitalize="none"
-        autoCorrect={false}
-        autoFocus={false}
-        id="usernameTextInput"
-        onChangeText={[Function]}
-        placeholder="Username"
-        style={
-          Object {
-            "marginBottom": 12,
+          underlineColorAndroid="transparent"
+          value=""
+        />
+      </View>
+      <View>
+        <TextInput
+          allowFontScaling={true}
+          autoCapitalize="none"
+          autoCorrect={false}
+          autoFocus={false}
+          id="usernameTextInput"
+          onChangeText={[Function]}
+          placeholder="Username"
+          style={
+            Object {
+              "marginBottom": 12,
+            }
           }
-        }
-        underlineColorAndroid="transparent"
-        value=""
-      />
-      <TextInput
-        allowFontScaling={true}
-        autoCapitalize="none"
-        autoCorrect={false}
-        id="passwordTextInput"
-        onChangeText={[Function]}
-        placeholder="Password"
-        secureTextEntry={true}
-        style={
-          Object {
-            "marginBottom": 16,
+          underlineColorAndroid="transparent"
+          value=""
+        />
+        <TextInput
+          allowFontScaling={true}
+          autoCapitalize="none"
+          autoCorrect={false}
+          id="passwordTextInput"
+          onChangeText={[Function]}
+          placeholder="Password"
+          secureTextEntry={true}
+          style={
+            Object {
+              "marginBottom": 16,
+            }
           }
-        }
-        underlineColorAndroid="transparent"
-        value=""
-      />
+          underlineColorAndroid="transparent"
+          value=""
+        />
+      </View>
       <View
         accessibilityComponentType={undefined}
         accessibilityLabel={undefined}
@@ -323,47 +331,49 @@ exports[`Login renders sign up details when state is sign up 1`] = `
           Sign up
         </Text>
       </View>
-      <View
-        style={
-          Object {
-            "flexDirection": "row",
-            "justifyContent": "center",
-            "marginTop": 40,
+      <View>
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "marginTop": 40,
+            }
           }
-        }
-      >
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            id="altPageTitle"
+            onPress={[Function]}
+            style={
+              Object {
+                "color": "blue",
+                "fontSize": 16,
+              }
+            }
+          >
+            Login
+          </Text>
+        </View>
         <Text
           accessible={true}
           allowFontScaling={true}
           ellipsizeMode="tail"
-          id="altPageTitle"
-          onPress={[Function]}
+          id="helperText"
           style={
             Object {
-              "color": "blue",
-              "fontSize": 16,
+              "fontFamily": null,
+              "fontSize": 12,
+              "marginTop": 10,
+              "textAlign": "center",
             }
           }
         >
-          Login
+          Existing user? Press 'Login'.
         </Text>
       </View>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        id="helperText"
-        style={
-          Object {
-            "fontFamily": null,
-            "fontSize": 12,
-            "marginTop": 10,
-            "textAlign": "center",
-          }
-        }
-      >
-        Existing user? Press 'Login'.
-      </Text>
     </View>
   </View>
 </View>

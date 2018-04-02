@@ -1,14 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import {
   Alert,
-  Image,
   Keyboard,
   KeyboardAvoidingView,
   Platform,
-  Text,
-  TextInput,
-  TouchableHighlight,
   View,
 } from 'react-native';
 import { login } from '../../redux/actions/AuthorizationAction';
@@ -20,15 +17,15 @@ import {
 import {
   localhost,
   loginText,
-  logo,
   networkErrorAlert,
   registerText,
 } from '../../static/constants';
 import { styles } from '../../static/styles/LoginStyles';
 import CredentialsEntry from './CredentialsEntry';
 import EmailEntry from './EmailEntry';
-
-const LOGO = logo;
+import LogoAndWelcomeText from './LogoAndWelcomeText';
+import LoginAndRegisterButton from './LoginAndRegisterButton';
+import AltPage from './AltPage';
 
 export class Login extends React.Component {
   constructor(props) {
@@ -49,6 +46,8 @@ export class Login extends React.Component {
     this.handleError = this.handleError.bind(this);
     this.handleCredentialChange = this.handleCredentialChange.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
+    this.handleButtonPress = this.handleButtonPress.bind(this);
+    this.togglePage = this.togglePage.bind(this);
   }
 
   componentDidMount() {
@@ -67,27 +66,17 @@ export class Login extends React.Component {
     this.keyboardDidHideListener.remove();
   }
 
-  getAlternativePageTitle() {
-    const { page } = this.state;
-    return page === 'Login' ? 'Sign up' : 'Login';
-  }
-
-  getHelperText() {
-    const { page } = this.state;
-    return page === 'Login' ? loginText : registerText;
-  }
-
   keyboardDidShow() {
-    this.setState({ isKeyboardVisible: true });
+    this.setState(() => ({ isKeyboardVisible: true }));
   }
 
   keyboardDidHide() {
-    this.setState({ isKeyboardVisible: false });
+    this.setState(() => ({ isKeyboardVisible: false }));
   }
 
   togglePage() {
-    const alternativePage = this.getAlternativePageTitle();
-    this.setState({ page: alternativePage });
+    const alternativePage = this.state.page === 'Login' ? 'Sign up' : 'Login';
+    this.setState(() => ({ page: alternativePage }));
   }
 
   handleButtonPress() {
@@ -164,18 +153,7 @@ export class Login extends React.Component {
       this.props.onLogin(this.state.username, response.token);
     } else {
       Alert.alert('Try again, mate!', 'Invalid credentials.');
-      this.setState({ password: '' });
-    }
-  }
-
-  renderLogoAndWelcomeText() {
-    if (!this.state.isKeyboardVisible) {
-      return (
-        <View style={styles.logoContainer}>
-          <Text style={styles.welcomeText}>Hi! Welcome to</Text>
-          <Image resizeMode="contain" style={styles.logo} source={LOGO} />
-        </View>
-      );
+      this.setState(() => ({ password: '' }));
     }
   }
 
@@ -194,54 +172,38 @@ export class Login extends React.Component {
 
   render() {
     const behavior = Platform.OS === 'ios' ? 'padding' : null;
+    const emailProps = {
+      email: this.state.email,
+      handleEmailChange: this.handleEmailChange,
+    };
+    const credsProps = {
+      username: this.state.username,
+      password: this.state.password,
+      handleCredentialChange: this.handleCredentialChange,
+    };
+    const altPageProps = {
+      togglePage: this.togglePage,
+      page: this.state.page,
+    };
 
     return (
       <View style={[styles.container]}>
         <KeyboardAvoidingView behavior={behavior} keyboardVerticalOffset={64}>
-          {this.renderLogoAndWelcomeText()}
+          {!this.state.isKeyboardVisible && <LogoAndWelcomeText />}
           <View style={styles.loginContainer}>
-            {this.state.page === 'Sign up' && (
-              <EmailEntry
-                email={this.state.email}
-                handleEmailChange={this.handleEmailChange}
-              />
-            )}
-            <CredentialsEntry
-              username={this.state.username}
-              password={this.state.password}
-              handleCredentialChange={this.handleCredentialChange}
+            {this.state.page === 'Sign up' && <EmailEntry {...emailProps} />}
+            <CredentialsEntry {...credsProps} />
+            <LoginAndRegisterButton
+              text={this.state.page}
+              handlePress={this.handleButtonPress}
             />
-            <TouchableHighlight
-              id="loginButton"
-              onPress={() => this.handleButtonPress()}
-              style={styles.loginButton}
-            >
-              <Text style={styles.loginText}>{this.state.page}</Text>
-            </TouchableHighlight>
-            <View style={styles.altPageContainer}>
-              <Text
-                id="altPageTitle"
-                onPress={() => this.togglePage()}
-                style={styles.altPageTitle}
-              >
-                {this.getAlternativePageTitle()}
-              </Text>
-            </View>
-            <Text id="helperText" style={styles.loginHint}>
-              {this.getHelperText()}
-            </Text>
+            <AltPage {...altPageProps} />
           </View>
         </KeyboardAvoidingView>
       </View>
     );
   }
 }
-
-const mapStateToProps = (state, ownProps) => {
-  return {
-    isLoggedIn: state.authorizationReducer.isLoggedIn,
-  };
-};
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -251,4 +213,8 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+Login.propTypes = {
+  onLogin: PropTypes.func.isRequired,
+};
+
+export default connect(null, mapDispatchToProps)(Login);
