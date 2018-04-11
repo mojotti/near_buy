@@ -7,14 +7,14 @@ import imghdr
 import os
 import sys
 import six
-from flask import Flask, jsonify, abort, request, make_response, url_for, g
+from flask import Flask, jsonify, abort, request, make_response, url_for, g, send_from_directory
 from flask_httpauth import HTTPBasicAuth, HTTPTokenAuth
 
 import User as U
 import database
 from werkzeug.utils import secure_filename
 
-app = Flask(__name__, static_url_path="")
+app = Flask(__name__, static_folder='static')
 app.config.from_object('Config.DevelopmentConfig')
 
 basic_auth = HTTPBasicAuth()
@@ -94,23 +94,6 @@ def not_found(error):
     return make_response(jsonify({'error': 'Not found'}), 404)
 
 
-def make_public_item(item):
-    """"
-    Helper function for get_items(). Collects one item at the time.
-    :param: item
-    :return: dictionary
-    """
-    new_item = {}
-    for field in item:
-        if field == 'id':
-            new_item['uri'] = url_for('get_item', item_id=item['id'],
-                                      _external=True)
-            new_item['id'] = item[field]
-        else:
-            new_item[field] = item[field]
-    return new_item
-
-
 @app.route('/api/v1.0/register', methods=['POST'])
 def new_user():
     """
@@ -127,6 +110,23 @@ def new_user():
         return jsonify({'user_creation': 'user exists'})
     else:
         return jsonify({'user_creation': 'success'})
+
+
+def make_public_item(item):
+    """"
+    Helper function for get_items(). Collects one item at the time.
+    :param: item
+    :return: dictionary
+    """
+    new_item = {}
+    for field in item:
+        if field == 'id':
+            new_item['uri'] = url_for('get_item', item_id=item['id'],
+                                      _external=True)
+            new_item['id'] = item[field]
+        else:
+            new_item[field] = item[field]
+    return new_item
 
 
 @app.route('/api/v1.0/user/items', methods=['GET'])
@@ -301,6 +301,16 @@ def delete_item(item_id):
         abort(404)
     DB.remove_item(item[0])
     return jsonify({'result': True})
+
+
+@app.route('/<user_id>/<image>', methods=['GET'])
+def show_image(user_id, image):
+    """
+    Shows the image with given parameters.
+    In production use nginx or apache for serving files.
+    """
+    path = app.static_folder + '/images/' + user_id
+    return send_from_directory(path, image)
 
 
 if __name__ == '__main__':

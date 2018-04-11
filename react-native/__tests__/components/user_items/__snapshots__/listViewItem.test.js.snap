@@ -3,40 +3,64 @@
 exports[`ListViewItem renders and shows current details 1`] = `
 <View
   style={
-    Array [
-      Object {
-        "backgroundColor": "azure",
-        "padding": 10,
-        "width": 750,
-      },
-      Object {
-        "borderBottomColor": "gainsboro",
-        "borderBottomWidth": 1,
-        "marginBottom": 1,
-      },
-    ]
+    Object {
+      "flex": 1,
+      "flexDirection": "row",
+    }
   }
 >
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
+  <Image
+    source={
+      Object {
+        "uri": "http://localhost:5000/undefined/image0.jpg",
+      }
+    }
+    style={
+      Object {
+        "height": 50,
+        "width": 50,
+      }
+    }
+  />
+  <View
+    style={
+      Array [
+        Object {
+          "backgroundColor": "azure",
+          "flex": 1,
+          "flexDirection": "column",
+          "padding": 10,
+          "width": 750,
+        },
+        Object {
+          "borderBottomColor": "gainsboro",
+          "borderBottomWidth": 1,
+          "marginBottom": 1,
+        },
+      ]
+    }
   >
-    Title: Item 1
-  </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
-    Description: Description. Very awesome item.
-  </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  >
-    Price: 50 €
-  </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      Title: Item 1
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      Description: Description. Very awesome item.
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      Price: 50 €
+    </Text>
+  </View>
 </View>
 `;

@@ -1,5 +1,5 @@
-upload_folder = '/home/risto-matti/test_pics/'
-testing_folder = '/home/risto-matti/test_pics/unit_testing/'
+upload_folder = './static/images/'
+testing_folder = './unit_tests/'
 
 class Config(object):
     DEBUG = False

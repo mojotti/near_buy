@@ -3,6 +3,8 @@ import { width } from '../constants';
 
 export const styles = StyleSheet.create({
   item: {
+    flexDirection: 'column',
+    flex: 1,
     padding: 10,
     backgroundColor: 'azure',
     width,

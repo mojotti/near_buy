@@ -24,231 +24,375 @@ exports[`UserItems render correctly when response has user_items 1`] = `
     <View>
       <View
         style={
-          Array [
-            Object {
-              "backgroundColor": "azure",
-              "padding": 10,
-              "width": 750,
-            },
-            Object {
-              "borderBottomColor": "gainsboro",
-              "borderBottomWidth": 1,
-              "marginBottom": 1,
-            },
-          ]
+          Object {
+            "flex": 1,
+            "flexDirection": "row",
+          }
         }
       >
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
+        <Image
+          source={
+            Object {
+              "uri": "http://localhost:5000/0/image0.jpg",
+            }
+          }
+          style={
+            Object {
+              "height": 50,
+              "width": 50,
+            }
+          }
+        />
+        <View
+          style={
+            Array [
+              Object {
+                "backgroundColor": "azure",
+                "flex": 1,
+                "flexDirection": "column",
+                "padding": 10,
+                "width": 750,
+              },
+              Object {
+                "borderBottomColor": "gainsboro",
+                "borderBottomWidth": 1,
+                "marginBottom": 1,
+              },
+            ]
+          }
         >
-          Title: Item 1
-        </Text>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
-          Description: Description. Very awesome item.
-        </Text>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
-          Price: 50 €
-        </Text>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+          >
+            Title: Item 1
+          </Text>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+          >
+            Description: Description. Very awesome item.
+          </Text>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+          >
+            Price: 50 €
+          </Text>
+        </View>
       </View>
       <View
         style={
-          Array [
-            Object {
-              "backgroundColor": "azure",
-              "padding": 10,
-              "width": 750,
-            },
-            Object {
-              "borderBottomColor": "gainsboro",
-              "borderBottomWidth": 1,
-              "marginBottom": 1,
-            },
-          ]
+          Object {
+            "flex": 1,
+            "flexDirection": "row",
+          }
         }
       >
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
+        <Image
+          source={
+            Object {
+              "uri": "http://localhost:5000/1/image0.jpg",
+            }
+          }
+          style={
+            Object {
+              "height": 50,
+              "width": 50,
+            }
+          }
+        />
+        <View
+          style={
+            Array [
+              Object {
+                "backgroundColor": "azure",
+                "flex": 1,
+                "flexDirection": "column",
+                "padding": 10,
+                "width": 750,
+              },
+              Object {
+                "borderBottomColor": "gainsboro",
+                "borderBottomWidth": 1,
+                "marginBottom": 1,
+              },
+            ]
+          }
         >
-          Title: New item 500
-        </Text>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
-          Description: Description 600
-        </Text>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
-          Price: 120 €
-        </Text>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+          >
+            Title: New item 500
+          </Text>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+          >
+            Description: Description 600
+          </Text>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+          >
+            Price: 120 €
+          </Text>
+        </View>
       </View>
       <View
         style={
-          Array [
-            Object {
-              "backgroundColor": "azure",
-              "padding": 10,
-              "width": 750,
-            },
-            Object {
-              "borderBottomColor": "gainsboro",
-              "borderBottomWidth": 1,
-              "marginBottom": 1,
-            },
-          ]
+          Object {
+            "flex": 1,
+            "flexDirection": "row",
+          }
         }
       >
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
+        <Image
+          source={
+            Object {
+              "uri": "http://localhost:5000/2/image0.jpg",
+            }
+          }
+          style={
+            Object {
+              "height": 50,
+              "width": 50,
+            }
+          }
+        />
+        <View
+          style={
+            Array [
+              Object {
+                "backgroundColor": "azure",
+                "flex": 1,
+                "flexDirection": "column",
+                "padding": 10,
+                "width": 750,
+              },
+              Object {
+                "borderBottomColor": "gainsboro",
+                "borderBottomWidth": 1,
+                "marginBottom": 1,
+              },
+            ]
+          }
         >
-          Title: Jee
-        </Text>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
-          Description: LOl
-        </Text>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
-          Price: 200 €
-        </Text>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+          >
+            Title: Jee
+          </Text>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+          >
+            Description: LOl
+          </Text>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+          >
+            Price: 200 €
+          </Text>
+        </View>
       </View>
       <View
         style={
-          Array [
-            Object {
-              "backgroundColor": "azure",
-              "padding": 10,
-              "width": 750,
-            },
-            Object {
-              "borderBottomColor": "gainsboro",
-              "borderBottomWidth": 1,
-              "marginBottom": 1,
-            },
-          ]
+          Object {
+            "flex": 1,
+            "flexDirection": "row",
+          }
         }
       >
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
+        <Image
+          source={
+            Object {
+              "uri": "http://localhost:5000/3/image0.jpg",
+            }
+          }
+          style={
+            Object {
+              "height": 50,
+              "width": 50,
+            }
+          }
+        />
+        <View
+          style={
+            Array [
+              Object {
+                "backgroundColor": "azure",
+                "flex": 1,
+                "flexDirection": "column",
+                "padding": 10,
+                "width": 750,
+              },
+              Object {
+                "borderBottomColor": "gainsboro",
+                "borderBottomWidth": 1,
+                "marginBottom": 1,
+              },
+            ]
+          }
         >
-          Title: JEees Jeees
-        </Text>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
-          Description: Jees
-        </Text>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
-          Price: 100 €
-        </Text>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+          >
+            Title: JEees Jeees
+          </Text>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+          >
+            Description: Jees
+          </Text>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+          >
+            Price: 100 €
+          </Text>
+        </View>
       </View>
       <View
         style={
-          Array [
-            Object {
-              "backgroundColor": "azure",
-              "padding": 10,
-              "width": 750,
-            },
-            Object {
-              "borderBottomColor": "gainsboro",
-              "borderBottomWidth": 1,
-              "marginBottom": 1,
-            },
-          ]
+          Object {
+            "flex": 1,
+            "flexDirection": "row",
+          }
         }
       >
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
+        <Image
+          source={
+            Object {
+              "uri": "http://localhost:5000/4/image0.jpg",
+            }
+          }
+          style={
+            Object {
+              "height": 50,
+              "width": 50,
+            }
+          }
+        />
+        <View
+          style={
+            Array [
+              Object {
+                "backgroundColor": "azure",
+                "flex": 1,
+                "flexDirection": "column",
+                "padding": 10,
+                "width": 750,
+              },
+              Object {
+                "borderBottomColor": "gainsboro",
+                "borderBottomWidth": 1,
+                "marginBottom": 1,
+              },
+            ]
+          }
         >
-          Title: Neoa
-        </Text>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
-          Description: Otoaeeontaonaoooenotaontaoenoteaoneoanoao
-        </Text>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
-          Price: 10200 €
-        </Text>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+          >
+            Title: Neoa
+          </Text>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+          >
+            Description: Otoaeeontaonaoooenotaontaoenoteaoneoanoao
+          </Text>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+          >
+            Price: 10200 €
+          </Text>
+        </View>
       </View>
       <View
         style={
-          Array [
-            Object {
-              "backgroundColor": "azure",
-              "padding": 10,
-              "width": 750,
-            },
-            Object {
-              "borderBottomColor": "gainsboro",
-              "borderBottomWidth": 1,
-              "marginBottom": 1,
-            },
-          ]
+          Object {
+            "flex": 1,
+            "flexDirection": "row",
+          }
         }
       >
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
+        <Image
+          source={
+            Object {
+              "uri": "http://localhost:5000/5/image0.jpg",
+            }
+          }
+          style={
+            Object {
+              "height": 50,
+              "width": 50,
+            }
+          }
+        />
+        <View
+          style={
+            Array [
+              Object {
+                "backgroundColor": "azure",
+                "flex": 1,
+                "flexDirection": "column",
+                "padding": 10,
+                "width": 750,
+              },
+              Object {
+                "borderBottomColor": "gainsboro",
+                "borderBottomWidth": 1,
+                "marginBottom": 1,
+              },
+            ]
+          }
         >
-          Title: Jees
-        </Text>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
-          Description: JEeeeeabaeoaneo
-        </Text>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
-          Price: 100 €
-        </Text>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+          >
+            Title: Jees
+          </Text>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+          >
+            Description: JEeeeeabaeoaneo
+          </Text>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+          >
+            Price: 100 €
+          </Text>
+        </View>
       </View>
     </View>
   </RCTScrollView>

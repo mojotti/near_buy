@@ -5,3 +5,4 @@
 /__pycache__/database.cpython-34.pyc
 /tests/__pycache__/*
 /.cache/*
+/static/*

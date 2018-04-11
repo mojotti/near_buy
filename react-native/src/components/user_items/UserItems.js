@@ -27,7 +27,7 @@ export class UserItems extends React.Component {
       headerLeft: (
         <View style={{ paddingHorizontal: 10 }}>
           <TouchableOpacity onPress={() => navigation.navigate('DrawerOpen')}>
-            <Icon name="menu" size={30} color='#4d4dff' />
+            <Icon name="menu" size={30} color="#4d4dff" />
           </TouchableOpacity>
         </View>
       ),
@@ -89,7 +89,9 @@ export class UserItems extends React.Component {
       return (
         <ListView
           dataSource={this.state.dataSource}
-          renderRow={data => <ListViewItem item={data} />}
+          renderRow={(rowData, sectionID, rowID) => (
+            <ListViewItem item={rowData} itemId={rowID} />
+          )}
         />
       );
     }
