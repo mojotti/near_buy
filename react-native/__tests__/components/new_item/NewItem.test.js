@@ -78,7 +78,7 @@ describe('<_NewItem />', () => {
     const newItemComponent = shallow(<_NewItem {...props} />);
     const newItemInstance = newItemComponent.instance();
 
-    const header = newItemInstance._getHeaders();
+    const header = newItemInstance.getHeaders();
     expect(header).toMatchSnapshot();
   });
 

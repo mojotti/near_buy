@@ -28,18 +28,4 @@ describe('Render', () => {
     const tree = renderer.create(<Login store={store} />).toJSON();
     expect(tree).toMatchSnapshot();
   });
-
-  test('user_items renders without crashing', () => {
-    fetch.mockResponseSuccess(sample);
-
-    const rendered = renderer.create(<UserItems />).toJSON();
-    expect(rendered).toBeTruthy();
-  });
-
-  test('user_items renders correctly', () => {
-    fetch.mockResponseSuccess(sample);
-
-    const tree = renderer.create(<UserItems />).toJSON();
-    expect(tree).toMatchSnapshot();
-  });
 });

@@ -84,7 +84,15 @@ export class UserItems extends React.Component {
         <FlatList
           data={this.state.data}
           renderItem={(rowData, sectionID, rowID) => {
-            return <UserItem item={rowData.item} itemId={rowData.index} />;
+            return (
+              <UserItem
+                item={rowData.item}
+                itemId={rowData.index}
+                fetchItems={() => {
+                  this.fetchData();
+                }}
+              />
+            );
           }}
           keyExtractor={(item, index) => index.toString()}
           onRefresh={() => {

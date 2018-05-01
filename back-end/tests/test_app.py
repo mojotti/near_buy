@@ -129,6 +129,41 @@ class TestApp(unittest.TestCase):
         self.assertEqual(self.db.items.count(), 1)
 
     @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_MOJO)
+    def test_given_user_has_two_items_in_db_when_one_is_deleted_it_cannot_be_found(self, mock):
+        delete = self.app.delete(
+            '/api/v1.0/user/items/0',
+            headers={'Authorization':
+                    'Bearer ' + TOKEN_FOR_USER_ID_0})
+        self.assertEqual(delete.status_code, 200)
+        response = self.app.get(
+            '/api/v1.0/user/items',
+            headers={'Authorization':
+                    'Bearer ' + TOKEN_FOR_USER_ID_0})
+        self.assertEqual(response.status_code, 200)
+
+        user_items = self.db.retrieve_items_with_seller_id(0)
+        user_items = [item for item in user_items]
+
+        self.assertEqual(len(user_items), 1)
+        self.assertEqual(self.db.items.count(), 1)
+
+    @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_MOJO)
+    def test_when_trying_to_delete_non_existing_user_item_then_error_is_raised(self, mock):
+        delete = self.app.delete(
+            '/api/v1.0/user/items/10000',
+            headers={'Authorization':
+                    'Bearer ' + TOKEN_FOR_USER_ID_0})
+        self.assertEqual(delete.status_code, 404)
+
+    @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_MOJO)
+    def test_when_trying_to_delete_non_existing_item_then_error_is_raised(self, mock):
+        delete = self.app.delete(
+            '/api/v1.0/items/10000',
+            headers={'Authorization':
+                    'Bearer ' + TOKEN_FOR_USER_ID_0})
+        self.assertEqual(delete.status_code, 404)
+
+    @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_MOJO)
     def test_given_there_is_two_items_in_db_when_invalid_item_is_created_then_status_code_400_is_retrieved(self, mock):
         item = {'description': 'fake_news'}  # no title or price
         response = self.app.post('/api/v1.0/items',

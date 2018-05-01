@@ -1,11 +1,13 @@
 import React, { PureComponent } from 'react';
-import { Image, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { connect } from 'react-redux';
+import ImageLoad from 'react-native-image-placeholder';
+
 import Swipeout from 'react-native-swipeout';
 import { styles } from '../../static/styles/ListViewItemStyle';
 import { localhost } from '../../static/constants';
 
-class UserItem extends PureComponent {
+export class _UserItem extends PureComponent {
   _getHeaders() {
     const headers = new Headers();
     headers.append('Authorization', `Bearer ${this.props.token}`);
@@ -21,6 +23,7 @@ class UserItem extends PureComponent {
       .then(response => response.json())
       .then(responseJson => {
         console.log(responseJson);
+        this.props.fetchItems();
       })
       .catch(error => {
         console.error(error);
@@ -45,8 +48,9 @@ class UserItem extends PureComponent {
     return (
       <Swipeout right={deleteButton}>
         <View style={[{ flexDirection: 'row', flex: 1 }, styles.separator]}>
-          <Image
+          <ImageLoad
             style={{ width: 70 }}
+            placeholderStyle={{ height: 70, resizeMode: 'contain' }}
             source={{
               uri: imagePath,
             }}
@@ -69,4 +73,5 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps, null)(UserItem);
+const UserItem = connect(mapStateToProps, null)(_UserItem);
+export default UserItem;

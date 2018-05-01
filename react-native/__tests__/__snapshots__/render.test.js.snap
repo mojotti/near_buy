@@ -199,33 +199,3 @@ exports[`Render Login renders correctly 1`] = `
   </View>
 </View>
 `;
-
-exports[`Render user_items renders correctly 1`] = `
-<View
-  style={
-    Array [
-      Object {
-        "backgroundColor": "#fff",
-        "flex": 1,
-        "justifyContent": "space-between",
-      },
-    ]
-  }
->
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-    style={
-      Array [
-        Object {
-          "padding": 10,
-          "textAlign": "center",
-        },
-      ]
-    }
-  >
-    Loading user data...
-  </Text>
-</View>
-`;

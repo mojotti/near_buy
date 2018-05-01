@@ -1,66 +1,174 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ListViewItem renders and shows current details 1`] = `
+exports[`_UserItem renders and shows current details 1`] = `
 <View
   style={
-    Object {
-      "flex": 1,
-      "flexDirection": "row",
-    }
+    Array [
+      Object {
+        "backgroundColor": "#dbddde",
+        "overflow": "hidden",
+      },
+      undefined,
+    ]
   }
 >
-  <Image
-    source={
-      Object {
-        "uri": "http://localhost:5000/undefined/image0.jpg",
-      }
-    }
-    style={
-      Object {
-        "height": 50,
-        "width": 50,
-      }
-    }
-  />
   <View
+    onLayout={[Function]}
+    onMoveShouldSetResponder={[Function]}
+    onMoveShouldSetResponderCapture={[Function]}
+    onResponderEnd={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderReject={[Function]}
+    onResponderRelease={[Function]}
+    onResponderStart={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    onStartShouldSetResponderCapture={[Function]}
     style={
       Array [
+        Object {},
         Object {
-          "backgroundColor": "azure",
-          "flex": 1,
-          "flexDirection": "column",
-          "padding": 10,
-          "width": 750,
-        },
-        Object {
-          "borderBottomColor": "gainsboro",
-          "borderBottomWidth": 1,
-          "marginBottom": 1,
+          "left": 0,
         },
       ]
     }
   >
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
+    <View
+      style={
+        Array [
+          Object {
+            "flex": 1,
+            "flexDirection": "row",
+          },
+          Object {
+            "borderBottomColor": "gainsboro",
+            "borderBottomWidth": 1,
+            "marginBottom": 1,
+          },
+        ]
+      }
     >
-      Title: Item 1
-    </Text>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
-      Description: Description. Very awesome item.
-    </Text>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
-      Price: 50 €
-    </Text>
+      <View
+        style={
+          Array [
+            Object {
+              "position": "relative",
+            },
+            Object {
+              "width": 70,
+            },
+          ]
+        }
+      >
+        <Image
+          borderRadius={undefined}
+          onError={[Function]}
+          onLoadEnd={[Function]}
+          resizeMode={undefined}
+          source={
+            Object {
+              "uri": "http://localhost:5000/2/image0.jpg",
+            }
+          }
+          style={
+            Array [
+              Object {
+                "bottom": 0,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              },
+              Object {
+                "height": undefined,
+                "width": undefined,
+              },
+              undefined,
+            ]
+          }
+        />
+        <View
+          style={
+            Array [
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#e9eef1",
+                "flex": 1,
+                "justifyContent": "center",
+              },
+              Object {
+                "borderRadius": undefined,
+              },
+              Object {},
+            ]
+          }
+        >
+          <ActivityIndicator
+            animating={true}
+            color="gray"
+            hidesWhenStopped={true}
+            size="small"
+            style={
+              Object {
+                "margin": "auto",
+                "position": "absolute",
+                "zIndex": 9,
+              }
+            }
+          />
+          <Image
+            source={
+              Object {
+                "testUri": "../../react-native-image-placeholder/Images/empty-image.png",
+              }
+            }
+            style={
+              Object {
+                "height": 70,
+                "resizeMode": "contain",
+              }
+            }
+          />
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "backgroundColor": "azure",
+            "flex": 1,
+            "flexDirection": "column",
+            "padding": 10,
+            "width": 750,
+          }
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+        >
+          Title: Item 1
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+        >
+          Description: Description. Very awesome item.
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+        >
+          Price: 50 €
+        </Text>
+      </View>
+    </View>
   </View>
+  <View />
+  <View />
 </View>
 `;

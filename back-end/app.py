@@ -303,6 +303,23 @@ def delete_item(item_id):
     return jsonify({'result': True})
 
 
+@app.route('/api/v1.0/user/items/<int:item_id>', methods=['DELETE'])
+@token_auth.login_required
+def delete_item_for_user(item_id):
+    """
+    Delete user's item with id.
+    :param: item
+    :return: json
+    """
+    items = DB.retrieve_items_with_seller_id(g.user['id'])
+    item = [item for item in items if item['id'] == item_id]
+    item_length = len(item)
+    if item_length == 0:
+        abort(404)
+    DB.remove_item(item[0])
+    return jsonify({'result': True})
+
+
 @app.route('/<user_id>/<image>', methods=['GET'])
 def show_image(user_id, image):
     """
