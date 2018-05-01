@@ -1,22 +1,20 @@
 'use strict';
 
 import React from 'react';
-import { Button, ListView, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { localhost, userHasNoItemsText } from '../../static/constants';
-import { ListViewItem } from './ListViewItem';
+import UserItem from './UserItem';
 import { styles } from '../../static/styles/ItemsStyles';
 
 export class UserItems extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      dataSource: new ListView.DataSource({
-        rowHasChanged: (row1, row2) => row1 !== row2,
-      }),
-      loaded: false,
-      data: '',
+      data: {},
+      isLoaded: false,
+      isRefreshing: false,
     };
   }
 
@@ -51,6 +49,8 @@ export class UserItems extends React.Component {
 
   fetchData() {
     let url = `http://${localhost}:5000/api/v1.0/user/items`;
+    this.setState(() => ({ isRefreshing: false }));
+
     fetch(url, {
       method: 'GET',
       headers: this.getHeaders(),
@@ -61,37 +61,36 @@ export class UserItems extends React.Component {
       })
       .catch(error => {
         console.error(error);
+        this.setState(() => ({ isRefreshing: false }));
       });
   }
 
   handleAllItemsRequest(responseJson) {
-    if (responseJson.items === 'no user_items') {
-      this.setState({
-        loaded: true,
-        data: responseJson.items,
-      });
-    } else {
-      this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(responseJson.items),
-        loaded: true,
-        data: responseJson.items,
-      });
-    }
+    this.setState(() => ({
+      isLoaded: true,
+      data: responseJson.items,
+      isRefreshing: false,
+    }));
   }
 
   renderUserData() {
-    if (this.state.loaded === false) {
+    if (!this.state.isLoaded) {
       return <Text style={[styles.infoText]}>{'Loading user data...'}</Text>;
     }
     if (this.state.data === 'no user_items') {
       return <Text style={[styles.infoText]}>{userHasNoItemsText}</Text>;
     } else {
       return (
-        <ListView
-          dataSource={this.state.dataSource}
-          renderRow={(rowData, sectionID, rowID) => (
-            <ListViewItem item={rowData} itemId={rowID} />
-          )}
+        <FlatList
+          data={this.state.data}
+          renderItem={(rowData, sectionID, rowID) => {
+            return <UserItem item={rowData.item} itemId={rowData.index} />;
+          }}
+          keyExtractor={(item, index) => index.toString()}
+          onRefresh={() => {
+            this.fetchData();
+          }}
+          refreshing={this.state.isRefreshing}
         />
       );
     }

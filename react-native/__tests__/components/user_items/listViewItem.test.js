@@ -1,13 +1,13 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import { ListViewItem } from '../../../src/components/user_items/ListViewItem';
+import { UserItem } from '../../../src/components/user_items/UserItem';
 import { mockedListViewItem } from '../../../src/static/samples/mockedListViewItem';
 
-describe('ListViewItem', () => {
+describe('UserItem', () => {
   test('renders and shows current details', () => {
     const rendered = renderer
-      .create(<ListViewItem item={mockedListViewItem} />)
+      .create(<UserItem item={mockedListViewItem} />)
       .toJSON();
     expect(rendered).toBeTruthy();
     expect(rendered).toMatchSnapshot();
