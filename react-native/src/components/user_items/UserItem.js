@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Text, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
 import ImageLoad from 'react-native-image-placeholder';
 
@@ -13,6 +13,11 @@ export class _UserItem extends PureComponent {
     headers.append('Authorization', `Bearer ${this.props.token}`);
     return headers;
   }
+
+  _onPress = () => {
+    const { navigate } = this.props.navigation;
+    navigate('UserItemDetails', { id: this.props.item.id });
+  };
 
   _removeItem(itemId) {
     const url = `http://${localhost}:5000/api/v1.0/user/items/${itemId}`;
@@ -47,22 +52,23 @@ export class _UserItem extends PureComponent {
     }/image0.jpg`;
 
     return (
-      <Swipeout right={deleteButton} autoClose={true}>
-        <View style={[{ flexDirection: 'row', flex: 1 }, styles.separator]}>
-          <ImageLoad
-            style={{ width: 70 }}
-            placeholderStyle={{ height: 70, resizeMode: 'contain' }}
-            source={{
-              uri: imagePath,
-            }}
-          />
-          <View style={styles.item}>
-            <Text>{`Title: ${this.props.item.title}`}</Text>
-            <Text>{`Description: ${this.props.item.description}`}</Text>
-            <Text>{`Price: ${this.props.item.price} €`}</Text>
-          </View>
-        </View>
-      </Swipeout>
+      <View>
+        <Swipeout right={deleteButton} autoClose={true}>
+          <TouchableOpacity onPress={this._onPress}>
+            <View style={styles.itemContainer}>
+              <ImageLoad
+                style={styles.image}
+                placeholderStyle={{ height: 70, resizeMode: 'contain' }}
+                source={{ uri: imagePath }}
+              />
+              <View style={styles.item}>
+                <Text style={styles.title}>{this.props.item.title}</Text>
+                <Text style={styles.price}>{`${this.props.item.price} €`}</Text>
+              </View>
+            </View>
+          </TouchableOpacity>
+        </Swipeout>
+      </View>
     );
   }
 }

@@ -1,174 +1,205 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`_UserItem renders and shows current details 1`] = `
-<View
-  style={
-    Array [
-      Object {
-        "backgroundColor": "#dbddde",
-        "overflow": "hidden",
-      },
-      undefined,
-    ]
-  }
->
+<View>
   <View
-    onLayout={[Function]}
-    onMoveShouldSetResponder={[Function]}
-    onMoveShouldSetResponderCapture={[Function]}
-    onResponderEnd={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderReject={[Function]}
-    onResponderRelease={[Function]}
-    onResponderStart={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    onStartShouldSetResponderCapture={[Function]}
     style={
       Array [
-        Object {},
         Object {
-          "left": 0,
+          "backgroundColor": "#dbddde",
+          "overflow": "hidden",
         },
+        undefined,
       ]
     }
   >
     <View
+      onLayout={[Function]}
+      onMoveShouldSetResponder={[Function]}
+      onMoveShouldSetResponderCapture={[Function]}
+      onResponderEnd={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderReject={[Function]}
+      onResponderRelease={[Function]}
+      onResponderStart={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      onStartShouldSetResponderCapture={[Function]}
       style={
         Array [
+          Object {},
           Object {
-            "flex": 1,
-            "flexDirection": "row",
-          },
-          Object {
-            "borderBottomColor": "gainsboro",
-            "borderBottomWidth": 1,
-            "marginBottom": 1,
+            "left": 0,
           },
         ]
       }
     >
       <View
-        style={
-          Array [
-            Object {
-              "position": "relative",
-            },
-            Object {
-              "width": 70,
-            },
-          ]
-        }
-      >
-        <Image
-          borderRadius={undefined}
-          onError={[Function]}
-          onLoadEnd={[Function]}
-          resizeMode={undefined}
-          source={
-            Object {
-              "uri": "http://localhost:5000/2/image0.jpg",
-            }
-          }
-          style={
-            Array [
-              Object {
-                "bottom": 0,
-                "left": 0,
-                "position": "absolute",
-                "right": 0,
-                "top": 0,
-              },
-              Object {
-                "height": undefined,
-                "width": undefined,
-              },
-              undefined,
-            ]
-          }
-        />
-        <View
-          style={
-            Array [
-              Object {
-                "alignItems": "center",
-                "backgroundColor": "#e9eef1",
-                "flex": 1,
-                "justifyContent": "center",
-              },
-              Object {
-                "borderRadius": undefined,
-              },
-              Object {},
-            ]
-          }
-        >
-          <ActivityIndicator
-            animating={true}
-            color="gray"
-            hidesWhenStopped={true}
-            size="small"
-            style={
-              Object {
-                "margin": "auto",
-                "position": "absolute",
-                "zIndex": 9,
-              }
-            }
-          />
-          <Image
-            source={
-              Object {
-                "testUri": "../../react-native-image-placeholder/Images/empty-image.png",
-              }
-            }
-            style={
-              Object {
-                "height": 70,
-                "resizeMode": "contain",
-              }
-            }
-          />
-        </View>
-      </View>
-      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hasTVPreferredFocus={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
         style={
           Object {
-            "backgroundColor": "azure",
-            "flex": 1,
-            "flexDirection": "column",
-            "padding": 10,
-            "width": 750,
+            "opacity": 1,
           }
         }
+        testID={undefined}
+        tvParallaxProperties={undefined}
       >
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
+        <View
+          style={
+            Object {
+              "backgroundColor": "#FFFFFF",
+              "borderWidth": 0,
+              "flex": 1,
+              "flexDirection": "row",
+            }
+          }
         >
-          Title: Item 1
-        </Text>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
-          Description: Description. Very awesome item.
-        </Text>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-        >
-          Price: 50 €
-        </Text>
+          <View
+            style={
+              Array [
+                Object {
+                  "position": "relative",
+                },
+                Object {
+                  "borderRadius": 100,
+                  "height": 112.5,
+                  "margin": 10,
+                  "overflow": "hidden",
+                  "width": 112.5,
+                },
+              ]
+            }
+          >
+            <Image
+              borderRadius={undefined}
+              onError={[Function]}
+              onLoadEnd={[Function]}
+              resizeMode={undefined}
+              source={
+                Object {
+                  "uri": "http://localhost:5000/2/image0.jpg",
+                }
+              }
+              style={
+                Array [
+                  Object {
+                    "bottom": 0,
+                    "left": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                  },
+                  Object {
+                    "height": undefined,
+                    "width": undefined,
+                  },
+                  undefined,
+                ]
+              }
+            />
+            <View
+              style={
+                Array [
+                  Object {
+                    "alignItems": "center",
+                    "backgroundColor": "#e9eef1",
+                    "flex": 1,
+                    "justifyContent": "center",
+                  },
+                  Object {
+                    "borderRadius": undefined,
+                  },
+                  Object {},
+                ]
+              }
+            >
+              <ActivityIndicator
+                animating={true}
+                color="gray"
+                hidesWhenStopped={true}
+                size="small"
+                style={
+                  Object {
+                    "margin": "auto",
+                    "position": "absolute",
+                    "zIndex": 9,
+                  }
+                }
+              />
+              <Image
+                source={
+                  Object {
+                    "testUri": "../../react-native-image-placeholder/Images/empty-image.png",
+                  }
+                }
+                style={
+                  Object {
+                    "height": 70,
+                    "resizeMode": "contain",
+                  }
+                }
+              />
+            </View>
+          </View>
+          <View
+            style={
+              Object {
+                "backgroundColor": "#FFFFFF",
+                "flex": 1,
+                "flexDirection": "column",
+                "padding": 10,
+                "width": 750,
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "fontSize": 17,
+                  "fontWeight": "bold",
+                }
+              }
+            >
+              Item 1
+            </Text>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "fontSize": 16,
+                }
+              }
+            >
+              50 €
+            </Text>
+          </View>
+        </View>
       </View>
     </View>
+    <View />
+    <View />
   </View>
-  <View />
-  <View />
 </View>
 `;

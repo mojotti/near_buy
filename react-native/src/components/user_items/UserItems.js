@@ -13,6 +13,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { localhost, userHasNoItemsText } from '../../static/constants';
 import UserItem from './UserItem';
 import { styles } from '../../static/styles/ItemsStyles';
+import ItemSeparator from './ItemSeparator';
 
 export class UserItems extends React.Component {
   constructor(props) {
@@ -104,6 +105,7 @@ export class UserItems extends React.Component {
                 fetchItems={() => {
                   this.fetchData();
                 }}
+                navigation={this.props.navigation}
               />
             );
           }}
@@ -112,6 +114,7 @@ export class UserItems extends React.Component {
             this.fetchData();
           }}
           refreshing={this.state.isRefreshing}
+          ItemSeparatorComponent={ItemSeparator}
         />
       );
     }

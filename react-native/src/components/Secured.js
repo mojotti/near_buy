@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 
 import UserItems from './user_items/UserItems';
 import NewItem from './new_item/NewItem';
+import UserItemDetails from './user_items/UserItemDetails';
 import ItemExplorer from './item_explorer/ItemExplorer';
 import { handleAppStateChange } from '../AppState';
 import { runAppStartEvents } from '../AppStartEvents';
@@ -16,6 +17,7 @@ const App = StackNavigator(
   {
     ItemExplorer: { screen: ItemExplorer },
     UserItems: { screen: UserItems },
+    UserItemDetails: { screen: UserItemDetails },
     NewItem: {
       screen: NewItem,
       navigationOptions: ({ navigation }) => ({
