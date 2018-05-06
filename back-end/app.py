@@ -317,7 +317,7 @@ def delete_item_for_user(item_id):
     if item_length == 0:
         abort(404)
     DB.remove_item(item[0])
-    return jsonify({'result': True})
+    return jsonify({'ok': True})
 
 
 @app.route('/<user_id>/<image>', methods=['GET'])

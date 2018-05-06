@@ -15,15 +15,16 @@ export class _UserItem extends PureComponent {
   }
 
   _removeItem(itemId) {
-    let url = `http://${localhost}:5000/api/v1.0/user/items/${itemId}`;
+    const url = `http://${localhost}:5000/api/v1.0/user/items/${itemId}`;
     fetch(url, {
       method: 'DELETE',
       headers: this._getHeaders(),
     })
       .then(response => response.json())
       .then(responseJson => {
-        console.log(responseJson);
-        this.props.fetchItems();
+        if (responseJson.ok) {
+          this.props.fetchItems();
+        }
       })
       .catch(error => {
         console.error(error);
@@ -46,7 +47,7 @@ export class _UserItem extends PureComponent {
     }/image0.jpg`;
 
     return (
-      <Swipeout right={deleteButton}>
+      <Swipeout right={deleteButton} autoClose={true}>
         <View style={[{ flexDirection: 'row', flex: 1 }, styles.separator]}>
           <ImageLoad
             style={{ width: 70 }}

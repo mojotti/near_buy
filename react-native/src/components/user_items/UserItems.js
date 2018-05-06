@@ -1,7 +1,13 @@
 'use strict';
 
 import React from 'react';
-import { FlatList, Text, TouchableOpacity, View } from 'react-native';
+import {
+  ActivityIndicator,
+  FlatList,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { localhost, userHasNoItemsText } from '../../static/constants';
@@ -49,7 +55,7 @@ export class UserItems extends React.Component {
 
   fetchData() {
     let url = `http://${localhost}:5000/api/v1.0/user/items`;
-    this.setState(() => ({ isRefreshing: false }));
+    this.setState(() => ({ isRefreshing: true }));
 
     fetch(url, {
       method: 'GET',
@@ -57,7 +63,7 @@ export class UserItems extends React.Component {
     })
       .then(response => response.json())
       .then(responseJson => {
-        this.handleAllItemsRequest(responseJson);
+        this.handleAllItemsResponse(responseJson);
       })
       .catch(error => {
         console.error(error);
@@ -65,7 +71,8 @@ export class UserItems extends React.Component {
       });
   }
 
-  handleAllItemsRequest(responseJson) {
+  handleAllItemsResponse(responseJson) {
+    console.log('Items', responseJson.items);
     this.setState(() => ({
       isLoaded: true,
       data: responseJson.items,
@@ -75,7 +82,13 @@ export class UserItems extends React.Component {
 
   renderUserData() {
     if (!this.state.isLoaded) {
-      return <Text style={[styles.infoText]}>{'Loading user data...'}</Text>;
+      return (
+        <ActivityIndicator
+          size="large"
+          color="#0000ff"
+          style={styles.activityIndicator}
+        />
+      );
     }
     if (this.state.data === 'no user_items') {
       return <Text style={[styles.infoText]}>{userHasNoItemsText}</Text>;
@@ -83,7 +96,7 @@ export class UserItems extends React.Component {
       return (
         <FlatList
           data={this.state.data}
-          renderItem={(rowData, sectionID, rowID) => {
+          renderItem={rowData => {
             return (
               <UserItem
                 item={rowData.item}

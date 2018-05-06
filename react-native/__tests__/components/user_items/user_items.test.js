@@ -23,7 +23,7 @@ describe('UserItems', () => {
     fetch.mockResponseSuccess(sample);
 
     const items = renderer.create(<UserItems store={store} />);
-    items.getInstance().handleAllItemsRequest(sample);
+    items.getInstance().handleAllItemsResponse(sample);
 
     expect(items.toJSON()).toMatchSnapshot();
   });
