@@ -16,7 +16,7 @@ export class _UserItem extends PureComponent {
 
   _onPress = () => {
     const { navigate } = this.props.navigation;
-    navigate('UserItemDetails', { id: this.props.item.id });
+    navigate('UserItemDetails', { item: this.props.item });
   };
 
   _removeItem(itemId) {
@@ -47,7 +47,7 @@ export class _UserItem extends PureComponent {
       },
     ];
 
-    const imagePath = `http://${localhost}:5000/${
+    const imagePath = `http://${localhost}:5000/api/v1.0/${
       this.props.item.id
     }/image0.jpg`;
 

@@ -18,6 +18,9 @@ TEST_DB = TestDB()
 USER = User(email='test_email', password='test_pw')
 
 app.config.from_object('Config.TestingConfig')
+app.static_url_path = app.config.get('STATIC_FOLDER')
+app.static_folder = app.root_path + app.static_url_path
+
 TOKEN_FOR_USER_ID_0 = USER.encode_auth_token(0).decode('utf-8')
 TOKEN_FOR_USER_ID_1 = USER.encode_auth_token(1).decode('utf-8')
 
@@ -234,6 +237,28 @@ class TestApp(unittest.TestCase):
             content_type='application/json'
         )
         self.assertEqual(response.status_code, 400)
+
+    def test_given_folder_has_images_when_requested_then_images_are_shown(self):
+        response = self.app.get(
+            '/api/v1.0/1/image0.jpg',
+            headers={'Authorization': 'Bearer ' + TOKEN_FOR_USER_ID_1})
+        self.assertEqual(response.status_code, 200)
+
+    def test_given_folder_has_images_when_requested_then_num_of_images_is_retrieved(self):
+        response = self.app.get(
+            '/api/v1.0/1/num_of_images',
+            headers={'Authorization': 'Bearer ' + TOKEN_FOR_USER_ID_1})
+        self.assertEqual(response.status_code, 200)
+        json_resp = json.loads(response.data.decode('utf-8'))
+        self.assertEqual(json_resp['num_of_images'], 2)
+
+    def test_given_folder_has_no_images_when_requested_then_num_of_images_is_zero(self):
+        response = self.app.get(
+            '/api/v1.0/1000/num_of_images',
+            headers={'Authorization': 'Bearer ' + TOKEN_FOR_USER_ID_1})
+        self.assertEqual(response.status_code, 200)
+        json_resp = json.loads(response.data.decode('utf-8'))
+        self.assertEqual(json_resp['num_of_images'], 0)
 
 
 

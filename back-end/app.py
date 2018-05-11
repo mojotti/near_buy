@@ -14,8 +14,12 @@ import User as U
 import database
 from werkzeug.utils import secure_filename
 
-app = Flask(__name__, static_folder='static')
+app = Flask(__name__, static_url_path=None)
+
 app.config.from_object('Config.DevelopmentConfig')
+
+app.static_url_path = app.config.get('STATIC_FOLDER')
+app.static_folder = app.root_path + app.static_url_path
 
 basic_auth = HTTPBasicAuth()
 token_auth = HTTPTokenAuth('Bearer')
@@ -320,14 +324,30 @@ def delete_item_for_user(item_id):
     return jsonify({'ok': True})
 
 
-@app.route('/<user_id>/<image>', methods=['GET'])
-def show_image(user_id, image):
+@app.route('/api/v1.0/<item_id>/<image>', methods=['GET'])
+def show_image(item_id, image):
     """
     Shows the image with given parameters.
     In production use nginx or apache for serving files.
     """
-    path = app.static_folder + '/images/' + user_id
+    path = app.static_folder + '/images/' + item_id
+
+    path, dirs, files = next(os.walk(path))
+
     return send_from_directory(path, image)
+
+
+@app.route('/api/v1.0/<item_id>/num_of_images', methods=['GET'])
+def retrieve_number_of_images(item_id):
+    """
+    returns the number of images that item has
+    """
+    try:
+        images_path = app.static_folder + '/images/' + item_id
+        path, dirs, files = next(os.walk(images_path))
+        return jsonify({'num_of_images': len(files)})
+    except StopIteration:
+        return jsonify({'num_of_images': 0})
 
 
 if __name__ == '__main__':
