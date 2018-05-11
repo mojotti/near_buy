@@ -94,7 +94,7 @@ exports[`_UserItem renders and shows current details 1`] = `
               resizeMode={undefined}
               source={
                 Object {
-                  "uri": "http://localhost:5000/2/image0.jpg",
+                  "uri": "http://localhost:5000/api/v1.0/2/image0.jpg",
                 }
               }
               style={
