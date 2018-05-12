@@ -55,7 +55,7 @@ export class UserItems extends React.Component {
   }
 
   fetchData() {
-    let url = `http://${localhost}:5000/api/v1.0/user/items`;
+    const url = `http://${localhost}:5000/api/v1.0/user/items`;
     this.setState(() => ({ isRefreshing: true }));
 
     fetch(url, {

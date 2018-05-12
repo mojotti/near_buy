@@ -1,5 +1,5 @@
-upload_folder = './static/images'
-static_folder = '/static'
+upload_folder = './static/images/'
+static_folder = '/static/'
 
 testing_folder = './unit_tests/'
 test_data_folder = '/tests/test_data'
