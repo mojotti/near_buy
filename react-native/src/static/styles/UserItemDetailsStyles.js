@@ -23,4 +23,21 @@ export const styles = StyleSheet.create({
     fontFamily: baseFont,
     color: '#848484',
   },
+  deleteButton: {
+    marginTop: 15,
+    marginBottom: 15,
+    elevation: 1,
+    borderRadius: 30,
+    backgroundColor: '#ff3c21',
+    paddingTop: 8,
+    paddingBottom: 8,
+    alignItems: 'center',
+    width: width * 0.7,
+  },
+  deleteText: {
+    fontFamily: baseFont,
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
 });

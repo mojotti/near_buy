@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Alert, Text, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
 import ImageLoad from 'react-native-image-placeholder';
 
 import Swipeout from 'react-native-swipeout';
 import { styles } from '../../static/styles/ListViewItemStyle';
-import { localhost } from '../../static/constants';
+import { DELETION_ERROR, localhost } from '../../static/constants';
 
 export class _UserItem extends PureComponent {
   _getHeaders() {
@@ -16,7 +16,7 @@ export class _UserItem extends PureComponent {
 
   _onPress = () => {
     const { navigate } = this.props.navigation;
-    navigate('UserItemDetails', { item: this.props.item });
+    navigate('UserItemDetails', { item: this.props.item, fetchItems: this.props.fetchItems });
   };
 
   _removeItem(itemId) {
@@ -33,6 +33,7 @@ export class _UserItem extends PureComponent {
       })
       .catch(error => {
         console.error(error);
+        Alert.alert(...DELETION_ERROR);
       });
   }
 

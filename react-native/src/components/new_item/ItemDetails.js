@@ -17,6 +17,16 @@ export class ItemDetails extends React.Component {
     this.handlePriceChange = this.handlePriceChange.bind(this);
   }
 
+  componentDidMount() {
+    if (this.props.title && this.props.description && this.props.price) {
+      this.setState(() => ({
+        title: this.props.title,
+        description: this.props.description,
+        price: this.props.price.toString(),
+      }));
+    }
+  }
+
   handleTitleChange(text) {
     this.setState({ title: text });
     this.props.onTitleChange(text);
@@ -89,8 +99,17 @@ export class ItemDetails extends React.Component {
   }
 }
 
+ItemDetails.defaultProps = {
+  title: '',
+  description: '',
+  price: null,
+};
+
 ItemDetails.propTypes = {
   onTitleChange: PropTypes.func.isRequired,
   onDescriptionChange: PropTypes.func.isRequired,
   onPriceChange: PropTypes.func.isRequired,
+  title: PropTypes.string,
+  description: PropTypes.string,
+  price: PropTypes.number,
 };

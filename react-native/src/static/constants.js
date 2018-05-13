@@ -29,3 +29,8 @@ export const MISSING_USER_DETAILS_ALERT = [
 export const INVALID_CREDS_ALERT = ['Try again, mate!', 'Invalid credentials.'];
 export const NETWORK_ERROR_ALERT = ['Oops!', networkErrorAlert];
 export const NETWORK_ERROR = 'network error!';
+
+export const DELETION_ERROR = [
+  'Oopsie Woopsie!',
+  'Something went wrong, please check your network connection & try again!',
+];

@@ -7,6 +7,7 @@ import { localhost } from '../../static/constants';
 import DetailImage from './DetailImage';
 import { styles } from '../../static/styles/UserItemDetailsStyles';
 import { ItemDetails } from '../new_item/ItemDetails';
+import DeleteButton from './DeleteButton';
 
 class _UserItemDetails extends Component {
   constructor(props) {
@@ -21,6 +22,8 @@ class _UserItemDetails extends Component {
       price: item.price,
       imageUrls: [],
     };
+
+    this.fetchItems = params.fetchItems;
   }
 
   static navigationOptions = ({ navigation }) => ({
@@ -79,6 +82,9 @@ class _UserItemDetails extends Component {
       onTitleChange: () => {},
       onDescriptionChange: () => {},
       onPriceChange: () => {},
+      title: this.state.title,
+      description: this.state.description,
+      price: this.state.price,
     };
 
     return (
@@ -99,6 +105,12 @@ class _UserItemDetails extends Component {
           </Carousel>
           <Text style={styles.headerText}>Edit details</Text>
           <ItemDetails {...itemDetailsProps} />
+          <DeleteButton
+            id={this.state.id}
+            token={this.props.token}
+            navigation={this.props.navigation}
+            fetchItems={this.fetchItems}
+          />
         </View>
       </ScrollView>
     );
