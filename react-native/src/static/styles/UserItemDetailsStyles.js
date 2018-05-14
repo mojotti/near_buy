@@ -2,6 +2,17 @@ import { Dimensions, StyleSheet } from 'react-native';
 import { baseFont } from './BaseStyles';
 const { width, height } = Dimensions.get('window');
 
+const button = {
+  marginTop: 15,
+  elevation: 1,
+  borderRadius: 30,
+  backgroundColor: '#ff3c21',
+  paddingTop: 8,
+  paddingBottom: 8,
+  alignItems: 'center',
+  width: width * 0.7,
+};
+
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -24,17 +35,15 @@ export const styles = StyleSheet.create({
     color: '#848484',
   },
   deleteButton: {
-    marginTop: 15,
-    marginBottom: 15,
-    elevation: 1,
-    borderRadius: 30,
+    ...button,
     backgroundColor: '#ff3c21',
-    paddingTop: 8,
-    paddingBottom: 8,
-    alignItems: 'center',
-    width: width * 0.7,
+    marginBottom: 15,
   },
-  deleteText: {
+  editButton: {
+    ...button,
+    backgroundColor: '#100eff',
+  },
+  buttonText: {
     fontFamily: baseFont,
     color: 'white',
     fontSize: 16,

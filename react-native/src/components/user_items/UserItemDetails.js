@@ -8,6 +8,7 @@ import DetailImage from './DetailImage';
 import { styles } from '../../static/styles/UserItemDetailsStyles';
 import { ItemDetails } from '../new_item/ItemDetails';
 import DeleteButton from './DeleteButton';
+import EditButton from './EditButton';
 
 class _UserItemDetails extends Component {
   constructor(props) {
@@ -99,8 +100,6 @@ class _UserItemDetails extends Component {
       price: this.state.price,
     };
 
-    console.log('state', this.state);
-
     return (
       <ScrollView keyboardShouldPersistTaps="handled">
         <View style={styles.container}>
@@ -119,6 +118,14 @@ class _UserItemDetails extends Component {
           </Carousel>
           <Text style={styles.headerText}>Edit details</Text>
           <ItemDetails {...itemDetailsProps} />
+          <EditButton
+            id={this.state.id}
+            token={this.props.token}
+            navigation={this.props.navigation}
+            fetchItems={this.fetchItems}
+            item={this.state}
+            location={this.props.location}
+          />
           <DeleteButton
             id={this.state.id}
             token={this.props.token}
@@ -131,7 +138,16 @@ class _UserItemDetails extends Component {
   }
 }
 
-const mapStateToProps = state => ({ token: state.authorizationReducer.token });
+const mapStateToProps = state => {
+  const { latitude, longitude } = state.locationReducer;
+  return {
+    token: state.authorizationReducer.token,
+    location: {
+      latitude,
+      longitude
+    }
+  }
+};
 
 const UserItemDetails = connect(mapStateToProps, null)(_UserItemDetails);
 export default UserItemDetails;

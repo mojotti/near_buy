@@ -4,11 +4,13 @@ import PropTypes from 'prop-types';
 
 import { styles } from '../../static/styles/UserItemDetailsStyles';
 import { DELETION_ERROR, localhost } from '../../static/constants';
+import { getHeadersForRegistering } from '../../networking/networking';
 
-export default class DeleteButton extends Component {
+export default class EditButton extends Component {
   _getHeaders = () => {
     const headers = new Headers();
     headers.append('Authorization', `Bearer ${this.props.token}`);
+    headers.append('Content-Type', 'application/json');
     return headers;
   };
 
@@ -17,18 +19,25 @@ export default class DeleteButton extends Component {
     goBack();
   };
 
-  _removeItemAndNavigateBack = () => {
-    const url = `http://${localhost}:5000/api/v1.0/user/items/${this.props.id}`;
+  _updateItemAndNavigateBack = () => {
+    const url = `http://${localhost}:5000/api/v1.0/items/${this.props.id}`;
     fetch(url, {
-      method: 'DELETE',
+      method: 'PUT',
       headers: this._getHeaders(),
+      body: JSON.stringify({
+        id: this.props.item.id,
+        title: this.props.item.title,
+        description: this.props.item.description,
+        price: this.props.item.price,
+        location: this.props.location,
+        sold: false,
+      }),
     })
       .then(response => response.json())
       .then(responseJson => {
-        if (responseJson.ok) {
-          this.props.fetchItems();
-          this._navigateBack();
-        }
+        console.log('response', responseJson);
+        // this.props.fetchItems();
+        // this._navigateBack();
       })
       .catch(error => {
         Alert.alert(...DELETION_ERROR);
@@ -39,16 +48,16 @@ export default class DeleteButton extends Component {
   render() {
     return (
       <TouchableHighlight
-        onPress={this._removeItemAndNavigateBack}
-        style={styles.deleteButton}
+        onPress={this._updateItemAndNavigateBack}
+        style={styles.editButton}
       >
-        <Text style={styles.buttonText}>Delete item</Text>
+        <Text style={styles.buttonText}>Edit item</Text>
       </TouchableHighlight>
     );
   }
 }
 
-DeleteButton.propTypes = {
+EditButton.propTypes = {
   id: PropTypes.number.isRequired,
   token: PropTypes.string.isRequired,
 };
