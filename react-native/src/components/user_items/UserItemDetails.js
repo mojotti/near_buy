@@ -77,15 +77,29 @@ class _UserItemDetails extends Component {
     }
   };
 
+  handleTitleChange = text => {
+    this.setState({ title: text });
+  };
+
+  handleDescriptionChange = text => {
+    this.setState({ description: text });
+  };
+
+  handlePriceChange = text => {
+    this.setState({ price: text });
+  };
+
   render() {
     const itemDetailsProps = {
-      onTitleChange: () => {},
-      onDescriptionChange: () => {},
-      onPriceChange: () => {},
+      onTitleChange: this.handleTitleChange,
+      onDescriptionChange: this.handleDescriptionChange,
+      onPriceChange: this.handlePriceChange,
       title: this.state.title,
       description: this.state.description,
       price: this.state.price,
     };
+
+    console.log('state', this.state);
 
     return (
       <ScrollView keyboardShouldPersistTaps="handled">

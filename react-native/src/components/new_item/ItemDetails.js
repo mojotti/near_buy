@@ -111,5 +111,5 @@ ItemDetails.propTypes = {
   onPriceChange: PropTypes.func.isRequired,
   title: PropTypes.string,
   description: PropTypes.string,
-  price: PropTypes.number,
+  price: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
