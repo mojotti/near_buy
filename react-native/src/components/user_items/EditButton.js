@@ -28,7 +28,7 @@ export default class EditButton extends Component {
         id: this.props.item.id,
         title: this.props.item.title,
         description: this.props.item.description,
-        price: Number(this.props.item.price),
+        price: this.props.item.price,
         location: this.props.location,
         sold: false,
       }),

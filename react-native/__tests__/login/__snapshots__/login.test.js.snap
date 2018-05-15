@@ -13,6 +13,7 @@ exports[`Login Logo is hidden when keyboard is visible 1`] = `
   }
 >
   <View
+    enabled={true}
     keyboardVerticalOffset={64}
     onLayout={[Function]}
     style={
@@ -173,6 +174,7 @@ exports[`Login renders sign up details when state is sign up 1`] = `
   }
 >
   <View
+    enabled={true}
     keyboardVerticalOffset={64}
     onLayout={[Function]}
     style={

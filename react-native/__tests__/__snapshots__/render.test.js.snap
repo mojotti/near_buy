@@ -13,6 +13,7 @@ exports[`Render Login renders correctly 1`] = `
   }
 >
   <View
+    enabled={true}
     keyboardVerticalOffset={64}
     onLayout={[Function]}
     style={
