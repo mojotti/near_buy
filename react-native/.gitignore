@@ -48,6 +48,7 @@ buck-out/
 # For more information about the recommended setup visit:
 # https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Gitignore.md
 
+<<<<<<< ours
 fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
@@ -57,3 +58,11 @@ coverage/
 
 #expo
 .expo/
+=======
+*/fastlane/report.xml
+*/fastlane/Preview.html
+*/fastlane/screenshots
+
+# Bundle artifact
+*.jsbundle
+>>>>>>> theirs

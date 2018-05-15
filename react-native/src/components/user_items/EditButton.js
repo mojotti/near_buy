@@ -28,7 +28,7 @@ export default class EditButton extends Component {
         id: this.props.item.id,
         title: this.props.item.title,
         description: this.props.item.description,
-        price: this.props.item.price,
+        price: Number(this.props.item.price),
         location: this.props.location,
         sold: false,
       }),
@@ -36,8 +36,8 @@ export default class EditButton extends Component {
       .then(response => response.json())
       .then(responseJson => {
         console.log('response', responseJson);
-        // this.props.fetchItems();
-        // this._navigateBack();
+        this.props.fetchItems();
+        this._navigateBack();
       })
       .catch(error => {
         Alert.alert(...DELETION_ERROR);

@@ -259,7 +259,8 @@ def update_item(item_id):
                                               item[0]['description'])
     item[0]['seller_id'] = user_id
     item[0]['sold'] = request.get_json().get('sold', item[0]['sold'])
-    item[0]['location'] = request.get_json().get('location', item[0]['location'])
+    item[0]['price'] = request.get_json().get('price', item[0]['price'])
+    # item[0]['location'] = request.get_json().get('location', item[0]['location'])
     DB.find_and_update_item(item[0])
     return jsonify({'item': make_public_item(item[0])})
 
@@ -279,15 +280,15 @@ def check_if_item_is_valid(item):
             not isinstance(request.get_json()['title'], six.string_types):
         abort(400)
     if 'price' in request.get_json() and \
-            not isinstance(request.get_json()['price'], int):
+            not isinstance(request.get_json()['price'], six.string_types):
         abort(400)
     if 'description' in request.get_json() and \
             not isinstance(request.get_json()['description'], six.string_types):
         abort(400)
     if 'sold' in request.get_json() and not isinstance(request.get_json()['sold'], bool):
         abort(400)
-    if 'location' in request.get_json() and not isinstance(request.json['location'], six.string_types):
-        abort(400)
+    # if 'location' in request.get_json() and not isinstance(request.json['location'], six.string_types):
+    #     abort(400)
 
 
 @app.route('/api/v1.0/items/<int:item_id>', methods=['DELETE'])
@@ -332,9 +333,11 @@ def show_image(item_id, image):
     """
     path = app.static_folder + '/images/' + item_id
 
-    path, dirs, files = next(os.walk(path))
-
-    return send_from_directory(path, image)
+    try:
+        path, dirs, files = next(os.walk(path))
+        return send_from_directory(path, image)
+    except StopIteration:
+        return 'no image to show'
 
 
 @app.route('/api/v1.0/<item_id>/num_of_images', methods=['GET'])
