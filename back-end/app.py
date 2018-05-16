@@ -7,6 +7,7 @@ import imghdr
 import os
 import sys
 import six
+import time
 from flask import Flask, jsonify, abort, request, make_response, url_for, g, send_from_directory
 from flask_httpauth import HTTPBasicAuth, HTTPTokenAuth
 
@@ -228,6 +229,7 @@ def get_item_details(user_data):
     :return: dictionary
     """
     user_id = g.user['id']
+    current_milli_time = int(round(time.time() * 1000))
     return {
         'id': DB.get_id_for_new_item(),
         'title': user_data.get('title'),
@@ -236,7 +238,8 @@ def get_item_details(user_data):
         'description': user_data.get('description'),
         'sold': False,
         'latitude': user_data.get('latitude'),
-        'longitude': user_data.get('longitude')
+        'longitude': user_data.get('longitude'),
+        'item_created': current_milli_time
     }
 
 
