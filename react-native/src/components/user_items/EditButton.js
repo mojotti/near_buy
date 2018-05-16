@@ -21,6 +21,7 @@ export default class EditButton extends Component {
 
   _updateItemAndNavigateBack = () => {
     const url = `http://${localhost}:5000/api/v1.0/items/${this.props.id}`;
+    console.log(this.props.location);
     fetch(url, {
       method: 'PUT',
       headers: this._getHeaders(),
@@ -29,7 +30,8 @@ export default class EditButton extends Component {
         title: this.props.item.title,
         description: this.props.item.description,
         price: this.props.item.price,
-        location: this.props.location,
+        longitude: this.props.location.longitude,
+        latitude: this.props.location.latitude,
         sold: false,
       }),
     })

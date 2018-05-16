@@ -260,7 +260,8 @@ def update_item(item_id):
     item[0]['seller_id'] = user_id
     item[0]['sold'] = request.get_json().get('sold', item[0]['sold'])
     item[0]['price'] = request.get_json().get('price', item[0]['price'])
-    # item[0]['location'] = request.get_json().get('location', item[0]['location'])
+    item[0]['latitude'] = request.get_json().get('latitude', item[0]['latitude'])
+    item[0]['longitude'] = request.get_json().get('longitude', item[0]['longitude'])
     DB.find_and_update_item(item[0])
     return jsonify({'item': make_public_item(item[0])})
 
@@ -280,15 +281,18 @@ def check_if_item_is_valid(item):
             not isinstance(request.get_json()['title'], six.string_types):
         abort(400)
     if 'price' in request.get_json() and \
-            not isinstance(request.get_json()['price'], six.string_types):
+            not isinstance(request.get_json()['price'], int or \
+            not isinstance(request.get_json()['price'], six.string_types)):
         abort(400)
     if 'description' in request.get_json() and \
             not isinstance(request.get_json()['description'], six.string_types):
         abort(400)
     if 'sold' in request.get_json() and not isinstance(request.get_json()['sold'], bool):
         abort(400)
-    # if 'location' in request.get_json() and not isinstance(request.json['location'], six.string_types):
-    #     abort(400)
+    if 'latitude' in request.get_json() and not isinstance(request.json['latitude'], float):
+        abort(400)
+    if 'longitude' in request.get_json() and not isinstance(request.json['longitude'], float):
+        abort(400)
 
 
 @app.route('/api/v1.0/items/<int:item_id>', methods=['DELETE'])

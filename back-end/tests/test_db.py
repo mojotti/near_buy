@@ -88,7 +88,8 @@ class TestApp(unittest.TestCase):
             'price': 15,
             'description': u'Hardly used air maxes. Get em while you can',
             'sold': False,
-            'location': '-121.45356 46.51119 4392',
+            'longitude': '-121.45356',
+            'latitude': '24.5114392',
             'seller_id': 0
         }
         self.db.remove_item(item)
