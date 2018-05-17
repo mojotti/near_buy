@@ -21,6 +21,7 @@ class _UserItemDetails extends Component {
       title: item.title,
       description: item.description,
       price: item.price,
+      created: item.item_created,
       imageUrls: [],
     };
 
@@ -118,6 +119,8 @@ class _UserItemDetails extends Component {
           </Carousel>
           <Text style={styles.headerText}>Edit details</Text>
           <ItemDetails {...itemDetailsProps} />
+          <Text style={styles.headerText}>Fun facts</Text>
+          <Text>{`You created this item ${new Date(this.state.created)}`}</Text>
           <EditButton
             id={this.state.id}
             token={this.props.token}
@@ -144,9 +147,9 @@ const mapStateToProps = state => {
     token: state.authorizationReducer.token,
     location: {
       latitude,
-      longitude
-    }
-  }
+      longitude,
+    },
+  };
 };
 
 const UserItemDetails = connect(mapStateToProps, null)(_UserItemDetails);

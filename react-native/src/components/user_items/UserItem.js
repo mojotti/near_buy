@@ -14,13 +14,18 @@ export class _UserItem extends PureComponent {
     return headers;
   }
 
-  _onPress = () => {
+  _navigateToItem = () => {
     const { navigate } = this.props.navigation;
-    navigate('UserItemDetails', { item: this.props.item, fetchItems: this.props.fetchItems });
+    navigate('UserItemDetails', {
+      item: this.props.item,
+      fetchItems: this.props.fetchItems,
+    });
   };
 
-  _removeItem(itemId) {
-    const url = `http://${localhost}:5000/api/v1.0/user/items/${itemId}`;
+  _removeItem = () => {
+    const url = `http://${localhost}:5000/api/v1.0/user/items/${
+      this.props.item.id
+    }`;
     fetch(url, {
       method: 'DELETE',
       headers: this._getHeaders(),
@@ -35,16 +40,19 @@ export class _UserItem extends PureComponent {
         console.error(error);
         Alert.alert(...DELETION_ERROR);
       });
-  }
+  };
 
   render() {
-    const deleteButton = [
+    const swipeButtons = [
+      {
+        text: 'Edit',
+        backgroundColor: '#1b01d3',
+        onPress: this._navigateToItem,
+      },
       {
         text: 'Delete',
         backgroundColor: '#ff1018',
-        onPress: () => {
-          this._removeItem(this.props.item.id);
-        },
+        onPress: this._removeItem,
       },
     ];
 
@@ -54,8 +62,8 @@ export class _UserItem extends PureComponent {
 
     return (
       <View>
-        <Swipeout right={deleteButton} autoClose={true}>
-          <TouchableOpacity onPress={this._onPress}>
+        <Swipeout right={swipeButtons} autoClose={true}>
+          <TouchableOpacity onPress={this._navigateToItem}>
             <View style={styles.itemContainer}>
               <ImageLoad
                 style={styles.image}
