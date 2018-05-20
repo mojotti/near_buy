@@ -143,7 +143,6 @@ def get_items_for_user():
     """
     items = DB.retrieve_items_with_seller_id(g.user['id'])
     public_items = [make_public_item(item) for item in items]
-    print('USER ITEMS', public_items)
     if not public_items:
         return jsonify({'items': 'no items'})
     return jsonify({'items': public_items})

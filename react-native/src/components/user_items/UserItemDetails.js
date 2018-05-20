@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import Carousel from 'react-native-looped-carousel';
 import { connect } from 'react-redux';
+import MapView, { Marker } from 'react-native-maps';
 
 import { localhost } from '../../static/constants';
 import DetailImage from './DetailImage';
@@ -120,7 +121,29 @@ class _UserItemDetails extends Component {
           <Text style={styles.headerText}>Edit details</Text>
           <ItemDetails {...itemDetailsProps} />
           <Text style={styles.headerText}>Fun facts</Text>
-          <Text>{`You created this item ${new Date(this.state.created)}`}</Text>
+          <Text
+            style={styles.funFactText}
+          >{`\u2022 You decided to get rid of this item ${new Date(
+            this.state.created,
+          ).toDateString()}`}</Text>
+          <Text style={styles.headerText}>Location</Text>
+          <View style={styles.mapContainer}>
+            <MapView
+              style={styles.map}
+              region={{
+                latitude: this.props.location.latitude,
+                longitude: this.props.location.longitude,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421,
+              }}
+            >
+              <Marker
+                coordinate={this.props.location}
+                title={this.state.title}
+                description={this.state.title}
+              />
+            </MapView>
+          </View>
           <EditButton
             id={this.state.id}
             token={this.props.token}

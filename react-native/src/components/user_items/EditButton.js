@@ -34,6 +34,7 @@ export default class EditButton extends Component {
         latitude: this.props.location.latitude,
         sold: false,
       }),
+      N,
     })
       .then(response => response.json())
       .then(responseJson => {

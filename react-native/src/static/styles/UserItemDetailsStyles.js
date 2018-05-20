@@ -49,4 +49,18 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
+  funFactText: {
+    textAlign: 'center',
+    alignSelf: 'center',
+    fontFamily: baseFont,
+    marginBottom: 10,
+  },
+  mapContainer: {
+    height: height * 0.4,
+    width: width,
+    alignItems: 'center',
+  },
+  map: {
+    ...StyleSheet.absoluteFillObject,
+  },
 });
