@@ -4,14 +4,9 @@ import PropTypes from 'prop-types';
 
 import { styles } from '../../static/styles/UserItemDetailsStyles';
 import { DELETION_ERROR, localhost } from '../../static/constants';
+import { getBearerHeaders } from '../../networking/networking';
 
 export default class DeleteButton extends Component {
-  _getHeaders = () => {
-    const headers = new Headers();
-    headers.append('Authorization', `Bearer ${this.props.token}`);
-    return headers;
-  };
-
   _navigateBack = () => {
     const { goBack } = this.props.navigation;
     goBack();
@@ -21,7 +16,7 @@ export default class DeleteButton extends Component {
     const url = `http://${localhost}:5000/api/v1.0/user/items/${this.props.id}`;
     fetch(url, {
       method: 'DELETE',
-      headers: this._getHeaders(),
+      headers: getBearerHeaders(this.props.token),
     })
       .then(response => response.json())
       .then(responseJson => {

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import Carousel from 'react-native-looped-carousel';
 import { connect } from 'react-redux';
-import MapView, { Marker } from 'react-native-maps';
 
 import { localhost } from '../../static/constants';
 import DetailImage from './DetailImage';
@@ -10,6 +9,8 @@ import { styles } from '../../static/styles/UserItemDetailsStyles';
 import { ItemDetails } from '../new_item/ItemDetails';
 import DeleteButton from './DeleteButton';
 import EditButton from './EditButton';
+import UserItemMapView from './UserItemMapView';
+import { getBearerHeaders } from '../../networking/networking';
 
 class _UserItemDetails extends Component {
   constructor(props) {
@@ -24,6 +25,8 @@ class _UserItemDetails extends Component {
       price: item.price,
       created: item.item_created,
       imageUrls: [],
+      longitude: item.longitude,
+      latitude: item.latitude,
     };
 
     this.fetchItems = params.fetchItems;
@@ -42,19 +45,13 @@ class _UserItemDetails extends Component {
     this.props.navigation.setParams({ title: this.state.title });
   }
 
-  getHeaders = () => {
-    const headers = new Headers();
-    headers.append('Authorization', `Bearer ${this.props.token}`);
-    return headers;
-  };
-
   getNumOfPictures = () => {
     const url = `http://${localhost}:5000/api/v1.0/${
       this.props.navigation.state.params.item.id
     }/num_of_images`;
     return fetch(url, {
       method: 'GET',
-      headers: this.getHeaders(),
+      headers: getBearerHeaders(this.props.token),
     })
       .then(response => response.json())
       .then(responseJson => {
@@ -120,30 +117,17 @@ class _UserItemDetails extends Component {
           </Carousel>
           <Text style={styles.headerText}>Edit details</Text>
           <ItemDetails {...itemDetailsProps} />
+          <Text style={styles.headerText}>Location</Text>
+          <UserItemMapView
+            longitude={this.state.longitude}
+            latitude={this.state.latitude}
+          />
           <Text style={styles.headerText}>Fun facts</Text>
           <Text
-            style={styles.funFactText}
+            style={styles.paragraph}
           >{`\u2022 You decided to get rid of this item ${new Date(
             this.state.created,
           ).toDateString()}`}</Text>
-          <Text style={styles.headerText}>Location</Text>
-          <View style={styles.mapContainer}>
-            <MapView
-              style={styles.map}
-              region={{
-                latitude: this.props.location.latitude,
-                longitude: this.props.location.longitude,
-                latitudeDelta: 0.0922,
-                longitudeDelta: 0.0421,
-              }}
-            >
-              <Marker
-                coordinate={this.props.location}
-                title={this.state.title}
-                description={this.state.title}
-              />
-            </MapView>
-          </View>
           <EditButton
             id={this.state.id}
             token={this.props.token}

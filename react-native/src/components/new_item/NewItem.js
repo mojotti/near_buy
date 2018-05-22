@@ -16,6 +16,7 @@ import { alertInvalidValuesNewItem, localhost } from '../../static/constants';
 import { styles } from '../../static/styles/NewItemStyles';
 import { ItemDetails } from './ItemDetails';
 import { ImageRow } from './ImageRow';
+import { getFormDataHeaders } from '../../networking/networking';
 
 const UPPER_BUTTON_IDS = {
   leftButtonId: 0,
@@ -59,7 +60,8 @@ export class _NewItem extends React.Component {
 
   getImages() {
     let images = [];
-    this.state.images.forEach((image, i) => {
+    let i = 0;
+    this.state.images.forEach(image => {
       if (image) {
         images.push({
           name: 'pictures[]',
@@ -67,6 +69,7 @@ export class _NewItem extends React.Component {
           type: image.mime,
           data: RNFetchBlob.wrap(image.path),
         });
+        i++;
       }
     });
     return images;
@@ -98,19 +101,17 @@ export class _NewItem extends React.Component {
     return true;
   }
 
-  getHeaders() {
-    return {
-      Authorization: `Bearer ${this.props.token}`,
-      'Content-Type': 'multipart/form-data',
-    };
-  }
-
   handleNewItemCreation() {
     if (!this.isValidItem()) {
       return;
     }
     const url = `http://${localhost}:5000/api/v1.0/items`;
-    RNFetchBlob.fetch('POST', url, this.getHeaders(), this.getNewItemData())
+    RNFetchBlob.fetch(
+      'POST',
+      url,
+      getFormDataHeaders(this.props.token),
+      this.getNewItemData(),
+    )
       .then(response => response.json())
       .then(responseJson => this.handleResponse(responseJson))
       .catch(error => console.error(error));

@@ -5,6 +5,24 @@ const registeringHeaders = {
   'Content-Type': 'application/json',
 };
 
+export const getBearerHeaders = token => {
+  const headers = new Headers();
+  headers.append('Authorization', `Bearer ${token}`);
+  return headers;
+};
+
+export const getFormDataHeaders = token => ({
+  Authorization: `Bearer ${token}`,
+  'Content-Type': 'multipart/form-data',
+});
+
+export const getApplicationJsonHeaders = token => {
+  const headers = new Headers();
+  headers.append('Authorization', `Bearer ${token}`);
+  headers.append('Content-Type', 'application/json');
+  return headers;
+};
+
 const generateHash = (username, password) => {
   const credentials = `${username}:${password}`;
   return base64.encode(credentials);

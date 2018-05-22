@@ -6,15 +6,10 @@ import ImageLoad from 'react-native-image-placeholder';
 import Swipeout from 'react-native-swipeout';
 import { styles } from '../../static/styles/ListViewItemStyle';
 import { DELETION_ERROR, localhost } from '../../static/constants';
+import { getBearerHeaders } from '../../networking/networking';
 
 export class _UserItem extends PureComponent {
-  _getHeaders() {
-    const headers = new Headers();
-    headers.append('Authorization', `Bearer ${this.props.token}`);
-    return headers;
-  }
-
-  _navigateToItem = () => {
+ _navigateToItem = () => {
     const { navigate } = this.props.navigation;
     navigate('UserItemDetails', {
       item: this.props.item,
@@ -28,7 +23,7 @@ export class _UserItem extends PureComponent {
     }`;
     fetch(url, {
       method: 'DELETE',
-      headers: this._getHeaders(),
+      headers: getBearerHeaders(this.props.token),
     })
       .then(response => response.json())
       .then(responseJson => {

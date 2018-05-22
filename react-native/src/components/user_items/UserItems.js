@@ -14,6 +14,7 @@ import { localhost, userHasNoItemsText } from '../../static/constants';
 import UserItem from './UserItem';
 import { styles } from '../../static/styles/ItemsStyles';
 import ItemSeparator from './ItemSeparator';
+import { getBearerHeaders } from '../../networking/networking';
 
 export class UserItems extends React.Component {
   constructor(props) {
@@ -48,19 +49,13 @@ export class UserItems extends React.Component {
     this.fetchData();
   }
 
-  getHeaders() {
-    const headers = new Headers();
-    headers.append('Authorization', `Bearer ${this.props.token}`);
-    return headers;
-  }
-
   fetchData() {
     const url = `http://${localhost}:5000/api/v1.0/user/items`;
     this.setState(() => ({ isRefreshing: true }));
 
     fetch(url, {
       method: 'GET',
-      headers: this.getHeaders(),
+      headers: getBearerHeaders(this.props.token),
     })
       .then(response => response.json())
       .then(responseJson => {
