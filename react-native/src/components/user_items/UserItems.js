@@ -86,7 +86,7 @@ export class UserItems extends React.Component {
         />
       );
     }
-    if (this.state.data === 'no user_items') {
+    if (!this.state.data || this.state.data === 'no items') {
       return <Text style={[styles.infoText]}>{userHasNoItemsText}</Text>;
     } else {
       return (

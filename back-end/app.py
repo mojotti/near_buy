@@ -6,6 +6,7 @@ import base64
 import imghdr
 import os
 import sys
+import shutil
 import six
 import time
 from flask import Flask, jsonify, abort, request, make_response, url_for, g, send_from_directory
@@ -143,7 +144,8 @@ def get_items_for_user():
     """
     items = DB.retrieve_items_with_seller_id(g.user['id'])
     public_items = [make_public_item(item) for item in items]
-    if not public_items:
+    print([make_public_item(item) for item in items])
+    if not public_items or public_items == []:
         return jsonify({'items': 'no items'})
     return jsonify({'items': public_items})
 
@@ -315,6 +317,10 @@ def delete_item(item_id):
     return jsonify({'result': True})
 
 
+def delete_images(item_id):
+    shutil.rmtree(app.config.get('UPLOAD_FOLDER') + str(item_id), ignore_errors=True)
+
+
 @app.route('/api/v1.0/user/items/<int:item_id>', methods=['DELETE'])
 @token_auth.login_required
 def delete_item_for_user(item_id):
@@ -329,6 +335,7 @@ def delete_item_for_user(item_id):
     if item_length == 0:
         abort(404)
     DB.remove_item(item[0])
+    delete_images(item_id)
     return jsonify({'ok': True})
 
 
