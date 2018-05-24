@@ -46,7 +46,7 @@ export default class EditButton extends Component {
         onPress={this._updateItemAndNavigateBack}
         style={styles.editButton}
       >
-        <Text style={styles.buttonText}>Edit item</Text>
+        <Text style={styles.buttonText}>Update item</Text>
       </TouchableHighlight>
     );
   }

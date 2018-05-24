@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
   },
   separator: {
     marginBottom: 1,
-    borderBottomWidth: 1,
+    borderBottomWidth: 0.5,
     borderBottomColor: '#858585',
     width: WIDTH * 0.93,
     justifyContent: 'center',
@@ -40,5 +40,5 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFFFFF',
     borderWidth: 0,
-  }
+  },
 });
