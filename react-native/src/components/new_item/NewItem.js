@@ -44,6 +44,8 @@ export class _NewItem extends React.Component {
     this.setNewImage = this.setNewImage.bind(this);
     this.getNewItemData = this.getNewItemData.bind(this);
     this.isValidItem = this.isValidItem.bind(this);
+
+    this.isButtonDisabled = false;
   }
 
   static navigationOptions = {
@@ -102,9 +104,10 @@ export class _NewItem extends React.Component {
   }
 
   handleNewItemCreation() {
-    if (!this.isValidItem()) {
+    if (!this.isValidItem() || this.isButtonDisabled) {
       return;
     }
+    this.isButtonDisabled = true;
     const url = `http://${localhost}:5000/api/v1.0/items`;
     RNFetchBlob.fetch(
       'POST',
