@@ -24,6 +24,11 @@ export const styles = StyleSheet.create({
     height: height * 0.5,
     width,
   },
+  arrowStyle: {
+    height: height * 0.5,
+    width: width * 0.3,
+    backgroundColor: 'transparent',
+  },
   headerText: {
     fontSize: 25,
     marginTop: 20,
@@ -54,6 +59,13 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
     fontFamily: baseFont,
     marginBottom: 10,
+  },
+  infoText: {
+    textAlign: 'left',
+    alignSelf: 'stretch',
+    fontFamily: baseFont,
+    marginBottom: 20,
+    marginLeft: width * 0.12,
   },
   mapContainer: {
     height: height * 0.45,

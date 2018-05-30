@@ -117,7 +117,10 @@ export class _NewItem extends React.Component {
     )
       .then(response => response.json())
       .then(responseJson => this.handleResponse(responseJson))
-      .catch(error => console.error(error));
+      .catch(error => {
+        console.error(error);
+        this.isButtonDisabled = false;
+      });
   }
 
   handleResponse(responseJson) {
@@ -126,6 +129,7 @@ export class _NewItem extends React.Component {
     } else {
       Alert.alert('Item creation failed', 'Something went wrong');
     }
+    this.isButtonDisabled = false;
   }
 
   renderSubmitButton() {

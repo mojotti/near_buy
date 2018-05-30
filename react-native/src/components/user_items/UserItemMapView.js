@@ -4,7 +4,6 @@ import MapView, { Marker } from 'react-native-maps';
 import PropTypes from 'prop-types';
 import { styles } from '../../static/styles/UserItemDetailsStyles';
 
-
 export default class UserItemMapView extends Component {
   render() {
     return (
@@ -24,7 +23,6 @@ export default class UserItemMapView extends Component {
               latitude: this.props.latitude,
             }}
             title={`Item's current location`}
-            description={`Exact location is not visible to others`}
           />
         </MapView>
       </View>

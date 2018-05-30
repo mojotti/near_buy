@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import { ScrollView, Text, View } from 'react-native';
-import Carousel from 'react-native-looped-carousel';
 import { connect } from 'react-redux';
 
 import { localhost } from '../../static/constants';
-import DetailImage from './DetailImage';
 import { styles } from '../../static/styles/UserItemDetailsStyles';
 import { ItemDetails } from '../new_item/ItemDetails';
 import DeleteButton from './DeleteButton';
 import EditButton from './EditButton';
 import UserItemMapView from './UserItemMapView';
 import { getBearerHeaders } from '../../networking/networking';
+import ImageCarousel from './ImageCarousel';
 
 class _UserItemDetails extends Component {
   constructor(props) {
@@ -103,21 +102,13 @@ class _UserItemDetails extends Component {
       <ScrollView keyboardShouldPersistTaps="handled">
         <View style={styles.container}>
           <Text style={styles.headerText}>Pictures</Text>
-          <Carousel
-            style={styles.carousel}
-            autoplay={false}
-            pageInfo
-            currentPage={0}
-            onAnimateNextPage={p => console.log(p)}
-          >
-            <DetailImage url={this.state.imageUrls[0]} />
-            <DetailImage url={this.state.imageUrls[1]} />
-            <DetailImage url={this.state.imageUrls[2]} />
-            <DetailImage url={this.state.imageUrls[3]} />
-          </Carousel>
+          <ImageCarousel imageUrls={this.state.imageUrls} />
           <Text style={styles.headerText}>Edit details</Text>
           <ItemDetails {...itemDetailsProps} />
           <Text style={styles.headerText}>Location</Text>
+          <Text
+            style={styles.infoText}
+          >{`Your exact location is not visible to others`}</Text>
           <UserItemMapView
             longitude={this.state.longitude}
             latitude={this.state.latitude}
