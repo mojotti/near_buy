@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { Alert, Text, TouchableHighlight } from 'react-native';
+import { Alert, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 
-import { styles } from '../../static/styles/UserItemDetailsStyles';
+import * as itemsStyles from '../../static/styles/ItemsStyles';
 import { DELETION_ERROR, localhost } from '../../static/constants';
 import { getApplicationJsonHeaders } from '../../networking/networking';
+import { connect } from 'react-redux';
 
-export default class EditButton extends Component {
+class _SaveButton extends Component {
   _navigateBack = () => {
     const { goBack } = this.props.navigation;
     goBack();
@@ -14,7 +15,6 @@ export default class EditButton extends Component {
 
   _updateItemAndNavigateBack = () => {
     const url = `http://${localhost}:5000/api/v1.0/items/${this.props.id}`;
-    console.log(this.props.location);
     fetch(url, {
       method: 'PUT',
       headers: getApplicationJsonHeaders(this.props.token),
@@ -42,17 +42,32 @@ export default class EditButton extends Component {
 
   render() {
     return (
-      <TouchableHighlight
-        onPress={this._updateItemAndNavigateBack}
-        style={styles.editButton}
-      >
-        <Text style={styles.buttonText}>Update item</Text>
-      </TouchableHighlight>
+      <View>
+        <Text
+          style={itemsStyles.styles.headerButton}
+          onPress={this._updateItemAndNavigateBack}
+        >
+          Save
+        </Text>
+      </View>
     );
   }
 }
 
-EditButton.propTypes = {
+_SaveButton.propTypes = {
   id: PropTypes.number.isRequired,
-  token: PropTypes.string.isRequired,
 };
+
+const mapStateToProps = state => {
+  const { latitude, longitude } = state.locationReducer;
+  return {
+    token: state.authorizationReducer.token,
+    location: {
+      latitude,
+      longitude,
+    },
+  };
+};
+
+const SaveButton = connect(mapStateToProps, null)(_SaveButton);
+export default SaveButton;

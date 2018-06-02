@@ -10,12 +10,11 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     padding: 10,
   },
-  newItem: {
+  headerButton: {
     margin: 10,
     padding: 8,
     backgroundColor: '#4d4dff',
     color: 'white',
     borderRadius: 6,
   },
-
 });

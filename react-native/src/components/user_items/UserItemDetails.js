@@ -6,7 +6,7 @@ import { localhost } from '../../static/constants';
 import { styles } from '../../static/styles/UserItemDetailsStyles';
 import { ItemDetails } from '../new_item/ItemDetails';
 import DeleteButton from './DeleteButton';
-import EditButton from './EditButton';
+import SaveButton from './SaveButton';
 import UserItemMapView from './UserItemMapView';
 import { getBearerHeaders } from '../../networking/networking';
 import ImageCarousel from './ImageCarousel';
@@ -31,17 +31,42 @@ class _UserItemDetails extends Component {
     this.fetchItems = params.fetchItems;
   }
 
-  static navigationOptions = ({ navigation }) => ({
-    title:
-      typeof navigation.state.params === 'undefined' ||
-      typeof navigation.state.params.title === 'undefined'
-        ? ''
-        : navigation.state.params.title,
-  });
+  static navigationOptions = ({ navigation }) => {
+    const { params } = navigation.state;
+    const item = params ? params.item : null;
+
+    return {
+      title:
+        typeof navigation.state.params === 'undefined' ||
+        typeof navigation.state.params.title === 'undefined'
+          ? ''
+          : navigation.state.params.title,
+      headerRight: (
+        <SaveButton
+          id={item.id}
+          navigation={navigation}
+          fetchItems={params.fetchItems}
+          item={item}
+        />
+      ),
+    };
+  };
 
   componentDidMount() {
     this.getNumOfPictures().then(numOfPics => this.getImageUrls(numOfPics));
     this.props.navigation.setParams({ title: this.state.title });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      prevState.title !== this.state.title ||
+      prevState.description !== this.state.description ||
+      prevState.price !== this.state.price ||
+      prevState.longitude !== this.state.longitude ||
+      prevState.latitude !== this.state.latitude
+    ) {
+      this.props.navigation.setParams({ item: this.state });
+    }
   }
 
   getNumOfPictures = () => {
@@ -119,14 +144,6 @@ class _UserItemDetails extends Component {
           >{`\u2022 You decided to get rid of this item ${new Date(
             this.state.created,
           ).toDateString()}`}</Text>
-          <EditButton
-            id={this.state.id}
-            token={this.props.token}
-            navigation={this.props.navigation}
-            fetchItems={this.fetchItems}
-            item={this.state}
-            location={this.props.location}
-          />
           <DeleteButton
             id={this.state.id}
             token={this.props.token}

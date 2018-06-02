@@ -38,7 +38,7 @@ export class UserItems extends React.Component {
         </View>
       ),
       headerRight: (
-        <Text onPress={() => navigate('NewItem')} style={styles.newItem}>
+        <Text onPress={() => navigate('NewItem')} style={styles.headerButton}>
           New item
         </Text>
       ),
