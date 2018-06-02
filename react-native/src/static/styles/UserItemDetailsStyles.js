@@ -62,9 +62,8 @@ export const styles = StyleSheet.create({
   },
   infoText: {
     textAlign: 'left',
-    alignSelf: 'stretch',
     fontFamily: baseFont,
-    marginBottom: 20,
+    marginBottom: 5,
     marginLeft: width * 0.12,
   },
   mapContainer: {
@@ -72,6 +71,7 @@ export const styles = StyleSheet.create({
     width: width,
     alignItems: 'center',
     marginBottom: 15,
+    marginTop: 15,
   },
   map: {
     ...StyleSheet.absoluteFillObject,

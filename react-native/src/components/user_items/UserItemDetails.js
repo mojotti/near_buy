@@ -10,6 +10,7 @@ import SaveButton from './SaveButton';
 import UserItemMapView from './UserItemMapView';
 import { getBearerHeaders } from '../../networking/networking';
 import ImageCarousel from './ImageCarousel';
+import LocationInfoText from './LocationInfoText';
 
 class _UserItemDetails extends Component {
   constructor(props) {
@@ -131,9 +132,7 @@ class _UserItemDetails extends Component {
           <Text style={styles.headerText}>Edit details</Text>
           <ItemDetails {...itemDetailsProps} />
           <Text style={styles.headerText}>Location</Text>
-          <Text
-            style={styles.infoText}
-          >{`Your exact location is not visible to others`}</Text>
+          <LocationInfoText />
           <UserItemMapView
             longitude={this.state.longitude}
             latitude={this.state.latitude}

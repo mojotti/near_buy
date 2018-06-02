@@ -29,6 +29,7 @@ export default class UserItemMapView extends Component {
               latitude: this.props.latitude,
             }}
             title={`Item's current location`}
+            pinColor={'blue'}
           />
           <Marker
             coordinate={{
