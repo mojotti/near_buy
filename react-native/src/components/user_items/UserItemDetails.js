@@ -137,6 +137,7 @@ class _UserItemDetails extends Component {
           <UserItemMapView
             longitude={this.state.longitude}
             latitude={this.state.latitude}
+            currentLocation={this.props.location}
           />
           <Text style={styles.headerText}>Fun facts</Text>
           <Text

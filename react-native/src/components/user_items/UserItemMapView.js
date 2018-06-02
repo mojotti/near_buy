@@ -6,6 +6,12 @@ import { styles } from '../../static/styles/UserItemDetailsStyles';
 
 export default class UserItemMapView extends Component {
   render() {
+    const latitudeDelta =
+      Math.abs(this.props.latitude - this.props.currentLocation.latitude) +
+      0.004;
+    const longitudeDelta =
+      Math.abs(this.props.longitude - this.props.currentLocation.longitude) +
+      0.0013;
     return (
       <View style={styles.mapContainer}>
         <MapView
@@ -13,8 +19,8 @@ export default class UserItemMapView extends Component {
           region={{
             latitude: this.props.latitude,
             longitude: this.props.longitude,
-            latitudeDelta: 0.0622,
-            longitudeDelta: 0.0221,
+            latitudeDelta,
+            longitudeDelta,
           }}
         >
           <Marker
@@ -23,6 +29,13 @@ export default class UserItemMapView extends Component {
               latitude: this.props.latitude,
             }}
             title={`Item's current location`}
+          />
+          <Marker
+            coordinate={{
+              longitude: this.props.currentLocation.longitude,
+              latitude: this.props.currentLocation.latitude,
+            }}
+            title={`Your location`}
           />
         </MapView>
       </View>
@@ -33,4 +46,5 @@ export default class UserItemMapView extends Component {
 UserItemMapView.propTypes = {
   longitude: PropTypes.number.isRequired,
   latitude: PropTypes.number.isRequired,
+  currentLocation: PropTypes.objectOf(PropTypes.number).isRequired,
 };
