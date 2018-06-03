@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { ScrollView, Text, TouchableHighlight, View } from 'react-native';
 import { connect } from 'react-redux';
 
 import { localhost } from '../../static/constants';
@@ -11,6 +11,7 @@ import UserItemMapView from './UserItemMapView';
 import { getBearerHeaders } from '../../networking/networking';
 import ImageCarousel from './ImageCarousel';
 import LocationInfoText from './LocationInfoText';
+import UpdateLocationButton from './UpdateLocationButton';
 
 class _UserItemDetails extends Component {
   constructor(props) {
@@ -42,7 +43,7 @@ class _UserItemDetails extends Component {
         typeof navigation.state.params.title === 'undefined'
           ? ''
           : navigation.state.params.title,
-      headerRight: (
+      headerRight: params.isEdited && (
         <SaveButton
           id={item.id}
           navigation={navigation}
@@ -66,7 +67,7 @@ class _UserItemDetails extends Component {
       prevState.longitude !== this.state.longitude ||
       prevState.latitude !== this.state.latitude
     ) {
-      this.props.navigation.setParams({ item: this.state });
+      this.props.navigation.setParams({ item: this.state, isEdited: true });
     }
   }
 
@@ -103,15 +104,22 @@ class _UserItemDetails extends Component {
   };
 
   handleTitleChange = text => {
-    this.setState({ title: text });
+    this.setState(() => ({ title: text }));
   };
 
   handleDescriptionChange = text => {
-    this.setState({ description: text });
+    this.setState(() => ({ description: text }));
   };
 
   handlePriceChange = text => {
-    this.setState({ price: text });
+    this.setState(() => ({ price: text }));
+  };
+
+  updateLocation = () => {
+    this.setState(() => ({
+      latitude: this.props.location.latitude,
+      longitude: this.props.location.longitude,
+    }));
   };
 
   render() {
@@ -138,6 +146,7 @@ class _UserItemDetails extends Component {
             latitude={this.state.latitude}
             currentLocation={this.props.location}
           />
+          <UpdateLocationButton updateLocation={this.updateLocation} />
           <Text style={styles.headerText}>Fun facts</Text>
           <Text
             style={styles.paragraph}

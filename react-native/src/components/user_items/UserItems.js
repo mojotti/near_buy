@@ -97,17 +97,13 @@ export class UserItems extends React.Component {
               <UserItem
                 item={rowData.item}
                 itemId={rowData.index}
-                fetchItems={() => {
-                  this.fetchData();
-                }}
+                fetchItems={this.fetchData}
                 navigation={this.props.navigation}
               />
             );
           }}
           keyExtractor={(item, index) => index.toString()}
-          onRefresh={() => {
-            this.fetchData();
-          }}
+          onRefresh={this.fetchData}
           refreshing={this.state.isRefreshing}
           ItemSeparatorComponent={ItemSeparator}
         />
