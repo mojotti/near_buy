@@ -196,6 +196,19 @@ def create_item():
     return jsonify({'item': make_public_item(item)}), 201
 
 
+@app.route('/api/v1.0/items/<int:item_id>/add_picture', methods=['POST'])
+@token_auth.login_required
+def add_picture(item_id):
+    """
+    Save picture to file system, if there are pictures with item.
+    :return: json, status code
+    """
+    pictures = request.files.getlist('pictures[]')
+    if pictures:
+        save_pictures_for_existing_item(pictures, item_id)
+    return jsonify({'ok': True}), 201
+
+
 def is_allowed_file(picture):
     """
      Helper for create_item().
@@ -204,6 +217,21 @@ def is_allowed_file(picture):
      """
     is_valid_image = imghdr.what(picture) in ALLOWED_EXTENSIONS
     return '.' in picture.filename and is_valid_image
+
+
+def save_pictures_for_existing_item(pictures, item_id):
+    """
+    Helper for create_item().
+    Save item's pictures to file system.
+    :param: pictures
+    """
+    for picture in pictures:
+        if is_allowed_file(picture):
+            picture_name = secure_filename(picture.filename)
+            directory = app.config['UPLOAD_FOLDER'] + str(item_id) + '/'
+            if not os.path.exists(directory):
+                os.makedirs(directory)
+            picture.save(os.path.join(directory + picture_name))
 
 
 def save_pictures(pictures):

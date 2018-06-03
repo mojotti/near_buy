@@ -3,9 +3,13 @@ import { Alert, Dimensions, TouchableHighlight, View } from 'react-native';
 import ImageLoad from 'react-native-image-placeholder';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import ImagePicker from 'react-native-image-crop-picker';
+import RNFetchBlob from 'react-native-fetch-blob';
+import { getFormDataHeaders } from '../../networking/networking';
+import { localhost } from '../../static/constants';
+import { connect } from 'react-redux';
 const { height } = Dimensions.get('window');
 
-export default class DetailImage extends Component {
+class _DetailImage extends Component {
   constructor(props) {
     super(props);
     this.handleImageSelection = this.handleImageSelection.bind(this);
@@ -30,13 +34,33 @@ export default class DetailImage extends Component {
     );
   };
 
+  sendItemToDb = image => {
+    let images = [];
+    images.push({
+      name: 'pictures[]',
+      filename: 'image' + this.props.imageId + '.jpg',
+      type: image.mime,
+      data: RNFetchBlob.wrap(image.path),
+    });
+
+    const url = `http://${localhost}:5000/api/v1.0/items/${
+      this.props.id
+    }/add_picture`;
+    RNFetchBlob.fetch('POST', url, getFormDataHeaders(this.props.token), images)
+      .then(response => response.json())
+      .then(responseJson => console.log('response', responseJson))
+      .catch(error => {
+        console.error(error);
+      });
+  };
+
   handleNewImage = () => {
     ImagePicker.openCamera({
       width: 400,
       height: 400,
       cropping: true,
     })
-      .then(image => console.log(image))
+      .then(image => this.sendItemToDb(image))
       .catch(error => console.log('error in image selection:', error));
   };
 
@@ -46,7 +70,7 @@ export default class DetailImage extends Component {
       height: 400,
       cropping: true,
     })
-      .then(image => console.log(image))
+      .then(image => this.sendItemToDb(image))
       .catch(error => console.log('error in image selection:', error));
   };
 
@@ -93,3 +117,11 @@ export default class DetailImage extends Component {
     return this.props.url ? this.renderImage() : this.renderPlaceholder();
   }
 }
+
+const mapStateToProps = (state, ownProps) => {
+  const token = state.authorizationReducer.token;
+  return { token };
+};
+
+const DetailImage = connect(mapStateToProps, null)(_DetailImage);
+export default DetailImage;

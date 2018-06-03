@@ -199,7 +199,6 @@ export class _NewItem extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  console.log('props', state);
   const { latitude, longitude } = state.locationReducer;
   const token = state.authorizationReducer.token;
   return { latitude, longitude, token };
