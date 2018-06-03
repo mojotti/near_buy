@@ -48,7 +48,11 @@ class _DetailImage extends Component {
     }/add_picture`;
     RNFetchBlob.fetch('POST', url, getFormDataHeaders(this.props.token), images)
       .then(response => response.json())
-      .then(responseJson => console.log('response', responseJson))
+      .then(responseJson => {
+        if (responseJson.ok) {
+          this.props.onImageUpload();
+        }
+      })
       .catch(error => {
         console.error(error);
       });

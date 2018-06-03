@@ -21,21 +21,25 @@ export default class ImageCarousel extends React.Component {
           url={this.props.imageUrls[0]}
           id={this.props.id}
           imageId={0}
+          onImageUpload={this.props.onImageUpload}
         />
         <DetailImage
           url={this.props.imageUrls[1]}
           id={this.props.id}
           imageId={1}
+          onImageUpload={this.props.onImageUpload}
         />
         <DetailImage
           url={this.props.imageUrls[2]}
           id={this.props.id}
           imageId={2}
+          onImageUpload={this.props.onImageUpload}
         />
         <DetailImage
           url={this.props.imageUrls[3]}
           id={this.props.id}
           imageId={3}
+          onImageUpload={this.props.onImageUpload}
         />
       </Carousel>
     );
@@ -45,4 +49,5 @@ export default class ImageCarousel extends React.Component {
 ImageCarousel.propTypes = {
   imageUrls: PropTypes.arrayOf(PropTypes.string).isRequired,
   id: PropTypes.number.isRequired,
+  onImageUpload: PropTypes.func.isRequired,
 };

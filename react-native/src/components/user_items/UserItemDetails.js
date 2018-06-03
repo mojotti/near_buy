@@ -140,7 +140,11 @@ class _UserItemDetails extends Component {
       <ScrollView keyboardShouldPersistTaps="handled">
         <View style={styles.container}>
           <Text style={styles.headerText}>Pictures</Text>
-          <ImageCarousel imageUrls={this.state.imageUrls} id={this.state.id} />
+          <ImageCarousel
+            imageUrls={this.state.imageUrls}
+            id={this.state.id}
+            onImageUpload={this.updateImages}
+          />
           <Text style={styles.headerText}>Edit details</Text>
           <ItemDetails {...itemDetailsProps} />
           <Text style={styles.headerText}>Location</Text>
