@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
-import { Dimensions, View } from 'react-native';
+import { Alert, Dimensions, TouchableHighlight, View } from 'react-native';
 import ImageLoad from 'react-native-image-placeholder';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import ImagePicker from 'react-native-image-crop-picker';
 const { height } = Dimensions.get('window');
 
 export default class DetailImage extends Component {
+  constructor(props) {
+    super(props);
+    this.handleImageSelection = this.handleImageSelection.bind(this);
+    this.handleNewImage = this.handleNewImage.bind(this);
+  }
+
   renderImage = () => {
     return (
       <View style={{ flex: 1 }}>
@@ -23,6 +30,46 @@ export default class DetailImage extends Component {
     );
   };
 
+  handleNewImage = () => {
+    ImagePicker.openCamera({
+      width: 400,
+      height: 400,
+      cropping: true,
+    })
+      .then(image => console.log(image))
+      .catch(error => console.log('error in image selection:', error));
+  };
+
+  handleGalleryImage = () => {
+    ImagePicker.openPicker({
+      width: 400,
+      height: 400,
+      cropping: true,
+    })
+      .then(image => console.log(image))
+      .catch(error => console.log('error in image selection:', error));
+  };
+
+  handleImageSelection() {
+    Alert.alert(
+      'Select picture',
+      'Select from gallery or take a new one with camera',
+      [
+        {
+          text: 'Cancel',
+          onPress: () => {},
+          style: 'cancel',
+        },
+        {
+          text: 'Gallery',
+          onPress: () => this.handleGalleryImage(),
+        },
+        { text: 'Camera', onPress: () => this.handleNewImage() },
+      ],
+      { cancelable: false },
+    );
+  }
+
   renderPlaceholder = () => {
     return (
       <View
@@ -35,7 +82,9 @@ export default class DetailImage extends Component {
           backgroundColor: '#FFFFFF',
         }}
       >
-        <MaterialIcons name="add-a-photo" size={height * 0.4} color="gray" />
+        <TouchableHighlight onPress={this.handleImageSelection}>
+          <MaterialIcons name="add-a-photo" size={height * 0.4} color="gray" />
+        </TouchableHighlight>
       </View>
     );
   };

@@ -9,7 +9,7 @@ import { DELETION_ERROR, localhost } from '../../static/constants';
 import { getBearerHeaders } from '../../networking/networking';
 
 export class _UserItem extends PureComponent {
- _navigateToItem = () => {
+  _navigateToItem = () => {
     const { navigate } = this.props.navigation;
     navigate('UserItemDetails', {
       item: this.props.item,
@@ -41,12 +41,12 @@ export class _UserItem extends PureComponent {
     const swipeButtons = [
       {
         text: 'Edit',
-        backgroundColor: '#1b01d3',
+        backgroundColor: '#3d4ed3',
         onPress: this._navigateToItem,
       },
       {
         text: 'Delete',
-        backgroundColor: '#ff1018',
+        backgroundColor: '#ff5a3e',
         onPress: this._removeItem,
       },
     ];

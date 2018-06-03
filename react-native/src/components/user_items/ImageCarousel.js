@@ -12,16 +12,31 @@ export default class ImageCarousel extends React.Component {
         autoplay={false}
         pageInfo
         currentPage={0}
-        onAnimateNextPage={p => console.log(p)}
         arrows
         arrowStyle={styles.arrowStyle}
         leftArrowText={' '}
         rightArrowText={' '}
       >
-        <DetailImage url={this.props.imageUrls[0]} />
-        <DetailImage url={this.props.imageUrls[1]} />
-        <DetailImage url={this.props.imageUrls[2]} />
-        <DetailImage url={this.props.imageUrls[3]} />
+        <DetailImage
+          url={this.props.imageUrls[0]}
+          id={this.props.id}
+          imageId={0}
+        />
+        <DetailImage
+          url={this.props.imageUrls[1]}
+          id={this.props.id}
+          imageId={1}
+        />
+        <DetailImage
+          url={this.props.imageUrls[2]}
+          id={this.props.id}
+          imageId={2}
+        />
+        <DetailImage
+          url={this.props.imageUrls[3]}
+          id={this.props.id}
+          imageId={3}
+        />
       </Carousel>
     );
   }
@@ -29,4 +44,5 @@ export default class ImageCarousel extends React.Component {
 
 ImageCarousel.propTypes = {
   imageUrls: PropTypes.arrayOf(PropTypes.string).isRequired,
+  id: PropTypes.number.isRequired,
 };

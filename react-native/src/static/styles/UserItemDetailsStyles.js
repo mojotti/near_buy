@@ -41,12 +41,12 @@ export const styles = StyleSheet.create({
   },
   deleteButton: {
     ...button,
-    backgroundColor: '#ff3c21',
+    backgroundColor: '#ff5a3e',
     marginBottom: 15,
   },
   updateLocationButton: {
     ...button,
-    backgroundColor: '#100eff',
+    backgroundColor: '#3d4ed3',
     marginBottom: 5,
   },
   editButton: {

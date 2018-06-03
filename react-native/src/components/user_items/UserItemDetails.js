@@ -55,7 +55,7 @@ class _UserItemDetails extends Component {
   };
 
   componentDidMount() {
-    this.getNumOfPictures().then(numOfPics => this.getImageUrls(numOfPics));
+    this.updateImages();
     this.props.navigation.setParams({ title: this.state.title });
   }
 
@@ -70,6 +70,10 @@ class _UserItemDetails extends Component {
       this.props.navigation.setParams({ item: this.state, isEdited: true });
     }
   }
+
+  updateImages = () => {
+    this.getNumOfPictures().then(numOfPics => this.getImageUrls(numOfPics));
+  };
 
   getNumOfPictures = () => {
     const url = `http://${localhost}:5000/api/v1.0/${
@@ -136,7 +140,7 @@ class _UserItemDetails extends Component {
       <ScrollView keyboardShouldPersistTaps="handled">
         <View style={styles.container}>
           <Text style={styles.headerText}>Pictures</Text>
-          <ImageCarousel imageUrls={this.state.imageUrls} />
+          <ImageCarousel imageUrls={this.state.imageUrls} id={this.state.id} />
           <Text style={styles.headerText}>Edit details</Text>
           <ItemDetails {...itemDetailsProps} />
           <Text style={styles.headerText}>Location</Text>
