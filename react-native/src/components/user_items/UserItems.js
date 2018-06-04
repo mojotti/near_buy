@@ -49,7 +49,7 @@ export class UserItems extends React.Component {
     this.fetchData();
   }
 
-  fetchData() {
+  fetchData = () => {
     const url = `http://${localhost}:5000/api/v1.0/user/items`;
     this.setState(() => ({ isRefreshing: true }));
 
@@ -65,7 +65,7 @@ export class UserItems extends React.Component {
         console.error(error);
         this.setState(() => ({ isRefreshing: false }));
       });
-  }
+  };
 
   handleAllItemsResponse(responseJson) {
     console.log('Items', responseJson.items);

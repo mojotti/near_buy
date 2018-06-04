@@ -7,7 +7,8 @@ import RNFetchBlob from 'react-native-fetch-blob';
 import { getFormDataHeaders } from '../../networking/networking';
 import { localhost } from '../../static/constants';
 import { connect } from 'react-redux';
-const { height } = Dimensions.get('window');
+import ImagePlaceholder from '../image_placeholder/ImagePlaceholder';
+const { height, width } = Dimensions.get('window');
 
 class _DetailImage extends Component {
   constructor(props) {
@@ -19,17 +20,7 @@ class _DetailImage extends Component {
   renderImage = () => {
     return (
       <View style={{ flex: 1 }}>
-        <ImageLoad
-          style={{ flex: 1 }}
-          placeholderStyle={{
-            flex: 1,
-            alignSelf: 'center',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-          source={{ uri: this.props.url }}
-          isShowActivity={false}
-        />
+        <ImagePlaceholder url={this.props.url} />
       </View>
     );
   };
@@ -38,7 +29,7 @@ class _DetailImage extends Component {
     let images = [];
     images.push({
       name: 'pictures[]',
-      filename: 'image' + this.props.imageId + '.jpg',
+      filename: 'image' + this.props.numOfPics + '.jpg',
       type: image.mime,
       data: RNFetchBlob.wrap(image.path),
     });
@@ -108,9 +99,14 @@ class _DetailImage extends Component {
           justifyContent: 'center',
           paddingBottom: 40,
           backgroundColor: '#FFFFFF',
+          height: width,
+          width: width,
         }}
       >
-        <TouchableHighlight onPress={this.handleImageSelection}>
+        <TouchableHighlight
+          onPress={this.handleImageSelection}
+          underlayColor={'#888888'}
+        >
           <MaterialIcons name="add-a-photo" size={height * 0.4} color="gray" />
         </TouchableHighlight>
       </View>

@@ -1,0 +1,17 @@
+import { StyleSheet } from 'react-native';
+
+export const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  image: {
+    position: 'absolute',
+    resizeMode: 'contain',
+  },
+  placeholder: {
+    position: 'absolute',
+  },
+});

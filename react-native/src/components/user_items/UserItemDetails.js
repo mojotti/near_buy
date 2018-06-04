@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, TouchableHighlight, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 
 import { localhost } from '../../static/constants';
@@ -30,6 +30,7 @@ class _UserItemDetails extends Component {
       latitude: item.latitude,
     };
 
+    this.numOfImages = 0;
     this.fetchItems = params.fetchItems;
   }
 
@@ -72,7 +73,10 @@ class _UserItemDetails extends Component {
   }
 
   updateImages = () => {
-    this.getNumOfPictures().then(numOfPics => this.getImageUrls(numOfPics));
+    this.getNumOfPictures().then(numOfPics => {
+      this.numOfImages = numOfPics;
+      this.getImageUrls(numOfPics);
+    });
   };
 
   getNumOfPictures = () => {
@@ -144,6 +148,7 @@ class _UserItemDetails extends Component {
             imageUrls={this.state.imageUrls}
             id={this.state.id}
             onImageUpload={this.updateImages}
+            numOfPics={this.numOfImages}
           />
           <Text style={styles.headerText}>Edit details</Text>
           <ItemDetails {...itemDetailsProps} />
