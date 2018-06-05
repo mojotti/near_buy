@@ -7,6 +7,7 @@ import Swipeout from 'react-native-swipeout';
 import { styles } from '../../static/styles/ListViewItemStyle';
 import { DELETION_ERROR, localhost } from '../../static/constants';
 import { getBearerHeaders } from '../../networking/networking';
+import ImagePlaceholder from '../image_placeholder/ImagePlaceholder';
 
 export class _UserItem extends PureComponent {
   _navigateToItem = () => {
@@ -60,11 +61,9 @@ export class _UserItem extends PureComponent {
         <Swipeout right={swipeButtons} autoClose={true}>
           <TouchableOpacity onPress={this._navigateToItem}>
             <View style={styles.itemContainer}>
-              <ImageLoad
-                style={styles.image}
-                placeholderStyle={{ height: 70, resizeMode: 'contain' }}
-                source={{ uri: imagePath }}
-              />
+              <View style={styles.imageContainer}>
+                <ImagePlaceholder styles={styles.image} url={imagePath} />
+              </View>
               <View style={styles.item}>
                 <Text style={styles.title}>{this.props.item.title}</Text>
                 <Text style={styles.price}>{`${this.props.item.price} €`}</Text>

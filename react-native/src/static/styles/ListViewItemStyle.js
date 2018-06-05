@@ -18,6 +18,12 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignSelf: 'center',
   },
+  imageContainer: {
+    width: WIDTH * 0.2,
+    height: WIDTH * 0.2,
+    justifyContent: 'flex-start',
+    flexDirection: 'column',
+  },
   image: {
     width: WIDTH * 0.15,
     height: WIDTH * 0.15,

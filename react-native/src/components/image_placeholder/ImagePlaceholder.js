@@ -3,7 +3,7 @@ import { Dimensions, Image, StyleSheet, View } from 'react-native';
 import PropTypes from 'prop-types';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 //import { styles } from '../../static/styles/ImagePlaceHolderStyles';
-const { height, width } = Dimensions.get('window');
+const { height } = Dimensions.get('window');
 
 export default class ImagePlaceholder extends React.Component {
   constructor(props) {
@@ -21,8 +21,8 @@ export default class ImagePlaceholder extends React.Component {
     return (
       <View style={styles.container}>
         <Image
-          source={{ uri: this.props.url }}
-          style={styles.image}
+          source={{ uri: this.props.url + '?' + new Date() }}
+          style={[styles.image, this.props.styles]}
           onLoad={this._onLoad}
         />
 
@@ -30,7 +30,7 @@ export default class ImagePlaceholder extends React.Component {
           <View style={styles.placeholderView}>
             <MaterialIcons
               name="image"
-              size={height * 0.4}
+              size={this.props.styles.height * 0.4}
               color="gray"
               style={styles.placeholder}
             />
@@ -54,8 +54,6 @@ const styles = StyleSheet.create({
   },
   image: {
     position: 'absolute',
-    width: width,
-    height: width,
   },
   placeholder: {
     position: 'absolute',

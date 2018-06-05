@@ -20,7 +20,7 @@ class _DetailImage extends Component {
   renderImage = () => {
     return (
       <View style={{ flex: 1 }}>
-        <ImagePlaceholder url={this.props.url} />
+        <ImagePlaceholder url={this.props.url} styles={{ width, height }} />
       </View>
     );
   };
