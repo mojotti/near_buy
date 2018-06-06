@@ -1,13 +1,13 @@
 import React, { PureComponent } from 'react';
-import { Alert, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, Dimensions, Text, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
-import ImageLoad from 'react-native-image-placeholder';
 
 import Swipeout from 'react-native-swipeout';
 import { styles } from '../../static/styles/ListViewItemStyle';
 import { DELETION_ERROR, localhost } from '../../static/constants';
 import { getBearerHeaders } from '../../networking/networking';
 import ImagePlaceholder from '../image_placeholder/ImagePlaceholder';
+const WIDTH = Dimensions.get('window').width;
 
 export class _UserItem extends PureComponent {
   _navigateToItem = () => {
@@ -62,7 +62,11 @@ export class _UserItem extends PureComponent {
           <TouchableOpacity onPress={this._navigateToItem}>
             <View style={styles.itemContainer}>
               <View style={styles.imageContainer}>
-                <ImagePlaceholder styles={styles.image} url={imagePath} />
+                <ImagePlaceholder
+                  styles={styles.image}
+                  url={imagePath}
+                  placeholderSize={WIDTH * 0.15}
+                />
               </View>
               <View style={styles.item}>
                 <Text style={styles.title}>{this.props.item.title}</Text>

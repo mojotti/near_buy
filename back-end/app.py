@@ -373,7 +373,6 @@ def show_image(item_id, image):
     In production use nginx or apache for serving files.
     """
     path = app.static_folder + '/images/' + item_id
-
     try:
         path, dirs, files = next(os.walk(path))
         return send_from_directory(path, image)

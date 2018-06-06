@@ -1,9 +1,8 @@
 import React from 'react';
-import { Dimensions, Image, StyleSheet, View } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
 import PropTypes from 'prop-types';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 //import { styles } from '../../static/styles/ImagePlaceHolderStyles';
-const { height } = Dimensions.get('window');
 
 export default class ImagePlaceholder extends React.Component {
   constructor(props) {
@@ -13,11 +12,11 @@ export default class ImagePlaceholder extends React.Component {
     };
   }
 
-  _onLoad = () => {
-    this.setState(() => ({ isLoaded: true }));
-  };
+  _onLoad = () => this.setState(() => ({ isLoaded: true }));
 
   render() {
+    console.log('this.props.placeholder', this.props);
+
     return (
       <View style={styles.container}>
         <Image
@@ -27,10 +26,10 @@ export default class ImagePlaceholder extends React.Component {
         />
 
         {!this.state.isLoaded && (
-          <View style={styles.placeholderView}>
+          <View style={[styles.placeholderBackground, this.props.styles]}>
             <MaterialIcons
               name="image"
-              size={this.props.styles.height * 0.4}
+              size={this.props.placeholderSize}
               color="gray"
               style={styles.placeholder}
             />
@@ -55,10 +54,12 @@ const styles = StyleSheet.create({
   image: {
     position: 'absolute',
   },
-  placeholder: {
-    position: 'absolute',
+  placeholderBackground: {
+    backgroundColor: 'white',
   },
-  placeholderView: {
-    backgroundColor: '#FFFFFF',
+  placeholder: {
+    alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

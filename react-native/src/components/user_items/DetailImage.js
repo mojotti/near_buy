@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Alert, Dimensions, TouchableHighlight, View } from 'react-native';
-import ImageLoad from 'react-native-image-placeholder';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import ImagePicker from 'react-native-image-crop-picker';
 import RNFetchBlob from 'react-native-fetch-blob';
@@ -20,7 +19,11 @@ class _DetailImage extends Component {
   renderImage = () => {
     return (
       <View style={{ flex: 1 }}>
-        <ImagePlaceholder url={this.props.url} styles={{ width, height }} />
+        <ImagePlaceholder
+          url={this.props.url}
+          styles={{ width, height: width, paddingTop: 20 }}
+          placeholderSize={width * 0.8}
+        />
       </View>
     );
   };
