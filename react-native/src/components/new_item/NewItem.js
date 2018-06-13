@@ -17,6 +17,7 @@ import { styles } from '../../static/styles/NewItemStyles';
 import { ItemDetails } from './ItemDetails';
 import { ImageRow } from './ImageRow';
 import { getFormDataHeaders } from '../../networking/networking';
+import { baseStyles } from '../../static/styles/BaseStyles';
 
 const UPPER_BUTTON_IDS = {
   leftButtonId: 0,
@@ -186,9 +187,9 @@ export class _NewItem extends React.Component {
     return (
       <ScrollView keyboardShouldPersistTaps="handled">
         <View style={styles.container}>
-          <Text style={styles.headerText}>Item details</Text>
+          <Text style={baseStyles.headerText}>Item details</Text>
           <ItemDetails {...itemDetailsProps} />
-          <Text style={styles.headerText}>Add pictures</Text>
+          <Text style={baseStyles.headerText}>Add pictures</Text>
           <ImageRow {...firstImageRowProps} style={styles.imageRowMargin} />
           <ImageRow {...secondImageRowProps} style={styles.imageRowMargin} />
           {this.renderSubmitButton()}

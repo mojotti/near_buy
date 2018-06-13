@@ -1,11 +1,14 @@
 'use strict';
 
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Dimensions, Text, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-
+import Carousel from 'react-native-snap-carousel';
+import ItemCard from './ItemCard';
 import { styles } from '../../static/styles/ItemsStyles';
+
+const { width } = Dimensions.get('window');
 
 export class ItemExplorer extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -27,11 +30,46 @@ export class ItemExplorer extends React.Component {
     };
   };
 
+  _renderItem({ item, index }) {
+    return <ItemCard item={item} />;
+  }
+
   render() {
+    const entries = [
+      {
+        title: 'Tuote1',
+        latitude: 64.989806,
+        longitude: 25.552602,
+      },
+      {
+        title: 'Tuote2',
+        latitude: 64.989806,
+        longitude: 25.552602,
+      },
+      {
+        title: 'Tuote3',
+        latitude: 64.989806,
+        longitude: 25.552602,
+      },
+      {
+        title: 'Tuote4',
+        latitude: 64.989806,
+        longitude: 25.552602,
+      },
+    ];
     return (
-      <View>
-        <Text>Here will be items</Text>
-      </View>
+      <Carousel
+        ref={c => {
+          this._carousel = c;
+        }}
+        data={entries}
+        renderItem={this._renderItem}
+        sliderWidth={width}
+        itemWidth={width}
+        onSnapToItem={() => console.log('i was clicked')}
+        slideStyle={{ justifyContent: 'center' }}
+        layout={'stack'}
+      />
     );
   }
 }

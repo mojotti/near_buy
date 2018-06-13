@@ -12,6 +12,7 @@ import { getBearerHeaders } from '../../networking/networking';
 import ImageCarousel from './ImageCarousel';
 import LocationInfoText from './LocationInfoText';
 import UpdateLocationButton from './UpdateLocationButton';
+import { baseStyles } from '../../static/styles/BaseStyles';
 
 class _UserItemDetails extends Component {
   constructor(props) {
@@ -143,16 +144,16 @@ class _UserItemDetails extends Component {
     return (
       <ScrollView keyboardShouldPersistTaps="handled">
         <View style={styles.container}>
-          <Text style={styles.headerText}>Pictures</Text>
+          <Text style={baseStyles.headerText}>Pictures</Text>
           <ImageCarousel
             imageUrls={this.state.imageUrls}
             id={this.state.id}
             onImageUpload={this.updateImages}
             numOfPics={this.numOfImages}
           />
-          <Text style={styles.headerText}>Edit details</Text>
+          <Text style={baseStyles.headerText}>Edit details</Text>
           <ItemDetails {...itemDetailsProps} />
-          <Text style={styles.headerText}>Location</Text>
+          <Text style={baseStyles.headerText}>Location</Text>
           <LocationInfoText />
           <UserItemMapView
             longitude={this.state.longitude}
@@ -160,7 +161,7 @@ class _UserItemDetails extends Component {
             currentLocation={this.props.location}
           />
           <UpdateLocationButton updateLocation={this.updateLocation} />
-          <Text style={styles.headerText}>Fun facts</Text>
+          <Text style={baseStyles.headerText}>Fun facts</Text>
           <Text
             style={styles.paragraph}
           >{`\u2022 You decided to get rid of this item ${new Date(

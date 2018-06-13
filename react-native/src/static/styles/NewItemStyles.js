@@ -1,9 +1,8 @@
-import { Dimensions, Platform, StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 import { widthWithThirtyPercentPadding } from '../constants';
-import { baseFont } from './BaseStyles';
+import { baseFont, button } from './BaseStyles';
 
 const { width, height } = Dimensions.get('window');
-const textInputPadding = Platform.OS === 'ios' ? 5 : 0;
 export const cameraIconSize = width * 0.28;
 const itemContainer = {
   backgroundColor: '#fff',
@@ -18,16 +17,6 @@ export const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     marginTop: 5,
-  },
-  headerText: {
-    fontSize: 22,
-    marginTop: 10,
-    marginBottom: 15,
-    textAlign: 'left',
-    alignSelf: 'stretch',
-    marginLeft: width * 0.075,
-    fontFamily: baseFont,
-    color: '#848484',
   },
   itemDetailContainer: {
     height: height * 0.06,
@@ -47,12 +36,7 @@ export const styles = StyleSheet.create({
   },
   submitButton: {
     margin: 15,
-    elevation: 1,
-    borderRadius: 30,
-    paddingTop: 8,
-    paddingBottom: 8,
-    alignItems: 'center',
-    width: width * 0.7,
+    ...button,
     backgroundColor: '#4d4dff',
   },
   addPhotoButton: {
