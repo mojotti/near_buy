@@ -1,12 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<_NewItem /> gets correct header 1`] = `
-Object {
-  "Authorization": "Bearer jippii",
-  "Content-Type": "multipart/form-data",
-}
-`;
-
 exports[`<_NewItem /> images are added if they exist 1`] = `
 Array [
   Object {
@@ -17,7 +10,7 @@ Array [
   },
   Object {
     "data": "12345",
-    "filename": "image2.jpg",
+    "filename": "image1.jpg",
     "name": "pictures[]",
     "type": "image/foo",
   },
@@ -47,10 +40,10 @@ exports[`<_NewItem /> renders correctly 1`] = `
             "alignSelf": "stretch",
             "color": "#848484",
             "fontFamily": null,
-            "fontSize": 22,
+            "fontSize": 25,
             "marginBottom": 15,
             "marginLeft": 56.25,
-            "marginTop": 10,
+            "marginTop": 20,
             "textAlign": "left",
           }
         }
@@ -177,10 +170,10 @@ exports[`<_NewItem /> renders correctly 1`] = `
             "alignSelf": "stretch",
             "color": "#848484",
             "fontFamily": null,
-            "fontSize": 22,
+            "fontSize": 25,
             "marginBottom": 15,
             "marginLeft": 56.25,
-            "marginTop": 10,
+            "marginTop": 20,
             "textAlign": "left",
           }
         }
@@ -558,6 +551,7 @@ exports[`<_NewItem /> renders correctly 1`] = `
             "borderRadius": 30,
             "elevation": 1,
             "margin": 15,
+            "marginTop": 15,
             "paddingBottom": 8,
             "paddingTop": 8,
             "width": 525,

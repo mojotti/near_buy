@@ -54,7 +54,7 @@ class _ItemCard extends React.Component {
       <View style={styles.container}>
         <Text style={baseStyles.headerText}>{this.props.item.title}</Text>
         <Image
-          source={{ uri: 'http://10.0.2.2:5000/api/v1.0/0/image0.jpg' }}
+          source={{ uri: 'https://i.imgur.com/0oOZJGS.jpg' }}
           style={styles.image}
         />
         <Text style={baseStyles.headerText}>{this.state.distanceInKm}</Text>

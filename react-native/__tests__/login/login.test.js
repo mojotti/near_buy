@@ -22,7 +22,7 @@ import {
   successfulLoginResponse,
   unsuccessfulLoginResponse,
   userExistsRegisteringResponse,
-} from '../../src/static/samples/loginAndRegisteringSamples';
+} from '../__mocks__/loginAndRegisteringSamples';
 
 const onLoginSpy = sinon.spy();
 const mockedProps = {

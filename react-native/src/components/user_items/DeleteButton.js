@@ -46,4 +46,5 @@ export default class DeleteButton extends Component {
 DeleteButton.propTypes = {
   id: PropTypes.number.isRequired,
   token: PropTypes.string.isRequired,
+  fetchItems: PropTypes.func.isRequired,
 };

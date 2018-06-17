@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Alert, Dimensions, TouchableHighlight, View } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import ImagePicker from 'react-native-image-crop-picker';
+import PropTypes from 'prop-types';
 import RNFetchBlob from 'react-native-fetch-blob';
 import { getFormDataHeaders } from '../../networking/networking';
 import { localhost } from '../../static/constants';
@@ -9,7 +10,7 @@ import { connect } from 'react-redux';
 import ImagePlaceholder from '../image_placeholder/ImagePlaceholder';
 const { height, width } = Dimensions.get('window');
 
-class _DetailImage extends Component {
+export class _DetailImage extends Component {
   constructor(props) {
     super(props);
     this.handleImageSelection = this.handleImageSelection.bind(this);
@@ -120,6 +121,14 @@ class _DetailImage extends Component {
     return this.props.url ? this.renderImage() : this.renderPlaceholder();
   }
 }
+
+_DetailImage.propTypes = {
+  url: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  token: PropTypes.string.isRequired,
+  onImageUpload: PropTypes.func.isRequired,
+  numOfPics: PropTypes.number.isRequired,
+};
 
 const mapStateToProps = (state, ownProps) => {
   const token = state.authorizationReducer.token;

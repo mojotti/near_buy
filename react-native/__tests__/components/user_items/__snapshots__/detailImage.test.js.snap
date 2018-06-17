@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DetailImage /> renders correctly 1`] = `
+<Component
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <ImagePlaceholder
+    placeholderSize={600}
+    styles={
+      Object {
+        "height": 750,
+        "paddingTop": 20,
+        "width": 750,
+      }
+    }
+    url="foo.bar.png"
+  />
+</Component>
+`;

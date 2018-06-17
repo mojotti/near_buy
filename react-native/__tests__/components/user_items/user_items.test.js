@@ -4,7 +4,7 @@ import renderer from 'react-test-renderer';
 import configureStore from 'redux-mock-store';
 import { UserItems } from '../../../src/components/user_items/UserItems';
 
-import { sample } from '../../../src/static/samples/ItemSample';
+import { sample } from '../../__mocks__/ItemSample';
 
 const middlewares = [];
 const mockStore = configureStore(middlewares);

@@ -71,17 +71,6 @@ describe('<_NewItem />', () => {
     expect(newItemComponent.state('price')).toEqual(price);
   });
 
-  test('gets correct header', () => {
-    const props = {
-      token: 'jippii',
-    };
-    const newItemComponent = shallow(<_NewItem {...props} />);
-    const newItemInstance = newItemComponent.instance();
-
-    const header = newItemInstance.getHeaders();
-    expect(header).toMatchSnapshot();
-  });
-
   test('handles new item creation', () => {
     const newItemComponent = shallow(<_NewItem />);
     const newItemInstance = newItemComponent.instance();

@@ -11,7 +11,10 @@ exports[`<ImageRow /> when there are images, images are rendered 1`] = `
   }
 >
   <TouchableHighlight
+    activeOpacity={0.85}
+    delayPressOut={100}
     onPress={[Function]}
+    underlayColor="black"
   >
     <Image
       source={
@@ -31,7 +34,10 @@ exports[`<ImageRow /> when there are images, images are rendered 1`] = `
     />
   </TouchableHighlight>
   <TouchableHighlight
+    activeOpacity={0.85}
+    delayPressOut={100}
     onPress={[Function]}
+    underlayColor="black"
   >
     <Image
       source={
@@ -65,6 +71,7 @@ exports[`<ImageRow /> when there is no images, empty image buttons are rendered 
 >
   <IconButton
     backgroundColor="transparent"
+    borderRadius={5}
     color="gray"
     name="add-a-photo"
     onPress={[Function]}
@@ -84,6 +91,7 @@ exports[`<ImageRow /> when there is no images, empty image buttons are rendered 
   />
   <IconButton
     backgroundColor="transparent"
+    borderRadius={5}
     color="gray"
     name="add-a-photo"
     onPress={[Function]}

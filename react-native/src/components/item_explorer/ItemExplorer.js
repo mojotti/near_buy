@@ -37,24 +37,24 @@ export class ItemExplorer extends React.Component {
   render() {
     const entries = [
       {
-        title: 'Tuote1',
+        title: 'Example item 1',
+        latitude: 65.989806,
+        longitude: 24.552602,
+      },
+      {
+        title: 'Example item 2',
         latitude: 64.989806,
         longitude: 25.552602,
       },
       {
-        title: 'Tuote2',
-        latitude: 64.989806,
-        longitude: 25.552602,
+        title: 'Example item 3',
+        latitude: 64.389806,
+        longitude: 25.952602,
       },
       {
-        title: 'Tuote3',
-        latitude: 64.989806,
-        longitude: 25.552602,
-      },
-      {
-        title: 'Tuote4',
-        latitude: 64.989806,
-        longitude: 25.552602,
+        title: 'Example item 4',
+        latitude: 60,
+        longitude: 24.2,
       },
     ];
     return (

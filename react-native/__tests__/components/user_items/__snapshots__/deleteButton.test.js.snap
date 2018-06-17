@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DeleteButton /> renders correctly 1`] = `
+<TouchableHighlight
+  activeOpacity={0.85}
+  delayPressOut={100}
+  onPress={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#ff5a3e",
+      "borderRadius": 30,
+      "elevation": 1,
+      "marginBottom": 15,
+      "marginTop": 15,
+      "paddingBottom": 8,
+      "paddingTop": 8,
+      "width": 525,
+    }
+  }
+  underlayColor="black"
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "color": "white",
+        "fontFamily": null,
+        "fontSize": 16,
+        "fontWeight": "bold",
+      }
+    }
+  >
+    Delete item
+  </Text>
+</TouchableHighlight>
+`;
