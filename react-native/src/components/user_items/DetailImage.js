@@ -89,7 +89,7 @@ export class _DetailImage extends Component {
         },
         { text: 'Camera', onPress: () => this.handleNewImage() },
       ],
-      { cancelable: false },
+      { cancelable: false }
     );
   }
 

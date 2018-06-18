@@ -1,5 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<DetailImage /> placeholder handles image selection on press 1`] = `
+Array [
+  Object {
+    "onPress": [Function],
+    "style": "cancel",
+    "text": "Cancel",
+  },
+  Object {
+    "onPress": [Function],
+    "text": "Gallery",
+  },
+  Object {
+    "onPress": [Function],
+    "text": "Camera",
+  },
+]
+`;
+
 exports[`<DetailImage /> renders correctly 1`] = `
 <Component
   style={
@@ -19,5 +37,36 @@ exports[`<DetailImage /> renders correctly 1`] = `
     }
     url="foo.bar.png"
   />
+</Component>
+`;
+
+exports[`<DetailImage /> renders placeholder when url is not given 1`] = `
+<Component
+  style={
+    Object {
+      "alignItems": "center",
+      "alignSelf": "center",
+      "backgroundColor": "#FFFFFF",
+      "flex": 1,
+      "height": 750,
+      "justifyContent": "center",
+      "paddingBottom": 40,
+      "width": 750,
+    }
+  }
+>
+  <TouchableHighlight
+    activeOpacity={0.85}
+    delayPressOut={100}
+    onPress={[Function]}
+    underlayColor="#888888"
+  >
+    <Icon
+      allowFontScaling={false}
+      color="gray"
+      name="add-a-photo"
+      size={533.6}
+    />
+  </TouchableHighlight>
 </Component>
 `;
