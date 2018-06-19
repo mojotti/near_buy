@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ImageCarousel renders images 1`] = `
+<Carousel
+  arrowStyle={
+    Object {
+      "backgroundColor": "transparent",
+      "height": 667,
+      "width": 225,
+    }
+  }
+  arrows={true}
+  autoplay={false}
+  bullets={false}
+  currentPage={0}
+  delay={4000}
+  isLooped={true}
+  leftArrowText=" "
+  pageInfo={true}
+  pageInfoBackgroundColor="rgba(0, 0, 0, 0.25)"
+  pageInfoTextSeparator=" / "
+  rightArrowText=" "
+  style={
+    Object {
+      "height": 667,
+      "width": 750,
+    }
+  }
+  swipe={true}
+>
+  <Connect(_DetailImage)
+    id={0}
+    numOfPics={2}
+    onImageUpload={[Function]}
+    url="foo.com/png"
+  />
+  <Connect(_DetailImage)
+    id={0}
+    numOfPics={2}
+    onImageUpload={[Function]}
+    url="bar.com/png"
+  />
+  <Connect(_DetailImage)
+    id={0}
+    numOfPics={2}
+    onImageUpload={[Function]}
+  />
+  <Connect(_DetailImage)
+    id={0}
+    numOfPics={2}
+    onImageUpload={[Function]}
+  />
+</Carousel>
+`;

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<DetailImage /> placeholder handles image selection on press 1`] = `
+exports[`<DetailImage /> alert has correct texts 1`] = `
 Array [
   Object {
     "onPress": [Function],

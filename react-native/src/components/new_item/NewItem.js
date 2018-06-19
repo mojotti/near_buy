@@ -19,6 +19,15 @@ import { ImageRow } from './ImageRow';
 import { getFormDataHeaders } from '../../networking/networking';
 import { baseStyles } from '../../static/styles/BaseStyles';
 
+jest.mock('react-native-fetch-blob', () => {
+  return {
+    DocumentDir: () => {},
+    polyfill: () => {},
+    fetch: () => Promise.resolve({ json: () => Promise.resolve('success') }),
+    wrap: () => '12345',
+  };
+});
+
 const UPPER_BUTTON_IDS = {
   leftButtonId: 0,
   rightButtonId: 1,
@@ -114,7 +123,7 @@ export class _NewItem extends React.Component {
       'POST',
       url,
       getFormDataHeaders(this.props.token),
-      this.getNewItemData(),
+      this.getNewItemData()
     )
       .then(response => response.json())
       .then(responseJson => this.handleResponse(responseJson))
