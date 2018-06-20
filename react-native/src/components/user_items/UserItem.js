@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import Swipeout from 'react-native-swipeout';
 import { Alert, Dimensions, Text, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
-
-import Swipeout from 'react-native-swipeout';
 import { styles } from '../../static/styles/ListViewItemStyle';
 import { DELETION_ERROR, localhost } from '../../static/constants';
 import { getBearerHeaders } from '../../networking/networking';
@@ -79,6 +79,19 @@ export class _UserItem extends PureComponent {
     );
   }
 }
+
+_UserItem.propTypes = {
+  item: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    created: PropTypes.number.isRequired,
+    longitude: PropTypes.number.isRequired,
+    latitude: PropTypes.number.isRequired,
+  }),
+  fetchItems: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = (state, ownProps) => {
   return {

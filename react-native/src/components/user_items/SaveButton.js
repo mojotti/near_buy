@@ -7,7 +7,7 @@ import { DELETION_ERROR, localhost } from '../../static/constants';
 import { getApplicationJsonHeaders } from '../../networking/networking';
 import { connect } from 'react-redux';
 
-class _SaveButton extends Component {
+export class _SaveButton extends Component {
   _navigateBack = () => {
     const { goBack } = this.props.navigation;
     goBack();
@@ -30,7 +30,6 @@ class _SaveButton extends Component {
     })
       .then(response => response.json())
       .then(responseJson => {
-        console.log('response', responseJson);
         this.props.fetchItems();
         this._navigateBack();
       })
@@ -56,6 +55,17 @@ class _SaveButton extends Component {
 
 _SaveButton.propTypes = {
   id: PropTypes.number.isRequired,
+  fetchItems: PropTypes.func.isRequired,
+  item: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    created: PropTypes.number.isRequired,
+    imageUrls: PropTypes.arrayOf(PropTypes.string).isRequired,
+    longitude: PropTypes.number.isRequired,
+    latitude: PropTypes.number.isRequired,
+  })
 };
 
 const mapStateToProps = state => {

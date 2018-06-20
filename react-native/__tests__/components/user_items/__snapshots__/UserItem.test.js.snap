@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<_UserItem /> renders correctly 1`] = `
+<Component>
+  <Swipeout
+    autoClose={true}
+    disabled={false}
+    right={
+      Array [
+        Object {
+          "backgroundColor": "#3d4ed3",
+          "onPress": [Function],
+          "text": "Edit",
+        },
+        Object {
+          "backgroundColor": "#ff5a3e",
+          "onPress": [Function],
+          "text": "Delete",
+        },
+      ]
+    }
+    rowID={-1}
+    sectionID={-1}
+    sensitivity={50}
+  >
+    <TouchableOpacity
+      activeOpacity={0.2}
+      onPress={[Function]}
+    >
+      <Component
+        style={
+          Object {
+            "backgroundColor": "#FFFFFF",
+            "borderWidth": 0,
+            "flex": 1,
+            "flexDirection": "row",
+          }
+        }
+      >
+        <Component
+          style={
+            Object {
+              "flexDirection": "column",
+              "height": 150,
+              "justifyContent": "flex-start",
+              "width": 150,
+            }
+          }
+        >
+          <ImagePlaceholder
+            placeholderSize={112.5}
+            styles={
+              Object {
+                "borderRadius": 100,
+                "height": 112.5,
+                "margin": 10,
+                "overflow": "hidden",
+                "width": 112.5,
+              }
+            }
+            url="http://localhost:5000/api/v1.0/1/image0.jpg"
+          />
+        </Component>
+        <Component
+          style={
+            Object {
+              "backgroundColor": "#FFFFFF",
+              "flex": 1,
+              "flexDirection": "column",
+              "padding": 10,
+              "width": 750,
+            }
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "fontSize": 17,
+                "fontWeight": "bold",
+              }
+            }
+          >
+            foo
+          </Text>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "fontSize": 16,
+              }
+            }
+          >
+            100 €
+          </Text>
+        </Component>
+      </Component>
+    </TouchableOpacity>
+  </Swipeout>
+</Component>
+`;

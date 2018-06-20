@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<_SaveButton /> renders correctly 1`] = `
+<Component>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    onPress={[Function]}
+    style={
+      Object {
+        "backgroundColor": "#4d4dff",
+        "borderRadius": 6,
+        "color": "white",
+        "margin": 10,
+        "padding": 8,
+      }
+    }
+  >
+    Save
+  </Text>
+</Component>
+`;
