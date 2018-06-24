@@ -14,7 +14,7 @@ import LocationInfoText from './LocationInfoText';
 import UpdateLocationButton from './UpdateLocationButton';
 import { baseStyles } from '../../static/styles/BaseStyles';
 
-class _UserItemDetails extends Component {
+export class _UserItemDetails extends Component {
   constructor(props) {
     super(props);
     const { params } = this.props.navigation.state;

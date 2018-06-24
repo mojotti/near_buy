@@ -1,0 +1,203 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<_UserItemDetails /> navigation options 1`] = `
+Object {
+  "headerRight": <Connect(_SaveButton)
+    fetchItems={[Function]}
+    id={0}
+    item={
+      Object {
+        "description": "bar",
+        "id": 0,
+        "item_created": 103042050,
+        "latitude": 65.02,
+        "longitude": 25,
+        "price": 100,
+        "title": "foo",
+      }
+    }
+    navigation={
+      Object {
+        "state": Object {
+          "params": Object {
+            "fetchItems": [Function],
+            "isEdited": true,
+            "item": Object {
+              "description": "bar",
+              "id": 0,
+              "item_created": 103042050,
+              "latitude": 65.02,
+              "longitude": 25,
+              "price": 100,
+              "title": "foo",
+            },
+          },
+        },
+      }
+    }
+  />,
+  "title": "",
+}
+`;
+
+exports[`<_UserItemDetails /> renders correctly 1`] = `
+<ScrollView
+  keyboardShouldPersistTaps="handled"
+>
+  <Component
+    style={
+      Object {
+        "alignItems": "center",
+        "alignSelf": "center",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "alignSelf": "stretch",
+          "color": "#848484",
+          "fontFamily": null,
+          "fontSize": 25,
+          "marginBottom": 15,
+          "marginLeft": 56.25,
+          "marginTop": 20,
+          "textAlign": "left",
+        }
+      }
+    >
+      Pictures
+    </Text>
+    <ImageCarousel
+      id={0}
+      imageUrls={Array []}
+      numOfPics={0}
+      onImageUpload={[Function]}
+    />
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "alignSelf": "stretch",
+          "color": "#848484",
+          "fontFamily": null,
+          "fontSize": 25,
+          "marginBottom": 15,
+          "marginLeft": 56.25,
+          "marginTop": 20,
+          "textAlign": "left",
+        }
+      }
+    >
+      Edit details
+    </Text>
+    <ItemDetails
+      description="bar"
+      onDescriptionChange={[Function]}
+      onPriceChange={[Function]}
+      onTitleChange={[Function]}
+      price={100}
+      title="foo"
+    />
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "alignSelf": "stretch",
+          "color": "#848484",
+          "fontFamily": null,
+          "fontSize": 25,
+          "marginBottom": 15,
+          "marginLeft": 56.25,
+          "marginTop": 20,
+          "textAlign": "left",
+        }
+      }
+    >
+      Location
+    </Text>
+    <LocationInfoText />
+    <UserItemMapView
+      currentLocation={
+        Object {
+          "latitude": 65,
+          "longitude": 24,
+        }
+      }
+      latitude={65.02}
+      longitude={25}
+    />
+    <UpdateLocationButton
+      updateLocation={[Function]}
+    />
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "alignSelf": "stretch",
+          "color": "#848484",
+          "fontFamily": null,
+          "fontSize": 25,
+          "marginBottom": 15,
+          "marginLeft": 56.25,
+          "marginTop": 20,
+          "textAlign": "left",
+        }
+      }
+    >
+      Fun facts
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "alignSelf": "center",
+          "fontFamily": null,
+          "marginBottom": 10,
+          "textAlign": "center",
+        }
+      }
+    >
+      • You decided to get rid of this item Fri Jan 02 1970
+    </Text>
+    <DeleteButton
+      fetchItems={[Function]}
+      id={0}
+      navigation={
+        Object {
+          "setParams": [Function],
+          "state": Object {
+            "params": Object {
+              "fetchItems": [Function],
+              "isEdited": true,
+              "item": Object {
+                "description": "bar",
+                "id": 0,
+                "item_created": 103042050,
+                "latitude": 65.02,
+                "longitude": 25,
+                "price": 100,
+                "title": "foo",
+              },
+            },
+          },
+        }
+      }
+      token="foo"
+    />
+  </Component>
+</ScrollView>
+`;

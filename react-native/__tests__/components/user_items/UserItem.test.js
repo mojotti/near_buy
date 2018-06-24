@@ -1,4 +1,5 @@
 import React from 'react';
+import { Alert } from 'react-native';
 import { shallow } from 'enzyme';
 import { _UserItem } from '../../../src/components/user_items/UserItem';
 
@@ -44,5 +45,48 @@ describe('<_UserItem />', () => {
       .simulate('Press');
 
     expect(naviSpy.mock.calls.length).toEqual(1);
+  });
+
+  test('removes item', async () => {
+    fetch.mockResponseSuccess({ ok: true });
+    const fetchSpy = jest.fn();
+
+    const userItem = shallow(
+      <_UserItem
+        item={MOCKED_ITEM}
+        fetchItems={fetchSpy}
+        navigation={() => {}}
+        token="foo_token"
+      />
+    );
+
+    await await userItem.instance()._removeItem();
+
+    expect(fetchSpy.mock.calls.length).toEqual(1);
+  });
+
+  test('fails to remove item', async () => {
+    Alert.alert = jest.fn();
+    fetch.mockResponseFailure('failed to remove item');
+
+    const userItem = shallow(
+      <_UserItem
+        item={MOCKED_ITEM}
+        fetchItems={() => {}}
+        navigation={() => {}}
+        token="foo_token"
+      />
+    );
+
+    await await await userItem.instance()._removeItem();
+
+    const expectedError = [
+      [
+        'Oopsie Woopsie!',
+        'Something went wrong, please check your network connection & try again!',
+      ],
+    ];
+    expect(Alert.alert.mock.calls.length).toEqual(1);
+    expect(Alert.alert.mock.calls).toEqual(expectedError);
   });
 });
