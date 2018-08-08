@@ -9,7 +9,7 @@ __Running instuctions - back-end:__
 		https://docs.mongodb.com/manual/installation/
     
 	Check you have correct python version:
-		python --version (should be 3.4.X)
+		python3 --version (should be 3.4.X)
 
 	Install pipenv:
 		export LC_ALL=en_US.UTF-8 && pip install pipenv

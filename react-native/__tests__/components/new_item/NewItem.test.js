@@ -15,6 +15,15 @@ jest.mock('react-navigation', () => {
   };
 });
 
+jest.mock('react-native-fetch-blob', () => {
+  return {
+    DocumentDir: () => {},
+    polyfill: () => {},
+    fetch: () => Promise.resolve({ json: () => Promise.resolve('success') }),
+    wrap: () => '12345',
+  };
+});
+
 describe('<_NewItem />', () => {
   beforeEach(() => {
     Alert.alert = jest.fn();

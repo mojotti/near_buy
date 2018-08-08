@@ -19,14 +19,6 @@ import { ImageRow } from './ImageRow';
 import { getFormDataHeaders } from '../../networking/networking';
 import { baseStyles } from '../../static/styles/BaseStyles';
 
-jest.mock('react-native-fetch-blob', () => {
-  return {
-    DocumentDir: () => {},
-    polyfill: () => {},
-    fetch: () => Promise.resolve({ json: () => Promise.resolve('success') }),
-    wrap: () => '12345',
-  };
-});
 
 const UPPER_BUTTON_IDS = {
   leftButtonId: 0,
