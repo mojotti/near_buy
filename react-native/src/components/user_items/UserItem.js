@@ -86,7 +86,7 @@ _UserItem.propTypes = {
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
-    created: PropTypes.number.isRequired,
+    item_created: PropTypes.number.isRequired,
     longitude: PropTypes.number.isRequired,
     latitude: PropTypes.number.isRequired,
   }),

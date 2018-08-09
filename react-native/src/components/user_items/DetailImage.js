@@ -122,12 +122,16 @@ export class _DetailImage extends Component {
   }
 }
 
+_DetailImage.defaultProps = {
+  url: null,
+};
+
 _DetailImage.propTypes = {
-  url: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
   token: PropTypes.string.isRequired,
   onImageUpload: PropTypes.func.isRequired,
   numOfPics: PropTypes.number.isRequired,
+  url: PropTypes.string,
 };
 
 const mapStateToProps = (state, ownProps) => {
