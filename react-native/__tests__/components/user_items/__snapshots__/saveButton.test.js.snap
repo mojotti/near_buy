@@ -9,11 +9,8 @@ exports[`<_SaveButton /> renders correctly 1`] = `
     onPress={[Function]}
     style={
       Object {
-        "backgroundColor": "#4d4dff",
-        "borderRadius": 6,
-        "color": "white",
-        "margin": 10,
-        "padding": 8,
+        "color": "#4d4dff",
+        "margin": 8,
       }
     }
   >
