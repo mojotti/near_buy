@@ -9,7 +9,7 @@ exports[`ImageCarousel renders images 1`] = `
       "width": 225,
     }
   }
-  arrows={true}
+  arrows={false}
   autoplay={false}
   bullets={false}
   currentPage={0}
@@ -17,8 +17,13 @@ exports[`ImageCarousel renders images 1`] = `
   isLooped={true}
   leftArrowText=" "
   pageInfo={true}
-  pageInfoBackgroundColor="rgba(0, 0, 0, 0.25)"
+  pageInfoBackgroundColor="#292929"
   pageInfoTextSeparator=" / "
+  pageInfoTextStyle={
+    Object {
+      "color": "#FFFFFF",
+    }
+  }
   rightArrowText=" "
   style={
     Object {
