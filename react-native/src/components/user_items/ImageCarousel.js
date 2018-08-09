@@ -12,7 +12,10 @@ export default class ImageCarousel extends React.Component {
         autoplay={false}
         pageInfo
         currentPage={0}
-        arrows
+        pageInfoBackgroundColor={'#292929'}
+        pageInfoTextStyle={{ color: '#FFFFFF' }}
+    // arrows are disabled for now since they don't work as intended on ios
+        arrows={false}
         arrowStyle={styles.arrowStyle}
         leftArrowText={' '}
         rightArrowText={' '}

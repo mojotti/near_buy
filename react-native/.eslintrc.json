@@ -8,9 +8,11 @@
     "react/jsx-indent": ["error", 2],
     "react/jsx-indent-props": ["error", 2],
     "import/no-named-as-default": 0,
+    "import/no-named-as-default-member": 0,
     "import/prefer-default-export": 0,
     "no-undef": "off",
-    "no-use-before-define": "off"
+    "no-use-before-define": "off",
+    "react/prefer-stateless-function": "off"
   },
   "env": {
     "jest": true
