@@ -12,13 +12,20 @@ export default class UserItemMapView extends Component {
     const longitudeDelta =
       Math.abs(this.props.longitude - this.props.currentLocation.longitude) +
       0.0013;
+    console.log(
+      'lat delta', latitudeDelta,
+      'long delta', longitudeDelta,
+      'props', this.props,
+    )
+    const centerLatitude = (this.props.latitude + this.props.currentLocation.latitude) / 2;
+    const centerLongitude = (this.props.longitude + this.props.currentLocation.longitude) / 2;
     return (
       <View style={styles.mapContainer}>
         <MapView
           style={styles.map}
           region={{
-            latitude: this.props.latitude,
-            longitude: this.props.longitude,
+            latitude: centerLatitude,
+            longitude: centerLongitude,
             latitudeDelta,
             longitudeDelta,
           }}
