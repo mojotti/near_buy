@@ -1,6 +1,7 @@
-import { Dimensions, StyleSheet } from 'react-native';
+import { Dimensions, Platform, StyleSheet } from 'react-native';
 
 const WIDTH = Dimensions.get('window').width;
+const BORDER_RADIUS = Platform.OS === 'ios' ? 15 : 100;
 
 export const styles = StyleSheet.create({
   item: {
@@ -29,7 +30,7 @@ export const styles = StyleSheet.create({
     height: WIDTH * 0.15,
     margin: 10,
     overflow: 'hidden',
-    borderRadius: 100,
+    borderRadius: BORDER_RADIUS,
   },
   title: {
     fontSize: 17,
