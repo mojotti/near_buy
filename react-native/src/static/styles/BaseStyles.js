@@ -10,7 +10,6 @@ export const button = {
   marginTop: 15,
   elevation: 1,
   borderRadius: 30,
-  backgroundColor: '#ff3c21',
   paddingTop: 8,
   paddingBottom: 8,
   alignItems: 'center',

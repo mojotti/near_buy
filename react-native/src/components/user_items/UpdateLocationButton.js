@@ -10,12 +10,14 @@ export default class UpdateLocationButton extends React.Component {
       buttonText: `Update item's location`,
     };
     this.isAccessible = false;
+    this.buttonColor = '#3d4ed3';
   }
 
   handleButtonPress = () => {
     this.props.updateLocation();
     this.isAccessible = true;
     this.setState(() => ({ buttonText: 'Location updated' }));
+    this.buttonColor = '#071135';
   };
 
   render() {
@@ -24,7 +26,7 @@ export default class UpdateLocationButton extends React.Component {
         <TouchableHighlight
           disabled={this.isAccessible}
           onPress={this.handleButtonPress}
-          style={styles.updateLocationButton}
+          style={{ ...styles.updateLocationButton, backgroundColor: this.buttonColor }}
         >
           <Text style={styles.buttonText}>{this.state.buttonText}</Text>
         </TouchableHighlight>

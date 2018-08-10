@@ -25,7 +25,6 @@ export const styles = StyleSheet.create({
   },
   updateLocationButton: {
     ...button,
-    backgroundColor: '#3d4ed3',
     marginBottom: 5,
   },
   editButton: {
