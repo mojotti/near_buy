@@ -2,10 +2,7 @@
 
 exports[`<_SaveButton /> renders correctly 1`] = `
 <Component>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
+  <Component
     onPress={[Function]}
     style={
       Object {
@@ -15,6 +12,6 @@ exports[`<_SaveButton /> renders correctly 1`] = `
     }
   >
     Save
-  </Text>
+  </Component>
 </Component>
 `;

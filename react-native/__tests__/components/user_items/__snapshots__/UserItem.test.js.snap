@@ -72,10 +72,7 @@ exports[`<_UserItem /> renders correctly 1`] = `
             }
           }
         >
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
+          <Component
             style={
               Object {
                 "fontSize": 17,
@@ -84,11 +81,8 @@ exports[`<_UserItem /> renders correctly 1`] = `
             }
           >
             foo
-          </Text>
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
+          </Component>
+          <Component
             style={
               Object {
                 "fontSize": 16,
@@ -96,7 +90,7 @@ exports[`<_UserItem /> renders correctly 1`] = `
             }
           >
             100 €
-          </Text>
+          </Component>
         </Component>
       </Component>
     </TouchableOpacity>

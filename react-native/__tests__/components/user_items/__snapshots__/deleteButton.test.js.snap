@@ -20,10 +20,7 @@ exports[`<DeleteButton /> renders correctly 1`] = `
   }
   underlayColor="black"
 >
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
+  <Component
     style={
       Object {
         "color": "white",
@@ -34,6 +31,6 @@ exports[`<DeleteButton /> renders correctly 1`] = `
     }
   >
     Delete item
-  </Text>
+  </Component>
 </TouchableHighlight>
 `;

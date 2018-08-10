@@ -54,10 +54,7 @@ exports[`<_UserItemDetails /> renders correctly 1`] = `
       }
     }
   >
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
+    <Component
       style={
         Object {
           "alignSelf": "stretch",
@@ -72,17 +69,14 @@ exports[`<_UserItemDetails /> renders correctly 1`] = `
       }
     >
       Pictures
-    </Text>
+    </Component>
     <ImageCarousel
       id={0}
       imageUrls={Array []}
       numOfPics={0}
       onImageUpload={[Function]}
     />
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
+    <Component
       style={
         Object {
           "alignSelf": "stretch",
@@ -97,7 +91,7 @@ exports[`<_UserItemDetails /> renders correctly 1`] = `
       }
     >
       Edit details
-    </Text>
+    </Component>
     <ItemDetails
       description="bar"
       onDescriptionChange={[Function]}
@@ -106,10 +100,7 @@ exports[`<_UserItemDetails /> renders correctly 1`] = `
       price={100}
       title="foo"
     />
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
+    <Component
       style={
         Object {
           "alignSelf": "stretch",
@@ -124,7 +115,7 @@ exports[`<_UserItemDetails /> renders correctly 1`] = `
       }
     >
       Location
-    </Text>
+    </Component>
     <LocationInfoText />
     <UserItemMapView
       currentLocation={
@@ -139,10 +130,7 @@ exports[`<_UserItemDetails /> renders correctly 1`] = `
     <UpdateLocationButton
       updateLocation={[Function]}
     />
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
+    <Component
       style={
         Object {
           "alignSelf": "stretch",
@@ -157,11 +145,8 @@ exports[`<_UserItemDetails /> renders correctly 1`] = `
       }
     >
       Fun facts
-    </Text>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
+    </Component>
+    <Component
       style={
         Object {
           "alignSelf": "center",
@@ -172,7 +157,7 @@ exports[`<_UserItemDetails /> renders correctly 1`] = `
       }
     >
       • You decided to get rid of this item Fri Jan 02 1970
-    </Text>
+    </Component>
     <DeleteButton
       fetchItems={[Function]}
       id={0}

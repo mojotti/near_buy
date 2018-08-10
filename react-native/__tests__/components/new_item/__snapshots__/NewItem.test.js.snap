@@ -32,9 +32,6 @@ exports[`<_NewItem /> renders correctly 1`] = `
       }
     >
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         style={
           Object {
             "alignSelf": "stretch",
@@ -162,9 +159,6 @@ exports[`<_NewItem /> renders correctly 1`] = `
         </View>
       </View>
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         style={
           Object {
             "alignSelf": "stretch",
@@ -190,15 +184,8 @@ exports[`<_NewItem /> renders correctly 1`] = `
         }
       >
         <View
-          accessibilityComponentType={undefined}
-          accessibilityLabel={undefined}
-          accessibilityTraits={undefined}
           accessible={true}
-          hasTVPreferredFocus={undefined}
-          hitSlop={undefined}
           isTVSelectable={true}
-          nativeID={undefined}
-          onLayout={undefined}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -216,8 +203,6 @@ exports[`<_NewItem /> renders correctly 1`] = `
               },
             ]
           }
-          testID={undefined}
-          tvParallaxProperties={undefined}
         >
           <View
             style={
@@ -246,9 +231,7 @@ exports[`<_NewItem /> renders correctly 1`] = `
             }
           >
             <Text
-              accessible={true}
               allowFontScaling={false}
-              ellipsizeMode="tail"
               onPress={[Function]}
               style={
                 Array [
@@ -272,15 +255,8 @@ exports[`<_NewItem /> renders correctly 1`] = `
           </View>
         </View>
         <View
-          accessibilityComponentType={undefined}
-          accessibilityLabel={undefined}
-          accessibilityTraits={undefined}
           accessible={true}
-          hasTVPreferredFocus={undefined}
-          hitSlop={undefined}
           isTVSelectable={true}
-          nativeID={undefined}
-          onLayout={undefined}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -298,8 +274,6 @@ exports[`<_NewItem /> renders correctly 1`] = `
               },
             ]
           }
-          testID={undefined}
-          tvParallaxProperties={undefined}
         >
           <View
             style={
@@ -328,9 +302,7 @@ exports[`<_NewItem /> renders correctly 1`] = `
             }
           >
             <Text
-              accessible={true}
               allowFontScaling={false}
-              ellipsizeMode="tail"
               onPress={[Function]}
               style={
                 Array [
@@ -364,15 +336,8 @@ exports[`<_NewItem /> renders correctly 1`] = `
         }
       >
         <View
-          accessibilityComponentType={undefined}
-          accessibilityLabel={undefined}
-          accessibilityTraits={undefined}
           accessible={true}
-          hasTVPreferredFocus={undefined}
-          hitSlop={undefined}
           isTVSelectable={true}
-          nativeID={undefined}
-          onLayout={undefined}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -390,8 +355,6 @@ exports[`<_NewItem /> renders correctly 1`] = `
               },
             ]
           }
-          testID={undefined}
-          tvParallaxProperties={undefined}
         >
           <View
             style={
@@ -420,9 +383,7 @@ exports[`<_NewItem /> renders correctly 1`] = `
             }
           >
             <Text
-              accessible={true}
               allowFontScaling={false}
-              ellipsizeMode="tail"
               onPress={[Function]}
               style={
                 Array [
@@ -446,15 +407,8 @@ exports[`<_NewItem /> renders correctly 1`] = `
           </View>
         </View>
         <View
-          accessibilityComponentType={undefined}
-          accessibilityLabel={undefined}
-          accessibilityTraits={undefined}
           accessible={true}
-          hasTVPreferredFocus={undefined}
-          hitSlop={undefined}
           isTVSelectable={true}
-          nativeID={undefined}
-          onLayout={undefined}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -472,8 +426,6 @@ exports[`<_NewItem /> renders correctly 1`] = `
               },
             ]
           }
-          testID={undefined}
-          tvParallaxProperties={undefined}
         >
           <View
             style={
@@ -502,9 +454,7 @@ exports[`<_NewItem /> renders correctly 1`] = `
             }
           >
             <Text
-              accessible={true}
               allowFontScaling={false}
-              ellipsizeMode="tail"
               onPress={[Function]}
               style={
                 Array [
@@ -529,15 +479,8 @@ exports[`<_NewItem /> renders correctly 1`] = `
         </View>
       </View>
       <View
-        accessibilityComponentType={undefined}
-        accessibilityLabel={undefined}
-        accessibilityTraits={undefined}
         accessible={true}
-        hasTVPreferredFocus={undefined}
-        hitSlop={undefined}
         isTVSelectable={true}
-        nativeID={undefined}
-        onLayout={undefined}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -557,13 +500,8 @@ exports[`<_NewItem /> renders correctly 1`] = `
             "width": 525,
           }
         }
-        testID={undefined}
-        tvParallaxProperties={undefined}
       >
         <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
           style={
             Object {
               "color": "white",

@@ -13,16 +13,11 @@ exports[`Render Login renders correctly 1`] = `
   }
 >
   <View
-    enabled={true}
-    keyboardVerticalOffset={64}
     onLayout={[Function]}
     style={
-      Array [
-        undefined,
-        Object {
-          "paddingBottom": 0,
-        },
-      ]
+      Object {
+        "paddingBottom": 0,
+      }
     }
   >
     <View
@@ -35,9 +30,6 @@ exports[`Render Login renders correctly 1`] = `
       }
     >
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         style={
           Object {
             "fontFamily": null,
@@ -109,15 +101,8 @@ exports[`Render Login renders correctly 1`] = `
         />
       </View>
       <View
-        accessibilityComponentType={undefined}
-        accessibilityLabel={undefined}
-        accessibilityTraits={undefined}
         accessible={true}
-        hasTVPreferredFocus={undefined}
-        hitSlop={undefined}
         isTVSelectable={true}
-        nativeID={undefined}
-        onLayout={undefined}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -134,13 +119,8 @@ exports[`Render Login renders correctly 1`] = `
             "paddingTop": 8,
           }
         }
-        testID={undefined}
-        tvParallaxProperties={undefined}
       >
         <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
           style={
             Object {
               "color": "white",
@@ -164,9 +144,6 @@ exports[`Render Login renders correctly 1`] = `
           }
         >
           <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
             id="altPageTitle"
             onPress={[Function]}
             style={
@@ -180,9 +157,6 @@ exports[`Render Login renders correctly 1`] = `
           </Text>
         </View>
         <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
           id="helperText"
           style={
             Object {

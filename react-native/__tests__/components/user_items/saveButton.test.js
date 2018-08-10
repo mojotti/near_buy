@@ -51,7 +51,7 @@ describe('<_SaveButton />', () => {
     );
 
     // to resolve both of the promises
-    await await saveButton.find('Text').simulate('Press');
+    await await saveButton.find('Component').last().simulate('Press');
 
     expect(fetchItemsSpy.mock.calls.length).toEqual(1);
     expect(goBackSpy.mock.calls.length).toEqual(1);
@@ -71,7 +71,7 @@ describe('<_SaveButton />', () => {
       />
     );
 
-    await await await saveButton.find('Text').simulate('Press');
+    await await await saveButton.find('Component').last().simulate('Press');
 
     expect(Alert.alert.mock.calls).toEqual([
       [
