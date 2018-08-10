@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { styles } from '../../static/styles/DrawerStyles';
+import { navigateToItem } from '../../redux/actions/NavigationAction';
 
 class MenuItem extends Component {
   _navigate(route) {
@@ -13,20 +14,30 @@ class MenuItem extends Component {
       NavigationActions.reset({
         index: 0,
         actions: [NavigationActions.navigate({ routeName: `${route}` })],
-      }),
-    );
+      }));
   }
 
+  _handleNavigation = () => {
+    this._navigate(this.props.navigationRoute, {
+      isStatusBarHidden: false,
+    });
+    this.props.dispatch(navigateToItem(this.props.itemName));
+  };
+
+  _getBackgroundColor = () => {
+    if (this.props.itemName === this.props.currentTab) {
+      return { backgroundColor: '#eaebff' };
+    }
+    return { backgroundColor: '#FFFFFF' };
+  };
+
   render() {
+    console.log('prpps', this.props);
     return (
-      <View>
+      <View style={this._getBackgroundColor()}>
         <TouchableOpacity
           style={styles.menuItem}
-          onPress={() =>
-            this._navigate(this.props.navigationRoute, {
-              isStatusBarHidden: false,
-            })
-          }
+          onPress={this._handleNavigation}
         >
           <Icon
             name={this.props.iconName}
@@ -51,4 +62,10 @@ MenuItem.propTypes = {
   }).isRequired,
 };
 
-export default connect(null, null)(MenuItem);
+const mapStateToProps = (state) => {
+  return {
+    currentTab: state.navigationReducer.currentTab,
+  };
+};
+
+export default connect(mapStateToProps)(MenuItem);

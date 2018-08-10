@@ -7,9 +7,8 @@ class Application extends React.Component {
   render() {
     if (this.props.isLoggedIn) {
       return <Secured />;
-    } else {
-      return <Login />;
     }
+    return <Login />;
   }
 }
 
