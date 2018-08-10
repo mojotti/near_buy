@@ -162,11 +162,11 @@ export class _UserItemDetails extends Component {
           />
           <UpdateLocationButton updateLocation={this.updateLocation} />
           <Text style={baseStyles.headerText}>Fun facts</Text>
-          <Text
-            style={styles.paragraph}
-          >{`\u2022 You decided to get rid of this item ${new Date(
-            this.state.created,
-          ).toDateString()}`}</Text>
+          <Text style={styles.paragraph}>
+            {
+              `\u2022 You decided to get rid of this item ${new Date(this.state.created).toDateString()}`
+            }
+          </Text>
           <DeleteButton
             id={this.state.id}
             token={this.props.token}

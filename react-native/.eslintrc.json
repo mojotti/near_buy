@@ -1,5 +1,6 @@
 {
   "extends": "airbnb",
+  "parser": "babel-eslint",
   "rules": {
     "func-names": ["error", "never"],
     "indent": ["error", 2],
@@ -12,7 +13,11 @@
     "import/prefer-default-export": 0,
     "no-undef": "off",
     "no-use-before-define": "off",
-    "react/prefer-stateless-function": "off"
+    "react/prefer-stateless-function": "off",
+    "arrow-body-style": "off",
+    "react/no-did-update-set-state": "off",
+    "no-underscore-dangle": "off",
+    "react/sort-comp": "off"
   },
   "env": {
     "jest": true
