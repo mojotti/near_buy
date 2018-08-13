@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ItemSeparator /> renders correctly 1`] = `
+<Component
+  style={
+    Object {
+      "alignSelf": "center",
+      "borderBottomColor": "#858585",
+      "borderBottomWidth": 0.5,
+      "justifyContent": "center",
+      "marginBottom": 1,
+      "width": 697.5,
+    }
+  }
+/>
+`;

@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<UserItemMapView renders correctly 1`] = `
+<Component
+  style={
+    Object {
+      "alignItems": "center",
+      "height": 600.3000000000001,
+      "marginBottom": 15,
+      "marginTop": 15,
+      "width": 750,
+    }
+  }
+>
+  <MapView
+    initialRegion={
+      Object {
+        "latitude": 53,
+        "latitudeDelta": 22.006,
+        "longitude": 65,
+        "longitudeDelta": 80.0017,
+      }
+    }
+    style={
+      Object {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  >
+    <AnimatedComponent
+      coordinate={
+        Object {
+          "latitude": 64,
+          "latitudeDelta": NaN,
+          "longitude": 25,
+          "longitudeDelta": NaN,
+        }
+      }
+      pinColor="blue"
+      title="Item's current location"
+    />
+    <AnimatedComponent
+      coordinate={
+        Object {
+          "latitude": 42,
+          "longitude": 105,
+        }
+      }
+      title="Your location"
+    />
+  </MapView>
+</Component>
+`;

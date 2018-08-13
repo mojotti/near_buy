@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LocationInfoText /> renders correctly 1`] = `
+<Component
+  style={
+    Object {
+      "alignSelf": "stretch",
+    }
+  }
+>
+  <Component
+    style={
+      Object {
+        "fontFamily": null,
+        "marginBottom": 5,
+        "marginLeft": 90,
+        "textAlign": "left",
+      }
+    }
+  >
+    • Your exact location is not visible to others
+  </Component>
+  <Component
+    style={
+      Object {
+        "fontFamily": null,
+        "marginBottom": 5,
+        "marginLeft": 90,
+        "textAlign": "left",
+      }
+    }
+  >
+    •
+    <Component
+      style={
+        Object {
+          "color": "blue",
+        }
+      }
+    >
+       Blue
+    </Component>
+    <Component>
+       color indicates your item's location
+    </Component>
+  </Component>
+  <Component
+    style={
+      Object {
+        "fontFamily": null,
+        "marginBottom": 5,
+        "marginLeft": 90,
+        "textAlign": "left",
+      }
+    }
+  >
+    •
+    <Component
+      style={
+        Object {
+          "color": "red",
+        }
+      }
+    >
+       Red
+    </Component>
+    <Component>
+       color indicates your location
+    </Component>
+  </Component>
+</Component>
+`;
