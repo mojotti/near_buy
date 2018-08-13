@@ -32,7 +32,6 @@ class MenuItem extends Component {
   };
 
   render() {
-    console.log('prpps', this.props);
     return (
       <View style={this._getBackgroundColor()}>
         <TouchableOpacity
