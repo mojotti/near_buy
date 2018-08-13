@@ -1,5 +1,3 @@
-'use strict';
-
 import React from 'react';
 import {
   ActivityIndicator,
@@ -16,7 +14,7 @@ import { styles } from '../../static/styles/ItemsStyles';
 import ItemSeparator from './ItemSeparator';
 import { getBearerHeaders } from '../../networking/networking';
 
-export class UserItems extends React.Component {
+export class _UserItems extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -123,4 +121,5 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps, null)(UserItems);
+const UserItems = connect(mapStateToProps, null)(_UserItems);
+export default UserItems;

@@ -1,0 +1,529 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<_UserItems /> has correct navigation options 1`] = `
+Object {
+  "headerLeft": <Component
+    style={
+      Object {
+        "paddingHorizontal": 10,
+      }
+    }
+  >
+    <TouchableOpacity
+      activeOpacity={0.2}
+      onPress={[Function]}
+    >
+      <Icon
+        allowFontScaling={false}
+        color="#4d4dff"
+        name="menu"
+        size={30}
+      />
+    </TouchableOpacity>
+  </Component>,
+  "headerRight": <Component
+    onPress={[Function]}
+    style={
+      Object {
+        "color": "#4d4dff",
+        "margin": 8,
+      }
+    }
+  >
+    New item
+  </Component>,
+  "title": "My items",
+}
+`;
+
+exports[`<_UserItems /> renders correctly when response has no items 1`] = `
+<Component
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#fff",
+        "flex": 1,
+        "justifyContent": "space-between",
+      },
+    ]
+  }
+>
+  <Component
+    style={
+      Array [
+        Object {
+          "padding": 10,
+          "textAlign": "center",
+        },
+      ]
+    }
+  >
+    You have no items yet. Add one by clicking 'New item'
+  </Component>
+</Component>
+`;
+
+exports[`<_UserItems /> renders correctly when response has user_items 1`] = `
+<Component
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#fff",
+        "flex": 1,
+        "justifyContent": "space-between",
+      },
+    ]
+  }
+>
+  <FlatList
+    ItemSeparatorComponent={[Function]}
+    data={
+      Array [
+        Object {
+          "description": "Description. Very awesome item.",
+          "id": 2,
+          "location": null,
+          "pictures": Object {
+            "1": null,
+            "2": null,
+            "3": null,
+          },
+          "price": 50,
+          "seller_id": 2,
+          "sold": false,
+          "title": "Item 1",
+          "uri": "http://localhost:5000/api/v1.0/user_items/2",
+        },
+        Object {
+          "description": "Description 600",
+          "id": 3,
+          "location": null,
+          "pictures": Object {
+            "1": null,
+            "2": null,
+            "3": null,
+          },
+          "price": 120,
+          "seller_id": 2,
+          "sold": false,
+          "title": "New item 500",
+          "uri": "http://localhost:5000/api/v1.0/user_items/3",
+        },
+        Object {
+          "description": "LOl",
+          "id": 4,
+          "location": null,
+          "pictures": Object {
+            "1": null,
+            "2": null,
+            "3": null,
+          },
+          "price": 200,
+          "seller_id": 2,
+          "sold": false,
+          "title": "Jee",
+          "uri": "http://localhost:5000/api/v1.0/user_items/4",
+        },
+        Object {
+          "description": "Jees",
+          "id": 6,
+          "location": null,
+          "pictures": Object {
+            "1": null,
+            "2": null,
+            "3": null,
+          },
+          "price": 100,
+          "seller_id": 2,
+          "sold": false,
+          "title": "JEees Jeees",
+          "uri": "http://localhost:5000/api/v1.0/user_items/6",
+        },
+        Object {
+          "description": "Otoaeeontaonaoooenotaontaoenoteaoneoanoao",
+          "id": 7,
+          "location": null,
+          "pictures": Object {
+            "1": null,
+            "2": null,
+            "3": null,
+          },
+          "price": 10200,
+          "seller_id": 2,
+          "sold": false,
+          "title": "Neoa",
+          "uri": "http://localhost:5000/api/v1.0/user_items/7",
+        },
+        Object {
+          "description": "JEeeeeabaeoaneo",
+          "id": 8,
+          "location": null,
+          "pictures": Object {
+            "1": null,
+            "2": null,
+            "3": null,
+          },
+          "price": 100,
+          "seller_id": 2,
+          "sold": false,
+          "title": "Jees",
+          "uri": "http://localhost:5000/api/v1.0/user_items/8",
+        },
+      ]
+    }
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    onRefresh={[Function]}
+    refreshing={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</Component>
+`;
+
+exports[`<UserItems /> has correct navigation options 1`] = `
+Object {
+  "headerLeft": <Component
+    style={
+      Object {
+        "paddingHorizontal": 10,
+      }
+    }
+  >
+    <TouchableOpacity
+      activeOpacity={0.2}
+      onPress={[Function]}
+    >
+      <Icon
+        allowFontScaling={false}
+        color="#4d4dff"
+        name="menu"
+        size={30}
+      />
+    </TouchableOpacity>
+  </Component>,
+  "headerRight": <Component
+    onPress={[Function]}
+    style={
+      Object {
+        "color": "#4d4dff",
+        "margin": 8,
+      }
+    }
+  >
+    New item
+  </Component>,
+  "title": "My items",
+}
+`;
+
+exports[`<UserItems /> renders correctly when response has no items 1`] = `
+<Component
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#fff",
+        "flex": 1,
+        "justifyContent": "space-between",
+      },
+    ]
+  }
+>
+  <Component
+    style={
+      Array [
+        Object {
+          "padding": 10,
+          "textAlign": "center",
+        },
+      ]
+    }
+  >
+    You have no items yet. Add one by clicking 'New item'
+  </Component>
+</Component>
+`;
+
+exports[`<UserItems /> renders correctly when response has user_items 1`] = `
+<Component
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#fff",
+        "flex": 1,
+        "justifyContent": "space-between",
+      },
+    ]
+  }
+>
+  <FlatList
+    ItemSeparatorComponent={[Function]}
+    data={
+      Array [
+        Object {
+          "description": "Description. Very awesome item.",
+          "id": 2,
+          "location": null,
+          "pictures": Object {
+            "1": null,
+            "2": null,
+            "3": null,
+          },
+          "price": 50,
+          "seller_id": 2,
+          "sold": false,
+          "title": "Item 1",
+          "uri": "http://localhost:5000/api/v1.0/user_items/2",
+        },
+        Object {
+          "description": "Description 600",
+          "id": 3,
+          "location": null,
+          "pictures": Object {
+            "1": null,
+            "2": null,
+            "3": null,
+          },
+          "price": 120,
+          "seller_id": 2,
+          "sold": false,
+          "title": "New item 500",
+          "uri": "http://localhost:5000/api/v1.0/user_items/3",
+        },
+        Object {
+          "description": "LOl",
+          "id": 4,
+          "location": null,
+          "pictures": Object {
+            "1": null,
+            "2": null,
+            "3": null,
+          },
+          "price": 200,
+          "seller_id": 2,
+          "sold": false,
+          "title": "Jee",
+          "uri": "http://localhost:5000/api/v1.0/user_items/4",
+        },
+        Object {
+          "description": "Jees",
+          "id": 6,
+          "location": null,
+          "pictures": Object {
+            "1": null,
+            "2": null,
+            "3": null,
+          },
+          "price": 100,
+          "seller_id": 2,
+          "sold": false,
+          "title": "JEees Jeees",
+          "uri": "http://localhost:5000/api/v1.0/user_items/6",
+        },
+        Object {
+          "description": "Otoaeeontaonaoooenotaontaoenoteaoneoanoao",
+          "id": 7,
+          "location": null,
+          "pictures": Object {
+            "1": null,
+            "2": null,
+            "3": null,
+          },
+          "price": 10200,
+          "seller_id": 2,
+          "sold": false,
+          "title": "Neoa",
+          "uri": "http://localhost:5000/api/v1.0/user_items/7",
+        },
+        Object {
+          "description": "JEeeeeabaeoaneo",
+          "id": 8,
+          "location": null,
+          "pictures": Object {
+            "1": null,
+            "2": null,
+            "3": null,
+          },
+          "price": 100,
+          "seller_id": 2,
+          "sold": false,
+          "title": "Jees",
+          "uri": "http://localhost:5000/api/v1.0/user_items/8",
+        },
+      ]
+    }
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    onRefresh={[Function]}
+    refreshing={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</Component>
+`;
+
+exports[`UserItems renders correctly when response has no items 1`] = `
+<Component
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#fff",
+        "flex": 1,
+        "justifyContent": "space-between",
+      },
+    ]
+  }
+>
+  <Component
+    style={
+      Array [
+        Object {
+          "padding": 10,
+          "textAlign": "center",
+        },
+      ]
+    }
+  >
+    You have no items yet. Add one by clicking 'New item'
+  </Component>
+</Component>
+`;
+
+exports[`UserItems renders correctly when response has user_items 1`] = `
+<Component
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#fff",
+        "flex": 1,
+        "justifyContent": "space-between",
+      },
+    ]
+  }
+>
+  <FlatList
+    ItemSeparatorComponent={[Function]}
+    data={
+      Array [
+        Object {
+          "description": "Description. Very awesome item.",
+          "id": 2,
+          "location": null,
+          "pictures": Object {
+            "1": null,
+            "2": null,
+            "3": null,
+          },
+          "price": 50,
+          "seller_id": 2,
+          "sold": false,
+          "title": "Item 1",
+          "uri": "http://localhost:5000/api/v1.0/user_items/2",
+        },
+        Object {
+          "description": "Description 600",
+          "id": 3,
+          "location": null,
+          "pictures": Object {
+            "1": null,
+            "2": null,
+            "3": null,
+          },
+          "price": 120,
+          "seller_id": 2,
+          "sold": false,
+          "title": "New item 500",
+          "uri": "http://localhost:5000/api/v1.0/user_items/3",
+        },
+        Object {
+          "description": "LOl",
+          "id": 4,
+          "location": null,
+          "pictures": Object {
+            "1": null,
+            "2": null,
+            "3": null,
+          },
+          "price": 200,
+          "seller_id": 2,
+          "sold": false,
+          "title": "Jee",
+          "uri": "http://localhost:5000/api/v1.0/user_items/4",
+        },
+        Object {
+          "description": "Jees",
+          "id": 6,
+          "location": null,
+          "pictures": Object {
+            "1": null,
+            "2": null,
+            "3": null,
+          },
+          "price": 100,
+          "seller_id": 2,
+          "sold": false,
+          "title": "JEees Jeees",
+          "uri": "http://localhost:5000/api/v1.0/user_items/6",
+        },
+        Object {
+          "description": "Otoaeeontaonaoooenotaontaoenoteaoneoanoao",
+          "id": 7,
+          "location": null,
+          "pictures": Object {
+            "1": null,
+            "2": null,
+            "3": null,
+          },
+          "price": 10200,
+          "seller_id": 2,
+          "sold": false,
+          "title": "Neoa",
+          "uri": "http://localhost:5000/api/v1.0/user_items/7",
+        },
+        Object {
+          "description": "JEeeeeabaeoaneo",
+          "id": 8,
+          "location": null,
+          "pictures": Object {
+            "1": null,
+            "2": null,
+            "3": null,
+          },
+          "price": 100,
+          "seller_id": 2,
+          "sold": false,
+          "title": "Jees",
+          "uri": "http://localhost:5000/api/v1.0/user_items/8",
+        },
+      ]
+    }
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    onRefresh={[Function]}
+    refreshing={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</Component>
+`;

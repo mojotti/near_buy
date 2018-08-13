@@ -1,8 +1,8 @@
 import React from 'react';
 import 'isomorphic-fetch'; // for headers, fetch, etc.
-import renderer from 'react-test-renderer';
+import { shallow } from 'enzyme';
 import configureStore from 'redux-mock-store';
-import { UserItems } from '../../../src/components/user_items/UserItems';
+import { _UserItems } from '../../../src/components/user_items/UserItems';
 
 import { sample } from '../../__mocks__/ItemSample';
 
@@ -18,13 +18,29 @@ const initialState = {
 };
 const store = mockStore(initialState);
 
-describe('UserItems', () => {
-  it.skip('render correctly when response has user_items', () => {
+describe('<_UserItems />', () => {
+  test('renders correctly when response has user_items', () => {
     fetch.mockResponseSuccess(sample);
 
-    const items = renderer.create(<UserItems store={store} />);
-    items.getInstance().handleAllItemsResponse(sample);
+    const items = shallow(<_UserItems store={store} />);
+    items.instance().handleAllItemsResponse(sample);
 
-    expect(items.toJSON()).toMatchSnapshot();
+    expect(items).toMatchSnapshot();
+  });
+
+  test('renders correctly when response has no items', () => {
+    fetch.mockResponseSuccess({ items: 'no items' });
+
+    const items = shallow(<_UserItems store={store} />);
+    items.instance().handleAllItemsResponse({ items: 'no items' });
+
+    expect(items).toMatchSnapshot();
+  });
+
+  test('has correct navigation options', () => {
+    const params = { navigate: jest.fn() }
+    const naviOptions = _UserItems.navigationOptions({ navigation: params });
+
+    expect(naviOptions).toMatchSnapshot();
   });
 });
