@@ -8,7 +8,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { styles } from '../../static/styles/DrawerStyles';
 import { navigateToItem } from '../../redux/actions/NavigationAction';
 
-class MenuItem extends Component {
+export class _MenuItem extends Component {
   _navigate(route) {
     return this.props.navigation.dispatch(
       NavigationActions.reset({
@@ -51,14 +51,17 @@ class MenuItem extends Component {
   }
 }
 
-MenuItem.propTypes = {
+_MenuItem.propTypes = {
   itemName: PropTypes.string.isRequired,
   iconName: PropTypes.string.isRequired,
   iconSize: PropTypes.number.isRequired,
   navigationRoute: PropTypes.string.isRequired,
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
+    dispatch: PropTypes.func.isRequired,
   }).isRequired,
+  currentTab: PropTypes.string.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -67,4 +70,5 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(MenuItem);
+const MenuItem = connect(mapStateToProps)(_MenuItem);
+export default MenuItem;

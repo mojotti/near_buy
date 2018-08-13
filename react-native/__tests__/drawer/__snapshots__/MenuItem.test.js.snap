@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<_MenuItem /> renders correctly when tab is current tab 1`] = `
+<Component
+  style={
+    Object {
+      "backgroundColor": "#eaebff",
+    }
+  }
+>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    onPress={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "transparent",
+        "flexDirection": "row",
+        "justifyContent": "flex-start",
+        "marginBottom": 2,
+        "padding": 10,
+      }
+    }
+  >
+    <Icon
+      allowFontScaling={false}
+      color="#232c44"
+      size={12}
+      style={
+        Object {
+          "paddingRight": 3,
+        }
+      }
+    />
+    <Component
+      style={
+        Object {
+          "color": "#232c44",
+          "fontFamily": null,
+          "fontSize": 18,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      current
+    </Component>
+  </TouchableOpacity>
+</Component>
+`;
+
+exports[`<_MenuItem /> renders correctly when tab is not the current tab 1`] = `
+<Component
+  style={
+    Object {
+      "backgroundColor": "#FFFFFF",
+    }
+  }
+>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    onPress={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "transparent",
+        "flexDirection": "row",
+        "justifyContent": "flex-start",
+        "marginBottom": 2,
+        "padding": 10,
+      }
+    }
+  >
+    <Icon
+      allowFontScaling={false}
+      color="#232c44"
+      size={12}
+      style={
+        Object {
+          "paddingRight": 3,
+        }
+      }
+    />
+    <Component
+      style={
+        Object {
+          "color": "#232c44",
+          "fontFamily": null,
+          "fontSize": 18,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      not current
+    </Component>
+  </TouchableOpacity>
+</Component>
+`;
