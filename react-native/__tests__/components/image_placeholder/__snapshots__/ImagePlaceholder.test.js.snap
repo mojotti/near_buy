@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ImagePlaceholder /> does not show placeholder image when image is loaded 1`] = `
+<Component
+  style={
+    Object {
+      "alignItems": "center",
+      "alignSelf": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <Image
+    onLoad={[Function]}
+    source={
+      Object {
+        "uri": "foo.com?Fri Jan 01 2016 02:00:00 GMT+0200 (Eastern European Standard Time)",
+      }
+    }
+    style={
+      Array [
+        Object {
+          "position": "absolute",
+        },
+        undefined,
+      ]
+    }
+  />
+</Component>
+`;
+
+exports[`<ImagePlaceholder /> shows placeholder image when image is not loaded 1`] = `
+<Component
+  style={
+    Object {
+      "alignItems": "center",
+      "alignSelf": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <Image
+    onLoad={[Function]}
+    source={
+      Object {
+        "uri": "foo.com?Fri Jan 01 2016 02:00:00 GMT+0200 (Eastern European Standard Time)",
+      }
+    }
+    style={
+      Array [
+        Object {
+          "position": "absolute",
+        },
+        undefined,
+      ]
+    }
+  />
+  <Component
+    style={
+      Array [
+        Object {
+          "backgroundColor": "white",
+        },
+        undefined,
+      ]
+    }
+  >
+    <Icon
+      allowFontScaling={false}
+      color="gray"
+      name="image"
+      size={12}
+      style={
+        Object {
+          "alignItems": "center",
+          "alignSelf": "center",
+          "justifyContent": "center",
+        }
+      }
+    />
+  </Component>
+</Component>
+`;

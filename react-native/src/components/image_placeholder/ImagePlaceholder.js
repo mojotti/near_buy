@@ -15,8 +15,6 @@ export default class ImagePlaceholder extends React.Component {
   _onLoad = () => this.setState(() => ({ isLoaded: true }));
 
   render() {
-    console.log('this.props.placeholder', this.props);
-
     return (
       <View style={styles.container}>
         <Image
