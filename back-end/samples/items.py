@@ -24,9 +24,22 @@ DB_ITEM2 = {
     'seller_id': 0
 }
 
+DB_ITEM3 = {
+    'id': 3,
+    'title': u'Something beautiful',
+    'price': 50,
+    'description': u'Oh this is good item.',
+    'sold': False,
+    'longitude': '-121.45356',
+    'latitude': '24.5114392',
+    'seller_id': 1
+}
+
 ITEM1 = "{'title': 'item 1', 'price': 123, 'description': 'best stuff you can get', 'latitude': 163.020, 'longitude': "\
            "200.4040}"
 ITEM2 = "{'title': 'item 2', 'price': 600, 'description': 'very good stuff', 'latitude': -140.020, 'longitude': " \
+           "-20.4040}"
+ITEM3 = "{'title': 'item 3', 'price': 23143, 'description': 'this is item 3', 'latitude': -140.020, 'longitude': " \
            "-20.4040}"
 NEW_ITEM = "{'title': 'new_item', 'price': 100, 'description': 'almost brand new stuff', 'latitude': 63.020, " \
            "'longitude': 20.4040}"

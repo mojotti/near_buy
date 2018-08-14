@@ -160,6 +160,20 @@ def get_items():
     return jsonify({'items': [make_public_item(item) for item in items]})
 
 
+@app.route('/api/v1.0/items_from_others', methods=['GET'])
+@token_auth.login_required
+def get_items_from_other_users():
+    """
+    Get all items that are created by other users.
+    :return: json
+    """
+    items = DB.retrieve_items_from_others(g.user['id'])
+    public_items = [make_public_item(item) for item in items]
+    if not public_items or public_items == []:
+        return jsonify({'items': 'no items'})
+    return jsonify({'items': public_items})
+
+
 @app.route('/api/v1.0/items/<int:item_id>', methods=['GET'])
 @token_auth.login_required
 def get_item(item_id):

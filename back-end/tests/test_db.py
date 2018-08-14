@@ -7,6 +7,7 @@ from samples import items
 
 ITEM1 = items.DB_ITEM1
 ITEM2 = items.DB_ITEM2
+ITEM3 = items.DB_ITEM3
 
 TEST_PASSWORD = "test_password123"
 TEST_USER = "test_user"
@@ -180,7 +181,20 @@ class TestApp(unittest.TestCase):
         self.assertEqual(user['username'], 'user')
         self.assertEqual(user['token'], token)
 
+    def test_given_other_users_have_items_when_they_are_searched_then_they_are_retrieved(self):
+        own_seller_id = ITEM3.get('seller_id')
+        self.db.items.insert_one(ITEM3)
 
+        other_items = self.db.retrieve_items_from_others(own_seller_id)
+        other_items = [item for item in other_items]
+        all_items = self.db.retrieve_items()
+        all_items = [item for item in all_items]
+
+        self.assertEqual(len(other_items), 2)
+        self.assertEqual(len(all_items), 3)
+
+        own_item_in_others = next((item for item in other_items if item["seller_id"] is own_seller_id), None)
+        self.assertIsNone(own_item_in_others)
 
 
 

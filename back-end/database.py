@@ -29,6 +29,9 @@ class DatabaseHelper(object):
     def retrieve_items_with_seller_id(self, id_):
         return self.items.find({'seller_id': id_}, {'_id': 0})
 
+    def retrieve_items_from_others(self, id_):
+        return self.items.find({'seller_id': {'$ne': id_}}, {'_id': 0})
+
     def find_and_update_item(self, item):
         id_ = item['id']
         items = self.retrieve_items()

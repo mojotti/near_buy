@@ -12,6 +12,7 @@ from samples import items
 
 ITEM1 = items.ITEM1
 ITEM2 = items.ITEM2
+ITEM3 = items.ITEM3
 NEW_ITEM = items.NEW_ITEM
 
 TEST_DB = TestDB()
@@ -69,6 +70,17 @@ class TestApp(unittest.TestCase):
                       content_type='multipart/form-data',
                       headers={'Authorization':
                                'Bearer ' + TOKEN_FOR_USER_ID_0})
+
+    @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_KOJO)
+    @mock.patch('app.is_allowed_file', return_value=True)
+    def create_item_for_user_one(self, mock, rock):
+        data = {'info': ITEM3}
+        data['pictures[]'] = [(io.BytesIO(b"abcdef"), 'test0.jpg'), (io.BytesIO(b"abcdef"), 'test1.jpg')]
+        self.app.post('/api/v1.0/items',
+                      data=data,
+                      content_type='multipart/form-data',
+                      headers={'Authorization':
+                                   'Bearer ' + TOKEN_FOR_USER_ID_1})
 
     @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_MOJO)
     def test_given_there_is_two_items_in_db_when_item_two_is_retrieved_then_it_is_not_sold(self, mock):
@@ -190,7 +202,7 @@ class TestApp(unittest.TestCase):
             self.assertEqual(item['seller_id'], 0)
 
     @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_KOJO)
-    def test_given_there_is_two_items_in_db_when_user_zeros_item_is_requested_then_it_is_retrieved(self, mock):
+    def test_given_there_are_two_items_in_db_when_user_zeros_item_is_requested_then_it_is_retrieved(self, mock):
         response = self.app.get(
             '/api/v1.0/user/items',
             headers={'Authorization':
@@ -198,6 +210,27 @@ class TestApp(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         json_resp = json.loads(response.data.decode('utf-8'))
         self.assertEqual(json_resp['items'], 'no items')
+
+    @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_KOJO)
+    def test_given_there_are_two_items_in_db_when_items_by_others_are_requested_then_they_are_retrieved(self, mock):
+        self.create_item_for_user_one()
+
+        response = self.app.get(
+            '/api/v1.0/items_from_others',
+            headers={'Authorization':
+                         'Bearer ' + TOKEN_FOR_USER_ID_1})
+        self.assertEqual(response.status_code, 200)
+        others_items = json.loads(response.data.decode('utf-8'))
+
+        response = self.app.get(
+            '/api/v1.0/items',
+            headers={'Authorization':
+                         'Bearer ' + TOKEN_FOR_USER_ID_1})
+        self.assertEqual(response.status_code, 200)
+        all_items = json.loads(response.data.decode('utf-8'))
+
+        self.assertEquals(len(others_items['items']), 2)
+        self.assertEquals(len(all_items['items']), 3)
 
     @mock.patch('database.DatabaseHelper.create_new_user_to_database', return_value=None)
     def test_given_user_has_valid_user_info_when_user_registers_then_it_is_successful(self, mock):
