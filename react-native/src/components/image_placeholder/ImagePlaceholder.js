@@ -18,7 +18,7 @@ export default class ImagePlaceholder extends React.Component {
     return (
       <View style={styles.container}>
         <Image
-          source={{ uri: this.props.url + '?' + new Date() }}
+          source={{ uri: this.props.url }}//+ '?' + new Date() }}
           style={[styles.image, this.props.styles]}
           onLoad={this._onLoad}
         />

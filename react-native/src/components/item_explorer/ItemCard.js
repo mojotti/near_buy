@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import { styles } from '../../static/styles/ItemCardStyles';
 import { baseStyles } from '../../static/styles/BaseStyles';
+import { localhost } from "../../static/constants";
 
 class _ItemCard extends React.Component {
   constructor(props) {
@@ -49,14 +50,15 @@ class _ItemCard extends React.Component {
     this.setState(() => ({ distanceInKm: `Distance: ${d.toFixed(1)} km` }));
   };
 
+  _getImageSource = () => {
+    return `http://${localhost}:5000/api/v1.0/${this.props.item.id}/image0.jpg`;
+  };
+
   render() {
     return (
       <View style={styles.container}>
         <Text style={baseStyles.headerText}>{this.props.item.title}</Text>
-        <Image
-          source={{ uri: 'https://i.imgur.com/0oOZJGS.jpg' }}
-          style={styles.image}
-        />
+        <Image source={{ uri: this._getImageSource() }} style={styles.image} />
         <Text style={baseStyles.headerText}>{this.state.distanceInKm}</Text>
       </View>
     );
@@ -74,5 +76,6 @@ export default ItemCard;
 _ItemCard.propTypes = {
   item: PropTypes.shape({
     title: PropTypes.string,
+    id: PropTypes.number,
   }).isRequired,
 };

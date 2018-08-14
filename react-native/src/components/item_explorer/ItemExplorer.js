@@ -1,13 +1,13 @@
 'use strict';
 
 import React from 'react';
-import { Dimensions, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, Dimensions, Text, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Carousel from 'react-native-snap-carousel';
 import ItemCard from './ItemCard';
 import { styles } from '../../static/styles/ItemsStyles';
-import { login } from "../../redux/actions/AuthorizationAction";
 
 const { width } = Dimensions.get('window');
 
@@ -35,35 +35,13 @@ export class ItemExplorer extends React.Component {
     return <ItemCard item={item} />;
   }
 
-  render() {
-    const entries = [
-      {
-        title: 'Example item 1',
-        latitude: 65.989806,
-        longitude: 24.552602,
-      },
-      {
-        title: 'Example item 2',
-        latitude: 64.989806,
-        longitude: 25.552602,
-      },
-      {
-        title: 'Example item 3',
-        latitude: 64.389806,
-        longitude: 25.952602,
-      },
-      {
-        title: 'Example item 4',
-        latitude: 60,
-        longitude: 24.2,
-      },
-    ];
+  _renderCarousel = () => {
     return (
       <Carousel
         ref={c => {
           this._carousel = c;
         }}
-        data={entries}
+        data={this.props.items}
         renderItem={this._renderItem}
         sliderWidth={width}
         itemWidth={width}
@@ -72,12 +50,32 @@ export class ItemExplorer extends React.Component {
         layout={'stack'}
       />
     );
+  };
+
+  _renderLoader = () => {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignSelf: 'center' }}>
+        <ActivityIndicator size="large" color="#4d4dff" />
+      </View>
+    );
+  };
+
+  render() {
+    return this.props.isFetching ? this._renderLoader() : this._renderCarousel();
+    // return this._renderLoader();
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   console.log('state', state);
-  return {};
+  return {
+    isFetching: state.itemExplorerReducer.isFetching,
+    items: state.itemExplorerReducer.items,
+  };
+};
+
+ItemExplorer.propTypes = {
+  isFetching: PropTypes.bool.isRequired,
 };
 
 export default connect(mapStateToProps, null)(ItemExplorer);
