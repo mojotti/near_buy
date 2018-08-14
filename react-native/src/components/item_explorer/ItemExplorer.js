@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Carousel from 'react-native-snap-carousel';
 import ItemCard from './ItemCard';
-import { styles } from '../../static/styles/ItemsStyles';
+import { styles } from '../../static/styles/ItemExplorerStyles';
 
 const { width } = Dimensions.get('window');
 
@@ -31,9 +31,19 @@ export class ItemExplorer extends React.Component {
     };
   };
 
-  _renderItem({ item, index }) {
-    return <ItemCard item={item} />;
-  }
+  _renderItems = () => {
+    return this.props.items === 'no items'
+      ? this._renderNoItems()
+      : this._renderCarousel();
+  };
+
+  _renderLoader = () => {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" color="#4d4dff" />
+      </View>
+    );
+  };
 
   _renderCarousel = () => {
     return (
@@ -52,17 +62,20 @@ export class ItemExplorer extends React.Component {
     );
   };
 
-  _renderLoader = () => {
+  _renderItem({ item, index }) {
+    return <ItemCard item={item} />;
+  }
+
+  _renderNoItems = () => {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignSelf: 'center' }}>
-        <ActivityIndicator size="large" color="#4d4dff" />
+      <View style={[styles.noItemsText, styles.container]}>
+        <Text>{`Oops! Could not find any items. Perhaps you are in the middle of nowhere!`}</Text>
       </View>
     );
   };
 
   render() {
-    return this.props.isFetching ? this._renderLoader() : this._renderCarousel();
-    // return this._renderLoader();
+    return this.props.isFetching ? this._renderLoader() : this._renderItems();
   }
 }
 

@@ -14,7 +14,7 @@ const headerButtonIos = {
   margin: 8,
 };
 
-const headerButton = Platform.OS === 'ios' ? headerButtonIos : headerButtonAndroid;
+export const headerButton = Platform.OS === 'ios' ? headerButtonIos : headerButtonAndroid;
 
 export const styles = StyleSheet.create({
   container: {
