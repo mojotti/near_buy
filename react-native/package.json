@@ -76,6 +76,7 @@
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-persist": "^5.9.1",
-    "redux-persist-transform-encrypt": "^2.0.0"
+    "redux-persist-transform-encrypt": "^2.0.0",
+    "redux-thunk": "^2.3.0"
   }
 }
