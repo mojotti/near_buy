@@ -6,7 +6,7 @@ const initialState = {
 
 export const itemExplorerReducer = (state = initialState, action) => {
   switch (action.type) {
-  case 'FETCH_ITEMS_REQUEST':
+  case 'FETCHING_ITEMS':
     return Object.assign({}, state, {
       isFetching: true,
     });

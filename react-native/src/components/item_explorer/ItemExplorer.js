@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import Carousel from 'react-native-snap-carousel';
 import ItemCard from './ItemCard';
 import { styles } from '../../static/styles/ItemsStyles';
+import { login } from "../../redux/actions/AuthorizationAction";
 
 const { width } = Dimensions.get('window');
 
@@ -75,6 +76,7 @@ export class ItemExplorer extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
+  console.log('state', state);
   return {};
 };
 

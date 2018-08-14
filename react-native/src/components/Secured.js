@@ -46,7 +46,7 @@ const Drawer = DrawerNavigator(
 
 class Secured extends Component {
   componentDidMount() {
-    runAppStartEvents(this.props.dispatch);
+    runAppStartEvents(this.props.dispatch, this.props.token);
     AppState.addEventListener('change', handleAppStateChange);
   }
 
@@ -59,12 +59,15 @@ class Secured extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  return {};
+const mapStateToProps = (state) => {
+  return {
+    token: state.authorizationReducer.token,
+  };
 };
 
 Secured.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  token: PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps, null)(Secured);
