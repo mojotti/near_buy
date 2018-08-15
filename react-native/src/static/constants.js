@@ -11,7 +11,8 @@ export const widthWithThirtyPercentPadding =
   Dimensions.get('window').width * 0.7;
 export const width = Dimensions.get('window').width;
 
-export const userHasNoItemsText = `You have no items yet. Add one by clicking 'New item'`;
+export const userHasNoItemsHeader = `You have no items yet.'`;
+export const userHasNoItemsContainer = `Add one by clicking 'New item'`;
 export const alertInvalidValuesNewItem = [
   'Invalid values',
   'Enter at least price, title and description',

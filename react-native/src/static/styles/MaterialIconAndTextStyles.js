@@ -9,6 +9,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignSelf: 'center',
+    backgroundColor: 'transparent',
   },
   noItemsText: {
     paddingHorizontal: 30,
@@ -16,7 +17,7 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
   },
   headerButton,
-  poopContainer: {
+  iconContainer: {
     width: width * 0.24,
     height: width * 0.24,
     backgroundColor: '#FFFFFF',
@@ -25,7 +26,7 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
     marginBottom: 15,
   },
-  poopStyles: {
+  iconStyles: {
     alignSelf: 'center',
   },
 });

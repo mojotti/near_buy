@@ -8,11 +8,16 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { localhost, userHasNoItemsText } from '../../static/constants';
+import {
+  localhost,
+  userHasNoItemsContainer,
+  userHasNoItemsHeader,
+} from '../../static/constants';
 import UserItem from './UserItem';
 import { styles } from '../../static/styles/ItemsStyles';
 import ItemSeparator from './ItemSeparator';
 import { getBearerHeaders } from '../../networking/networking';
+import MaterialIconAndText from '../common/MaterialIconAndText';
 
 export class _UserItems extends React.Component {
   constructor(props) {
@@ -85,32 +90,44 @@ export class _UserItems extends React.Component {
       );
     }
     if (!this.state.data || this.state.data === 'no items') {
-      return <Text style={[styles.infoText]}>{userHasNoItemsText}</Text>;
-    } else {
       return (
-        <FlatList
-          data={this.state.data}
-          renderItem={rowData => {
-            return (
-              <UserItem
-                item={rowData.item}
-                itemId={rowData.index}
-                fetchItems={this.fetchData}
-                navigation={this.props.navigation}
-              />
-            );
-          }}
-          keyExtractor={(item, index) => index.toString()}
-          onRefresh={this.fetchData}
-          refreshing={this.state.isRefreshing}
-          ItemSeparatorComponent={ItemSeparator}
-        />
-      );
+        <MaterialIconAndText
+          iconName="emoticon-poop"
+          headerText={userHasNoItemsHeader}
+          containerText={userHasNoItemsContainer}
+        />);
     }
+    return (
+      <FlatList
+        data={this.state.data}
+        renderItem={rowData => {
+          return (
+            <UserItem
+              item={rowData.item}
+              itemId={rowData.index}
+              fetchItems={this.fetchData}
+              navigation={this.props.navigation}
+            />
+          );
+        }}
+        keyExtractor={(item, index) => index.toString()}
+        onRefresh={this.fetchData}
+        refreshing={this.state.isRefreshing}
+        ItemSeparatorComponent={ItemSeparator}
+      />
+    );
   }
 
   render() {
-    return <View style={[styles.container]}>{this.renderUserData()}</View>;
+    const backgroundColor = !this.state.data || this.state.data === 'no items' ?
+      'transparent' :
+      '#fff';
+    const bgColor = { backgroundColor };
+    return (
+      <View style={[styles.container, bgColor]}>
+        {this.renderUserData()}
+      </View>
+    );
   }
 }
 

@@ -8,8 +8,9 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Carousel from 'react-native-snap-carousel';
 import ItemCard from './ItemCard';
-import { styles } from '../../static/styles/ItemExplorerStyles';
+import { styles } from '../../static/styles/MaterialIconAndTextStyles';
 import { NO_ITEMS_TEXT_CONTENT, NO_ITEMS_TEXT_HEADER } from '../../static/constants';
+import MaterialIconAndText from '../common/MaterialIconAndText';
 
 const { width } = Dimensions.get('window');
 
@@ -70,17 +71,11 @@ export class ItemExplorer extends React.Component {
 
   _renderNoItems = () => {
     return (
-      <View style={styles.container}>
-        <View style={styles.poopContainer}>
-          <MaterialIcon
-            name="emoticon-poop"
-            size={width * 0.22}
-            style={styles.poopStyles}
-          />
-        </View>
-        <Text style={styles.noItemsText}>{NO_ITEMS_TEXT_HEADER}</Text>
-        <Text style={styles.noItemsText}>{NO_ITEMS_TEXT_CONTENT}</Text>
-      </View>
+      <MaterialIconAndText
+        iconName="emoticon-poop"
+        headerText={NO_ITEMS_TEXT_HEADER}
+        containerText={NO_ITEMS_TEXT_CONTENT}
+      />
     );
   };
 
