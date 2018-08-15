@@ -13,7 +13,7 @@ const encryptor = createEncryptor({
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['authorizationReducer'], // store only auth info
+  whitelist: ['authorizationReducer', 'locationReducer'],
   transforms: [encryptor],
 };
 

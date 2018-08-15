@@ -34,3 +34,6 @@ export const DELETION_ERROR = [
   'Oopsie Woopsie!',
   'Something went wrong, please check your network connection & try again!',
 ];
+
+export const NO_ITEMS_TEXT_HEADER = 'Oops! Could not find any items.';
+export const NO_ITEMS_TEXT_CONTENT = 'Perhaps you are in the middle of nowhere.';
