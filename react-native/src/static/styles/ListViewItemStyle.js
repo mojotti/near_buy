@@ -1,7 +1,6 @@
-import { Dimensions, Platform, StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 
 const WIDTH = Dimensions.get('window').width;
-const BORDER_RADIUS = Platform.OS === 'ios' ? 15 : 100;
 
 export const styles = StyleSheet.create({
   item: {
@@ -19,18 +18,24 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignSelf: 'center',
   },
-  imageContainer: {
+  imagePlaceholderContainer: {
     width: WIDTH * 0.2,
     height: WIDTH * 0.2,
     justifyContent: 'flex-start',
     flexDirection: 'column',
   },
+  imageContainer: {
+    width: WIDTH * 0.15,
+    height: WIDTH * 0.15,
+    overflow: 'hidden',
+    borderRadius: 100,
+    justifyContent: 'center',
+    alignSelf: 'center',
+    margin: 10,
+  },
   image: {
     width: WIDTH * 0.15,
     height: WIDTH * 0.15,
-    margin: 10,
-    overflow: 'hidden',
-    borderRadius: BORDER_RADIUS,
   },
   title: {
     fontSize: 17,

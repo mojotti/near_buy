@@ -9,6 +9,13 @@ import MenuItem from './MenuItem';
 
 class DrawerMenu extends Component {
   render() {
+    const allItemsProps = {
+      itemName: 'All items',
+      iconName: 'public',
+      iconSize: 27,
+      navigationRoute: 'ItemExplorer',
+      navigation: this.props.navigation,
+    };
     const myItemProps = {
       itemName: 'My items',
       iconName: 'account-circle',
@@ -17,19 +24,11 @@ class DrawerMenu extends Component {
       navigation: this.props.navigation,
     };
 
-    const allItemsProps = {
-      itemName: 'All items',
-      iconName: 'public',
-      iconSize: 27,
-      navigationRoute: 'ItemExplorer',
-      navigation: this.props.navigation,
-    };
-
     return (
       <View style={styles.container}>
         <View>
-          <MenuItem {...myItemProps} />
           <MenuItem {...allItemsProps} />
+          <MenuItem {...myItemProps} />
         </View>
 
         <TouchableHighlight

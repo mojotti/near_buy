@@ -34,7 +34,8 @@
     "ios": "react-native run-ios",
     "test": "jest",
     "test:watch": "npm test -- --watch",
-    "flow": "flow"
+    "flow": "flow",
+    "clean-install": "rm -rf node_modules && rm -rf $TMPDIR/react-* && yarn cache clean --force && watchman watch-del-all && yarn"
   },
   "jest": {
     "testEnvironment": "node",

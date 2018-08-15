@@ -61,12 +61,14 @@ export class _UserItem extends PureComponent {
         <Swipeout right={swipeButtons} autoClose={true}>
           <TouchableOpacity onPress={this._navigateToItem}>
             <View style={styles.itemContainer}>
-              <View style={styles.imageContainer}>
-                <ImagePlaceholder
-                  styles={styles.image}
-                  url={imagePath}
-                  placeholderSize={WIDTH * 0.15}
-                />
+              <View style={styles.imagePlaceholderContainer}>
+                <View style={styles.imageContainer}>
+                  <ImagePlaceholder
+                    styles={styles.image}
+                    url={imagePath}
+                    placeholderSize={WIDTH * 0.15}
+                  />
+                </View>
               </View>
               <View style={styles.item}>
                 <Text style={styles.title}>{this.props.item.title}</Text>

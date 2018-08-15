@@ -31,6 +31,7 @@ import EmailEntry from './EmailEntry';
 import LogoAndWelcomeText from './LogoAndWelcomeText';
 import LoginAndRegisterButton from './LoginAndRegisterButton';
 import AltPage from './AltPage';
+import { navigateToItem } from '../../redux/actions/NavigationAction';
 
 export class Login extends React.Component {
   constructor(props) {
@@ -214,6 +215,7 @@ const mapDispatchToProps = dispatch => {
   return {
     onLogin: (username, token) => {
       dispatch(login(username, token));
+      dispatch(navigateToItem('All items'));
     },
   };
 };
