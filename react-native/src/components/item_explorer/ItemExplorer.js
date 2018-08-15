@@ -1,16 +1,21 @@
 'use strict';
 
 import React from 'react';
-import { ActivityIndicator, Dimensions, Text, TouchableOpacity, View } from 'react-native';
+import { Dimensions, Text, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Carousel from 'react-native-snap-carousel';
 import ItemCard from './ItemCard';
 import { styles } from '../../static/styles/MaterialIconAndTextStyles';
-import { NO_ITEMS_TEXT_CONTENT, NO_ITEMS_TEXT_HEADER } from '../../static/constants';
+import {
+  ITEM_EXPLORER_LOADER_BOTTOM,
+  ITEM_EXPLORER_LOADER_TOP,
+  NO_ITEMS_TEXT_CONTENT,
+  NO_ITEMS_TEXT_HEADER,
+} from '../../static/constants';
 import MaterialIconAndText from '../common/MaterialIconAndText';
+import LoadingAnimation from '../common/LoadingAnimation';
 
 const { width } = Dimensions.get('window');
 
@@ -42,9 +47,10 @@ export class ItemExplorer extends React.Component {
 
   _renderLoader = () => {
     return (
-      <View style={styles.container}>
-        <ActivityIndicator size="large" color="#4d4dff" />
-      </View>
+      <LoadingAnimation
+        topText={ITEM_EXPLORER_LOADER_TOP}
+        bottomText={ITEM_EXPLORER_LOADER_BOTTOM}
+      />
     );
   };
 

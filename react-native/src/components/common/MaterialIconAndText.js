@@ -16,6 +16,7 @@ export default class MaterialIconAndText extends React.Component {
             name={this.props.iconName}
             size={width * 0.22}
             style={styles.iconStyles}
+            color="#727272"
           />
         </View>
         <Text style={styles.noItemsText}>{this.props.headerText}</Text>

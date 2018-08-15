@@ -15,6 +15,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 30,
     fontFamily: baseFont,
     textAlign: 'center',
+    color: '#727272',
   },
   headerButton,
   iconContainer: {
