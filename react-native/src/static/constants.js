@@ -9,7 +9,7 @@ export const networkErrorAlert =
   'Check your network connection. If that does not help, try again later.';
 export const widthWithThirtyPercentPadding =
   Dimensions.get('window').width * 0.7;
-export const width = Dimensions.get('window').width;
+export const { width } = Dimensions.get('window');
 
 export const userHasNoItemsHeader = `You have no items yet.`;
 export const userHasNoItemsContainer = `Add one by clicking 'New item'.`;
@@ -41,3 +41,6 @@ export const NO_ITEMS_TEXT_CONTENT = 'Perhaps you are in the middle of nowhere.'
 
 export const ITEM_EXPLORER_LOADER_TOP = 'Just a second!';
 export const ITEM_EXPLORER_LOADER_BOTTOM = 'We are getting the items...';
+
+export const CHECKING_CREDENTIALS = 'Checking credentials';
+export const WAIT_A_SEC = 'Wait a sec...';

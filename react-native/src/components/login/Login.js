@@ -15,6 +15,7 @@ import {
   generateHashForRegistering,
 } from '../../networking/networking';
 import {
+  CHECKING_CREDENTIALS,
   INVALID_CREDS_ALERT,
   localhost,
   loginText,
@@ -23,7 +24,7 @@ import {
   networkErrorAlert,
   registerText,
   SUCCESSFUL_REGISTRATION_ALERT,
-  USER_EXISTS_ALERT,
+  USER_EXISTS_ALERT, WAIT_A_SEC
 } from '../../static/constants';
 import { styles } from '../../static/styles/LoginStyles';
 import CredentialsEntry from './CredentialsEntry';
@@ -32,6 +33,7 @@ import LogoAndWelcomeText from './LogoAndWelcomeText';
 import LoginAndRegisterButton from './LoginAndRegisterButton';
 import AltPage from './AltPage';
 import { navigateToItem } from '../../redux/actions/NavigationAction';
+import LoadingAnimation from '../common/LoadingAnimation';
 
 export class Login extends React.Component {
   constructor(props) {
@@ -42,6 +44,7 @@ export class Login extends React.Component {
       password: '',
       email: '',
       isKeyboardVisible: false,
+      isLoading: false,
     };
 
     this.keyboardDidHide = this.keyboardDidHide.bind(this);
@@ -96,6 +99,7 @@ export class Login extends React.Component {
       Alert.alert(...MISSING_USER_DETAILS_ALERT);
       return;
     }
+    this.setState(() => ({ isLoading: true }));
     if (page === 'Login') {
       this.handleLoginRequest();
     } else {
@@ -130,9 +134,11 @@ export class Login extends React.Component {
     } else {
       Alert.alert(...USER_EXISTS_ALERT);
     }
+    this.setState(() => ({ isLoading: false }));
   }
 
   handleError(error) {
+    this.setState(() => ({ isLoading: false }));
     if (error.message === 'Network request failed') {
       Alert.alert(...NETWORK_ERROR_ALERT);
     }
@@ -155,6 +161,7 @@ export class Login extends React.Component {
   }
 
   handleLoginResponse(response) {
+    this.setState(() => ({ isLoading: false }));
     if (response.username === this.state.username) {
       this.props.onLogin(this.state.username, response.token);
     } else {
@@ -176,7 +183,7 @@ export class Login extends React.Component {
     this.setState(() => ({ email: newEmail }));
   }
 
-  render() {
+  renderLoginView = () => {
     const behavior = Platform.OS === 'ios' ? 'padding' : null;
     const emailProps = {
       email: this.state.email,
@@ -208,6 +215,20 @@ export class Login extends React.Component {
         </KeyboardAvoidingView>
       </View>
     );
+  };
+
+  renderLoader = () => {
+    return (
+      <LoadingAnimation
+        animation="penguin"
+        topText={CHECKING_CREDENTIALS}
+        bottomText={WAIT_A_SEC}
+      />
+    );
+  };
+
+  render() {
+    return this.state.isLoading ? this.renderLoader() : this.renderLoginView();
   }
 }
 
