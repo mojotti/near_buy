@@ -8,7 +8,7 @@ import { ItemDetails } from '../new_item/ItemDetails';
 import DeleteButton from './DeleteButton';
 import SaveButton from './SaveButton';
 import UserItemMapView from './UserItemMapView';
-import { getBearerHeaders } from '../../networking/networking';
+import { getNumOfPictures } from '../../networking/networking';
 import ImageCarousel from './ImageCarousel';
 import LocationInfoText from './LocationInfoText';
 import UpdateLocationButton from './UpdateLocationButton';
@@ -74,38 +74,20 @@ export class _UserItemDetails extends Component {
   }
 
   updateImages = () => {
-    this.getNumOfPictures().then(numOfPics => {
+    const itemId = this.props.navigation.state.params.item.id;
+    getNumOfPictures(itemId, this.props.token).then(numOfPics => {
       this.numOfImages = numOfPics;
       this.getImageUrls(numOfPics);
     });
   };
 
-  getNumOfPictures = () => {
-    const url = `http://${localhost}:5000/api/v1.0/${
-      this.props.navigation.state.params.item.id
-    }/num_of_images`;
-    return fetch(url, {
-      method: 'GET',
-      headers: getBearerHeaders(this.props.token),
-    })
-      .then(response => response.json())
-      .then(responseJson => {
-        return responseJson.num_of_images;
-      })
-      .catch(error => {
-        console.error(error);
-        return 0;
-      });
-  };
-
   getImageUrls = numOfImages => {
     for (let i = 0; i < numOfImages; i++) {
-      const imagePath = `http://${localhost}:5000/api/v1.0/${
-        this.state.id
-      }/image${i}.jpg`;
+      const imagePath =
+        `http://${localhost}:5000/api/v1.0/${this.state.id}/image${i}.jpg`;
 
       this.setState(prevState => {
-        let images = prevState.imageUrls;
+        const images = prevState.imageUrls;
         images[i] = imagePath;
         return images;
       });

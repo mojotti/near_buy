@@ -24,6 +24,22 @@ class _ItemCard extends React.Component {
     );
   }
 
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.item.latitude !== this.props.item.latitude ||
+      prevProps.item.longitude !== this.props.item.longitude ||
+      prevProps.latitude !== this.props.latitude ||
+      prevProps.longitude !== this.props.longitude
+    ) {
+      this._getDistanceInKm(
+        this.props.latitude,
+        this.props.longitude,
+        this.props.item.latitude,
+        this.props.item.longitude,
+      );
+    }
+  }
+
   _degreesToRadians = degrees => degrees * Math.PI / 180;
 
   _getDistanceInKm = (lat1, lon1, lat2, lon2) => {

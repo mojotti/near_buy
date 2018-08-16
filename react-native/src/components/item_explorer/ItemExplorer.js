@@ -40,7 +40,7 @@ export class ItemExplorer extends React.Component {
   };
 
   _renderItems = () => {
-    return this.props.items === 'no items'
+    return this.props.items === 'no items' || !this.props.items
       ? this._renderNoItems()
       : this._renderCarousel();
   };
