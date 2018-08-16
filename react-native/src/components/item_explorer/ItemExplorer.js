@@ -62,18 +62,20 @@ export class ItemExplorer extends React.Component {
           this._carousel = c;
         }}
         data={this.props.items}
-        renderItem={this._renderItem}
+        renderItem={({item, index}) => {
+          return this._renderItem(item, index, this.props.navigation);
+        }}
         sliderWidth={width}
         itemWidth={width}
-        onSnapToItem={() => console.log('i was clicked')}
+        onSnapToItem={(i) => console.log('i was selected', i)}
         slideStyle={{ justifyContent: 'center' }}
         layout={'stack'}
       />
     );
   };
 
-  _renderItem({ item, index }) {
-    return <ItemCard item={item} />;
+  _renderItem(item, index, navi) {
+    return <ItemCard item={item} navigation={navi} />;
   }
 
   _renderNoItems = () => {
@@ -87,6 +89,7 @@ export class ItemExplorer extends React.Component {
   };
 
   render() {
+    console.log('this.props', this.props);
     return this.props.isFetching ? this._renderLoader() : this._renderItems();
   }
 }

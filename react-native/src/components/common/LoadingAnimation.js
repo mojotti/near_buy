@@ -11,15 +11,9 @@ import { styles } from '../../static/styles/LoadingAnimationStyles';
 
 export default class LoadingAnimation extends React.Component {
   _getAnimation = () => {
-    if (this.props.animation === 'dino') {
-      return dinoAnimation;
-    }
-    if (this.props.animation === 'chickenAnimation') {
-      return chickenAnimation;
-    }
-    if (this.props.animation === 'penguinAnimation') {
-      return penguinAnimation;
-    }
+    if (this.props.animation === 'dino') return dinoAnimation;
+    if (this.props.animation === 'penguinAnimation') return penguinAnimation;
+    if (this.props.animation === 'chickenAnimation') return chickenAnimation;
     return loadingAnimation;
   };
 

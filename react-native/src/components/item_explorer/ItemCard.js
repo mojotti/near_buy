@@ -1,11 +1,11 @@
 import React from 'react';
-import { Image, Text, View } from 'react-native';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { styles } from '../../static/styles/ItemCardStyles';
 import { baseStyles } from '../../static/styles/BaseStyles';
-import { localhost } from "../../static/constants";
+import { localhost } from '../../static/constants';
 
 class _ItemCard extends React.Component {
   constructor(props) {
@@ -15,20 +15,13 @@ class _ItemCard extends React.Component {
     };
   }
 
-  componentDidUpdate(prevProps) {
-    if (
-      prevProps.item.latitude !== this.props.item.latitude ||
-      prevProps.item.longitude !== this.props.item.longitude ||
-      prevProps.latitude !== this.props.latitude ||
-      prevProps.longitude !== this.props.longitude
-    ) {
-      this._getDistanceInKm(
-        this.props.latitude,
-        this.props.longitude,
-        this.props.item.latitude,
-        this.props.item.longitude,
-      );
-    }
+  componentDidMount() {
+    this._getDistanceInKm(
+      this.props.latitude,
+      this.props.longitude,
+      this.props.item.latitude,
+      this.props.item.longitude,
+    );
   }
 
   _degreesToRadians = degrees => degrees * Math.PI / 180;
@@ -54,12 +47,19 @@ class _ItemCard extends React.Component {
     return `http://${localhost}:5000/api/v1.0/${this.props.item.id}/image0.jpg`;
   };
 
+  _navigateToItem = () => {
+    const { navigate } = this.props.navigation;
+    navigate('ItemDetails', { item: this.props.item });
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Text style={baseStyles.headerText}>{this.props.item.title}</Text>
-        <Image source={{ uri: this._getImageSource() }} style={styles.image} />
-        <Text style={baseStyles.headerText}>{this.state.distanceInKm}</Text>
+        <TouchableOpacity onPress={this._navigateToItem}>
+          <Text style={baseStyles.headerText}>{this.props.item.title}</Text>
+          <Image source={{ uri: this._getImageSource() }} style={styles.image} />
+          <Text style={baseStyles.headerText}>{this.state.distanceInKm}</Text>
+        </TouchableOpacity>
       </View>
     );
   }

@@ -71,6 +71,7 @@
     "react-native-image-placeholder": "^1.0.14",
     "react-native-looped-carousel": "^0.1.10",
     "react-native-maps": "^0.21.0",
+    "react-native-modal": "^6.5.0",
     "react-native-snap-carousel": "^3.7.1",
     "react-native-swipeout": "^2.3.3",
     "react-native-vector-icons": "^4.5.0",

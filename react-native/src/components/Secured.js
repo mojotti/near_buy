@@ -12,17 +12,22 @@ import { handleAppStateChange } from '../AppState';
 import { runAppStartEvents } from '../AppStartEvents';
 import { baseFont } from '../static/styles/BaseStyles';
 import DrawerMenu from './drawer/DrawerMenu';
+import ItemDetails from './item_explorer/ItemDetails';
+import ItemCard from './item_explorer/ItemCard';
 
 const App = StackNavigator(
   {
     ItemExplorer: { screen: ItemExplorer },
     UserItems: { screen: UserItems },
     UserItemDetails: { screen: UserItemDetails },
+    ItemCard: { screen: ItemCard },
     NewItem: {
       screen: NewItem,
-      navigationOptions: ({ navigation }) => ({
-        drawerLockMode: 'locked-closed',
-      }),
+      navigationOptions: () => ({ drawerLockMode: 'locked-closed' }),
+    },
+    ItemDetails: {
+      screen: ItemDetails,
+      navigationOptions: () => ({ drawerLockMode: 'locked-closed' }),
     },
   },
   {
