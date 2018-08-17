@@ -1,9 +1,12 @@
 import React from 'react';
-import { View } from 'react-native';
+import { Text, ScrollView, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import ItemDetailsImageCarousel from './ItemDetailsImageCarousel';
 import { getNumOfPictures } from '../../networking/networking';
 import { localhost } from '../../static/constants';
+import { baseStyles } from '../../static/styles/BaseStyles';
+import { styles } from '../../static/styles/ItemDetailsStyles';
 
 
 export class _ItemDetails extends React.Component {
@@ -40,17 +43,29 @@ export class _ItemDetails extends React.Component {
 
   render() {
     return (
-      <View style={{ flex: 1 }}>
+      <ScrollView style={styles.container}>
         <ItemDetailsImageCarousel images={this.state.imageUrls} />
-      </View>
+        <Text style={baseStyles.headerText}>Distance</Text>
+        <Text style={styles.plainText}>{this.props.distance}</Text>
+        <Text style={baseStyles.headerText}>Description</Text>
+        <Text style={styles.plainText}>{this.props.item.description}</Text>
+        <Text style={baseStyles.headerText}>Chat</Text>
+        <TouchableOpacity style={styles.chatButton}>
+          <View style={styles.chatButtonContainer}>
+            <FontAwesome name="comments" size={50} color={'#FFFFFF'} />
+            <Text style={styles.chatText}>Chat with owner</Text>
+          </View>
+        </TouchableOpacity>
+      </ScrollView>
     );
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
   const { item } = ownProps.navigation.state.params;
+  const { distance } = ownProps.navigation.state.params;
   const { token } = state.authorizationReducer;
-  return { item, token };
+  return { item, token, distance };
 };
 
 const ItemDetails = connect(mapStateToProps, null)(_ItemDetails);

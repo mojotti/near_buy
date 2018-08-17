@@ -56,7 +56,7 @@ class _ItemCard extends React.Component {
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     const d = R * c; // Distance in km
 
-    this.setState(() => ({ distanceInKm: `Distance: ${d.toFixed(1)} km` }));
+    this.setState(() => ({ distanceInKm: `${d.toFixed(1)} km` }));
   };
 
   _getImageSource = () => {
@@ -65,8 +65,11 @@ class _ItemCard extends React.Component {
 
   _navigateToItem = () => {
     const { navigate } = this.props.navigation;
-    navigate('ItemDetails', { item: this.props.item });
-  }
+    navigate(
+      'ItemDetails',
+      { item: this.props.item, distance: this.state.distanceInKm },
+    );
+  };
 
   render() {
     return (
@@ -74,7 +77,9 @@ class _ItemCard extends React.Component {
         <TouchableOpacity onPress={this._navigateToItem}>
           <Text style={baseStyles.headerText}>{this.props.item.title}</Text>
           <Image source={{ uri: this._getImageSource() }} style={styles.image} />
-          <Text style={baseStyles.headerText}>{this.state.distanceInKm}</Text>
+          <Text style={baseStyles.headerText}>
+            {`Distance: ${this.state.distanceInKm}`}
+          </Text>
         </TouchableOpacity>
       </View>
     );
