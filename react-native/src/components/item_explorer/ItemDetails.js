@@ -49,7 +49,6 @@ export class _ItemDetails extends React.Component {
         <Text style={styles.plainText}>{this.props.distance}</Text>
         <Text style={baseStyles.headerText}>Description</Text>
         <Text style={styles.plainText}>{this.props.item.description}</Text>
-        <Text style={baseStyles.headerText}>Chat</Text>
         <ChatButton />
       </ScrollView>
     );
