@@ -1,12 +1,12 @@
 import React from 'react';
-import { Text, ScrollView, TouchableOpacity, View } from 'react-native';
+import { Text, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import ItemDetailsImageCarousel from './ItemDetailsImageCarousel';
 import { getNumOfPictures } from '../../networking/networking';
 import { localhost } from '../../static/constants';
 import { baseStyles } from '../../static/styles/BaseStyles';
 import { styles } from '../../static/styles/ItemDetailsStyles';
+import ChatButton from './ChatButton';
 
 
 export class _ItemDetails extends React.Component {
@@ -50,12 +50,7 @@ export class _ItemDetails extends React.Component {
         <Text style={baseStyles.headerText}>Description</Text>
         <Text style={styles.plainText}>{this.props.item.description}</Text>
         <Text style={baseStyles.headerText}>Chat</Text>
-        <TouchableOpacity style={styles.chatButton}>
-          <View style={styles.chatButtonContainer}>
-            <FontAwesome name="comments" size={50} color={'#FFFFFF'} />
-            <Text style={styles.chatText}>Chat with owner</Text>
-          </View>
-        </TouchableOpacity>
+        <ChatButton />
       </ScrollView>
     );
   }
