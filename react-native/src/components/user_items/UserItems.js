@@ -79,6 +79,10 @@ export class _UserItems extends React.Component {
     }));
   }
 
+  renderSeparator = () => {
+    return <ItemSeparator widthPercentage={0.93}/>
+  };
+
   renderUserData() {
     if (!this.state.isLoaded) {
       return (
@@ -113,7 +117,7 @@ export class _UserItems extends React.Component {
         keyExtractor={(item, index) => index.toString()}
         onRefresh={this.fetchData}
         refreshing={this.state.isRefreshing}
-        ItemSeparatorComponent={ItemSeparator}
+        ItemSeparatorComponent={this.renderSeparator}
       />
     );
   }

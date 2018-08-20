@@ -14,7 +14,6 @@ export const styles = StyleSheet.create({
     marginBottom: 1,
     borderBottomWidth: 0.5,
     borderBottomColor: '#858585',
-    width: WIDTH * 0.93,
     justifyContent: 'center',
     alignSelf: 'center',
   },

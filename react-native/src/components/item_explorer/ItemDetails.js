@@ -1,13 +1,16 @@
 import React from 'react';
-import { Text, ScrollView } from 'react-native';
+import { Text, ScrollView, View, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import ItemDetailsImageCarousel from './ItemDetailsImageCarousel';
 import { getNumOfPictures } from '../../networking/networking';
 import { localhost } from '../../static/constants';
 import { baseStyles } from '../../static/styles/BaseStyles';
 import { styles } from '../../static/styles/ItemDetailsStyles';
 import ChatButton from './ChatButton';
+import ItemSeparator from '../user_items/ItemSeparator';
 
+const { width } = Dimensions.get('window');
 
 export class _ItemDetails extends React.Component {
   constructor(props) {
@@ -46,7 +49,11 @@ export class _ItemDetails extends React.Component {
       <ScrollView style={styles.container}>
         <ItemDetailsImageCarousel images={this.state.imageUrls} />
         <Text style={baseStyles.headerText}>Distance</Text>
-        <Text style={styles.plainText}>{this.props.distance}</Text>
+        <View style={styles.locationIconContainer}>
+          <FontAwesome name="map-marker" size={20} color={'#9f9f9f'} style={styles.locationIcon} />
+          <Text style={styles.plainText}>{this.props.distance}</Text>
+        </View>
+        <ItemSeparator widthPercentage={0.86} />
         <Text style={baseStyles.headerText}>Description</Text>
         <Text style={styles.plainText}>{this.props.item.description}</Text>
         <ChatButton />

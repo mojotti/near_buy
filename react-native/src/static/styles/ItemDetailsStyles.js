@@ -42,4 +42,13 @@ export const styles = StyleSheet.create({
     marginLeft: 15,
     fontWeight: 'bold',
   },
+  locationIcon: {
+    marginLeft: width * 0.1,
+    marginRight: -width * 0.09,
+  },
+  locationIconContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    marginBottom: 25,
+  },
 });
