@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, ScrollView, View, Dimensions } from 'react-native';
+import { Text, ScrollView, View } from 'react-native';
 import { connect } from 'react-redux';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import ItemDetailsImageCarousel from './ItemDetailsImageCarousel';
@@ -22,8 +22,6 @@ const connectionConfig = {
 };
 
 const path = `http://${localhost}:5000`;
-
-const { width } = Dimensions.get('window');
 
 export class _ItemDetails extends React.Component {
   constructor(props) {
@@ -66,8 +64,6 @@ export class _ItemDetails extends React.Component {
   };
 
   render() {
-    console.log('i am now connected', this.socket.connected); // true
-
     return (
       <ScrollView style={styles.container}>
         <ItemDetailsImageCarousel images={this.state.imageUrls} />
@@ -79,6 +75,7 @@ export class _ItemDetails extends React.Component {
         <ItemSeparator widthPercentage={0.86} />
         <Text style={baseStyles.headerText}>Description</Text>
         <Text style={styles.plainText}>{this.props.item.description}</Text>
+        <ItemSeparator widthPercentage={0.86} />
         <ChatButton onPress={() => {
           this.forceUpdate();
           this.socket.emit('lol', 'Hello world!');

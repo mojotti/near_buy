@@ -14,13 +14,14 @@ export const styles = StyleSheet.create({
     alignSelf: 'stretch',
     marginLeft: width * 0.1,
     marginRight: width * 0.1,
+    marginBottom: 30,
     fontFamily: baseFont,
     color: '#2b2b2b',
   },
   chatButton: {
     marginHorizontal: width * 0.15,
     backgroundColor: '#4d4dff',
-    marginBottom: 20,
+    marginBottom: 30,
     marginTop: 30,
     paddingHorizontal: 6,
     paddingTop: 4,
@@ -49,6 +50,5 @@ export const styles = StyleSheet.create({
   locationIconContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    marginBottom: 25,
   },
 });
