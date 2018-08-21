@@ -10,6 +10,19 @@ import { styles } from '../../static/styles/ItemDetailsStyles';
 import ChatButton from './ChatButton';
 import ItemSeparator from '../user_items/ItemSeparator';
 
+window.navigator.userAgent = 'ReactNative';
+
+const io = require('socket.io-client/dist/socket.io');
+const connectionConfig = {
+  jsonp: false,
+  reconnection: true,
+  reconnectionDelay: 100,
+  reconnectionAttempts: 100000,
+  transports: ['websocket'], // you need to explicitly tell it to use websockets
+};
+
+const path = `http://${localhost}:5000`;
+
 const { width } = Dimensions.get('window');
 
 export class _ItemDetails extends React.Component {
@@ -18,6 +31,14 @@ export class _ItemDetails extends React.Component {
     this.state = {
       imageUrls: ['foo.bar'], // provide some uri while loading actual img uris
     };
+
+    this.socket = null;
+    if (!this.socket || !this.socket.connected) {
+      this.socket = io(path, connectionConfig);
+      this.socket.on('connect', () => {
+        console.log('connected!');
+      });
+    }
   }
 
   static navigationOptions = ({ navigation }) =>
@@ -45,6 +66,8 @@ export class _ItemDetails extends React.Component {
   };
 
   render() {
+    console.log('i am now connected', this.socket.connected); // true
+
     return (
       <ScrollView style={styles.container}>
         <ItemDetailsImageCarousel images={this.state.imageUrls} />
@@ -56,7 +79,11 @@ export class _ItemDetails extends React.Component {
         <ItemSeparator widthPercentage={0.86} />
         <Text style={baseStyles.headerText}>Description</Text>
         <Text style={styles.plainText}>{this.props.item.description}</Text>
-        <ChatButton />
+        <ChatButton onPress={() => {
+          this.forceUpdate();
+          this.socket.emit('lol', 'Hello world!');
+        }}
+        />
       </ScrollView>
     );
   }

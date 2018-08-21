@@ -1,12 +1,9 @@
 [[source]]
-
 verify_ssl = true
 url = "https://pypi.python.org/simple"
 name = "pypi"
 
-
 [packages]
-
 pymongo = "*"
 six = "*"
 flask = "*"
@@ -16,12 +13,10 @@ bcrypt = "*"
 mock = "*"
 patch = "*"
 nose = "*"
-
+flask-socketio = "*"
+eventlet = "*"
 
 [dev-packages]
 
-
-
 [requires]
-
 python_version = "3.4"

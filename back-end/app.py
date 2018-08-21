@@ -11,6 +11,7 @@ import six
 import time
 from flask import Flask, jsonify, abort, request, make_response, url_for, g, send_from_directory
 from flask_httpauth import HTTPBasicAuth, HTTPTokenAuth
+from flask_socketio import SocketIO, emit
 
 import User as U
 import database
@@ -32,6 +33,7 @@ else:
     DB = database.TestDB()  # if running unit tests
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif', 'pbm', 'bmp'])
+socketio = SocketIO(app, logger=True, engineio_logger=False, ping_timeout=30, ping_interval=30)
 
 
 @token_auth.verify_token
@@ -407,5 +409,15 @@ def retrieve_number_of_images(item_id):
         return jsonify({'num_of_images': 0})
 
 
+@socketio.on('connect')
+def test_connect():
+    print('connected')
+
+
+@socketio.on('lol')
+def test_connect(msg):
+    print('lolled', msg)
+
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    socketio.run(app, debug=True)
