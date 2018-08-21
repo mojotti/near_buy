@@ -21,6 +21,7 @@ class TestApp(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         TEST_DB.users.delete_many({})
+        TEST_DB.chats.delete_many({})
 
     def setUp(self):
         self.app = app.test_client()
@@ -195,6 +196,20 @@ class TestApp(unittest.TestCase):
 
         own_item_in_others = next((item for item in other_items if item["seller_id"] is own_seller_id), None)
         self.assertIsNone(own_item_in_others)
+
+    def test_given_chat_is_created_it_can_be_found(self):
+        buying_user = item_id = 0
+        selling_user = 1
+
+        self.db.create_a_new_chat_for_item(buying_user, selling_user, item_id)
+        self.db.create_a_new_chat_for_item(500, selling_user, item_id)
+        self.db.create_a_new_chat_for_item(100, 500, 3)  # add a couple of random chats
+        self.db.create_a_new_chat_for_item(buying_user, 500, 3)  # add a couple of random chats
+
+        chats = self.db.get_all_chats_for_user(selling_user)
+
+        chats = [self.assertEquals(chat['seller_id'], selling_user) for chat in chats]
+        self.assertEquals(len(chats), 2)
 
 
 

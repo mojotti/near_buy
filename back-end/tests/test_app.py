@@ -14,6 +14,7 @@ ITEM1 = items.ITEM1
 ITEM2 = items.ITEM2
 ITEM3 = items.ITEM3
 NEW_ITEM = items.NEW_ITEM
+CHAT = items.CHAT
 
 TEST_DB = TestDB()
 USER = User(email='test_email', password='test_pw')
@@ -43,6 +44,7 @@ class TestApp(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
         TEST_DB.users.delete_many({})
+        TEST_DB.chats.delete_many({})
         items.rm_test_pictures()
 
     def setUp(self):
@@ -293,6 +295,35 @@ class TestApp(unittest.TestCase):
         json_resp = json.loads(response.data.decode('utf-8'))
         self.assertEqual(json_resp['num_of_images'], 0)
 
+    @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_MOJO)
+    @mock.patch('database.DatabaseHelper.create_a_new_chat_for_item', return_value=None)
+    def test_given_chats_is_created_when_successful_then_ok_is_returned(self, mock, rock):
+        data = {'other_user': 1, 'item_id': 2}
+        response = self.app.post(
+            '/api/v1.0/new_chat',
+            headers={'Authorization':
+                    'Bearer ' + TOKEN_FOR_USER_ID_0},
+            data=json.dumps(data),
+            content_type='application/json'
+        )
+        self.assertEqual(response.status_code, 200)
+        json_resp = json.loads(response.data.decode('utf-8'))
+        self.assertTrue(json_resp['ok'])
+
+    @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_MOJO)
+    @mock.patch('database.DatabaseHelper.get_all_chats_for_user', return_value=CHAT)
+    def test_given_chat_is_in_db_when_it_is_requested_then_it_is_found(self, mock, rock):
+        response = self.app.get(
+            '/api/v1.0/chats',
+            headers={'Authorization':
+                    'Bearer ' + TOKEN_FOR_USER_ID_0},
+        )
+        self.assertEqual(response.status_code, 200)
+        json_resp = json.loads(response.data.decode('utf-8'))
+        print(json_resp)
+        self.assertEquals(json_resp['chats'][0]['item_id'], 0)
+        self.assertEquals(json_resp['chats'][0]['buyer_id'], 1)
+        self.assertEquals(json_resp['chats'][0]['seller_id'], 0)
 
 
 

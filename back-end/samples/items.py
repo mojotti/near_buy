@@ -47,6 +47,13 @@ NEW_ITEM = "{'title': 'new_item', 'price': 100, 'description': 'almost brand new
 HASH = {b'$2b$04$0NDkor0GmQki6i5zJiqNsu8hNtqGf5UJv3TPWRwLgs51Alo7cJJve'}
 HASH_2 = {b'$2b$04$p5VV5hvav5LTFEv0z7hJQupI/Dc6K4lFWXqD2Dv9bQ3rv/hDQe3Ry'}
 
+CHAT = [
+    {
+        'item_id': 0,
+        'buyer_id': 1,
+        'seller_id': 0
+     },
+]
 
 def rm_test_pictures():
     for root, dirs, files in os.walk(Config.testing_folder):

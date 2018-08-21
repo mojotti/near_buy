@@ -399,7 +399,7 @@ def show_image(item_id, image):
 @app.route('/api/v1.0/<item_id>/num_of_images', methods=['GET'])
 def retrieve_number_of_images(item_id):
     """
-    returns the number of images that item has
+    Returns the number of images that item has
     """
     try:
         images_path = app.static_folder + '/images/' + item_id
@@ -407,6 +407,38 @@ def retrieve_number_of_images(item_id):
         return jsonify({'num_of_images': len(files)})
     except StopIteration:
         return jsonify({'num_of_images': 0})
+
+
+@app.route('/api/v1.0/new_chat', methods=['POST'])
+@token_auth.login_required
+def create_a_new_chat_for_item():
+    """
+    Creates a new chat between seller and buyer.
+    """
+    buying_user = g.user['id']
+    if buying_user is None:
+        return jsonify({'ok': False})
+    selling_user = request.get_json().get('other_user')
+    item_id = request.get_json().get('item_id')
+    DB.create_a_new_chat_for_item(buying_user, selling_user, item_id)
+    return jsonify({'ok': True})
+
+
+@app.route('/api/v1.0/chats', methods=['GET'])
+@token_auth.login_required
+def get_chats_for_user():
+    """
+    Returns all the chats that user is participating.
+    Chats are presented as an array.
+    """
+    user_id = g.user['id']
+    if user_id is None:
+        return jsonify({'ok': False})
+    chats = DB.get_all_chats_for_user(user_id)
+    # chats = [chat for chat in chats]
+    return jsonify({'chats': chats})
+
+
 
 
 @socketio.on('connect')

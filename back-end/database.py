@@ -14,6 +14,7 @@ class DatabaseHelper(object):
             self.db = self.client.production
             self.items = self.db.items
             self.users = self.db.users
+            self.chats = self.db.chats
         except errors.ServerSelectionTimeoutError as err:
             print(err)
 
@@ -122,6 +123,17 @@ class DatabaseHelper(object):
         item = self.items.find_one(sort=[("id", -1)])
         return item['id']+1 if item else 0
 
+    def create_a_new_chat_for_item(self, buying_user, selling_user, item_id):
+        chat = {
+            'item_id': item_id,
+            'buyer_id': buying_user,
+            'seller_id': selling_user
+        }
+        self.chats.insert_one(chat)
+
+    def get_all_chats_for_user(self, user_id):
+        return self.chats.find({'$or': [{'buyer_id': user_id}, {'seller_id': user_id}]})
+
 
 class TestDB(DatabaseHelper):
     def __init__(self):
@@ -130,6 +142,7 @@ class TestDB(DatabaseHelper):
             self.db = self.client.test
             self.items = self.db.items
             self.users = self.db.users
+            self.chats = self.db.chats
         except errors.ServerSelectionTimeoutError as err:
             print(err)
 
