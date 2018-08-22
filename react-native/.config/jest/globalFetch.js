@@ -3,6 +3,11 @@ const realFetch = require('node-fetch');
 
 global.fetch = jest.fn();
 global.Headers = realFetch.Headers;
+global.window = {
+  navigator: {
+    userAgent: 'ReactNative'
+  }
+};
 
 fetch.mockResponseSuccess = body => {
   fetch.mockImplementationOnce(() =>

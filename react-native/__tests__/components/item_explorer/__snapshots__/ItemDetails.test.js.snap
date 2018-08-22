@@ -1,0 +1,114 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<_ItemDetails /> renders correctly 1`] = `
+<ScrollView
+  style={
+    Object {
+      "backgroundColor": "#f5f5f5",
+      "flex": 1,
+    }
+  }
+>
+  <ItemDetailsImageCarousel
+    images={
+      Array [
+        "foo.bar",
+      ]
+    }
+  />
+  <Component
+    style={
+      Object {
+        "alignSelf": "stretch",
+        "color": "#848484",
+        "fontFamily": null,
+        "fontSize": 25,
+        "marginBottom": 15,
+        "marginLeft": 56.25,
+        "marginTop": 20,
+        "textAlign": "left",
+      }
+    }
+  >
+    Distance
+  </Component>
+  <Component
+    style={
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "flex-start",
+      }
+    }
+  >
+    <Icon
+      allowFontScaling={false}
+      color="#9f9f9f"
+      name="map-marker"
+      size={20}
+      style={
+        Object {
+          "marginLeft": 75,
+          "marginRight": -67.5,
+        }
+      }
+    />
+    <Component
+      style={
+        Object {
+          "alignSelf": "stretch",
+          "color": "#2b2b2b",
+          "fontFamily": null,
+          "fontSize": 16,
+          "marginBottom": 30,
+          "marginLeft": 75,
+          "marginRight": 75,
+          "textAlign": "left",
+        }
+      }
+    >
+      2 km
+    </Component>
+  </Component>
+  <ItemSeparator
+    widthPercentage={0.86}
+  />
+  <Component
+    style={
+      Object {
+        "alignSelf": "stretch",
+        "color": "#848484",
+        "fontFamily": null,
+        "fontSize": 25,
+        "marginBottom": 15,
+        "marginLeft": 56.25,
+        "marginTop": 20,
+        "textAlign": "left",
+      }
+    }
+  >
+    Description
+  </Component>
+  <Component
+    style={
+      Object {
+        "alignSelf": "stretch",
+        "color": "#2b2b2b",
+        "fontFamily": null,
+        "fontSize": 16,
+        "marginBottom": 30,
+        "marginLeft": 75,
+        "marginRight": 75,
+        "textAlign": "left",
+      }
+    }
+  >
+    bar
+  </Component>
+  <ItemSeparator
+    widthPercentage={0.86}
+  />
+  <ChatButton
+    onPress={[Function]}
+  />
+</ScrollView>
+`;

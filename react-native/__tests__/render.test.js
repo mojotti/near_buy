@@ -1,7 +1,7 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
 import configureStore from 'redux-mock-store';
 import 'isomorphic-fetch'; // for headers, fetch, etc.
+import renderer from 'react-test-renderer';
 
 import Login from '../src/components/login/Login';
 

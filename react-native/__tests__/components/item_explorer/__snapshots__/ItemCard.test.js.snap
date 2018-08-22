@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<_ItemCard /> navigates to item on press 1`] = `
+Array [
+  Array [
+    "ItemDetails",
+    Object {
+      "distance": "11081.2 km",
+      "item": Object {
+        "item": Object {
+          "id": 0,
+          "title": "foo",
+        },
+        "latitude": 0,
+        "longitude": 0,
+      },
+    },
+  ],
+]
+`;

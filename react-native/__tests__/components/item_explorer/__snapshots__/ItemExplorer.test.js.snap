@@ -1,0 +1,197 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<_ItemExplorer /> navigation options 1`] = `
+Object {
+  "headerLeft": <Component
+    style={
+      Object {
+        "paddingHorizontal": 10,
+      }
+    }
+  >
+    <TouchableOpacity
+      activeOpacity={0.2}
+      onPress={[Function]}
+    >
+      <Icon
+        allowFontScaling={false}
+        color="#4d4dff"
+        name="menu"
+        size={30}
+      />
+    </TouchableOpacity>
+  </Component>,
+  "headerRight": <Component
+    onPress={[Function]}
+    style={
+      Object {
+        "color": "#4d4dff",
+        "margin": 8,
+      }
+    }
+  >
+    New item
+  </Component>,
+  "title": "Item Explorer",
+}
+`;
+
+exports[`<_ItemExplorer /> renders carousel when there is items 1`] = `
+<_ItemExplorer
+  dispatch={[Function]}
+  isFetching={false}
+  items={
+    Array [
+      Object {
+        "description": "description 0",
+        "id": 0,
+        "item_created": 0,
+        "latitude": 60,
+        "longitude": 20,
+        "price": 0,
+        "seller_id": 0,
+        "sold": false,
+        "title": "item 0",
+        "uri": "uri0",
+      },
+      Object {
+        "description": "description 1",
+        "id": 1,
+        "item_created": 10000,
+        "latitude": 61,
+        "longitude": 21,
+        "price": 100,
+        "seller_id": 1,
+        "sold": false,
+        "title": "item 1",
+        "uri": "uri1",
+      },
+      Object {
+        "description": "description 2",
+        "id": 2,
+        "item_created": 20000,
+        "latitude": 62,
+        "longitude": 22,
+        "price": 200,
+        "seller_id": 2,
+        "sold": false,
+        "title": "item 2",
+        "uri": "uri2",
+      },
+      Object {
+        "description": "description 3",
+        "id": 3,
+        "item_created": 30000,
+        "latitude": 63,
+        "longitude": 23,
+        "price": 300,
+        "seller_id": 3,
+        "sold": false,
+        "title": "item 3",
+        "uri": "uri3",
+      },
+      Object {
+        "description": "description 4",
+        "id": 4,
+        "item_created": 40000,
+        "latitude": 64,
+        "longitude": 24,
+        "price": 400,
+        "seller_id": 4,
+        "sold": false,
+        "title": "item 4",
+        "uri": "uri4",
+      },
+    ]
+  }
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+  storeSubscription={
+    Subscription {
+      "listeners": Object {
+        "clear": [Function],
+        "get": [Function],
+        "notify": [Function],
+        "subscribe": [Function],
+      },
+      "onStateChange": [Function],
+      "parentSub": undefined,
+      "store": Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+      "unsubscribe": [Function],
+    }
+  }
+/>
+`;
+
+exports[`<_ItemExplorer /> renders loader when is fetching 1`] = `
+<LoadingAnimation
+  animation="dino"
+  bottomText="We are getting the items..."
+  topText="Just a second!"
+/>
+`;
+
+exports[`<_ItemExplorer /> renders placeholder when not rendering and no items 1`] = `
+<MaterialIconAndText
+  containerText="Perhaps you are in the middle of nowhere."
+  headerText="Oops! Could not find any items."
+  iconName="emoticon-poop"
+/>
+`;
+
+exports[`<_ItemExplorer /> renders placeholder when not rendering and no items 2`] = `
+<Carousel
+  activeAnimationOptions={null}
+  activeAnimationType="timing"
+  activeSlideAlignment="center"
+  activeSlideOffset={20}
+  apparitionDelay={0}
+  autoplay={false}
+  autoplayDelay={5000}
+  autoplayInterval={3000}
+  callbackOffsetMargin={5}
+  containerCustomStyle={Object {}}
+  contentContainerCustomStyle={Object {}}
+  data={Array []}
+  enableMomentum={false}
+  enableSnap={true}
+  firstItem={0}
+  hasParallaxImages={false}
+  inactiveSlideOpacity={0.7}
+  inactiveSlideScale={0.9}
+  inactiveSlideShift={0}
+  itemWidth={750}
+  layout="stack"
+  lockScrollTimeoutDuration={1000}
+  lockScrollWhileSnapping={false}
+  loop={false}
+  loopClonesPerSide={3}
+  onSnapToItem={[Function]}
+  renderItem={[Function]}
+  shouldOptimizeUpdates={true}
+  slideStyle={
+    Object {
+      "justifyContent": "center",
+    }
+  }
+  sliderWidth={750}
+  swipeThreshold={20}
+  useScrollView={false}
+  vertical={false}
+/>
+`;

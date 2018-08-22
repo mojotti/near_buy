@@ -19,7 +19,7 @@ import LoadingAnimation from '../common/LoadingAnimation';
 
 const { width } = Dimensions.get('window');
 
-export class ItemExplorer extends React.Component {
+export class _ItemExplorer extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { navigate } = navigation;
     return {
@@ -40,7 +40,11 @@ export class ItemExplorer extends React.Component {
   };
 
   _renderItems = () => {
-    return this.props.items === 'no items' || !this.props.items
+    return (
+      this.props.items === 'no items' ||
+      this.props.items === [] ||
+      !this.props.items
+    )
       ? this._renderNoItems()
       : this._renderCarousel();
   };
@@ -89,7 +93,6 @@ export class ItemExplorer extends React.Component {
   };
 
   render() {
-    console.log('this.props', this.props);
     return this.props.isFetching ? this._renderLoader() : this._renderItems();
   }
 }
@@ -102,8 +105,9 @@ const mapStateToProps = (state) => {
   };
 };
 
-ItemExplorer.propTypes = {
+_ItemExplorer.propTypes = {
   isFetching: PropTypes.bool.isRequired,
 };
 
-export default connect(mapStateToProps, null)(ItemExplorer);
+const ItemExplorer = connect(mapStateToProps, null)(_ItemExplorer);
+export default ItemExplorer;

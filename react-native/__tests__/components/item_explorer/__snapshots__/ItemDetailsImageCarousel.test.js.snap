@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ItemDetailsImageCarousel /> renders carousel when it should 1`] = `
+<Carousel
+  arrows={false}
+  autoplay={false}
+  bullets={false}
+  currentPage={0}
+  delay={4000}
+  isLooped={true}
+  leftArrowText=""
+  pageInfo={true}
+  pageInfoBackgroundColor="#292929"
+  pageInfoTextSeparator=" / "
+  pageInfoTextStyle={
+    Object {
+      "color": "#FFFFFF",
+    }
+  }
+  rightArrowText=""
+  style={
+    Object {
+      "height": 750,
+      "width": 750,
+    }
+  }
+  swipe={true}
+>
+  <ImagePlaceholder
+    key="0"
+    placeholderSize={750}
+    styles={
+      Object {
+        "height": 750,
+        "width": 750,
+      }
+    }
+    url="foo.png"
+  />
+  <ImagePlaceholder
+    key="1"
+    placeholderSize={750}
+    styles={
+      Object {
+        "height": 750,
+        "width": 750,
+      }
+    }
+    url="bar.png"
+  />
+</Carousel>
+`;
+
+exports[`<ItemDetailsImageCarousel /> renders image when it should 1`] = `
+<Component
+  style={
+    Object {
+      "height": 750,
+      "width": 750,
+    }
+  }
+>
+  <ImagePlaceholder
+    placeholderSize={750}
+    styles={
+      Object {
+        "height": 750,
+        "width": 750,
+      }
+    }
+    url="foo.png"
+  />
+</Component>
+`;

@@ -7,7 +7,7 @@ import { styles } from '../../static/styles/ItemCardStyles';
 import { baseStyles } from '../../static/styles/BaseStyles';
 import { localhost } from '../../static/constants';
 
-class _ItemCard extends React.Component {
+export class _ItemCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -98,5 +98,9 @@ _ItemCard.propTypes = {
   item: PropTypes.shape({
     title: PropTypes.string,
     id: PropTypes.number,
+    latitude: PropTypes.number.isRequired,
+    longitude: PropTypes.number.isRequired,
   }).isRequired,
+  latitude: PropTypes.number.isRequired,
+  longitude: PropTypes.number.isRequired,
 };
