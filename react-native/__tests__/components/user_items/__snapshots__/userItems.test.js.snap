@@ -45,21 +45,17 @@ exports[`<_UserItems /> renders correctly when response has no items 1`] = `
         "flex": 1,
         "justifyContent": "space-between",
       },
+      Object {
+        "backgroundColor": "transparent",
+      },
     ]
   }
 >
-  <Component
-    style={
-      Array [
-        Object {
-          "padding": 10,
-          "textAlign": "center",
-        },
-      ]
-    }
-  >
-    You have no items yet. Add one by clicking 'New item'
-  </Component>
+  <MaterialIconAndText
+    containerText="Add one by clicking 'New item'."
+    headerText="You have no items yet."
+    iconName="emoticon-poop"
+  />
 </Component>
 `;
 
@@ -71,6 +67,9 @@ exports[`<_UserItems /> renders correctly when response has user_items 1`] = `
         "backgroundColor": "#fff",
         "flex": 1,
         "justifyContent": "space-between",
+      },
+      Object {
+        "backgroundColor": "#fff",
       },
     ]
   }

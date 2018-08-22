@@ -15,7 +15,7 @@ exports[`<ImagePlaceholder /> does not show placeholder image when image is load
     onLoad={[Function]}
     source={
       Object {
-        "uri": "foo.com?Fri Jan 01 2016 02:00:00 GMT+0200 (Eastern European Standard Time)",
+        "uri": "foo.com",
       }
     }
     style={
@@ -45,7 +45,7 @@ exports[`<ImagePlaceholder /> shows placeholder image when image is not loaded 1
     onLoad={[Function]}
     source={
       Object {
-        "uri": "foo.com?Fri Jan 01 2016 02:00:00 GMT+0200 (Eastern European Standard Time)",
+        "uri": "foo.com",
       }
     }
     style={

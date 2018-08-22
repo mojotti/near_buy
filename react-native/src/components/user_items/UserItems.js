@@ -71,7 +71,6 @@ export class _UserItems extends React.Component {
   };
 
   handleAllItemsResponse(responseJson) {
-    console.log('Items', responseJson.items);
     this.setState(() => ({
       isLoaded: true,
       data: responseJson.items,

@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { _UserItemDetails } from '../../../src/components/user_items/UserItemDetails';
 
+
 jest.mock('react-native-fetch-blob', () => {
   return {
     DocumentDir: () => {},
@@ -66,36 +67,6 @@ describe('<_UserItemDetails />', () => {
     };
     userItemDetails.instance().componentDidUpdate({}, prevState);
     expect(setParamsSpy.mock.calls.length).toEqual(2);
-  });
-
-  test('gets num of pictures', () => {
-    fetch.mockResponseSuccess({ num_of_images: 1 });
-
-    const userItemDetails = shallow(<_UserItemDetails {...PROPS} />);
-
-    fetch.mockResponseSuccess({ num_of_images: 1 });
-
-    return userItemDetails
-      .instance()
-      .getNumOfPictures()
-      .then(result => {
-        expect(result).toEqual(1);
-      });
-  });
-
-  test('does not get num of pictures', () => {
-    fetch.mockResponseSuccess({ num_of_images: 1 });
-
-    const userItemDetails = shallow(<_UserItemDetails {...PROPS} />);
-
-    fetch.mockResponseFailure('error');
-
-    return userItemDetails
-      .instance()
-      .getNumOfPictures()
-      .then(result => {
-        expect(result).toEqual(0);
-      });
   });
 
   test('state handlers', () => {

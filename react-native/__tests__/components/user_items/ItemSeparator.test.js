@@ -5,6 +5,6 @@ import ItemSeparator from '../../../src/components/user_items/ItemSeparator';
 
 describe('<ItemSeparator />', () => {
   test('renders correctly', () => {
-    expect(shallow(<ItemSeparator />)).toMatchSnapshot();
+    expect(shallow(<ItemSeparator widthPercentage={0.5} />)).toMatchSnapshot();
   });
 });

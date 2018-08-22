@@ -47,19 +47,30 @@ exports[`_UserItem renders and shows current details 1`] = `
             }
           }
         >
-          <ImagePlaceholder
-            placeholderSize={112.5}
-            styles={
+          <Component
+            style={
               Object {
-                "borderRadius": 15,
+                "alignSelf": "center",
+                "borderRadius": 100,
                 "height": 112.5,
+                "justifyContent": "center",
                 "margin": 10,
                 "overflow": "hidden",
                 "width": 112.5,
               }
             }
-            url="http://localhost:5000/api/v1.0/2/image0.jpg"
-          />
+          >
+            <ImagePlaceholder
+              placeholderSize={112.5}
+              styles={
+                Object {
+                  "height": 112.5,
+                  "width": 112.5,
+                }
+              }
+              url="http://localhost:5000/api/v1.0/2/image0.jpg"
+            />
+          </Component>
         </Component>
         <Component
           style={
