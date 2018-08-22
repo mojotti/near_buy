@@ -5,7 +5,7 @@ import { getBearerHeaders } from './networking';
 export const createNewChat = (sellerId, itemId, token) => {
   const ipAddress = `http://${localhost}:5000/api/v1.0/new_chat`;
 
-  fetch(ipAddress, {
+  return fetch(ipAddress, {
     method: 'POST',
     headers: getBearerHeaders(token),
     body: JSON.stringify({
@@ -19,6 +19,7 @@ export const createNewChat = (sellerId, itemId, token) => {
       return 'error';
     })
     .catch(error => {
+      console.error(error);
       return 'error';
     });
 };

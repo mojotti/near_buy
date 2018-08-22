@@ -7,7 +7,7 @@ import {
   getBearerHeaders,
   getApplicationJsonHeaders,
   getNumOfPictures,
-} from '../src/networking/networking';
+} from '../../src/networking/networking';
 
 const base64 = require('base-64');
 
