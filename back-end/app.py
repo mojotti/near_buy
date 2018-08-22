@@ -7,11 +7,10 @@ import imghdr
 import os
 import sys
 import shutil
-import six
-import time
-from flask import Flask, jsonify, abort, request, make_response, url_for, g, send_from_directory
+from flask import Flask, jsonify, abort, request, make_response, g, send_from_directory
 from flask_httpauth import HTTPBasicAuth, HTTPTokenAuth
 from flask_socketio import SocketIO, emit
+from Item import make_public_item, get_item_details, check_if_item_is_valid
 
 import User as U
 import database
@@ -120,23 +119,6 @@ def new_user():
         return jsonify({'user_creation': 'success'})
 
 
-def make_public_item(item):
-    """"
-    Helper function for get_items(). Collects one item at the time.
-    :param: item
-    :return: dictionary
-    """
-    new_item = {}
-    for field in item:
-        if field == 'id':
-            new_item['uri'] = url_for('get_item', item_id=item['id'],
-                                      _external=True)
-            new_item['id'] = item[field]
-        else:
-            new_item[field] = item[field]
-    return new_item
-
-
 @app.route('/api/v1.0/user/items', methods=['GET'])
 @token_auth.login_required
 def get_items_for_user():
@@ -206,7 +188,7 @@ def create_item():
         save_pictures(pictures)
     if not user_data or 'title' not in user_data or 'price' not in user_data:
         abort(400)
-    item = get_item_details(user_data)
+    item = get_item_details(user_data, DB.get_id_for_new_item(), g.user['id'])
     DB.add_item_to_db(item)
     item = DB.retrieve_item_with_title(user_data.get('title'))
     return jsonify({'item': make_public_item(item)}), 201
@@ -223,69 +205,6 @@ def add_picture(item_id):
     if pictures:
         save_pictures_for_existing_item(pictures, item_id)
     return jsonify({'ok': True}), 201
-
-
-def is_allowed_file(picture):
-    """
-     Helper for create_item().
-     Check if file to be saved is in allowed format.
-     :param: filename
-     """
-    is_valid_image = imghdr.what(picture) in ALLOWED_EXTENSIONS
-    return '.' in picture.filename and is_valid_image
-
-
-def save_pictures_for_existing_item(pictures, item_id):
-    """
-    Helper for create_item().
-    Save item's pictures to file system.
-    :param: pictures
-    """
-    for picture in pictures:
-        if is_allowed_file(picture):
-            picture_name = secure_filename(picture.filename)
-            directory = app.config['UPLOAD_FOLDER'] + str(item_id) + '/'
-            if not os.path.exists(directory):
-                os.makedirs(directory)
-            picture.save(os.path.join(directory + picture_name))
-
-
-def save_pictures(pictures):
-    """
-    Helper for create_item().
-    Save item's pictures to file system.
-    :param: pictures
-    """
-    for picture in pictures:
-        if is_allowed_file(picture):
-            picture_name = secure_filename(picture.filename)
-            id_ = DB.get_id_for_new_item()
-            directory = app.config['UPLOAD_FOLDER'] + str(id_) + '/'
-            if not os.path.exists(directory):
-                os.makedirs(directory)
-            picture.save(os.path.join(directory + picture_name))
-
-
-def get_item_details(user_data):
-    """
-    Helper for create_item().
-    Get and return all necessary details for item.
-    :param: user_data
-    :return: dictionary
-    """
-    user_id = g.user['id']
-    current_milli_time = int(round(time.time() * 1000))
-    return {
-        'id': DB.get_id_for_new_item(),
-        'title': user_data.get('title'),
-        'price': int(user_data.get('price')),
-        'seller_id': user_id,
-        'description': user_data.get('description'),
-        'sold': False,
-        'latitude': user_data.get('latitude'),
-        'longitude': user_data.get('longitude'),
-        'item_created': current_milli_time
-    }
 
 
 @app.route('/api/v1.0/items/<int:item_id>', methods=['PUT'])
@@ -314,35 +233,6 @@ def update_item(item_id):
     return jsonify({'item': make_public_item(item[0])})
 
 
-def check_if_item_is_valid(item):
-    """
-    Helper for update_item()
-    Check if all necessary conditions are fulfilled for item.
-    :param: item
-    """
-    item_length = len(item)
-    if item_length == 0:
-        abort(404)
-    if not request.get_json():
-        abort(400)
-    if 'title' in request.get_json() and \
-            not isinstance(request.get_json()['title'], six.string_types):
-        abort(400)
-    if 'price' in request.get_json() and \
-            not isinstance(request.get_json()['price'], int or \
-            not isinstance(request.get_json()['price'], six.string_types)):
-        abort(400)
-    if 'description' in request.get_json() and \
-            not isinstance(request.get_json()['description'], six.string_types):
-        abort(400)
-    if 'sold' in request.get_json() and not isinstance(request.get_json()['sold'], bool):
-        abort(400)
-    if 'latitude' in request.get_json() and not isinstance(request.json['latitude'], float):
-        abort(400)
-    if 'longitude' in request.get_json() and not isinstance(request.json['longitude'], float):
-        abort(400)
-
-
 @app.route('/api/v1.0/items/<int:item_id>', methods=['DELETE'])
 @token_auth.login_required
 def delete_item(item_id):
@@ -358,10 +248,6 @@ def delete_item(item_id):
         abort(404)
     DB.remove_item(item[0])
     return jsonify({'result': True})
-
-
-def delete_images(item_id):
-    shutil.rmtree(app.config.get('UPLOAD_FOLDER') + str(item_id), ignore_errors=True)
 
 
 @app.route('/api/v1.0/user/items/<int:item_id>', methods=['DELETE'])
@@ -435,10 +321,8 @@ def get_chats_for_user():
     if user_id is None:
         return jsonify({'ok': False})
     chats = DB.get_all_chats_for_user(user_id)
-    # chats = [chat for chat in chats]
+    chats = [chat for chat in chats]
     return jsonify({'chats': chats})
-
-
 
 
 @socketio.on('connect')
@@ -449,6 +333,55 @@ def test_connect():
 @socketio.on('lol')
 def test_connect(msg):
     print('lolled', msg)
+
+
+# Helpers, TODO: test these better and move to own file
+def is_allowed_file(picture):
+    """
+     Helper for create_item().
+     Check if file to be saved is in allowed format.
+     :param: filename
+     """
+    is_valid_image = imghdr.what(picture) in ALLOWED_EXTENSIONS
+    return '.' in picture.filename and is_valid_image
+
+
+def save_pictures_for_existing_item(pictures, item_id):
+    """
+    Helper for create_item().
+    Save item's pictures to file system.
+    :param: pictures
+    """
+    for picture in pictures:
+        if is_allowed_file(picture):
+            picture_name = secure_filename(picture.filename)
+            directory = app.config['UPLOAD_FOLDER'] + str(item_id) + '/'
+            if not os.path.exists(directory):
+                os.makedirs(directory)
+            picture.save(os.path.join(directory + picture_name))
+
+
+def save_pictures(pictures):
+    """
+    Helper for create_item().
+    Save item's pictures to file system.
+    :param: pictures
+    """
+    for picture in pictures:
+        if is_allowed_file(picture):
+            picture_name = secure_filename(picture.filename)
+            id_ = DB.get_id_for_new_item()
+            directory = app.config['UPLOAD_FOLDER'] + str(id_) + '/'
+            if not os.path.exists(directory):
+                os.makedirs(directory)
+            picture.save(os.path.join(directory + picture_name))
+
+
+def delete_images(item_id):
+    """
+    Deletes user images.
+    """
+    shutil.rmtree(app.config.get('UPLOAD_FOLDER') + str(item_id), ignore_errors=True)
 
 
 if __name__ == '__main__':

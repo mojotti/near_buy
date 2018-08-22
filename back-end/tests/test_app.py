@@ -320,7 +320,6 @@ class TestApp(unittest.TestCase):
         )
         self.assertEqual(response.status_code, 200)
         json_resp = json.loads(response.data.decode('utf-8'))
-        print(json_resp)
         self.assertEquals(json_resp['chats'][0]['item_id'], 0)
         self.assertEquals(json_resp['chats'][0]['buyer_id'], 1)
         self.assertEquals(json_resp['chats'][0]['seller_id'], 0)
