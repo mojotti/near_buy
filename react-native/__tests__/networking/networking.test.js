@@ -68,23 +68,4 @@ describe('Networking', () => {
     };
     expect(headers).toEqual(expectedResponse);
   });
-
-  test('gets num of pictures', () => {
-    fetch.mockResponseSuccess({ num_of_images: 1 });
-
-    return getNumOfPictures()
-      .then(result => {
-        expect(result).toEqual(1);
-      });
-  });
-
-  test('does not get num of pictures', () => {
-    fetch.mockResponseFailure('error');
-
-    return getNumOfPictures()
-      .then(result => {
-        expect(result).toEqual(0);
-      });
-  });
-
 });

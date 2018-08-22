@@ -8,7 +8,7 @@ import { ItemDetails } from '../new_item/ItemDetails';
 import DeleteButton from './DeleteButton';
 import SaveButton from './SaveButton';
 import UserItemMapView from './UserItemMapView';
-import { getNumOfPictures } from '../../networking/networking';
+import { getNumOfPictures } from '../../networking/ApiCalls';
 import ImageCarousel from './ImageCarousel';
 import LocationInfoText from './LocationInfoText';
 import UpdateLocationButton from './UpdateLocationButton';

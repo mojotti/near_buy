@@ -1,4 +1,4 @@
-import { createNewChat } from '../../src/networking/ApiCalls';
+import { createNewChat, getNumOfPictures } from '../../src/networking/ApiCalls';
 
 describe('createNewChat', () => {
   const SELLER_ID = 0;
@@ -30,5 +30,25 @@ describe('createNewChat', () => {
     const response = await await await createNewChat(SELLER_ID, ITEM_ID, TOKEN);
 
     expect(response).toEqual('error');
+  });
+});
+
+describe('getNumOfPictures', () => {
+  test('gets num of pictures', () => {
+    fetch.mockResponseSuccess({ num_of_images: 1 });
+
+    return getNumOfPictures()
+      .then(result => {
+        expect(result).toEqual(1);
+      });
+  });
+
+  test('does not get num of pictures', () => {
+    fetch.mockResponseFailure('error');
+
+    return getNumOfPictures()
+      .then(result => {
+        expect(result).toEqual(0);
+      });
   });
 });

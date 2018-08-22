@@ -1,5 +1,3 @@
-import { localhost } from '../static/constants';
-
 const base64 = require('base-64');
 
 const registeringHeaders = {
@@ -23,22 +21,6 @@ export const getApplicationJsonHeaders = token => {
   headers.append('Authorization', `Bearer ${token}`);
   headers.append('Content-Type', 'application/json');
   return headers;
-};
-
-export const getNumOfPictures = (itemId, token) => {
-  const url = `http://${localhost}:5000/api/v1.0/${itemId}/num_of_images`;
-  return fetch(url, {
-    method: 'GET',
-    headers: getBearerHeaders(token),
-  })
-    .then(response => response.json())
-    .then(responseJson => {
-      return responseJson.num_of_images;
-    })
-    .catch(error => {
-      console.error(error);
-      return 0;
-    });
 };
 
 const generateHash = (username, password) => {

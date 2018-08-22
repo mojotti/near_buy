@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MaterialIconAndText /> renders correctly 1`] = `
+<Component
+  style={
+    Object {
+      "alignSelf": "center",
+      "backgroundColor": "transparent",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <Component
+    style={
+      Object {
+        "alignSelf": "center",
+        "backgroundColor": "#FFFFFF",
+        "borderRadius": 100,
+        "height": 180,
+        "marginBottom": 15,
+        "overflow": "hidden",
+        "width": 180,
+      }
+    }
+  >
+    <Icon
+      allowFontScaling={false}
+      color="#727272"
+      name="access-point"
+      size={165}
+      style={
+        Object {
+          "alignSelf": "center",
+        }
+      }
+    />
+  </Component>
+  <Component
+    style={
+      Object {
+        "color": "#727272",
+        "fontFamily": null,
+        "paddingHorizontal": 30,
+        "textAlign": "center",
+      }
+    }
+  >
+    this is header
+  </Component>
+  <Component
+    style={
+      Object {
+        "color": "#727272",
+        "fontFamily": null,
+        "paddingHorizontal": 30,
+        "textAlign": "center",
+      }
+    }
+  >
+    and this just context
+  </Component>
+</Component>
+`;

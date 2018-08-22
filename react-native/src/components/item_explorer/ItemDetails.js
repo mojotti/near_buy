@@ -3,7 +3,7 @@ import { Text, ScrollView, View } from 'react-native';
 import { connect } from 'react-redux';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import ItemDetailsImageCarousel from './ItemDetailsImageCarousel';
-import { getNumOfPictures } from '../../networking/networking';
+import { getNumOfPictures } from '../../networking/ApiCalls';
 import { localhost } from '../../static/constants';
 import { baseStyles } from '../../static/styles/BaseStyles';
 import { styles } from '../../static/styles/ItemDetailsStyles';

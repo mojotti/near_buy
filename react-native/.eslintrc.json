@@ -18,7 +18,9 @@
     "react/no-did-update-set-state": "off",
     "no-underscore-dangle": "off",
     "react/sort-comp": "off",
-    "no-irregular-whitespace": "off"
+    "no-irregular-whitespace": "off",
+    "function-paren-newline": "off",
+    "comma-dangle": "off"
   },
   "env": {
     "jest": true

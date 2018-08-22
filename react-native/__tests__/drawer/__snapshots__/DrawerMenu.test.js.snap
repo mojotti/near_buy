@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DrawerMenu /> renders correctly 1`] = `
+<Component
+  style={
+    Object {
+      "flex": 1,
+      "justifyContent": "space-between",
+      "paddingTop": 100,
+    }
+  }
+>
+  <Component>
+    <Connect(_MenuItem)
+      iconName="public"
+      iconSize={27}
+      itemName="All items"
+      navigation={
+        Object {
+          "navigate": [Function],
+        }
+      }
+      navigationRoute="ItemExplorer"
+    />
+    <Connect(_MenuItem)
+      iconName="account-circle"
+      iconSize={27}
+      itemName="My items"
+      navigation={
+        Object {
+          "navigate": [Function],
+        }
+      }
+      navigationRoute="UserItems"
+    />
+  </Component>
+  <TouchableHighlight
+    activeOpacity={0.85}
+    delayPressOut={100}
+    onPress={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "alignSelf": "center",
+        "backgroundColor": "#4d4dff",
+        "borderRadius": 30,
+        "elevation": 1,
+        "marginBottom": 30,
+        "marginVertical": 10,
+        "paddingBottom": 8,
+        "paddingTop": 8,
+        "width": 397.5,
+      }
+    }
+    underlayColor="black"
+  >
+    <Component
+      style={
+        Object {
+          "color": "white",
+          "fontFamily": null,
+          "fontSize": 16,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      Logout
+    </Component>
+  </TouchableHighlight>
+</Component>
+`;

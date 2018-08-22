@@ -3,9 +3,9 @@ import { getBearerHeaders } from './networking';
 
 
 export const createNewChat = (sellerId, itemId, token) => {
-  const ipAddress = `http://${localhost}:5000/api/v1.0/new_chat`;
+  const url = `http://${localhost}:5000/api/v1.0/new_chat`;
 
-  return fetch(ipAddress, {
+  return fetch(url, {
     method: 'POST',
     headers: getBearerHeaders(token),
     body: JSON.stringify({
@@ -21,5 +21,21 @@ export const createNewChat = (sellerId, itemId, token) => {
     .catch(error => {
       console.error(error);
       return 'error';
+    });
+};
+
+export const getNumOfPictures = (itemId, token) => {
+  const url = `http://${localhost}:5000/api/v1.0/${itemId}/num_of_images`;
+  return fetch(url, {
+    method: 'GET',
+    headers: getBearerHeaders(token),
+  })
+    .then(response => response.json())
+    .then(responseJson => {
+      return responseJson.num_of_images;
+    })
+    .catch(error => {
+      console.error(error);
+      return 0;
     });
 };
