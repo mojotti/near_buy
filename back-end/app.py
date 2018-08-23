@@ -326,16 +326,16 @@ def get_chats_for_user():
 
 
 @socketio.on('connect')
-def test_connect():
+def connect():
     print('connected')
 
 
 @socketio.on('lol')
-def test_connect(msg):
+def connect(msg):
     print('lolled', msg)
 
 
-# Helpers, TODO: test these better and move to own file
+# Helpers, TODO: test these more comprehensively and move to own file
 def is_allowed_file(picture):
     """
      Helper for create_item().
