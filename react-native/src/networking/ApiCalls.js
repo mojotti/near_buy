@@ -1,5 +1,5 @@
 import { localhost } from '../static/constants';
-import { getBearerHeaders } from './networking';
+import { getApplicationJsonHeaders, getBearerHeaders } from './networking';
 
 
 export const createNewChat = (sellerId, itemId, token) => {
@@ -7,7 +7,7 @@ export const createNewChat = (sellerId, itemId, token) => {
 
   return fetch(url, {
     method: 'POST',
-    headers: getBearerHeaders(token),
+    headers: getApplicationJsonHeaders(token),
     body: JSON.stringify({
       other_user: sellerId,
       item_id: itemId,

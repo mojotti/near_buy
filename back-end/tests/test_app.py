@@ -297,6 +297,7 @@ class TestApp(unittest.TestCase):
 
     @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_MOJO)
     @mock.patch('database.DatabaseHelper.create_a_new_chat_for_item', return_value=None)
+    @mock.patch('database.DatabaseHelper.create_a_new_chat_for_item', return_value=None)
     def test_given_chats_is_created_when_successful_then_ok_is_returned(self, mock, rock):
         data = {'other_user': 1, 'item_id': 2}
         response = self.app.post(
@@ -323,6 +324,21 @@ class TestApp(unittest.TestCase):
         self.assertEquals(json_resp['chats'][0]['item_id'], 0)
         self.assertEquals(json_resp['chats'][0]['buyer_id'], 1)
         self.assertEquals(json_resp['chats'][0]['seller_id'], 0)
+
+    @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_MOJO)
+    @mock.patch('database.DatabaseHelper.get_all_chats_for_user', return_value=CHAT)
+    def test_given_chat_exists_when_its_requested_it_is_not_created_again(self, mock, rock):
+        data = {'other_user': 1, 'item_id': 2}
+        response = self.app.post(
+            '/api/v1.0/new_chat',
+            headers={'Authorization':
+                         'Bearer ' + TOKEN_FOR_USER_ID_0},
+            data=json.dumps(data),
+            content_type='application/json'
+        )
+        self.assertEqual(response.status_code, 200)
+        json_resp = json.loads(response.data.decode('utf-8'))
+        self.assertEquals(json_resp['ok'], 'chat exists')
 
 
 

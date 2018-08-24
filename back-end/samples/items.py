@@ -55,6 +55,7 @@ CHAT = [
      },
 ]
 
+
 def rm_test_pictures():
     for root, dirs, files in os.walk(Config.testing_folder):
         for f in files:

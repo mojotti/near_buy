@@ -9,6 +9,7 @@ import { baseStyles } from '../../static/styles/BaseStyles';
 import { styles } from '../../static/styles/ItemDetailsStyles';
 import ChatButton from './ChatButton';
 import ItemSeparator from '../user_items/ItemSeparator';
+import { createChatAction } from '../../redux/actions/ChatActions';
 
 window.navigator.userAgent = 'ReactNative';
 
@@ -36,6 +37,7 @@ export class _ItemDetails extends React.Component {
       this.socket.on('connect', () => {
         console.log('connected!');
       });
+      this.socket.emit('lol', 'Hello world!');
     }
   }
 
@@ -63,6 +65,14 @@ export class _ItemDetails extends React.Component {
     this.setState(() => ({ imageUrls: urls }));
   };
 
+  _openChat = () => {
+    this.props.dispatch(createChatAction(
+      this.props.item.seller_id,
+      this.props.item.id,
+      this.props.token,
+    ));
+  };
+
   render() {
     return (
       <ScrollView style={styles.container}>
@@ -76,11 +86,7 @@ export class _ItemDetails extends React.Component {
         <Text style={baseStyles.headerText}>Description</Text>
         <Text style={styles.plainText}>{this.props.item.description}</Text>
         <ItemSeparator widthPercentage={0.86} />
-        <ChatButton onPress={() => {
-          this.forceUpdate();
-          this.socket.emit('lol', 'Hello world!');
-        }}
-        />
+        <ChatButton onPress={this._openChat} />
       </ScrollView>
     );
   }
