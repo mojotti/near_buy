@@ -71,6 +71,7 @@ export const handleChatCreation = (dispatch, itemDetails, token) => {
     .then((response) => {
       if (response === 'chat created') {
         dispatch(createChatSuccessAction());
+        dispatch(requestChatsAction(token));
       } else {
         dispatch(createChatErrorAction(response));
       }

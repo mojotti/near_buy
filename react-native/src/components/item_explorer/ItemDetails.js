@@ -72,7 +72,6 @@ export class _ItemDetails extends React.Component {
       title: this.props.item.title,
     };
     this.props.dispatch(createChatAction(itemDetails, this.props.token));
-    this.props.dispatch(requestChatsAction(this.props.token));
   };
 
   render() {
