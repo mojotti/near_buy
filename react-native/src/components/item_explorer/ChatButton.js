@@ -10,7 +10,7 @@ export default class ChatButton extends React.Component {
     if (this.props.isCreatingChat) {
       return <ActivityIndicator size="large" color="#FFFFFF" />;
     }
-    return <FontAwesome name="comments" size={50} color="#FFFFFF" />;
+    return <FontAwesome name="comments" size={35} color="#FFFFFF" />;
   };
 
   _getText = () => {
@@ -24,8 +24,9 @@ export default class ChatButton extends React.Component {
     return (
       <View>
         <TouchableOpacity
-          style={styles.chatButton}
+          disabled={this.props.isCreatingChat}
           onPress={this.props.onPress}
+          style={styles.chatButton}
         >
           <View style={styles.chatButtonContainer}>
             {this._getIcon()}

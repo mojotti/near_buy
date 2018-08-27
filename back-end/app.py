@@ -301,8 +301,6 @@ def create_a_new_chat_for_item():
     """
     Creates a new chat between seller and buyer.
     """
-    import time
-    time.sleep(5)
     buying_user = g.user['id']
     if buying_user is None:
         return jsonify({'ok': False})
