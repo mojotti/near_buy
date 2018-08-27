@@ -301,13 +301,15 @@ def create_a_new_chat_for_item():
     """
     Creates a new chat between seller and buyer.
     """
+    import time
+    time.sleep(5)
     buying_user = g.user['id']
     if buying_user is None:
         return jsonify({'ok': False})
     selling_user = request.get_json().get('other_user')
     item_id = request.get_json().get('item_id')
 
-    if DB.isExistingChat(buying_user, selling_user, item_id):
+    if DB.is_existing_chat(buying_user, selling_user, item_id):
         return jsonify({'ok': 'chat exists'})
     DB.create_a_new_chat_for_item(buying_user, selling_user, item_id)
     return jsonify({'ok': True})

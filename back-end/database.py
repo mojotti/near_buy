@@ -134,6 +134,12 @@ class DatabaseHelper(object):
     def get_all_chats_for_user(self, user_id):
         return self.chats.find({'$or': [{'buyer_id': user_id}, {'seller_id': user_id}]})
 
+    def is_existing_chat(self, buying_user, selling_user, item_id):
+        chats = self.chats.find({'$and': [{'buyer_id': buying_user}, {'seller_id': selling_user}, {'item_id': item_id}]})
+        if not [chat for chat in chats]:
+            return False
+        return True
+
 
 class TestDB(DatabaseHelper):
     def __init__(self):

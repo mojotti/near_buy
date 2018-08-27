@@ -198,6 +198,8 @@ class TestApp(unittest.TestCase):
         self.assertIsNone(own_item_in_others)
 
     def test_given_chat_is_created_it_can_be_found(self):
+        TEST_DB.chats.delete_many({})
+
         buying_user = item_id = 0
         selling_user = 1
 
@@ -211,6 +213,19 @@ class TestApp(unittest.TestCase):
         chats = [self.assertEquals(chat['seller_id'], selling_user) for chat in chats]
         self.assertEquals(len(chats), 2)
 
+    def test_given_chat_exists_when_searched_then_it_is_found(self):
+        TEST_DB.chats.delete_many({})
+
+        buying_user = item_id = 0
+        selling_user = 1
+
+        is_existing = self.db.is_existing_chat(buying_user, selling_user, item_id)
+        self.assertFalse(is_existing)
+
+        self.db.create_a_new_chat_for_item(buying_user, selling_user, item_id)
+
+        is_existing = self.db.is_existing_chat(buying_user, selling_user, item_id)
+        self.assertTrue(is_existing)
 
 
 

@@ -298,7 +298,7 @@ class TestApp(unittest.TestCase):
     @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_MOJO)
     @mock.patch('database.DatabaseHelper.create_a_new_chat_for_item', return_value=None)
     @mock.patch('database.DatabaseHelper.create_a_new_chat_for_item', return_value=None)
-    def test_given_chats_is_created_when_successful_then_ok_is_returned(self, mock, rock):
+    def test_given_chats_is_created_when_successful_then_ok_is_returned(self, mock, rock, dock):
         data = {'other_user': 1, 'item_id': 2}
         response = self.app.post(
             '/api/v1.0/new_chat',
@@ -326,7 +326,7 @@ class TestApp(unittest.TestCase):
         self.assertEquals(json_resp['chats'][0]['seller_id'], 0)
 
     @mock.patch('database.DatabaseHelper.retrieve_user_by_token', return_value=USER_MOJO)
-    @mock.patch('database.DatabaseHelper.get_all_chats_for_user', return_value=CHAT)
+    @mock.patch('database.DatabaseHelper.is_existing_chat', return_value=True)
     def test_given_chat_exists_when_its_requested_it_is_not_created_again(self, mock, rock):
         data = {'other_user': 1, 'item_id': 2}
         response = self.app.post(

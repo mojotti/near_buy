@@ -86,7 +86,7 @@ export class _ItemDetails extends React.Component {
         <Text style={baseStyles.headerText}>Description</Text>
         <Text style={styles.plainText}>{this.props.item.description}</Text>
         <ItemSeparator widthPercentage={0.86} />
-        <ChatButton onPress={this._openChat} />
+        <ChatButton onPress={this._openChat} isCreatingChat={this.props.isCreatingChat} />
       </ScrollView>
     );
   }
@@ -96,7 +96,14 @@ const mapStateToProps = (state, ownProps) => {
   const { item } = ownProps.navigation.state.params;
   const { distance } = ownProps.navigation.state.params;
   const { token } = state.authorizationReducer;
-  return { item, token, distance };
+  const { isLoading } = state.chatReducer;
+
+  return {
+    item,
+    token,
+    distance,
+    isCreatingChat: isLoading,
+  };
 };
 
 const ItemDetails = connect(mapStateToProps, null)(_ItemDetails);

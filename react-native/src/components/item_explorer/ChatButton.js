@@ -1,11 +1,25 @@
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, Text, TouchableOpacity, View } from 'react-native';
 import PropTypes from 'prop-types';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { styles } from '../../static/styles/ItemDetailsStyles';
 
 
 export default class ChatButton extends React.Component {
+  _getIcon = () => {
+    if (this.props.isCreatingChat) {
+      return <ActivityIndicator size="large" color="#FFFFFF" />;
+    }
+    return <FontAwesome name="comments" size={50} color="#FFFFFF" />;
+  };
+
+  _getText = () => {
+    if (this.props.isCreatingChat) {
+      return 'Creating chat...';
+    }
+    return 'Chat with owner';
+  };
+
   render() {
     return (
       <View>
@@ -14,8 +28,8 @@ export default class ChatButton extends React.Component {
           onPress={this.props.onPress}
         >
           <View style={styles.chatButtonContainer}>
-            <FontAwesome name="comments" size={50} color="#FFFFFF" />
-            <Text style={styles.chatText}>Chat with owner</Text>
+            {this._getIcon()}
+            <Text style={styles.chatText}>{this._getText()}</Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -25,4 +39,5 @@ export default class ChatButton extends React.Component {
 
 ChatButton.propTypes = {
   onPress: PropTypes.func.isRequired,
+  isCreatingChat: PropTypes.bool.isRequired,
 };
