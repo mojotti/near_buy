@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
     marginBottom: 30,
     marginTop: 30,
     paddingHorizontal: 6,
-    paddingTop: 4,
+    paddingTop: 8,
     paddingBottom: 8, // bcz chat icon has some empty space in bottom
     borderRadius: 10,
     overflow: 'hidden',
