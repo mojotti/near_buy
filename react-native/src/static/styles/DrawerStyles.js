@@ -40,6 +40,6 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   iconStyles: {
-    paddingRight: 3,
+    paddingRight: 4,
   },
 });

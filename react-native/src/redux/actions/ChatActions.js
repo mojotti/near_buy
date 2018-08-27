@@ -19,6 +19,44 @@ export const createChatErrorAction = (error) => {
   };
 };
 
+export const fetchChatsRequestAction = () => {
+  return {
+    type: 'FETCH_CHATS_REQUEST',
+  };
+};
+
+export const fetchChatsSuccessAction = (chats) => {
+  return {
+    type: 'FETCH_CHATS_SUCCESS',
+    chats,
+  };
+};
+
+export const fetchChatsActionError = (error) => {
+  return {
+    type: 'FETCH_CHATS_ERROR',
+    error,
+  };
+};
+
+export const requestChatsAction = (token) => {
+  return (dispatch) => {
+    dispatch(fetchChatsRequestAction());
+    handleChatFetching(token, dispatch);
+  };
+};
+
+export const handleChatFetching = (token, dispatch) => {
+  fetchChats(token)
+    .then((response) => {
+      if (response.ok && response.chats) {
+        dispatch(fetchChatsSuccessAction(response.chats));
+      } else {
+        dispatch(fetchChatsActionError(response));
+      }
+    });
+};
+
 export const createChatAction = (sellerId, itemId, token) => {
   return (dispatch) => {
     dispatch(createChatRequestAction());
@@ -37,3 +75,4 @@ export const handleChatCreation = (dispatch, sellerId, itemId, token) => {
     })
     .catch((error) => dispatch(createChatErrorAction(error)));
 };
+

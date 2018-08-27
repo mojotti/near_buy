@@ -325,7 +325,7 @@ def get_chats_for_user():
         return jsonify({'ok': False})
     chats = DB.get_all_chats_for_user(user_id)
     chats = [chat for chat in chats]
-    return jsonify({'chats': chats})
+    return jsonify({'ok': True, 'chats': chats})
 
 
 @socketio.on('connect')

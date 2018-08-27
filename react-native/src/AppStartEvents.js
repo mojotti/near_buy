@@ -10,4 +10,5 @@ export const runAppStartEvents = (dispatch, token) => {
     getCurrentLocation(dispatch);
   }
   dispatch(requestItemsAction(token));
+  dispatch(requestChatsAction(token));
 };

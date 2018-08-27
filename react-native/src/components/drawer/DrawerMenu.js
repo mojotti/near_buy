@@ -25,7 +25,7 @@ class DrawerMenu extends Component {
     };
     const myChatProps = {
       itemName: 'Chats',
-      iconName: 'forum',
+      iconName: 'comment',
       iconSize: 27,
       navigationRoute: 'MyChats',
       navigation: this.props.navigation,

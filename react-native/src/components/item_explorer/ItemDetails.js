@@ -96,7 +96,7 @@ const mapStateToProps = (state, ownProps) => {
   const { item } = ownProps.navigation.state.params;
   const { distance } = ownProps.navigation.state.params;
   const { token } = state.authorizationReducer;
-  const { isLoading } = state.chatReducer;
+  const { isLoading } = state.chatCreationReducer;
 
   return {
     item,

@@ -9,7 +9,7 @@ import { NO_CHATS_TEXT_HEADER, NO_CHATS_TEXT_CONTENT } from '../../static/consta
 export default class MyChats extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      title: 'My Chats',
+      title: 'Chats',
       headerLeft: (
         <View style={{ paddingHorizontal: 10 }}>
           <TouchableOpacity onPress={() => navigation.navigate('DrawerOpen')}>
