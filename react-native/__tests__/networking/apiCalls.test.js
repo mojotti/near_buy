@@ -7,13 +7,15 @@ import {
 describe('createNewChat', () => {
   const sellerId = 0;
   const itemId = 0;
+  const title = 'foo';
+  const itemDetails = { title, sellerId, itemId};
   const token = 'fake token';
 
   test('creates a new chat', async () => {
     fetch.mockResponseSuccess({ ok: true });
 
     expect.hasAssertions();
-    const response = await await createNewChat(sellerId, itemId, token);
+    const response = await await createNewChat(itemDetails, token);
 
     expect(response).toEqual('chat created');
   });
@@ -22,7 +24,7 @@ describe('createNewChat', () => {
     fetch.mockResponseSuccess({ ok: false });
 
     expect.hasAssertions();
-    const response = await await createNewChat(sellerId, itemId, token);
+    const response = await await createNewChat(itemDetails, token);
 
     expect(response).toEqual('error');
   });
@@ -31,7 +33,7 @@ describe('createNewChat', () => {
     fetch.mockResponseFailure('error');
 
     expect.hasAssertions();
-    const response = await await await createNewChat(sellerId, itemId, token);
+    const response = await await await createNewChat(itemDetails, token);
 
     expect(response).toEqual('error');
   });

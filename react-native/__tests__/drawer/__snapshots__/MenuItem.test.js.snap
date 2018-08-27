@@ -28,7 +28,7 @@ exports[`<_MenuItem /> renders correctly when tab is current tab 1`] = `
       size={12}
       style={
         Object {
-          "paddingRight": 3,
+          "paddingRight": 4,
         }
       }
     />
@@ -76,7 +76,7 @@ exports[`<_MenuItem /> renders correctly when tab is not the current tab 1`] = `
       size={12}
       style={
         Object {
-          "paddingRight": 3,
+          "paddingRight": 4,
         }
       }
     />

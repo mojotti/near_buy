@@ -33,6 +33,17 @@ exports[`<DrawerMenu /> renders correctly 1`] = `
       }
       navigationRoute="UserItems"
     />
+    <Connect(_MenuItem)
+      iconName="comment"
+      iconSize={27}
+      itemName="Chats"
+      navigation={
+        Object {
+          "navigate": [Function],
+        }
+      }
+      navigationRoute="MyChats"
+    />
   </Component>
   <TouchableHighlight
     activeOpacity={0.85}

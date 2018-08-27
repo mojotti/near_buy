@@ -25,7 +25,7 @@ export const chatCreationReducer = (state = initialStateChatCreation, action) =>
 };
 
 const initialStateCurrentChats = {
-  chats: [],
+  chatHeaders: [],
   error: null,
   isFetching: false,
 };
@@ -39,7 +39,7 @@ export const currentChatsReducer = (state = initialStateCurrentChats, action) =>
   case 'FETCH_CHATS_SUCCESS':
     return Object.assign({}, state, {
       isFetching: false,
-      chats: action.chats,
+      chatHeaders: action.chatHeaders,
       error: null,
     });
   case 'FETCH_CHATS_ERROR':

@@ -306,10 +306,11 @@ def create_a_new_chat_for_item():
         return jsonify({'ok': False})
     selling_user = request.get_json().get('other_user')
     item_id = request.get_json().get('item_id')
+    title = request.get_json().get('title')
 
     if DB.is_existing_chat(buying_user, selling_user, item_id):
         return jsonify({'ok': 'chat exists'})
-    DB.create_a_new_chat_for_item(buying_user, selling_user, item_id)
+    DB.create_a_new_chat_for_item(buying_user, selling_user, item_id, title)
     return jsonify({'ok': True})
 
 

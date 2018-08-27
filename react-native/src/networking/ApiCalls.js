@@ -2,8 +2,9 @@ import { localhost } from '../static/constants';
 import { getApplicationJsonHeaders, getBearerHeaders } from './networking';
 
 
-export const createNewChat = (sellerId, itemId, token) => {
+export const createNewChat = (itemDetails, token) => {
   const url = `http://${localhost}:5000/api/v1.0/new_chat`;
+  const { sellerId, itemId, title } = itemDetails;
 
   return fetch(url, {
     method: 'POST',
@@ -11,6 +12,7 @@ export const createNewChat = (sellerId, itemId, token) => {
     body: JSON.stringify({
       other_user: sellerId,
       item_id: itemId,
+      title,
     }),
   })
     .then(response => response.json())

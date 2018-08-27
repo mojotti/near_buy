@@ -9,7 +9,7 @@ import { baseStyles } from '../../static/styles/BaseStyles';
 import { styles } from '../../static/styles/ItemDetailsStyles';
 import ChatButton from './ChatButton';
 import ItemSeparator from '../user_items/ItemSeparator';
-import { createChatAction } from '../../redux/actions/ChatActions';
+import { createChatAction, requestChatsAction } from '../../redux/actions/ChatActions';
 
 window.navigator.userAgent = 'ReactNative';
 
@@ -66,11 +66,13 @@ export class _ItemDetails extends React.Component {
   };
 
   _openChat = () => {
-    this.props.dispatch(createChatAction(
-      this.props.item.seller_id,
-      this.props.item.id,
-      this.props.token,
-    ));
+    const itemDetails = {
+      sellerId: this.props.item.seller_id,
+      itemId: this.props.item.id,
+      title: this.props.item.title,
+    };
+    this.props.dispatch(createChatAction(itemDetails, this.props.token));
+    this.props.dispatch(requestChatsAction(this.props.token));
   };
 
   render() {

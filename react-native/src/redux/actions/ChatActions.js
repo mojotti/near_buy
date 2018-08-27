@@ -1,4 +1,4 @@
-import { createNewChat } from '../../networking/ApiCalls';
+import { createNewChat, getChatsForUser } from '../../networking/ApiCalls';
 
 export const createChatRequestAction = () => {
   return {
@@ -25,10 +25,10 @@ export const fetchChatsRequestAction = () => {
   };
 };
 
-export const fetchChatsSuccessAction = (chats) => {
+export const fetchChatsSuccessAction = (chatHeaders) => {
   return {
     type: 'FETCH_CHATS_SUCCESS',
-    chats,
+    chatHeaders,
   };
 };
 
@@ -47,25 +47,27 @@ export const requestChatsAction = (token) => {
 };
 
 export const handleChatFetching = (token, dispatch) => {
-  fetchChats(token)
+  getChatsForUser(token)
     .then((response) => {
-      if (response.ok && response.chats) {
-        dispatch(fetchChatsSuccessAction(response.chats));
-      } else {
+      if (response === 'error') {
         dispatch(fetchChatsActionError(response));
+      } else if (response === 'could not get chats') {
+        dispatch(fetchChatsActionError('could not get chats'));
+      } else {
+        dispatch(fetchChatsSuccessAction(response));
       }
     });
 };
 
-export const createChatAction = (sellerId, itemId, token) => {
+export const createChatAction = (itemDetails, token) => {
   return (dispatch) => {
     dispatch(createChatRequestAction());
-    handleChatCreation(dispatch, sellerId, itemId, token);
+    handleChatCreation(dispatch, itemDetails, token);
   };
 };
 
-export const handleChatCreation = (dispatch, sellerId, itemId, token) => {
-  createNewChat(sellerId, itemId, token)
+export const handleChatCreation = (dispatch, itemDetails, token) => {
+  createNewChat(itemDetails, token)
     .then((response) => {
       if (response === 'chat created') {
         dispatch(createChatSuccessAction());

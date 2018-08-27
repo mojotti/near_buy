@@ -202,11 +202,12 @@ class TestApp(unittest.TestCase):
 
         buying_user = item_id = 0
         selling_user = 1
+        title = 'foo'
 
-        self.db.create_a_new_chat_for_item(buying_user, selling_user, item_id)
-        self.db.create_a_new_chat_for_item(500, selling_user, item_id)
-        self.db.create_a_new_chat_for_item(100, 500, 3)  # add a couple of random chats
-        self.db.create_a_new_chat_for_item(buying_user, 500, 3)  # add a couple of random chats
+        self.db.create_a_new_chat_for_item(buying_user, selling_user, item_id, title)
+        self.db.create_a_new_chat_for_item(500, selling_user, item_id, title)
+        self.db.create_a_new_chat_for_item(100, 500, 3, title)  # add a couple of random chats
+        self.db.create_a_new_chat_for_item(buying_user, 500, 3, title)  # add a couple of random chats
 
         chats = self.db.get_all_chats_for_user(selling_user)
 
@@ -218,11 +219,12 @@ class TestApp(unittest.TestCase):
 
         buying_user = item_id = 0
         selling_user = 1
+        title = 'foo'
 
         is_existing = self.db.is_existing_chat(buying_user, selling_user, item_id)
         self.assertFalse(is_existing)
 
-        self.db.create_a_new_chat_for_item(buying_user, selling_user, item_id)
+        self.db.create_a_new_chat_for_item(buying_user, selling_user, item_id, title)
 
         is_existing = self.db.is_existing_chat(buying_user, selling_user, item_id)
         self.assertTrue(is_existing)
