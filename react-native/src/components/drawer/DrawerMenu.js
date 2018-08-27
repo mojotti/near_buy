@@ -23,12 +23,20 @@ class DrawerMenu extends Component {
       navigationRoute: 'UserItems',
       navigation: this.props.navigation,
     };
+    const myChatProps = {
+      itemName: 'Chats',
+      iconName: 'forum',
+      iconSize: 27,
+      navigationRoute: 'MyChats',
+      navigation: this.props.navigation,
+    };
 
     return (
       <View style={styles.container}>
         <View>
           <MenuItem {...allItemsProps} />
           <MenuItem {...myItemProps} />
+          <MenuItem {...myChatProps} />
         </View>
 
         <TouchableHighlight

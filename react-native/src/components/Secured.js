@@ -14,12 +14,14 @@ import { baseFont } from '../static/styles/BaseStyles';
 import DrawerMenu from './drawer/DrawerMenu';
 import ItemDetails from './item_explorer/ItemDetails';
 import ItemCard from './item_explorer/ItemCard';
+import MyChats from './chats/MyChats';
 
 const App = StackNavigator(
   {
     ItemExplorer: { screen: ItemExplorer },
     UserItems: { screen: UserItems },
     UserItemDetails: { screen: UserItemDetails },
+    MyChats: { screen: MyChats },
     ItemCard: { screen: ItemCard },
     NewItem: {
       screen: NewItem,

@@ -39,6 +39,9 @@ export const DELETION_ERROR = [
 export const NO_ITEMS_TEXT_HEADER = 'Oops! Could not find any items.';
 export const NO_ITEMS_TEXT_CONTENT = 'Perhaps you are in the middle of nowhere.';
 
+export const NO_CHATS_TEXT_HEADER = 'You have no chats (yet).';
+export const NO_CHATS_TEXT_CONTENT = 'Start to socialize and get some cool stuff =)';
+
 export const ITEM_EXPLORER_LOADER_TOP = 'Just a second!';
 export const ITEM_EXPLORER_LOADER_BOTTOM = 'We are getting the items...';
 
