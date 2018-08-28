@@ -15,6 +15,7 @@ import DrawerMenu from './drawer/DrawerMenu';
 import ItemDetails from './item_explorer/ItemDetails';
 import ItemCard from './item_explorer/ItemCard';
 import MyChats from './chats/MyChats';
+import Chat from './chats/Chat';
 
 const App = StackNavigator(
   {
@@ -23,6 +24,7 @@ const App = StackNavigator(
     UserItemDetails: { screen: UserItemDetails },
     MyChats: { screen: MyChats },
     ItemCard: { screen: ItemCard },
+    Chat: { screen: Chat },
     NewItem: {
       screen: NewItem,
       navigationOptions: () => ({ drawerLockMode: 'locked-closed' }),
