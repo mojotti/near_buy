@@ -10,6 +10,7 @@ import {
 } from '../../static/constants';
 import { requestChatsAction } from '../../redux/actions/ChatActions';
 import Chat from './Chat';
+import ItemSeparator from '../user_items/ItemSeparator';
 
 
 export class _MyChats extends React.Component {
@@ -27,8 +28,10 @@ export class _MyChats extends React.Component {
   };
 
   componentWillMount() {
-    // this.props.dispatch(requestChatsAction(this.props.token));
+    this._updateChats();
   }
+
+  _updateChats = () => this.props.dispatch(requestChatsAction(this.props.token));
 
   _renderNoChats = () => {
     return (
@@ -42,14 +45,9 @@ export class _MyChats extends React.Component {
     );
   };
 
-  _renderChat = (rowData) => {
-    return (
-      <Chat
-        item={rowData}
-        itemId={rowData.index}
-      />
-    );
-  };
+  _renderChat = (rowData) => <Chat item={rowData} itemId={rowData.index} />;
+
+  _renderSeparator = () => <ItemSeparator widthPercentage={0.93} />;
 
   _renderChats = () => {
     return (
@@ -57,21 +55,29 @@ export class _MyChats extends React.Component {
         data={this.props.chatHeaders}
         renderItem={this._renderChat}
         keyExtractor={(item, index) => index.toString()}
-        //onRefresh={this.fetchData}
-        //refreshing={this.state.isRefreshing}
-        ItemSeparatorComponent={this.renderSeparator}
+        onRefresh={this._updateChats}
+        refreshing={this.props.isFetching}
+        ItemSeparatorComponent={this._renderSeparator}
       />
     );
   };
 
   render() {
-    return this.props.chatHeaders ? this._renderChats() : this._renderNoChats();
+    const backgroundColor = this.props.chatHeaders ? '#FFFFFF' : 'transparent';
+    const bgColor = { backgroundColor };
+    return (
+      <View style={[bgColor, { flex: 1 }]}>
+        {this.props.chatHeaders ? this._renderChats() : this._renderNoChats()}
+      </View>
+    );
   }
 }
 
 const mapStateToProps = (state) => {
-  const { chatHeaders } = state.currentChatsReducer;
-  return { chatHeaders };
+  const { chatHeaders, isFetching } = state.currentChatsReducer;
+  const { token } = state.authorizationReducer;
+
+  return { chatHeaders, isFetching, token };
 };
 
 const MyChats = connect(mapStateToProps)(_MyChats);
