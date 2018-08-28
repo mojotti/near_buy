@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { GiftedChat } from 'react-native-gifted-chat';
 import { localhost } from '../../static/constants';
 import { baseFont } from '../../static/styles/BaseStyles';
+import NavigationBarIconAndText from '../common/NavigationBarIconAndText';
 
 
 export default class Chat extends React.Component {
@@ -19,22 +20,10 @@ export default class Chat extends React.Component {
       `http://${localhost}:5000/api/v1.0/${this.itemId}/image0.jpg`;
   }
 
-  static getImageAndHeader = (navigation) => {
-    const id = navigation.state.params.item.item_id;
-    const uri = `http://${localhost}:5000/api/v1.0/${id}/image0.jpg`;
-    return (
-      <View style={{ flexDirection: 'row' }}>
-        <Image source={{ uri }} style={{ width: 40, height: 40, overflow: 'hidden', borderRadius: 100, marginRight: 15 }} />
-        <View style={{ justifyContent: 'flex-start', alignSelf: 'center' }}>
-          <Text style={{ fontStyle: baseFont, fontSize: 20, color: '#161616', fontWeight: '500', fontFamily: 'sans-serif-light' }}>{navigation.state.params.item.title}</Text>
-        </View>
-      </View>
-    );
-  };
-
   static navigationOptions = ({ navigation }) => {
+    const { item_id, title } = navigation.state.params.item;
     return {
-      headerTitle: Chat.getImageAndHeader(navigation),
+      headerTitle: (<NavigationBarIconAndText imageId={item_id} title={title} />),
     };
   };
 
