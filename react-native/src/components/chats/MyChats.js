@@ -9,7 +9,7 @@ import {
   NO_CHATS_TEXT_CONTENT
 } from '../../static/constants';
 import { requestChatsAction } from '../../redux/actions/ChatActions';
-import Chat from './Chat';
+import Chat from './ChatDetails';
 import ItemSeparator from '../user_items/ItemSeparator';
 
 
@@ -65,6 +65,7 @@ export class _MyChats extends React.Component {
   render() {
     const backgroundColor = this.props.chatHeaders ? '#FFFFFF' : 'transparent';
     const bgColor = { backgroundColor };
+
     return (
       <View style={[bgColor, { flex: 1 }]}>
         {this.props.chatHeaders ? this._renderChats() : this._renderNoChats()}

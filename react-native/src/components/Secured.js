@@ -8,14 +8,17 @@ import UserItems from './user_items/UserItems';
 import NewItem from './new_item/NewItem';
 import UserItemDetails from './user_items/UserItemDetails';
 import ItemExplorer from './item_explorer/ItemExplorer';
-import { handleAppStateChange } from '../AppState';
-import { runAppStartEvents } from '../AppStartEvents';
-import { baseFont } from '../static/styles/BaseStyles';
 import DrawerMenu from './drawer/DrawerMenu';
 import ItemDetails from './item_explorer/ItemDetails';
 import ItemCard from './item_explorer/ItemCard';
 import MyChats from './chats/MyChats';
+import ChatDetails from './chats/ChatDetails';
 import Chat from './chats/Chat';
+
+import { handleAppStateChange } from '../AppState';
+import { runAppStartEvents } from '../AppStartEvents';
+import { baseFont } from '../static/styles/BaseStyles';
+
 
 const App = StackNavigator(
   {
@@ -24,6 +27,7 @@ const App = StackNavigator(
     UserItemDetails: { screen: UserItemDetails },
     MyChats: { screen: MyChats },
     ItemCard: { screen: ItemCard },
+    ChatDetails: { screen: ChatDetails },
     Chat: { screen: Chat },
     NewItem: {
       screen: NewItem,
