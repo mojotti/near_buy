@@ -54,7 +54,7 @@ export class _ItemExplorer extends React.Component {
       <LoadingAnimation
         topText={ITEM_EXPLORER_LOADER_TOP}
         bottomText={ITEM_EXPLORER_LOADER_BOTTOM}
-        animation="dino"
+        animation="penguin"
       />
     );
   };

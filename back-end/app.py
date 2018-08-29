@@ -62,8 +62,11 @@ def validate_user_and_update_token_to_db():
     user = U.User(email=g.username, password=g.password)
     token = user.encode_auth_token(user_id=user_data['id'])
     DB.attach_token_to_user(username=g.username, token=token.decode('utf-8'))
-    return jsonify({'username': g.username,
-                    'token': token.decode('utf-8')})
+    return jsonify({
+        'username': g.username,
+        'token': token.decode('utf-8'),
+        'id': user_data['id']
+    })
 
 
 @basic_auth.verify_password

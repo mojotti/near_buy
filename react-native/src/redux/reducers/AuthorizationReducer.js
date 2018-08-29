@@ -11,12 +11,14 @@ export const authorizationReducer = (state = initialState, action) => {
       isLoggedIn: true,
       username: action.username,
       token: action.token,
+      id: action.id,
     });
   case 'LOGOUT':
     return Object.assign({}, state, {
       isLoggedIn: false,
       username: '',
       token: '',
+      id: '',
     });
   default:
     return state;

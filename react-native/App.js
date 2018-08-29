@@ -9,7 +9,7 @@ import LoadingAnimation from './src/components/common/LoadingAnimation';
 
 export default class App extends React.Component {
   _renderLoader = () => {
-    return <LoadingAnimation animation="dino" />;
+    return <LoadingAnimation animation="penguin" />;
   };
 
   render() {

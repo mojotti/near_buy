@@ -79,7 +79,7 @@ Chat.propTypes = {
         item: PropTypes.shape({
           seller_id: PropTypes.number.isRequired,
           buyer_id: PropTypes.number.isRequired,
-          item_id: PropTypes.number.isRequired,
+          id: PropTypes.number.isRequired,
         }).isRequired
       }).isRequired
     }).isRequired

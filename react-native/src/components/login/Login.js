@@ -163,7 +163,7 @@ export class Login extends React.Component {
   handleLoginResponse(response) {
     this.setState(() => ({ isLoading: false }));
     if (response.username === this.state.username) {
-      this.props.onLogin(this.state.username, response.token);
+      this.props.onLogin(response.username, response.token, response.id);
     } else {
       Alert.alert(...INVALID_CREDS_ALERT);
       this.setState(() => ({ password: '' }));
@@ -234,8 +234,8 @@ export class Login extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onLogin: (username, token) => {
-      dispatch(login(username, token));
+    onLogin: (username, token, id) => {
+      dispatch(login(username, token, id));
       dispatch(navigateToItem('All items'));
     },
   };

@@ -1,11 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Image, Text, View } from 'react-native';
 import { styles } from '../../static/styles/NavigationBarIconAndTextStyles';
 import { localhost } from '../../static/constants';
 
 export default class NavigationBarIconAndText extends React.Component {
   render() {
-    console.log('foo', this.props)
     const id = this.props.imageId;
     const uri = `http://${localhost}:5000/api/v1.0/${id}/image0.jpg`;
 
@@ -21,3 +21,8 @@ export default class NavigationBarIconAndText extends React.Component {
     );
   }
 }
+
+NavigationBarIconAndText.propTypes = {
+  imageId: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+};

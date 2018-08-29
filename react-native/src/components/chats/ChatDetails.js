@@ -16,7 +16,7 @@ export class _ChatDetails extends PureComponent {
   };
 
   render() {
-    const id = this.props.item.item.id;
+    const { id } = this.props.item.item;
     const imagePath = `http://${localhost}:5000/api/v1.0/${id}/image0.jpg`;
 
     return (
@@ -45,7 +45,7 @@ export class _ChatDetails extends PureComponent {
 _ChatDetails.propTypes = {
   item: PropTypes.shape({
     item: PropTypes.shape({
-      item_id: PropTypes.number.isRequired,
+      id: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
       seller_id: PropTypes.number.isRequired,
       buyer_id: PropTypes.number.isRequired,
