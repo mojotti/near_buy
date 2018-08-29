@@ -6,6 +6,7 @@ const defaultState = {
   isLoggedIn: false,
   username: '',
   token: '',
+  id: ''
 };
 const loggedInState = {
   isLoggedIn: true,

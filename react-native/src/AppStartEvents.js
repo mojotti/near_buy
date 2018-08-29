@@ -2,7 +2,7 @@ import { Platform } from 'react-native';
 import { getCurrentLocation } from './Location';
 import { requestPermissions } from './Permissions';
 import { requestItemsAction } from './redux/actions/ItemExplorerAction';
-import { requestChatsAction } from './redux/actions/ChatActions';
+import { requestChats } from './redux/actions/ChatActions';
 
 export const runAppStartEvents = (dispatch, token) => {
   if (Platform.OS === 'android') {
@@ -11,5 +11,5 @@ export const runAppStartEvents = (dispatch, token) => {
     getCurrentLocation(dispatch);
   }
   dispatch(requestItemsAction(token));
-  dispatch(requestChatsAction(token));
+  dispatch(requestChats(token));
 };

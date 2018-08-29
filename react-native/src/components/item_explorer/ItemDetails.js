@@ -10,11 +10,12 @@ import { baseStyles } from '../../static/styles/BaseStyles';
 import { styles } from '../../static/styles/ItemDetailsStyles';
 import ChatButton from './ChatButton';
 import ItemSeparator from '../user_items/ItemSeparator';
-import { createChatAction, requestChatsAction } from '../../redux/actions/ChatActions';
+import { createChat } from '../../redux/actions/ChatActions';
 
 window.navigator.userAgent = 'ReactNative';
 
 const io = require('socket.io-client/dist/socket.io');
+
 const connectionConfig = {
   jsonp: false,
   reconnection: true,
@@ -85,7 +86,7 @@ export class _ItemDetails extends React.Component {
       itemId: this.props.item.id,
       title: this.props.item.title,
     };
-    this.props.dispatch(createChatAction(itemDetails, this.props.token));
+    this.props.dispatch(createChat(itemDetails, this.props.token));
   };
 
   render() {

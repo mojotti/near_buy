@@ -19,7 +19,7 @@ const PROPS = {
   token: 'fake token',
   distance: '2 km',
 };
-describe('<_ItemDetails />', () => {
+describe.skip('<_ItemDetails />', () => {
   test('renders correctly', () => {
     fetch.mockResponseSuccess({ numOfImages: 2 });
 

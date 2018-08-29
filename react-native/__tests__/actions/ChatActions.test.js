@@ -1,6 +1,6 @@
 import { handleChatCreation } from '../../src/redux/actions/ChatActions';
 
-describe('createChatAction', () => {
+describe('createChat', () => {
   const sellerId = 0;
   const itemId = 0;
   const token = 'fake token';
@@ -12,8 +12,7 @@ describe('createChatAction', () => {
     // lol
     await await await await handleChatCreation(dispatchSpy, sellerId, itemId, token);
 
-    const expectedCalls = [[{ type: 'CREATE_CHAT_SUCCESSFUL' }]];
-    expect(dispatchSpy.mock.calls).toEqual(expectedCalls);
+    expect(dispatchSpy.mock.calls).toMatchSnapshot();
   });
 
   test('fails to create a new chat', async () => {

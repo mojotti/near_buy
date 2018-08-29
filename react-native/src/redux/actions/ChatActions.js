@@ -39,7 +39,7 @@ export const fetchChatsActionError = (error) => {
   };
 };
 
-export const requestChatsAction = (token) => {
+export const requestChats = (token) => {
   return (dispatch) => {
     dispatch(fetchChatsRequestAction());
     handleChatFetching(token, dispatch);
@@ -59,7 +59,7 @@ export const handleChatFetching = (token, dispatch) => {
     });
 };
 
-export const createChatAction = (itemDetails, token) => {
+export const createChat = (itemDetails, token) => {
   return (dispatch) => {
     dispatch(createChatRequestAction());
     handleChatCreation(dispatch, itemDetails, token);
@@ -71,7 +71,7 @@ export const handleChatCreation = (dispatch, itemDetails, token) => {
     .then((response) => {
       if (response === 'chat created') {
         dispatch(createChatSuccessAction());
-        dispatch(requestChatsAction(token));
+        dispatch(requestChats(token));
       } else {
         dispatch(createChatErrorAction(response));
       }

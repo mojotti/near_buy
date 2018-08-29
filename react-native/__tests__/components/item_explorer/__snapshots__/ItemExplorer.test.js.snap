@@ -140,7 +140,7 @@ exports[`<_ItemExplorer /> renders carousel when there is items 1`] = `
 
 exports[`<_ItemExplorer /> renders loader when is fetching 1`] = `
 <LoadingAnimation
-  animation="dino"
+  animation="penguin"
   bottomText="We are getting the items..."
   topText="Just a second!"
 />

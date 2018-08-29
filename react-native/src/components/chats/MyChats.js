@@ -8,7 +8,7 @@ import {
   NO_CHATS_TEXT_HEADER,
   NO_CHATS_TEXT_CONTENT
 } from '../../static/constants';
-import { requestChatsAction } from '../../redux/actions/ChatActions';
+import { requestChats } from '../../redux/actions/ChatActions';
 import Chat from './ChatDetails';
 import ItemSeparator from '../user_items/ItemSeparator';
 
@@ -31,7 +31,7 @@ export class _MyChats extends React.Component {
     this._updateChats();
   }
 
-  _updateChats = () => this.props.dispatch(requestChatsAction(this.props.token));
+  _updateChats = () => this.props.dispatch(requestChats(this.props.token));
 
   _renderNoChats = () => {
     return (

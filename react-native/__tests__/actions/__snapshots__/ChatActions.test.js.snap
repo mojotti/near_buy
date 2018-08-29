@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createChat creates a new chat 1`] = `
+Array [
+  Array [
+    Object {
+      "type": "CREATE_CHAT_SUCCESSFUL",
+    },
+  ],
+  Array [
+    [Function],
+  ],
+]
+`;
