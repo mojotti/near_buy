@@ -50,17 +50,28 @@ export class _ItemDetails extends React.Component {
     this.getImageUrls();
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.isCreatingChat &&
-        !this.props.isCreatingChat &&
-        this.props.error === null) {
+  componentDidUpdate(prevProps) {
+    if (this._isChatCreated(prevProps)) {
       this._navigateToChat();
     }
   }
 
+  _isChatCreated = (prevProps) => {
+    return (
+      !this.props.isCreatingChat &&
+      this.props.error === null &&
+      prevProps.isCreatingChat
+    );
+  };
+
   _navigateToChat = () => {
-    const { navigate } = this.props.navigation;
-    navigate('Chat', { item: this.props.item });
+    const item = {
+      id: this.props.item.id,
+      title: this.props.item.title,
+      buyer_id: this.props.id,
+      seller_id: this.props.item.seller_id,
+    };
+    this.props.navigation.navigate('Chat', { item });
   };
 
   getImageUrls = () => {
@@ -111,7 +122,7 @@ export class _ItemDetails extends React.Component {
 const mapStateToProps = (state, ownProps) => {
   const { item } = ownProps.navigation.state.params;
   const { distance } = ownProps.navigation.state.params;
-  const { token } = state.authorizationReducer;
+  const { id, token } = state.authorizationReducer;
   const { isLoading, error } = state.chatCreationReducer;
 
   return {
@@ -120,6 +131,7 @@ const mapStateToProps = (state, ownProps) => {
     distance,
     isCreatingChat: isLoading,
     error,
+    id
   };
 };
 

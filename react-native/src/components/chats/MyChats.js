@@ -34,6 +34,7 @@ export class _MyChats extends React.Component {
   _updateChats = () => this.props.dispatch(requestChats(this.props.token));
 
   _renderNoChats = () => {
+    console.log('rendering no chats')
     return (
       <View style={{ flex: 1 }}>
         <MaterialIconAndText
@@ -63,12 +64,13 @@ export class _MyChats extends React.Component {
   };
 
   render() {
-    const backgroundColor = this.props.chatHeaders ? '#FFFFFF' : 'transparent';
+    const isVisible = this.props.chatHeaders && this.props.chatHeaders.length > 0;
+    const backgroundColor = isVisible ? '#FFFFFF' : 'transparent';
     const bgColor = { backgroundColor };
 
     return (
       <View style={[bgColor, { flex: 1 }]}>
-        {this.props.chatHeaders ? this._renderChats() : this._renderNoChats()}
+        {isVisible ? this._renderChats() : this._renderNoChats()}
       </View>
     );
   }
