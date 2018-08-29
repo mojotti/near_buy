@@ -1,0 +1,108 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<_MyChats /> renders navigation options correctly 1`] = `
+Object {
+  "headerLeft": <Component
+    style={
+      Object {
+        "paddingHorizontal": 10,
+      }
+    }
+  >
+    <TouchableOpacity
+      activeOpacity={0.2}
+      onPress={[Function]}
+    >
+      <Icon
+        allowFontScaling={false}
+        color="#4d4dff"
+        name="menu"
+        size={30}
+      />
+    </TouchableOpacity>
+  </Component>,
+  "title": "Chats",
+}
+`;
+
+exports[`<_MyChats /> shows items when there are items 1`] = `
+<Component
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#FFFFFF",
+      },
+      Object {
+        "flex": 1,
+      },
+    ]
+  }
+>
+  <FlatList
+    ItemSeparatorComponent={[Function]}
+    data={
+      Array [
+        Object {
+          "buyer_id": 1,
+          "id": 0,
+          "seller_id": 0,
+          "title": "foo",
+        },
+      ]
+    }
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    onRefresh={[Function]}
+    refreshing={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</Component>
+`;
+
+exports[`<_MyChats /> shows placeholder when no items 1`] = `
+<Component
+  style={
+    Array [
+      Object {
+        "backgroundColor": "transparent",
+      },
+      Object {
+        "flex": 1,
+      },
+    ]
+  }
+>
+  <Component
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <MaterialIconAndText
+      containerText="Start to socialize and get some cool stuff =)"
+      headerText="You have no chats (yet)."
+      iconName="emoticon-poop"
+    />
+  </Component>
+</Component>
+`;
+
+exports[`<_MyChats /> update calls correct actions 1`] = `
+Array [
+  Array [
+    [Function],
+  ],
+  Array [
+    [Function],
+  ],
+]
+`;

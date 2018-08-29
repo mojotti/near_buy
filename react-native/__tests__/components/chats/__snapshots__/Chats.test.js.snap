@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Chat /> renders correctly 1`] = `
+<mockConstructor
+  messages={
+    Array [
+      Object {
+        "_id": 1,
+        "createdAt": 2018-08-29T12:24:59.907Z,
+        "text": "Hello developer",
+        "user": Object {
+          "_id": 2,
+          "avatar": "http://localhost:5000/api/v1.0/0/image0.jpg",
+          "name": "React Native",
+        },
+      },
+      Object {
+        "_id": 2,
+        "createdAt": 2018-08-29T12:24:59.907Z,
+        "text": "Hello stranger!",
+        "user": Object {
+          "_id": 1,
+          "avatar": "http://localhost:5000/api/v1.0/0/image0.jpg",
+          "name": "Raimo",
+        },
+      },
+    ]
+  }
+  onSend={[Function]}
+  user={
+    Object {
+      "_id": 1,
+    }
+  }
+/>
+`;

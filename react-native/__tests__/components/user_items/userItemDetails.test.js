@@ -3,15 +3,6 @@ import { shallow } from 'enzyme';
 import { _UserItemDetails } from '../../../src/components/user_items/UserItemDetails';
 
 
-jest.mock('react-native-fetch-blob', () => {
-  return {
-    DocumentDir: () => {},
-    polyfill: () => {},
-    fetch: () => Promise.resolve({ json: () => Promise.resolve('success') }),
-    wrap: () => '12345',
-  };
-});
-
 let setParamsSpy = null;
 let PROPS = null;
 

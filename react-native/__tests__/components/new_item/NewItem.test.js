@@ -6,23 +6,6 @@ import sinon from 'sinon';
 import { shallow } from 'enzyme';
 import NewItem, { _NewItem } from '../../../src/components/new_item/NewItem';
 
-jest.mock('react-navigation', () => {
-  return {
-    NavigationActions: {
-      reset: jest.fn(() => {}),
-      navigate: jest.fn(() => {}),
-    },
-  };
-});
-
-jest.mock('react-native-fetch-blob', () => {
-  return {
-    DocumentDir: () => {},
-    polyfill: () => {},
-    fetch: () => Promise.resolve({ json: () => Promise.resolve('success') }),
-    wrap: () => '12345',
-  };
-});
 
 describe('<_NewItem />', () => {
   beforeEach(() => {

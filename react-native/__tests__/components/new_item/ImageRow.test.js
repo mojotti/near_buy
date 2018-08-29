@@ -4,13 +4,6 @@ import { shallow } from 'enzyme';
 import 'react-native-image-crop-picker';
 import { ImageRow } from '../../../src/components/new_item/ImageRow';
 
-jest.mock('react-native-image-crop-picker', () => {
-  return {
-    openPicker: jest.fn(() => Promise.resolve('./image.jpg')),
-    openCamera: jest.fn(() => Promise.resolve('./image.jpg')),
-  };
-});
-
 const PROPS_NO_IMAGES = {
   onImageSelected: () => {},
   leftButtonId: 2,

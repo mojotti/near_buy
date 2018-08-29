@@ -1,5 +1,6 @@
 import React from 'react';
 import { FlatList, TouchableOpacity, View } from 'react-native';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -34,7 +35,6 @@ export class _MyChats extends React.Component {
   _updateChats = () => this.props.dispatch(requestChats(this.props.token));
 
   _renderNoChats = () => {
-    console.log('rendering no chats')
     return (
       <View style={{ flex: 1 }}>
         <MaterialIconAndText
@@ -75,6 +75,19 @@ export class _MyChats extends React.Component {
     );
   }
 }
+
+_MyChats.propTypes = {
+  isFetching: PropTypes.bool.isRequired,
+  token: PropTypes.string.isRequired,
+  chatHeaders: PropTypes.arrayOf(
+    PropTypes.shape({
+      seller_id: PropTypes.number.isRequired,
+      buyer_id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired,
+    }).isRequired,
+  ).isRequired
+};
 
 const mapStateToProps = (state) => {
   const { chatHeaders, isFetching } = state.currentChatsReducer;

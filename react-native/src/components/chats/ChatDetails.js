@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Dimensions, Text, TouchableOpacity, View } from 'react-native';
-import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
 import { styles } from '../../static/styles/ListViewItemStyle';
 import { localhost } from '../../static/constants';
@@ -53,9 +52,5 @@ _ChatDetails.propTypes = {
   }).isRequired,
 };
 
-const mapStateToProps = (state, ownProps) => {
-  return {};
-};
-
-const ChatDetails = connect(mapStateToProps, null)(_ChatDetails);
-export default withNavigation(ChatDetails);
+const ChatDetails = withNavigation(_ChatDetails);
+export default ChatDetails;

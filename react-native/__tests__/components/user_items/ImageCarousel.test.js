@@ -2,14 +2,6 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import ImageCarousel from '../../../src/components/user_items/ImageCarousel';
 
-jest.mock('react-native-fetch-blob', () => {
-  return {
-    DocumentDir: () => {},
-    polyfill: () => {},
-    fetch: () => Promise.resolve({ json: () => Promise.resolve({ ok: true }) }),
-    wrap: () => '12345',
-  };
-});
 
 describe('ImageCarousel', () => {
   test('renders images', () => {

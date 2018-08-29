@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ChatDetails /> renders correctly 1`] = `
+<Component>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    onPress={[Function]}
+  >
+    <Component
+      style={
+        Object {
+          "backgroundColor": "#FFFFFF",
+          "borderWidth": 0,
+          "flex": 1,
+          "flexDirection": "row",
+        }
+      }
+    >
+      <Component
+        style={
+          Object {
+            "flexDirection": "column",
+            "height": 150,
+            "justifyContent": "flex-start",
+            "width": 150,
+          }
+        }
+      >
+        <Component
+          style={
+            Object {
+              "alignSelf": "center",
+              "borderRadius": 100,
+              "height": 112.5,
+              "justifyContent": "center",
+              "margin": 10,
+              "overflow": "hidden",
+              "width": 112.5,
+            }
+          }
+        >
+          <ImagePlaceholder
+            placeholderSize={112.5}
+            styles={
+              Object {
+                "height": 112.5,
+                "width": 112.5,
+              }
+            }
+            url="http://localhost:5000/api/v1.0/1/image0.jpg"
+          />
+        </Component>
+      </Component>
+      <Component
+        style={
+          Object {
+            "backgroundColor": "#FFFFFF",
+            "flex": 1,
+            "flexDirection": "column",
+            "padding": 10,
+            "width": 750,
+          }
+        }
+      >
+        <Component
+          style={
+            Object {
+              "fontSize": 17,
+              "fontWeight": "bold",
+            }
+          }
+        >
+          foo
+        </Component>
+      </Component>
+    </Component>
+  </TouchableOpacity>
+</Component>
+`;
