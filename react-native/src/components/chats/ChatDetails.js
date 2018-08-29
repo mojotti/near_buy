@@ -11,13 +11,12 @@ const WIDTH = Dimensions.get('window').width;
 
 export class _ChatDetails extends PureComponent {
   _navigateToChat = () => {
-    console.log('navigation', this.props)
     const { navigate } = this.props.navigation;
     navigate('Chat', { item: this.props.item.item });
   };
 
   render() {
-    const id = this.props.item.item.item_id;
+    const id = this.props.item.item.id;
     const imagePath = `http://${localhost}:5000/api/v1.0/${id}/image0.jpg`;
 
     return (

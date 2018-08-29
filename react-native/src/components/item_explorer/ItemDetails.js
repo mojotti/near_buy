@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, ScrollView, View } from 'react-native';
 import { connect } from 'react-redux';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { withNavigation } from 'react-navigation';
 import ItemDetailsImageCarousel from './ItemDetailsImageCarousel';
 import { getNumOfPictures } from '../../networking/ApiCalls';
 import { localhost } from '../../static/constants';
@@ -47,6 +48,19 @@ export class _ItemDetails extends React.Component {
   componentWillMount() {
     this.getImageUrls();
   }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.isCreatingChat &&
+        !this.props.isCreatingChat &&
+        this.props.error === null) {
+      this._navigateToChat();
+    }
+  }
+
+  _navigateToChat = () => {
+    const { navigate } = this.props.navigation;
+    navigate('Chat', { item: this.props.item });
+  };
 
   getImageUrls = () => {
     getNumOfPictures(this.props.item.id, this.props.token)
@@ -97,15 +111,16 @@ const mapStateToProps = (state, ownProps) => {
   const { item } = ownProps.navigation.state.params;
   const { distance } = ownProps.navigation.state.params;
   const { token } = state.authorizationReducer;
-  const { isLoading } = state.chatCreationReducer;
+  const { isLoading, error } = state.chatCreationReducer;
 
   return {
     item,
     token,
     distance,
     isCreatingChat: isLoading,
+    error,
   };
 };
 
 const ItemDetails = connect(mapStateToProps, null)(_ItemDetails);
-export default ItemDetails;
+export default withNavigation(ItemDetails);

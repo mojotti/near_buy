@@ -1,9 +1,7 @@
 import React from 'react';
-import { Image, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { GiftedChat } from 'react-native-gifted-chat';
 import { localhost } from '../../static/constants';
-import { baseFont } from '../../static/styles/BaseStyles';
 import NavigationBarIconAndText from '../common/NavigationBarIconAndText';
 
 
@@ -15,15 +13,15 @@ export default class Chat extends React.Component {
     };
     this.sellerId = props.navigation.state.params.item.seller_id;
     this.buyerId = props.navigation.state.params.item.buyer_id;
-    this.itemId = props.navigation.state.params.item.item_id;
+    this.itemId = props.navigation.state.params.item.id;
     this.imagePath =
       `http://${localhost}:5000/api/v1.0/${this.itemId}/image0.jpg`;
   }
 
   static navigationOptions = ({ navigation }) => {
-    const { item_id, title } = navigation.state.params.item;
+    const { id, title } = navigation.state.params.item;
     return {
-      headerTitle: (<NavigationBarIconAndText imageId={item_id} title={title} />),
+      headerTitle: (<NavigationBarIconAndText imageId={id} title={title} />),
     };
   };
 
@@ -37,6 +35,16 @@ export default class Chat extends React.Component {
           user: {
             _id: 2,
             name: 'React Native',
+            avatar: this.imagePath,
+          },
+        },
+        {
+          _id: 2,
+          text: 'Hello stranger!',
+          createdAt: new Date(),
+          user: {
+            _id: 1,
+            name: 'Raimo',
             avatar: this.imagePath,
           },
         },

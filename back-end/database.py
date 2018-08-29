@@ -125,7 +125,7 @@ class DatabaseHelper(object):
 
     def create_a_new_chat_for_item(self, buying_user, selling_user, item_id, title):
         chat = {
-            'item_id': item_id,
+            'id': item_id,
             'buyer_id': buying_user,
             'seller_id': selling_user,
             'title': title
@@ -136,7 +136,7 @@ class DatabaseHelper(object):
         return self.chats.find({'$or': [{'buyer_id': user_id}, {'seller_id': user_id}]}, {'_id': 0})
 
     def is_existing_chat(self, buying_user, selling_user, item_id):
-        chats = self.chats.find({'$and': [{'buyer_id': buying_user}, {'seller_id': selling_user}, {'item_id': item_id}]})
+        chats = self.chats.find({'$and': [{'buyer_id': buying_user}, {'seller_id': selling_user}, {'id': item_id}]})
         if not [chat for chat in chats]:
             return False
         return True

@@ -49,7 +49,7 @@ HASH_2 = {b'$2b$04$p5VV5hvav5LTFEv0z7hJQupI/Dc6K4lFWXqD2Dv9bQ3rv/hDQe3Ry'}
 
 CHAT = [
     {
-        'item_id': 0,
+        'id': 0,
         'buyer_id': 1,
         'seller_id': 0
      },

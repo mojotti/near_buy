@@ -11,7 +11,7 @@ export const createNewChat = (itemDetails, token) => {
     headers: getApplicationJsonHeaders(token),
     body: JSON.stringify({
       other_user: sellerId,
-      item_id: itemId,
+      id: itemId,
       title,
     }),
   })

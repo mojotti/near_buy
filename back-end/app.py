@@ -305,7 +305,7 @@ def create_a_new_chat_for_item():
     if buying_user is None:
         return jsonify({'ok': False})
     selling_user = request.get_json().get('other_user')
-    item_id = request.get_json().get('item_id')
+    item_id = request.get_json().get('id')
     title = request.get_json().get('title')
 
     if DB.is_existing_chat(buying_user, selling_user, item_id):
