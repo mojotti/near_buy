@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`requestItemsAction does not get items 1`] = `
+Array [
+  Object {
+    "type": "FETCHING_ITEMS",
+  },
+  Object {
+    "error": "error",
+    "type": "FETCH_ITEMS_FAILURE",
+  },
+]
+`;
+
+exports[`requestItemsAction gets items 1`] = `
+Array [
+  Object {
+    "type": "FETCHING_ITEMS",
+  },
+  Object {
+    "items": Array [
+      1,
+      2,
+      3,
+    ],
+    "type": "FETCH_ITEMS_SUCCESS",
+  },
+]
+`;

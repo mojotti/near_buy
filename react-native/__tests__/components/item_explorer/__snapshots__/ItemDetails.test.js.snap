@@ -1,5 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<_ItemDetails /> opens chat on button press 1`] = `
+Array [
+  Array [
+    [Function],
+  ],
+]
+`;
+
 exports[`<_ItemDetails /> renders correctly 1`] = `
 <ScrollView
   style={
@@ -108,6 +116,7 @@ exports[`<_ItemDetails /> renders correctly 1`] = `
     widthPercentage={0.86}
   />
   <ChatButton
+    isCreatingChat={false}
     onPress={[Function]}
   />
 </ScrollView>

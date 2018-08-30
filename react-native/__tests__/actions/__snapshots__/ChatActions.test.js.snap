@@ -2,13 +2,78 @@
 
 exports[`createChat creates a new chat 1`] = `
 Array [
-  Array [
-    Object {
-      "type": "CREATE_CHAT_SUCCESSFUL",
-    },
-  ],
-  Array [
-    [Function],
-  ],
+  Object {
+    "type": "CREATE_CHAT_REQUEST",
+  },
+  Object {
+    "type": "CREATE_CHAT_SUCCESSFUL",
+  },
+  Object {
+    "type": "FETCH_CHATS_REQUEST",
+  },
+]
+`;
+
+exports[`createChat fails to create a new chat 1`] = `
+Array [
+  Object {
+    "type": "CREATE_CHAT_REQUEST",
+  },
+  Object {
+    "error": "error",
+    "type": "CREATE_CHAT_FAILURE",
+  },
+]
+`;
+
+exports[`createChat throws an error 1`] = `
+Array [
+  Object {
+    "type": "CREATE_CHAT_REQUEST",
+  },
+  Object {
+    "error": "error",
+    "type": "CREATE_CHAT_FAILURE",
+  },
+]
+`;
+
+exports[`requestChats cannot get chats 1`] = `
+Array [
+  Object {
+    "type": "FETCH_CHATS_REQUEST",
+  },
+  Object {
+    "error": "could not get chats",
+    "type": "FETCH_CHATS_ERROR",
+  },
+]
+`;
+
+exports[`requestChats gets chats 1`] = `
+Array [
+  Object {
+    "type": "FETCH_CHATS_REQUEST",
+  },
+  Object {
+    "chatHeaders": Array [
+      1,
+      2,
+      3,
+    ],
+    "type": "FETCH_CHATS_SUCCESS",
+  },
+]
+`;
+
+exports[`requestChats throws an error 1`] = `
+Array [
+  Object {
+    "type": "FETCH_CHATS_REQUEST",
+  },
+  Object {
+    "error": "error",
+    "type": "FETCH_CHATS_ERROR",
+  },
 ]
 `;
