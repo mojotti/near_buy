@@ -4,6 +4,14 @@ import { shallow } from 'enzyme';
 
 import { _DetailImage } from '../../../src/components/user_items/DetailImage';
 
+jest.mock('react-native-fetch-blob', () => {
+  return {
+    DocumentDir: () => {},
+    polyfill: () => {},
+    fetch: () => Promise.resolve({ json: () => Promise.resolve({ ok: true }) }),
+    wrap: () => '12345',
+  };
+});
 
 describe('<DetailImage />', () => {
   beforeEach(() => {

@@ -156,7 +156,7 @@ exports[`<_UserItemDetails /> renders correctly 1`] = `
         }
       }
     >
-      • You decided to get rid of this item Fri Jan 02 1970
+      • You decided to get rid of this item Fri Jan 01 2016
     </Component>
     <DeleteButton
       fetchItems={[Function]}

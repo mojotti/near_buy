@@ -6,7 +6,7 @@ exports[`<Chat /> renders correctly 1`] = `
     Array [
       Object {
         "_id": 1,
-        "createdAt": 2018-08-29T12:24:59.907Z,
+        "createdAt": 2016-01-01T00:00:00.000Z,
         "text": "Hello developer",
         "user": Object {
           "_id": 2,
@@ -16,7 +16,7 @@ exports[`<Chat /> renders correctly 1`] = `
       },
       Object {
         "_id": 2,
-        "createdAt": 2018-08-29T12:24:59.907Z,
+        "createdAt": 2016-01-01T00:00:00.000Z,
         "text": "Hello stranger!",
         "user": Object {
           "_id": 1,
