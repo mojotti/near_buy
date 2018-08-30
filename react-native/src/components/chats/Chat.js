@@ -48,6 +48,26 @@ export default class Chat extends React.Component {
             avatar: this.imagePath,
           },
         },
+        {
+          _id: 3,
+          text: 'Hello stranger!',
+          createdAt: new Date(),
+          user: {
+            _id: 2,
+            name: 'Raimo',
+            avatar: this.imagePath,
+          },
+        },
+        {
+          _id: 4,
+          text: 'Hello stranger!',
+          createdAt: new Date(),
+          user: {
+            _id: 1,
+            name: 'Raimo',
+            avatar: this.imagePath,
+          },
+        },
       ],
     });
   }

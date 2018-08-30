@@ -6,17 +6,8 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 const store = mockStore({});
 
-
-const sellerId = 0;
-const itemId = 0;
 const token = 'fake token';
-const title = 'foo';
 
-const ITEM = {
-  sellerId,
-  itemId,
-  title,
-};
 
 describe('requestItemsAction', () => {
   beforeEach(() => {
