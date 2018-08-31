@@ -12,19 +12,7 @@ import ChatButton from './ChatButton';
 import ItemSeparator from '../user_items/ItemSeparator';
 import { createChat } from '../../redux/actions/ChatActions';
 
-window.navigator.userAgent = 'ReactNative';
 
-const io = require('socket.io-client/dist/socket.io');
-
-const connectionConfig = {
-  jsonp: false,
-  reconnection: true,
-  reconnectionDelay: 100,
-  reconnectionAttempts: 100000,
-  transports: ['websocket'], // you need to explicitly tell it to use websockets
-};
-
-const path = `http://${localhost}:5000`;
 
 export class _ItemDetails extends React.Component {
   constructor(props) {
@@ -32,15 +20,6 @@ export class _ItemDetails extends React.Component {
     this.state = {
       imageUrls: ['foo.bar'], // provide some uri while loading actual img uris
     };
-
-    this.socket = null;
-    if (!this.socket || !this.socket.connected) {
-      this.socket = io(path, connectionConfig);
-      this.socket.on('connect', () => {
-        console.log('connected!');
-      });
-      this.socket.emit('lol', 'Hello world!');
-    }
   }
 
   static navigationOptions = ({ navigation }) =>

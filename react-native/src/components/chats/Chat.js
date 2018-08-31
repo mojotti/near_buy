@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { GiftedChat } from 'react-native-gifted-chat';
 import { localhost } from '../../static/constants';
 import NavigationBarIconAndText from '../common/NavigationBarIconAndText';
+import { connectSocket, sendMsg } from '../../networking/socketIO';
 
 
 export default class Chat extends React.Component {
@@ -48,34 +49,20 @@ export default class Chat extends React.Component {
             avatar: this.imagePath,
           },
         },
-        {
-          _id: 3,
-          text: 'Hello stranger!',
-          createdAt: new Date(),
-          user: {
-            _id: 2,
-            name: 'Raimo',
-            avatar: this.imagePath,
-          },
-        },
-        {
-          _id: 4,
-          text: 'Hello stranger!',
-          createdAt: new Date(),
-          user: {
-            _id: 1,
-            name: 'Raimo',
-            avatar: this.imagePath,
-          },
-        },
       ],
     });
+  }
+
+  componentDidMount() {
+    connectSocket();
   }
 
   onSend = (messages = []) => {
     this.setState(previousState => ({
       messages: GiftedChat.append(previousState.messages, messages),
     }));
+    console.log('messages', messages);
+    sendMsg(messages);
   };
 
   render() {
@@ -86,6 +73,7 @@ export default class Chat extends React.Component {
         user={{
           _id: 1,
         }}
+        isAnimated
       />
     );
   }
