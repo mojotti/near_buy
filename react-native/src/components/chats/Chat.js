@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { GiftedChat } from 'react-native-gifted-chat';
 import { localhost } from '../../static/constants';
 import NavigationBarIconAndText from '../common/NavigationBarIconAndText';
-import { connectSocket, sendMsg } from '../../networking/socketIO';
+import { connectSocket, sendMessage } from '../../networking/socketIO';
 
 
 export default class Chat extends React.Component {
@@ -54,7 +54,7 @@ export default class Chat extends React.Component {
   }
 
   componentDidMount() {
-    connectSocket();
+    connectSocket(this.itemId, this.buyerId, this.sellerId);
   }
 
   onSend = (messages = []) => {
@@ -62,7 +62,7 @@ export default class Chat extends React.Component {
       messages: GiftedChat.append(previousState.messages, messages),
     }));
     console.log('messages', messages);
-    sendMsg(messages);
+    sendMessage(messages);
   };
 
   render() {

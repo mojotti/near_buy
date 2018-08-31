@@ -2,6 +2,7 @@
 
 exports[`<Chat /> renders correctly 1`] = `
 <mockConstructor
+  isAnimated={true}
   messages={
     Array [
       Object {

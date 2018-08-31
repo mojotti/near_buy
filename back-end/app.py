@@ -9,7 +9,7 @@ import sys
 import shutil
 from flask import Flask, jsonify, abort, request, make_response, g, send_from_directory
 from flask_httpauth import HTTPBasicAuth, HTTPTokenAuth
-from flask_socketio import SocketIO, emit
+from flask_socketio import SocketIO, emit, join_room, send
 from Item import make_public_item, get_item_details, check_if_item_is_valid
 
 import User as U
@@ -337,9 +337,24 @@ def connect():
     print('connected')
 
 
-@socketio.on('lol')
-def connect(msg):
-    print('lolled', msg)
+@socketio.on('create_room')
+def create_room(config):
+    join_room(config)
+
+
+@socketio.on('message')
+def handle_message(data):
+    import ast
+    data = ast.literal_eval(data)
+
+    print('data', data)
+    msg = data.get('msg')
+    room = data.get('room')
+
+    if not msg or not room:
+        return
+
+    send(msg, room=room)
 
 
 # Helpers, TODO: test these more comprehensively and move to own file

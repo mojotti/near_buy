@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import { localhost } from '../static/constants';
 
 window.navigator.userAgent = 'ReactNative';
@@ -15,6 +14,7 @@ const connectionConfig = {
 };
 
 let socket = null;
+let room = null;
 
 let ITEM_ID = null;
 let USER_ID = null;
@@ -27,14 +27,12 @@ export const setRoomDetails = (details) => {
 };
 
 export const connectSocket = (itemId, userId, sellerId) => {
-  if (!socket || !socket.connected) {
-    socket = io(path, connectionConfig);
-    socket.on('connect', () => {
-      console.log('connected!');
-      setRoomDetails({ itemId, userId, sellerId });
-      createRoom();
-    });
-  }
+  socket = io(path, connectionConfig);
+  socket.on('connect', () => {
+    setRoomDetails({ itemId, userId, sellerId });
+    createRoom();
+    listenToMessages();
+  });
 };
 
 export const generateRoomId = () => {
@@ -42,13 +40,25 @@ export const generateRoomId = () => {
 };
 
 export const createRoom = () => {
-  const config = generateRoomId();
-  socket.emit('create_room', config);
+  room = generateRoomId();
+  socket.emit('create_room', room);
 };
 
-export const sendMsg = (msg) => {
-  socket.emit('lol', msg);
+export const sendMessage = (msg) => {
+  const payload = {
+    msg,
+    room,
+  };
+  socket.emit('message', JSON.stringify(payload));
 };
+
+const listenToMessages = () => {
+  // listen messages in room
+  socket.on('message', (msg) => {
+    console.log('received some shit in chat', msg);
+  });
+};
+
 
 // only for testing
 export const setSocketForTesting = (s) => {
