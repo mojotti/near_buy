@@ -229,8 +229,23 @@ class TestApp(unittest.TestCase):
         is_existing = self.db.is_existing_chat(buying_user, selling_user, item_id)
         self.assertTrue(is_existing)
 
+    def test_given_message_is_added_to_room_when_queried_then_it_is_found(self):
+        TEST_DB.rooms.delete_many({})
 
+        message = {'createdAt': 21012021021, 'text': 'important message'}
+        room = 'item_id:2user_id:1seller_id:0'
 
+        TEST_DB.add_message_to_chat(message, room)
+        messages_in_db = [msg for msg in TEST_DB.get_messages_from_room(room)]
+
+        self.assertEquals(messages_in_db[0]['messages'][0]['createdAt'], message['createdAt'])
+
+        other_message = {'createdAt': 2400420424040, 'text': 'hi! this is also important msg'}
+
+        TEST_DB.add_message_to_chat(other_message, room)
+        messages_in_db = TEST_DB.get_messages_from_room(room)
+
+        self.assertEquals([msg for msg in messages_in_db][0]['messages'], [message, other_message])
 
 
 

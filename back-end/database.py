@@ -15,6 +15,7 @@ class DatabaseHelper(object):
             self.items = self.db.items
             self.users = self.db.users
             self.chats = self.db.chats
+            self.rooms = self.db.rooms
         except errors.ServerSelectionTimeoutError as err:
             print(err)
 
@@ -141,6 +142,12 @@ class DatabaseHelper(object):
             return False
         return True
 
+    def add_message_to_chat(self, msg, room):
+        self.rooms.update_one({'room': room}, {'$push': {'messages': msg}}, upsert=True)
+
+    def get_messages_from_room(self, room):
+        return self.rooms.find({'room': room}, {'_id': 0})
+
 
 class TestDB(DatabaseHelper):
     def __init__(self):
@@ -150,6 +157,7 @@ class TestDB(DatabaseHelper):
             self.items = self.db.items
             self.users = self.db.users
             self.chats = self.db.chats
+            self.rooms = self.db.rooms
         except errors.ServerSelectionTimeoutError as err:
             print(err)
 
