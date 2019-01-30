@@ -83,8 +83,9 @@ export class _UserItemDetails extends Component {
 
   getImageUrls = numOfImages => {
     for (let i = 0; i < numOfImages; i++) {
-      const imagePath =
-        `http://${localhost}:5000/api/v1.0/${this.state.id}/image${i}.jpg`;
+      const imagePath = `http://${localhost}:5000/api/v1.0/${
+        this.state.id
+      }/image${i}.jpg`;
 
       this.setState(prevState => {
         const images = prevState.imageUrls;
@@ -145,9 +146,9 @@ export class _UserItemDetails extends Component {
           <UpdateLocationButton updateLocation={this.updateLocation} />
           <Text style={baseStyles.headerText}>Fun facts</Text>
           <Text style={styles.paragraph}>
-            {
-              `\u2022 You decided to get rid of this item ${new Date(this.state.created).toDateString()}`
-            }
+            {`\u2022 You decided to get rid of this item ${new Date(
+              this.state.created
+            ).toDateString()}`}
           </Text>
           <DeleteButton
             id={this.state.id}
