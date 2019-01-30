@@ -1,7 +1,4 @@
 {
   "name": "NearBuy",
-  "displayName": "NearBuy",
-  "expo": {
-    "sdkVersion": "25.0.0"
-  }
+  "displayName": "NearBuy"
 }
