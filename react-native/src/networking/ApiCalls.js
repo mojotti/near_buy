@@ -1,7 +1,6 @@
 import { localhost } from '../static/constants';
 import { getApplicationJsonHeaders, getBearerHeaders } from './networking';
 
-
 export const createNewChat = (itemDetails, token) => {
   const url = `http://${localhost}:5000/api/v1.0/new_chat`;
   const { sellerId, itemId, title } = itemDetails;
@@ -22,11 +21,11 @@ export const createNewChat = (itemDetails, token) => {
     })
     .catch(error => {
       console.error(error);
-      return 'error';
+      return Promise.reject(error);
     });
 };
 
-export const getChatsForUser = (token) => {
+export const getChatsForUser = token => {
   const url = `http://${localhost}:5000/api/v1.0/chats`;
   return fetch(url, {
     method: 'GET',
@@ -41,7 +40,7 @@ export const getChatsForUser = (token) => {
     })
     .catch(error => {
       console.error(error);
-      return 'error';
+      return Promise.reject(error);
     });
 };
 

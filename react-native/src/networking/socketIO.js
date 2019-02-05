@@ -20,19 +20,21 @@ let ITEM_ID = null;
 let USER_ID = null;
 let SELLER_ID = null;
 
-export const setRoomDetails = (details) => {
+export const setRoomDetails = details => {
   ITEM_ID = details.itemId;
   USER_ID = details.userId;
   SELLER_ID = details.sellerId;
 };
 
-export const connectSocket = (itemId, userId, sellerId) => {
-  socket = io(path, connectionConfig);
-  socket.on('connect', () => {
-    setRoomDetails({ itemId, userId, sellerId });
-    createRoom();
-    listenToMessages();
-  });
+export const connectSocket = (itemId, userId, sellerId) => {
+  if (!socket) {
+    socket = io(path, connectionConfig);
+    socket.on('connect', () => {
+      setRoomDetails({ itemId, userId, sellerId });
+      createRoom();
+      listenToMessages();
+    });
+  }
 };
 
 export const generateRoomId = () => {
@@ -44,7 +46,7 @@ export const createRoom = () => {
   socket.emit('create_room', room);
 };
 
-export const sendMessage = (msg) => {
+export const sendMessage = msg => {
   const payload = {
     msg,
     room,
@@ -54,14 +56,13 @@ export const sendMessage = (msg) => {
 
 const listenToMessages = () => {
   // listen messages in room
-  socket.on('message', (msg) => {
+  socket.on('message', msg => {
     console.log('received some shit in chat', msg);
   });
 };
 
-
 // only for testing
-export const setSocketForTesting = (s) => {
+export const setSocketForTesting = s => {
   socket = s;
 };
 

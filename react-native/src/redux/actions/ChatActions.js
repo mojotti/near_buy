@@ -1,46 +1,46 @@
 import { createNewChat, getChatsForUser } from '../../networking/ApiCalls';
 
-export const createChatRequestAction = () => {
+export const createChatRequestAction = () => {
   return {
     type: 'CREATE_CHAT_REQUEST',
   };
 };
 
-export const createChatSuccessAction = () => {
+export const createChatSuccessAction = () => {
   return {
     type: 'CREATE_CHAT_SUCCESSFUL',
   };
 };
 
-export const createChatErrorAction = (error) => {
+export const createChatErrorAction = error => {
   return {
     type: 'CREATE_CHAT_FAILURE',
     error,
   };
 };
 
-export const fetchChatsRequestAction = () => {
+export const fetchChatsRequestAction = () => {
   return {
     type: 'FETCH_CHATS_REQUEST',
   };
 };
 
-export const fetchChatsSuccessAction = (chatHeaders) => {
+export const fetchChatsSuccessAction = chatHeaders => {
   return {
     type: 'FETCH_CHATS_SUCCESS',
     chatHeaders,
   };
 };
 
-export const fetchChatsActionError = (error) => {
+export const fetchChatsActionError = error => {
   return {
     type: 'FETCH_CHATS_ERROR',
     error,
   };
 };
 
-export const requestChats = (token) => {
-  return (dispatch) => {
+export const requestChats = token => {
+  return dispatch => {
     dispatch(fetchChatsRequestAction());
     handleChatFetching(token, dispatch);
   };
@@ -48,7 +48,7 @@ export const requestChats = (token) => {
 
 export const handleChatFetching = (token, dispatch) => {
   getChatsForUser(token)
-    .then((response) => {
+    .then(response => {
       if (response === 'error') {
         dispatch(fetchChatsActionError(response));
       } else if (response === 'could not get chats') {
@@ -56,11 +56,12 @@ export const handleChatFetching = (token, dispatch) => {
       } else {
         dispatch(fetchChatsSuccessAction(response));
       }
-    });
+    })
+    .catch(error => dispatch(fetchChatsActionError(error)));
 };
 
 export const createChat = (itemDetails, token) => {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(createChatRequestAction());
     handleChatCreation(dispatch, itemDetails, token);
   };
@@ -68,7 +69,7 @@ export const createChat = (itemDetails, token) => {
 
 export const handleChatCreation = (dispatch, itemDetails, token) => {
   createNewChat(itemDetails, token)
-    .then((response) => {
+    .then(response => {
       if (response === 'chat created') {
         dispatch(createChatSuccessAction());
         dispatch(requestChats(token));
@@ -76,6 +77,5 @@ export const handleChatCreation = (dispatch, itemDetails, token) => {
         dispatch(createChatErrorAction(response));
       }
     })
-    .catch((error) => dispatch(createChatErrorAction(error)));
+    .catch(error => dispatch(createChatErrorAction(error)));
 };
-

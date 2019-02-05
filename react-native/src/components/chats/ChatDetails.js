@@ -44,7 +44,7 @@ export class _ChatDetails extends PureComponent {
 _ChatDetails.propTypes = {
   item: PropTypes.shape({
     item: PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      item_id: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
       seller_id: PropTypes.number.isRequired,
       buyer_id: PropTypes.number.isRequired,

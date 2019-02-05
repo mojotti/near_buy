@@ -19,13 +19,12 @@ import { handleAppStateChange } from '../AppState';
 import { runAppStartEvents } from '../AppStartEvents';
 import { baseFont } from '../static/styles/BaseStyles';
 
-
 const App = StackNavigator(
   {
     ItemExplorer: { screen: ItemExplorer },
     UserItems: { screen: UserItems },
     UserItemDetails: { screen: UserItemDetails },
-    MyChats: { screen: MyChats },
+    MyChats: { screen: MyChats },
     ItemCard: { screen: ItemCard },
     ChatDetails: { screen: ChatDetails },
     Chat: { screen: Chat },
@@ -44,7 +43,7 @@ const App = StackNavigator(
         fontFamily: baseFont,
       },
     },
-  },
+  }
 );
 
 const Drawer = DrawerNavigator(
@@ -54,7 +53,7 @@ const Drawer = DrawerNavigator(
   {
     contentComponent: DrawerMenu,
     drawerWidth: Dimensions.get('window').width * 0.6,
-  },
+  }
 );
 
 class Secured extends Component {
@@ -72,7 +71,7 @@ class Secured extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     token: state.authorizationReducer.token,
   };

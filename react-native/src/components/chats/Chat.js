@@ -1,12 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { GiftedChat } from 'react-native-gifted-chat';
 import { localhost } from '../../static/constants';
 import NavigationBarIconAndText from '../common/NavigationBarIconAndText';
 import { connectSocket, sendMessage } from '../../networking/socketIO';
 
-
-export default class Chat extends React.Component {
+class _Chat extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,14 +15,15 @@ export default class Chat extends React.Component {
     this.sellerId = props.navigation.state.params.item.seller_id;
     this.buyerId = props.navigation.state.params.item.buyer_id;
     this.itemId = props.navigation.state.params.item.id;
-    this.imagePath =
-      `http://${localhost}:5000/api/v1.0/${this.itemId}/image0.jpg`;
+    this.imagePath = `http://${localhost}:5000/api/v1.0/${
+      this.itemId
+    }/image0.jpg`;
   }
 
   static navigationOptions = ({ navigation }) => {
     const { id, title } = navigation.state.params.item;
     return {
-      headerTitle: (<NavigationBarIconAndText imageId={id} title={title} />),
+      headerTitle: <NavigationBarIconAndText imageId={id} title={title} />,
     };
   };
 
@@ -79,8 +80,7 @@ export default class Chat extends React.Component {
   }
 }
 
-
-Chat.propTypes = {
+_Chat.propTypes = {
   navigation: PropTypes.shape({
     state: PropTypes.shape({
       params: PropTypes.shape({
@@ -88,8 +88,18 @@ Chat.propTypes = {
           seller_id: PropTypes.number.isRequired,
           buyer_id: PropTypes.number.isRequired,
           id: PropTypes.number.isRequired,
-        }).isRequired
-      }).isRequired
-    }).isRequired
+        }).isRequired,
+      }).isRequired,
+    }).isRequired,
   }).isRequired,
 };
+
+const mapStateToProps = state => {
+  const { chatHeaders, isFetching } = state.currentChatsReducer;
+  const { token } = state.authorizationReducer;
+
+  return { chatHeaders, isFetching, token };
+};
+
+const Chat = connect(mapStateToProps)(_Chat);
+export default Chat;

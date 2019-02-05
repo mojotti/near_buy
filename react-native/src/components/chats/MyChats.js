@@ -7,12 +7,11 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import MaterialIconAndText from '../common/MaterialIconAndText';
 import {
   NO_CHATS_TEXT_HEADER,
-  NO_CHATS_TEXT_CONTENT
+  NO_CHATS_TEXT_CONTENT,
 } from '../../static/constants';
 import { requestChats } from '../../redux/actions/ChatActions';
 import Chat from './ChatDetails';
 import ItemSeparator from '../user_items/ItemSeparator';
-
 
 export class _MyChats extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -46,7 +45,7 @@ export class _MyChats extends React.Component {
     );
   };
 
-  _renderChat = (rowData) => <Chat item={rowData} itemId={rowData.index} />;
+  _renderChat = rowData => <Chat item={rowData} itemId={rowData.index} />;
 
   _renderSeparator = () => <ItemSeparator widthPercentage={0.93} />;
 
@@ -64,7 +63,8 @@ export class _MyChats extends React.Component {
   };
 
   render() {
-    const isVisible = this.props.chatHeaders && this.props.chatHeaders.length > 0;
+    const isVisible =
+      this.props.chatHeaders && this.props.chatHeaders.length > 0;
     const backgroundColor = isVisible ? '#FFFFFF' : 'transparent';
     const bgColor = { backgroundColor };
 
@@ -84,12 +84,12 @@ _MyChats.propTypes = {
       seller_id: PropTypes.number.isRequired,
       buyer_id: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
-      id: PropTypes.number.isRequired,
-    }).isRequired,
-  ).isRequired
+      item_id: PropTypes.number.isRequired,
+    }).isRequired
+  ).isRequired,
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   const { chatHeaders, isFetching } = state.currentChatsReducer;
   const { token } = state.authorizationReducer;
 

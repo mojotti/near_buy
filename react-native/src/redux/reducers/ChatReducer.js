@@ -3,24 +3,27 @@ const initialStateChatCreation = {
   error: null,
 };
 
-export const chatCreationReducer = (state = initialStateChatCreation, action) => {
+export const chatCreationReducer = (
+  state = initialStateChatCreation,
+  action
+) => {
   switch (action.type) {
-  case 'CREATE_CHAT_REQUEST':
-    return Object.assign({}, state, {
-      isLoading: true,
-    });
-  case 'CREATE_CHAT_SUCCESSFUL':
-    return Object.assign({}, state, {
-      isLoading: false,
-      error: null,
-    });
-  case 'CREATE_CHAT_FAILURE':
-    return Object.assign({}, state, {
-      isLoading: false,
-      error: action.error,
-    });
-  default:
-    return state;
+    case 'CREATE_CHAT_REQUEST':
+      return Object.assign({}, state, {
+        isLoading: true,
+      });
+    case 'CREATE_CHAT_SUCCESSFUL':
+      return Object.assign({}, state, {
+        isLoading: false,
+        error: null,
+      });
+    case 'CREATE_CHAT_FAILURE':
+      return Object.assign({}, state, {
+        isLoading: false,
+        error: action.error,
+      });
+    default:
+      return state;
   }
 };
 
@@ -30,23 +33,27 @@ const initialStateCurrentChats = {
   isFetching: false,
 };
 
-export const currentChatsReducer = (state = initialStateCurrentChats, action) => {
+export const currentChatsReducer = (
+  state = initialStateCurrentChats,
+  action
+) => {
   switch (action.type) {
-  case 'FETCH_CHATS_REQUEST':
-    return Object.assign({}, state, {
-      isFetching: true,
-    });
-  case 'FETCH_CHATS_SUCCESS':
-    return Object.assign({}, state, {
-      isFetching: false,
-      chatHeaders: action.chatHeaders,
-      error: null,
-    });
-  case 'FETCH_CHATS_ERROR':
-    return Object.assign({}, state, {
-      error: null,
-    });
-  default:
-    return state;
+    case 'FETCH_CHATS_REQUEST':
+      return Object.assign({}, state, {
+        isFetching: true,
+      });
+    case 'FETCH_CHATS_SUCCESS':
+      return Object.assign({}, state, {
+        isFetching: false,
+        chatHeaders: action.chatHeaders,
+        error: null,
+      });
+    case 'FETCH_CHATS_ERROR':
+      return Object.assign({}, state, {
+        error: action.error,
+        isFetching: false,
+      });
+    default:
+      return state;
   }
-}
+};

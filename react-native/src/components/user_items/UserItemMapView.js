@@ -4,7 +4,6 @@ import MapView, { AnimatedRegion, Marker } from 'react-native-maps';
 import PropTypes from 'prop-types';
 import { styles } from '../../static/styles/UserItemDetailsStyles';
 
-
 const ANIMATION_TIME = 500;
 
 export default class UserItemMapView extends Component {
@@ -19,10 +18,19 @@ export default class UserItemMapView extends Component {
     this.animatedMarker = null;
   }
 
+  isLatLongDifferent = prevProps => {
+    return (
+      this.props.longitude !== prevProps.longitude ||
+      this.props.latitude !== prevProps.latitude
+    );
+  };
+
+  shouldComponentUpdate(prevProps) {
+    return this.isLatLongDifferent(prevProps);
+  }
+
   componentDidUpdate(prevProps) {
-    if (this.props.longitude !== prevProps.longitude
-      || this.props.latitude !== prevProps.latitude
-    ) {
+    if (this.isLatLongDifferent(prevProps)) {
       this.animateItemToNewLocation();
     }
   }
@@ -35,7 +43,10 @@ export default class UserItemMapView extends Component {
 
     if (Platform.OS === 'android') {
       if (this.animatedMarker) {
-        this.animatedMarker._component.animateMarkerToCoordinate(newCoordinate, ANIMATION_TIME);
+        this.animatedMarker._component.animateMarkerToCoordinate(
+          newCoordinate,
+          ANIMATION_TIME
+        );
       }
     } else {
       const { coordinate } = this.state;
@@ -79,10 +90,12 @@ export default class UserItemMapView extends Component {
           }}
         >
           <Marker.Animated
-            ref={marker => { this.animatedMarker = marker; }}
+            ref={marker => {
+              this.animatedMarker = marker;
+            }}
             coordinate={this.state.coordinate}
             title={`Item's current location`}
-            pinColor={'blue'}
+            pinColor={'#100eff'}
           />
           <Marker.Animated
             coordinate={{
