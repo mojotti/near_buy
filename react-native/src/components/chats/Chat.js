@@ -16,9 +16,7 @@ class _Chat extends React.Component {
     this.sellerId = props.navigation.state.params.item.seller_id;
     this.buyerId = props.navigation.state.params.item.buyer_id;
     this.itemId = props.navigation.state.params.item.id;
-    this.imagePath = `http://${localhost}:5000/api/v1.0/${
-      this.itemId
-    }/image0.jpg`;
+    this.chatId = generateRoomId(this.itemId, this.buyerId, this.sellerId);
   }
 
   static navigationOptions = ({ navigation }) => {
@@ -29,30 +27,8 @@ class _Chat extends React.Component {
   };
 
   componentWillMount() {
-    this.setState({
-      messages: [
-        {
-          _id: 1,
-          text: 'Hello developer',
-          createdAt: new Date(),
-          user: {
-            _id: 2,
-            name: 'React Native',
-            avatar: this.imagePath,
-          },
-        },
-        {
-          _id: 2,
-          text: 'Hello stranger!',
-          createdAt: new Date(),
-          user: {
-            _id: 1,
-            name: 'Raimo',
-            avatar: this.imagePath,
-          },
-        },
-      ],
-    });
+    const messages = this.props.chatMessages[this.chatId] || [];
+    this.setState(() => ({ messages }));
   }
 
   componentDidMount() {
@@ -64,8 +40,7 @@ class _Chat extends React.Component {
       messages: GiftedChat.append(previousState.messages, message),
     }));
     console.log('new message', message);
-    const chatId = generateRoomId(this.itemId, this.buyerId, this.sellerId);
-    this.props.dispatch(addMessageToChat(chatId, message[0]));
+    this.props.dispatch(addMessageToChat(this.chatId, message[0]));
   };
 
   render() {
@@ -98,9 +73,10 @@ _Chat.propTypes = {
 
 const mapStateToProps = state => {
   const { chatHeaders, isFetching } = state.currentChatsReducer;
+  const { chatMessages } = state.chatMessagesReducer;
   const { token } = state.authorizationReducer;
 
-  return { chatHeaders, isFetching, token };
+  return { chatHeaders, chatMessages, isFetching, token };
 };
 
 const Chat = connect(mapStateToProps)(_Chat);

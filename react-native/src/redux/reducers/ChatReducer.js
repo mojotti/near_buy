@@ -32,7 +32,6 @@ export const chatCreationReducer = (
 
 const initialStateCurrentChats = {
   chatHeaders: [],
-  chatMessages: {},
   error: null,
   isFetching: false,
 };
@@ -41,7 +40,6 @@ export const currentChatsReducer = (
   state = initialStateCurrentChats,
   action
 ) => {
-  console.log('state', state, action);
   switch (action.type) {
     case 'FETCH_CHATS_REQUEST':
       return Object.assign({}, state, {
@@ -58,6 +56,23 @@ export const currentChatsReducer = (
         error: action.error,
         isFetching: false,
       });
+    default:
+      return state;
+  }
+};
+
+const initialStateChatMessages = {
+  chatMessages: {},
+  error: null,
+  isFetching: false,
+};
+
+export const chatMessagesReducer = (
+  state = initialStateChatMessages,
+  action
+) => {
+  console.log('state', state, action);
+  switch (action.type) {
     case 'ADD_MESSAGE_TO_CHAT': {
       socketIO.sendMessage(action.message);
       const newMessages = getNewMessages(
@@ -78,7 +93,6 @@ export const currentChatsReducer = (
       return state;
   }
 };
-
 const getNewMessages = (chats, chatId, msg) => {
   const chatToAppend = chats[chatId];
 

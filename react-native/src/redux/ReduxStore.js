@@ -13,15 +13,17 @@ const encryptor = createEncryptor({
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['authorizationReducer', 'locationReducer'],
+  whitelist: [
+    'authorizationReducer',
+    'locationReducer',
+    'chatMessagesReducer',
+    'chatMessagesReducer',
+  ],
   transforms: [encryptor],
 };
 
 const reducer = persistReducer(persistConfig, rootReducer);
 
-export const store = createStore(
-  reducer,
-  applyMiddleware(thunk),
-);
+export const store = createStore(reducer, applyMiddleware(thunk));
 
 export const persistor = persistStore(store);

@@ -3,7 +3,11 @@ import { authorizationReducer } from './AuthorizationReducer';
 import { locationReducer } from './LocationReducer';
 import { navigationReducer } from './NavigationReducer';
 import { itemExplorerReducer } from './ItemExplorerReducer';
-import { chatCreationReducer, currentChatsReducer } from './ChatReducer';
+import {
+  chatCreationReducer,
+  chatMessagesReducer,
+  currentChatsReducer,
+} from './ChatReducer';
 
 const rootReducer = combineReducers({
   authorizationReducer,
@@ -12,6 +16,7 @@ const rootReducer = combineReducers({
   itemExplorerReducer,
   chatCreationReducer,
   currentChatsReducer,
+  chatMessagesReducer,
 });
 
 export default rootReducer;
