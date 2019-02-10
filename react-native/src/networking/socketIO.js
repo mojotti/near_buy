@@ -37,12 +37,12 @@ export const connectSocket = (itemId, userId, sellerId) => {
   }
 };
 
-export const generateRoomId = () => {
-  return `item_id:${ITEM_ID}user_id:${USER_ID}seller_id:${SELLER_ID}`;
+export const generateRoomId = (itemId, userId, sellerId) => {
+  return `item_id:${itemId}user_id:${userId}seller_id:${sellerId}`;
 };
 
 export const createRoom = () => {
-  room = generateRoomId();
+  room = generateRoomId(ITEM_ID, USER_ID, SELLER_ID);
   socket.emit('create_room', room);
 };
 

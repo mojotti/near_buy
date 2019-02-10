@@ -39,6 +39,14 @@ export const fetchChatsActionError = error => {
   };
 };
 
+export const addMessageToChat = (chatId, message) => {
+  return {
+    type: 'ADD_MESSAGE_TO_CHAT',
+    chatId,
+    message,
+  };
+};
+
 export const requestChats = token => {
   return dispatch => {
     dispatch(fetchChatsRequestAction());

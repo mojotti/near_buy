@@ -1,3 +1,6 @@
+import * as socketIO from '../../networking/socketIO';
+/* eslint-disable indent */
+
 const initialStateChatCreation = {
   isLoading: false,
   error: null,
@@ -29,6 +32,7 @@ export const chatCreationReducer = (
 
 const initialStateCurrentChats = {
   chatHeaders: [],
+  chatMessages: {},
   error: null,
   isFetching: false,
 };
@@ -37,6 +41,7 @@ export const currentChatsReducer = (
   state = initialStateCurrentChats,
   action
 ) => {
+  console.log('state', state, action);
   switch (action.type) {
     case 'FETCH_CHATS_REQUEST':
       return Object.assign({}, state, {
@@ -53,7 +58,33 @@ export const currentChatsReducer = (
         error: action.error,
         isFetching: false,
       });
+    case 'ADD_MESSAGE_TO_CHAT': {
+      socketIO.sendMessage(action.message);
+      const newMessages = getNewMessages(
+        state.chatMessages,
+        action.chatId,
+        action.message
+      );
+      return Object.assign({}, state, {
+        chatMessages: Object.assign(
+          {
+            [action.chatId]: newMessages,
+          },
+          state.chatMessages
+        ),
+      });
+    }
     default:
       return state;
+  }
+};
+
+const getNewMessages = (chats, chatId, msg) => {
+  const chatToAppend = chats[chatId];
+
+  if (!chatToAppend) {
+    return [msg];
+  } else {
+    return chatToAppend.push(msg);
   }
 };

@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import { GiftedChat } from 'react-native-gifted-chat';
 import { localhost } from '../../static/constants';
 import NavigationBarIconAndText from '../common/NavigationBarIconAndText';
-import { connectSocket, sendMessage } from '../../networking/socketIO';
+import { connectSocket, generateRoomId } from '../../networking/socketIO';
+import { addMessageToChat } from '../../redux/actions/ChatActions';
 
 class _Chat extends React.Component {
   constructor(props) {
@@ -58,12 +59,13 @@ class _Chat extends React.Component {
     connectSocket(this.itemId, this.buyerId, this.sellerId);
   }
 
-  onSend = (messages = []) => {
+  onSend = (message = []) => {
     this.setState(previousState => ({
-      messages: GiftedChat.append(previousState.messages, messages),
+      messages: GiftedChat.append(previousState.messages, message),
     }));
-    console.log('messages', messages);
-    sendMessage(messages);
+    console.log('new message', message);
+    const chatId = generateRoomId(this.itemId, this.buyerId, this.sellerId);
+    this.props.dispatch(addMessageToChat(chatId, message[0]));
   };
 
   render() {
