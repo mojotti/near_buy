@@ -20,7 +20,7 @@ exports[`<DeleteButton /> renders correctly 1`] = `
   }
   underlayColor="black"
 >
-  <Component
+  <Text
     style={
       Object {
         "color": "white",
@@ -31,6 +31,6 @@ exports[`<DeleteButton /> renders correctly 1`] = `
     }
   >
     Delete item
-  </Component>
+  </Text>
 </TouchableHighlight>
 `;

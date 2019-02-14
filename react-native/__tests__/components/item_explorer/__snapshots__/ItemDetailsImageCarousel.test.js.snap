@@ -52,7 +52,7 @@ exports[`<ItemDetailsImageCarousel /> renders carousel when it should 1`] = `
 `;
 
 exports[`<ItemDetailsImageCarousel /> renders image when it should 1`] = `
-<Component
+<View
   style={
     Object {
       "height": 750,
@@ -70,5 +70,5 @@ exports[`<ItemDetailsImageCarousel /> renders image when it should 1`] = `
     }
     url="foo.png"
   />
-</Component>
+</View>
 `;

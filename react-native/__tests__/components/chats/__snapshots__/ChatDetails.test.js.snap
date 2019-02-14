@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ChatDetails /> renders correctly 1`] = `
-<Component>
+<View>
   <TouchableOpacity
     activeOpacity={0.2}
     onPress={[Function]}
   >
-    <Component
+    <View
       style={
         Object {
           "backgroundColor": "#FFFFFF",
@@ -16,7 +16,7 @@ exports[`<ChatDetails /> renders correctly 1`] = `
         }
       }
     >
-      <Component
+      <View
         style={
           Object {
             "flexDirection": "column",
@@ -26,7 +26,7 @@ exports[`<ChatDetails /> renders correctly 1`] = `
           }
         }
       >
-        <Component
+        <View
           style={
             Object {
               "alignSelf": "center",
@@ -49,9 +49,9 @@ exports[`<ChatDetails /> renders correctly 1`] = `
             }
             url="http://localhost:5000/api/v1.0/1/image0.jpg"
           />
-        </Component>
-      </Component>
-      <Component
+        </View>
+      </View>
+      <View
         style={
           Object {
             "backgroundColor": "#FFFFFF",
@@ -62,7 +62,7 @@ exports[`<ChatDetails /> renders correctly 1`] = `
           }
         }
       >
-        <Component
+        <Text
           style={
             Object {
               "fontSize": 17,
@@ -71,9 +71,9 @@ exports[`<ChatDetails /> renders correctly 1`] = `
           }
         >
           foo
-        </Component>
-      </Component>
-    </Component>
+        </Text>
+      </View>
+    </View>
   </TouchableOpacity>
-</Component>
+</View>
 `;

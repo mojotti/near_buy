@@ -24,7 +24,7 @@ exports[`<_ItemDetails /> renders correctly 1`] = `
       ]
     }
   />
-  <Component
+  <Text
     style={
       Object {
         "alignSelf": "stretch",
@@ -39,8 +39,8 @@ exports[`<_ItemDetails /> renders correctly 1`] = `
     }
   >
     Distance
-  </Component>
-  <Component
+  </Text>
+  <View
     style={
       Object {
         "flexDirection": "row",
@@ -60,7 +60,7 @@ exports[`<_ItemDetails /> renders correctly 1`] = `
         }
       }
     />
-    <Component
+    <Text
       style={
         Object {
           "alignSelf": "stretch",
@@ -75,12 +75,12 @@ exports[`<_ItemDetails /> renders correctly 1`] = `
       }
     >
       2 km
-    </Component>
-  </Component>
+    </Text>
+  </View>
   <ItemSeparator
     widthPercentage={0.86}
   />
-  <Component
+  <Text
     style={
       Object {
         "alignSelf": "stretch",
@@ -95,8 +95,8 @@ exports[`<_ItemDetails /> renders correctly 1`] = `
     }
   >
     Description
-  </Component>
-  <Component
+  </Text>
+  <Text
     style={
       Object {
         "alignSelf": "stretch",
@@ -111,7 +111,7 @@ exports[`<_ItemDetails /> renders correctly 1`] = `
     }
   >
     bar
-  </Component>
+  </Text>
   <ItemSeparator
     widthPercentage={0.86}
   />

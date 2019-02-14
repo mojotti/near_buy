@@ -1,11 +1,14 @@
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
-import { createChat, handleChatCreation, requestChats } from '../../src/redux/actions/ChatActions';
+import {
+  createChat,
+  handleChatCreation,
+  requestChats,
+} from '../../src/redux/actions/ChatActions';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 const store = mockStore({});
-
 
 const sellerId = 0;
 const itemId = 0;
@@ -40,7 +43,7 @@ describe('createChat', () => {
   test('throws an error', async () => {
     fetch.mockResponseFailure('error');
 
-    await await await await store.dispatch(createChat(ITEM, token));
+    await await await await await store.dispatch(createChat(ITEM, token));
     expect(store.getActions()).toMatchSnapshot();
   });
 });

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<_MenuItem /> renders correctly when tab is current tab 1`] = `
-<Component
+<View
   style={
     Object {
       "backgroundColor": "#eaebff",
@@ -32,7 +32,7 @@ exports[`<_MenuItem /> renders correctly when tab is current tab 1`] = `
         }
       }
     />
-    <Component
+    <Text
       style={
         Object {
           "color": "#232c44",
@@ -43,13 +43,13 @@ exports[`<_MenuItem /> renders correctly when tab is current tab 1`] = `
       }
     >
       current
-    </Component>
+    </Text>
   </TouchableOpacity>
-</Component>
+</View>
 `;
 
 exports[`<_MenuItem /> renders correctly when tab is not the current tab 1`] = `
-<Component
+<View
   style={
     Object {
       "backgroundColor": "#FFFFFF",
@@ -80,7 +80,7 @@ exports[`<_MenuItem /> renders correctly when tab is not the current tab 1`] = `
         }
       }
     />
-    <Component
+    <Text
       style={
         Object {
           "color": "#232c44",
@@ -91,7 +91,7 @@ exports[`<_MenuItem /> renders correctly when tab is not the current tab 1`] = `
       }
     >
       not current
-    </Component>
+    </Text>
   </TouchableOpacity>
-</Component>
+</View>
 `;

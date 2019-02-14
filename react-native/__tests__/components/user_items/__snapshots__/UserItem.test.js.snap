@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<_UserItem /> renders correctly 1`] = `
-<Component>
+<View>
   <Swipeout
     autoClose={true}
     disabled={false}
@@ -27,7 +27,7 @@ exports[`<_UserItem /> renders correctly 1`] = `
       activeOpacity={0.2}
       onPress={[Function]}
     >
-      <Component
+      <View
         style={
           Object {
             "backgroundColor": "#FFFFFF",
@@ -37,7 +37,7 @@ exports[`<_UserItem /> renders correctly 1`] = `
           }
         }
       >
-        <Component
+        <View
           style={
             Object {
               "flexDirection": "column",
@@ -47,7 +47,7 @@ exports[`<_UserItem /> renders correctly 1`] = `
             }
           }
         >
-          <Component
+          <View
             style={
               Object {
                 "alignSelf": "center",
@@ -70,9 +70,9 @@ exports[`<_UserItem /> renders correctly 1`] = `
               }
               url="http://localhost:5000/api/v1.0/1/image0.jpg"
             />
-          </Component>
-        </Component>
-        <Component
+          </View>
+        </View>
+        <View
           style={
             Object {
               "backgroundColor": "#FFFFFF",
@@ -83,7 +83,7 @@ exports[`<_UserItem /> renders correctly 1`] = `
             }
           }
         >
-          <Component
+          <Text
             style={
               Object {
                 "fontSize": 17,
@@ -92,8 +92,8 @@ exports[`<_UserItem /> renders correctly 1`] = `
             }
           >
             foo
-          </Component>
-          <Component
+          </Text>
+          <Text
             style={
               Object {
                 "fontSize": 16,
@@ -101,10 +101,10 @@ exports[`<_UserItem /> renders correctly 1`] = `
             }
           >
             100 €
-          </Component>
-        </Component>
-      </Component>
+          </Text>
+        </View>
+      </View>
     </TouchableOpacity>
   </Swipeout>
-</Component>
+</View>
 `;

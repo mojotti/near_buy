@@ -71,9 +71,5 @@ Array [
   Object {
     "type": "FETCH_CHATS_REQUEST",
   },
-  Object {
-    "error": "error",
-    "type": "FETCH_CHATS_ERROR",
-  },
 ]
 `;

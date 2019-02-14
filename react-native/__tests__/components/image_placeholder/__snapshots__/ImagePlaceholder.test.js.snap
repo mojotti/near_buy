@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ImagePlaceholder /> does not show placeholder image when image is loaded 1`] = `
-<Component
+<View
   style={
     Object {
       "alignItems": "center",
@@ -11,7 +11,7 @@ exports[`<ImagePlaceholder /> does not show placeholder image when image is load
     }
   }
 >
-  <Image
+  <Component
     onLoad={[Function]}
     source={
       Object {
@@ -27,11 +27,11 @@ exports[`<ImagePlaceholder /> does not show placeholder image when image is load
       ]
     }
   />
-</Component>
+</View>
 `;
 
 exports[`<ImagePlaceholder /> shows placeholder image when image is not loaded 1`] = `
-<Component
+<View
   style={
     Object {
       "alignItems": "center",
@@ -41,7 +41,7 @@ exports[`<ImagePlaceholder /> shows placeholder image when image is not loaded 1
     }
   }
 >
-  <Image
+  <Component
     onLoad={[Function]}
     source={
       Object {
@@ -57,7 +57,7 @@ exports[`<ImagePlaceholder /> shows placeholder image when image is not loaded 1
       ]
     }
   />
-  <Component
+  <View
     style={
       Array [
         Object {
@@ -80,6 +80,6 @@ exports[`<ImagePlaceholder /> shows placeholder image when image is not loaded 1
         }
       }
     />
-  </Component>
-</Component>
+  </View>
+</View>
 `;

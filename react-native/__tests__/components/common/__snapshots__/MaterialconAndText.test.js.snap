@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<MaterialIconAndText /> renders correctly 1`] = `
-<Component
+<View
   style={
     Object {
       "alignSelf": "center",
@@ -11,7 +11,7 @@ exports[`<MaterialIconAndText /> renders correctly 1`] = `
     }
   }
 >
-  <Component
+  <View
     style={
       Object {
         "alignSelf": "center",
@@ -35,8 +35,8 @@ exports[`<MaterialIconAndText /> renders correctly 1`] = `
         }
       }
     />
-  </Component>
-  <Component
+  </View>
+  <Text
     style={
       Object {
         "color": "#727272",
@@ -47,8 +47,8 @@ exports[`<MaterialIconAndText /> renders correctly 1`] = `
     }
   >
     this is header
-  </Component>
-  <Component
+  </Text>
+  <Text
     style={
       Object {
         "color": "#727272",
@@ -59,6 +59,6 @@ exports[`<MaterialIconAndText /> renders correctly 1`] = `
     }
   >
     and this just context
-  </Component>
-</Component>
+  </Text>
+</View>
 `;

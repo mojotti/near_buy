@@ -2,7 +2,7 @@
 
 exports[`<_UserItems /> has correct navigation options 1`] = `
 Object {
-  "headerLeft": <Component
+  "headerLeft": <View
     style={
       Object {
         "paddingHorizontal": 10,
@@ -20,8 +20,8 @@ Object {
         size={30}
       />
     </TouchableOpacity>
-  </Component>,
-  "headerRight": <Component
+  </View>,
+  "headerRight": <Text
     onPress={[Function]}
     style={
       Object {
@@ -31,13 +31,13 @@ Object {
     }
   >
     New item
-  </Component>,
+  </Text>,
   "title": "My items",
 }
 `;
 
 exports[`<_UserItems /> renders correctly when response has no items 1`] = `
-<Component
+<View
   style={
     Array [
       Object {
@@ -56,11 +56,11 @@ exports[`<_UserItems /> renders correctly when response has no items 1`] = `
     headerText="You have no items yet."
     iconName="emoticon-poop"
   />
-</Component>
+</View>
 `;
 
 exports[`<_UserItems /> renders correctly when response has user_items 1`] = `
-<Component
+<View
   style={
     Array [
       Object {
@@ -184,5 +184,5 @@ exports[`<_UserItems /> renders correctly when response has user_items 1`] = `
     updateCellsBatchingPeriod={50}
     windowSize={21}
   />
-</Component>
+</View>
 `;

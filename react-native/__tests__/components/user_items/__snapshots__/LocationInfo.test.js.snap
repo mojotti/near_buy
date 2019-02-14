@@ -1,14 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<LocationInfoText /> renders correctly 1`] = `
-<Component
+<View
   style={
     Object {
       "alignSelf": "stretch",
     }
   }
 >
-  <Component
+  <Text
     style={
       Object {
         "fontFamily": null,
@@ -19,8 +19,8 @@ exports[`<LocationInfoText /> renders correctly 1`] = `
     }
   >
     • Your exact location is not visible to others
-  </Component>
-  <Component
+  </Text>
+  <Text
     style={
       Object {
         "fontFamily": null,
@@ -31,7 +31,7 @@ exports[`<LocationInfoText /> renders correctly 1`] = `
     }
   >
     •
-    <Component
+    <Text
       style={
         Object {
           "color": "blue",
@@ -39,12 +39,12 @@ exports[`<LocationInfoText /> renders correctly 1`] = `
       }
     >
        Blue
-    </Component>
-    <Component>
+    </Text>
+    <Text>
        color indicates your item's location
-    </Component>
-  </Component>
-  <Component
+    </Text>
+  </Text>
+  <Text
     style={
       Object {
         "fontFamily": null,
@@ -55,7 +55,7 @@ exports[`<LocationInfoText /> renders correctly 1`] = `
     }
   >
     •
-    <Component
+    <Text
       style={
         Object {
           "color": "red",
@@ -63,10 +63,10 @@ exports[`<LocationInfoText /> renders correctly 1`] = `
       }
     >
        Red
-    </Component>
-    <Component>
+    </Text>
+    <Text>
        color indicates your location
-    </Component>
-  </Component>
-</Component>
+    </Text>
+  </Text>
+</View>
 `;

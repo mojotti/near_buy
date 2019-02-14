@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<UserItemMapView renders correctly 1`] = `
-<Component
+<View
   style={
     Object {
       "alignItems": "center",
@@ -40,7 +40,7 @@ exports[`<UserItemMapView renders correctly 1`] = `
           "longitudeDelta": NaN,
         }
       }
-      pinColor="blue"
+      pinColor="#100eff"
       title="Item's current location"
     />
     <AnimatedComponent
@@ -53,5 +53,5 @@ exports[`<UserItemMapView renders correctly 1`] = `
       title="Your location"
     />
   </MapView>
-</Component>
+</View>
 `;

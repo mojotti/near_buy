@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ImageRow /> when there are images, images are rendered 1`] = `
-<Component
+<View
   style={
     Object {
       "backgroundColor": "transparent",
@@ -16,7 +16,7 @@ exports[`<ImageRow /> when there are images, images are rendered 1`] = `
     onPress={[Function]}
     underlayColor="black"
   >
-    <Image
+    <Component
       source={
         Object {
           "uri": "foo/bar.png",
@@ -39,7 +39,7 @@ exports[`<ImageRow /> when there are images, images are rendered 1`] = `
     onPress={[Function]}
     underlayColor="black"
   >
-    <Image
+    <Component
       source={
         Object {
           "uri": "baz/foo.png",
@@ -56,11 +56,11 @@ exports[`<ImageRow /> when there are images, images are rendered 1`] = `
       }
     />
   </TouchableHighlight>
-</Component>
+</View>
 `;
 
 exports[`<ImageRow /> when there is no images, empty image buttons are rendered 1`] = `
-<Component
+<View
   style={
     Object {
       "backgroundColor": "transparent",
@@ -109,5 +109,5 @@ exports[`<ImageRow /> when there is no images, empty image buttons are rendered 
       }
     }
   />
-</Component>
+</View>
 `;

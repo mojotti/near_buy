@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<_SaveButton /> renders correctly 1`] = `
-<Component>
-  <Component
+<View>
+  <Text
     onPress={[Function]}
     style={
       Object {
@@ -12,6 +12,6 @@ exports[`<_SaveButton /> renders correctly 1`] = `
     }
   >
     Save
-  </Component>
-</Component>
+  </Text>
+</View>
 `;

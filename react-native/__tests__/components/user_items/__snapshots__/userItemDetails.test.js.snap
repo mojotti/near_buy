@@ -44,7 +44,7 @@ exports[`<_UserItemDetails /> renders correctly 1`] = `
 <ScrollView
   keyboardShouldPersistTaps="handled"
 >
-  <Component
+  <View
     style={
       Object {
         "alignItems": "center",
@@ -54,7 +54,7 @@ exports[`<_UserItemDetails /> renders correctly 1`] = `
       }
     }
   >
-    <Component
+    <Text
       style={
         Object {
           "alignSelf": "stretch",
@@ -69,14 +69,14 @@ exports[`<_UserItemDetails /> renders correctly 1`] = `
       }
     >
       Pictures
-    </Component>
+    </Text>
     <ImageCarousel
       id={0}
       imageUrls={Array []}
       numOfPics={0}
       onImageUpload={[Function]}
     />
-    <Component
+    <Text
       style={
         Object {
           "alignSelf": "stretch",
@@ -91,7 +91,7 @@ exports[`<_UserItemDetails /> renders correctly 1`] = `
       }
     >
       Edit details
-    </Component>
+    </Text>
     <ItemDetails
       description="bar"
       onDescriptionChange={[Function]}
@@ -100,7 +100,7 @@ exports[`<_UserItemDetails /> renders correctly 1`] = `
       price={100}
       title="foo"
     />
-    <Component
+    <Text
       style={
         Object {
           "alignSelf": "stretch",
@@ -115,7 +115,7 @@ exports[`<_UserItemDetails /> renders correctly 1`] = `
       }
     >
       Location
-    </Component>
+    </Text>
     <LocationInfoText />
     <UserItemMapView
       currentLocation={
@@ -130,7 +130,7 @@ exports[`<_UserItemDetails /> renders correctly 1`] = `
     <UpdateLocationButton
       updateLocation={[Function]}
     />
-    <Component
+    <Text
       style={
         Object {
           "alignSelf": "stretch",
@@ -145,8 +145,8 @@ exports[`<_UserItemDetails /> renders correctly 1`] = `
       }
     >
       Fun facts
-    </Component>
-    <Component
+    </Text>
+    <Text
       style={
         Object {
           "alignSelf": "center",
@@ -157,13 +157,27 @@ exports[`<_UserItemDetails /> renders correctly 1`] = `
       }
     >
       • You decided to get rid of this item Fri Jan 01 2016
-    </Component>
+    </Text>
     <DeleteButton
       fetchItems={[Function]}
       id={0}
       navigation={
         Object {
-          "setParams": [Function],
+          "setParams": [MockFunction] {
+            "calls": Array [
+              Array [
+                Object {
+                  "title": "foo",
+                },
+              ],
+            ],
+            "results": Array [
+              Object {
+                "isThrow": false,
+                "value": undefined,
+              },
+            ],
+          },
           "state": Object {
             "params": Object {
               "fetchItems": [Function],
@@ -183,6 +197,6 @@ exports[`<_UserItemDetails /> renders correctly 1`] = `
       }
       token="foo"
     />
-  </Component>
+  </View>
 </ScrollView>
 `;

@@ -2,7 +2,7 @@
 
 exports[`<_ItemExplorer /> navigation options 1`] = `
 Object {
-  "headerLeft": <Component
+  "headerLeft": <View
     style={
       Object {
         "paddingHorizontal": 10,
@@ -20,8 +20,8 @@ Object {
         size={30}
       />
     </TouchableOpacity>
-  </Component>,
-  "headerRight": <Component
+  </View>,
+  "headerRight": <Text
     onPress={[Function]}
     style={
       Object {
@@ -31,7 +31,7 @@ Object {
     }
   >
     New item
-  </Component>,
+  </Text>,
   "title": "Item Explorer",
 }
 `;
