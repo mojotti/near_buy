@@ -16,7 +16,7 @@ const persistConfig = {
   whitelist: [
     'authorizationReducer',
     'locationReducer',
-    'chatMessagesReducer',
+    'currentChatsReducer',
     'chatMessagesReducer',
   ],
   transforms: [encryptor],
