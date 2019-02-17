@@ -57,10 +57,7 @@ describe('<DetailImage />', () => {
       />
     );
 
-    detailImage
-      .dive()
-      .find('TouchableHighlight')
-      .simulate('Press');
+    detailImage.find('TouchableHighlight').simulate('Press');
 
     expect(Alert.alert.mock.calls[0][0]).toEqual('Select picture');
     expect(Alert.alert.mock.calls[0][1]).toEqual(
@@ -80,10 +77,7 @@ describe('<DetailImage />', () => {
       />
     );
 
-    detailImage
-      .dive()
-      .find('TouchableHighlight')
-      .simulate('Press');
+    detailImage.find('TouchableHighlight').simulate('Press');
 
     const handleGalleryImageSpy = jest.spyOn(
       detailImage.instance(),
@@ -105,10 +99,7 @@ describe('<DetailImage />', () => {
       />
     );
 
-    detailImage
-      .dive()
-      .find('TouchableHighlight')
-      .simulate('Press');
+    detailImage.find('TouchableHighlight').simulate('Press');
 
     const handleNewImageSpy = jest.spyOn(
       detailImage.instance(),

@@ -1,37 +1,53 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Chat /> renders correctly 1`] = `
-<mockConstructor
-  isAnimated={true}
-  messages={
-    Array [
-      Object {
-        "_id": 1,
-        "createdAt": 2016-01-01T00:00:00.000Z,
-        "text": "Hello developer",
-        "user": Object {
-          "_id": 2,
-          "avatar": "http://localhost:5000/api/v1.0/0/image0.jpg",
-          "name": "React Native",
-        },
-      },
-      Object {
-        "_id": 2,
-        "createdAt": 2016-01-01T00:00:00.000Z,
-        "text": "Hello stranger!",
-        "user": Object {
-          "_id": 1,
-          "avatar": "http://localhost:5000/api/v1.0/0/image0.jpg",
-          "name": "Raimo",
-        },
-      },
-    ]
-  }
-  onSend={[Function]}
-  user={
+exports[`<_Chat /> renders correctly 1`] = `
+<_Chat
+  chatMessages={Array []}
+  dispatch={[Function]}
+  navigation={
     Object {
-      "_id": 1,
+      "state": Object {
+        "params": Object {
+          "item": Object {
+            "buyer_id": 0,
+            "id": 0,
+            "seller_id": 0,
+          },
+        },
+      },
     }
   }
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+  storeSubscription={
+    Subscription {
+      "listeners": Object {
+        "clear": [Function],
+        "get": [Function],
+        "notify": [Function],
+        "subscribe": [Function],
+      },
+      "onStateChange": [Function],
+      "parentSub": undefined,
+      "store": Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+      "unsubscribe": [Function],
+    }
+  }
+  token="foo"
 />
 `;

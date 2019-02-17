@@ -4,7 +4,7 @@ import {
   getGlobals,
   sendMessage,
   setRoomDetails,
-  setSocketForTesting
+  setSocketForTesting,
 } from '../../src/networking/socketIO';
 
 let EMIT_SPY = null;
@@ -36,7 +36,7 @@ describe('socketIO', () => {
   });
 
   test('generates room id', () => {
-    const id = generateRoomId();
+    const id = generateRoomId(0, 1, 2);
 
     expect(id).toEqual('item_id:0user_id:1seller_id:2');
   });
@@ -54,7 +54,10 @@ describe('socketIO', () => {
     const message = 'foobar';
     sendMessage(message);
 
-    const expected = ['item_id:0user_id:1seller_id:2', 'foobar'];
+    const expected = [
+      'message',
+      '{"msg":"foobar","room":"item_id:0user_id:1seller_id:2"}',
+    ];
     expect(EMIT_SPY.mock.calls[1]).toEqual(expected);
   });
 });
