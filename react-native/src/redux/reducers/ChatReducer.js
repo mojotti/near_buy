@@ -74,7 +74,7 @@ export const chatMessagesReducer = (
   console.log('state', state, action);
   switch (action.type) {
     case 'ADD_MESSAGE_TO_CHAT': {
-      socketIO.sendMessage(action.message);
+      socketIO.sendMessage(action.message, action.chatId);
       const newMessages = getNewMessages(
         state.chatMessages,
         action.chatId,

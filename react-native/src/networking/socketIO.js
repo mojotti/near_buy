@@ -13,59 +13,51 @@ const connectionConfig = {
   transports: ['websocket'], // you need to explicitly tell it to use websockets
 };
 
-let socket = null;
-let room = null;
+const sockets = {};
 
-let ITEM_ID = null;
-let USER_ID = null;
-let SELLER_ID = null;
-
-export const setRoomDetails = details => {
-  ITEM_ID = details.itemId;
-  USER_ID = details.userId;
-  SELLER_ID = details.sellerId;
+export const destroySocket = (itemId, userId, sellerId) => {
+  const roomId = getRoomId(itemId, userId, sellerId);
+  if (sockets[roomId]) {
+    delete sockets[roomId];
+  }
 };
 
 export const connectSocket = (itemId, userId, sellerId) => {
-  if (!socket) {
-    socket = io(path, connectionConfig);
-    socket.on('connect', () => {
-      setRoomDetails({ itemId, userId, sellerId });
-      createRoom();
-      listenToMessages();
+  const roomId = getRoomId(itemId, userId, sellerId);
+  if (!sockets[roomId]) {
+    sockets[roomId] = io(path, connectionConfig);
+    sockets[roomId].on('connect', () => {
+      createRoom(itemId, userId, sellerId);
+      listenToMessages(roomId);
     });
   }
 };
 
-export const generateRoomId = (itemId, userId, sellerId) => {
+export const getRoomId = (itemId, userId, sellerId) => {
   return `item_id:${itemId}user_id:${userId}seller_id:${sellerId}`;
 };
 
-export const createRoom = () => {
-  room = generateRoomId(ITEM_ID, USER_ID, SELLER_ID);
-  socket.emit('create_room', room);
+export const createRoom = (itemId, userId, sellerId) => {
+  const room = getRoomId(itemId, userId, sellerId);
+  sockets[room].emit('create_room', room);
 };
 
-export const sendMessage = msg => {
+export const sendMessage = (msg, room) => {
   const payload = {
     msg,
     room,
   };
-  socket.emit('message', JSON.stringify(payload));
+  sockets[room].emit('message', JSON.stringify(payload));
 };
 
-const listenToMessages = () => {
+const listenToMessages = roomId => {
   // listen messages in room
-  socket.on('message', msg => {
+  sockets[roomId].on('message', msg => {
     console.log('received some shit in chat', msg);
   });
 };
 
 // only for testing
-export const setSocketForTesting = s => {
-  socket = s;
-};
-
-export const getGlobals = () => {
-  return { ITEM_ID, USER_ID, SELLER_ID };
+export const setSocketForTesting = (s, room) => {
+  sockets[room] = s;
 };

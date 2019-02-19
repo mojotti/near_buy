@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { GiftedChat } from 'react-native-gifted-chat';
 import { localhost } from '../../static/constants';
 import NavigationBarIconAndText from '../common/NavigationBarIconAndText';
-import { connectSocket, generateRoomId } from '../../networking/socketIO';
+import { connectSocket, getRoomId } from '../../networking/socketIO';
 import { addMessageToChat } from '../../redux/actions/ChatActions';
 
 class _Chat extends React.Component {
@@ -16,7 +16,7 @@ class _Chat extends React.Component {
     this.sellerId = props.navigation.state.params.item.seller_id;
     this.buyerId = props.navigation.state.params.item.buyer_id;
     this.itemId = props.navigation.state.params.item.id;
-    this.chatId = generateRoomId(this.itemId, this.buyerId, this.sellerId);
+    this.chatId = getRoomId(this.itemId, this.buyerId, this.sellerId);
   }
 
   static navigationOptions = ({ navigation }) => {
