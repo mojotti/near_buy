@@ -11,20 +11,23 @@ import { styles } from '../../static/styles/ItemDetailsStyles';
 import ChatButton from './ChatButton';
 import ItemSeparator from '../user_items/ItemSeparator';
 import { createChat } from '../../redux/actions/ChatActions';
-
+import { calculateDistanceInKm } from '../../utils/distance';
 
 export class _ItemDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      distance: props.distance || 'Getting distance...',
       imageUrls: ['foo.bar'], // provide some uri while loading actual img uris
     };
   }
 
-  static navigationOptions = ({ navigation }) =>
-    ({ title: navigation.state.params.item.title });
+  static navigationOptions = ({ navigation }) => ({
+    title: navigation.state.params.item.title,
+  });
 
-  componentWillMount() {
+  componentDidMount() {
+    this.getDistance();
     this.getImageUrls();
   }
 
@@ -34,7 +37,17 @@ export class _ItemDetails extends React.Component {
     }
   }
 
-  _isChatCreated = (prevProps) => {
+  getDistance = () => {
+    const dist = calculateDistanceInKm(
+      this.props.latitude,
+      this.props.longitude,
+      this.props.item.latitude,
+      this.props.item.longitude
+    );
+    this.setState(() => ({ distance: `${dist} km` }));
+  };
+
+  _isChatCreated = prevProps => {
     return (
       !this.props.isCreatingChat &&
       this.props.error === null &&
@@ -53,17 +66,17 @@ export class _ItemDetails extends React.Component {
   };
 
   getImageUrls = () => {
-    getNumOfPictures(this.props.item.id, this.props.token)
-      .then((numOfPics) => {
-        this.setImageUrls(numOfPics);
-      });
+    getNumOfPictures(this.props.item.id, this.props.token).then(numOfPics => {
+      this.setImageUrls(numOfPics);
+    });
   };
 
-  setImageUrls = (numOfPics) => {
+  setImageUrls = numOfPics => {
     const urls = [];
     for (let i = 0; i < numOfPics; i++) {
-      const imagePath =
-        `http://${localhost}:5000/api/v1.0/${this.props.item.id}/image${i}.jpg`;
+      const imagePath = `http://${localhost}:5000/api/v1.0/${
+        this.props.item.id
+      }/image${i}.jpg`;
       urls.push(imagePath);
     }
     this.setState(() => ({ imageUrls: urls }));
@@ -84,32 +97,43 @@ export class _ItemDetails extends React.Component {
         <ItemDetailsImageCarousel images={this.state.imageUrls} />
         <Text style={baseStyles.headerText}>Distance</Text>
         <View style={styles.locationIconContainer}>
-          <FontAwesome name="map-marker" size={20} color={'#9f9f9f'} style={styles.locationIcon} />
-          <Text style={styles.plainText}>{this.props.distance}</Text>
+          <FontAwesome
+            name="map-marker"
+            size={20}
+            color={'#9f9f9f'}
+            style={styles.locationIcon}
+          />
+          <Text style={styles.plainText}>{this.state.distance}</Text>
         </View>
         <ItemSeparator widthPercentage={0.86} />
         <Text style={baseStyles.headerText}>Description</Text>
         <Text style={styles.plainText}>{this.props.item.description}</Text>
         <ItemSeparator widthPercentage={0.86} />
-        <ChatButton onPress={this._openChat} isCreatingChat={this.props.isCreatingChat} />
+        <ChatButton
+          onPress={this._openChat}
+          isCreatingChat={this.props.isCreatingChat}
+        />
       </ScrollView>
     );
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const { item } = ownProps.navigation.state.params;
+  const itemId = ownProps.navigation.state.params.item.id;
   const { distance } = ownProps.navigation.state.params;
   const { id, token } = state.authorizationReducer;
   const { isLoading, error } = state.chatCreationReducer;
-
+  const { latitude, longitude } = state.locationReducer;
+  const item = state.itemExplorerReducer.items.find(i => i.id === itemId);
   return {
     item,
     token,
     distance,
     isCreatingChat: isLoading,
     error,
-    id
+    id,
+    latitude,
+    longitude,
   };
 };
 

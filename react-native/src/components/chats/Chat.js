@@ -34,7 +34,7 @@ class _Chat extends React.Component {
 
   static getHeaderTitle = (navigate, item) => {
     const navigateToItem = () => {
-      navigate('ItemDetails', { item, distance: 10 });
+      navigate('ItemDetails', { item });
     };
     return (
       <TouchableHighlight onPress={navigateToItem}>
@@ -94,9 +94,8 @@ const mapStateToProps = state => {
   const { chatHeaders, isFetching } = state.currentChatsReducer;
   const { chatMessages } = state.chatMessagesReducer;
   const { token } = state.authorizationReducer;
-  const { latitude, longitude } = state.locationReducer;
 
-  return { chatHeaders, chatMessages, isFetching, token, latitude, longitude };
+  return { chatHeaders, chatMessages, isFetching, token };
 };
 
 const Chat = connect(mapStateToProps)(_Chat);
