@@ -4,7 +4,11 @@ import PropTypes from 'prop-types';
 import { GiftedChat } from 'react-native-gifted-chat';
 import { localhost } from '../../static/constants';
 import NavigationBarIconAndText from '../common/NavigationBarIconAndText';
-import { connectSocket, getRoomId } from '../../networking/socketIO';
+import {
+  connectSocket,
+  destroySocket,
+  getRoomId,
+} from '../../networking/socketIO';
 import { addMessageToChat } from '../../redux/actions/ChatActions';
 
 class _Chat extends React.Component {
@@ -26,13 +30,15 @@ class _Chat extends React.Component {
     };
   };
 
-  componentWillMount() {
+  componentDidMount() {
+    connectSocket(this.itemId, this.buyerId, this.sellerId);
+
     const messages = this.props.chatMessages[this.chatId] || [];
     this.setState(() => ({ messages }));
   }
 
-  componentDidMount() {
-    connectSocket(this.itemId, this.buyerId, this.sellerId);
+  componentWillUnmount() {
+    destroySocket(this.itemId, this.buyerId, this.sellerId);
   }
 
   onSend = (message = []) => {

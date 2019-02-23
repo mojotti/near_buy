@@ -75,7 +75,7 @@ export const chatMessagesReducer = (
   switch (action.type) {
     case 'ADD_MESSAGE_TO_CHAT': {
       socketIO.sendMessage(action.message, action.chatId);
-      const newMessages = getNewMessages(
+      const updatedMessages = getNewMessages(
         state.chatMessages,
         action.chatId,
         action.message
@@ -83,7 +83,7 @@ export const chatMessagesReducer = (
       return Object.assign({}, state, {
         chatMessages: Object.assign(
           {
-            [action.chatId]: newMessages,
+            [action.chatId]: updatedMessages,
           },
           state.chatMessages
         ),

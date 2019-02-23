@@ -13,7 +13,8 @@ let EMIT_SPY = null;
 jest.mock('socket.io-client/dist/socket.io', () => {
   return jest.fn(() => {
     return {
-      on: jest.fn(),
+      on: () => {},
+      disconnect: () => {},
     };
   });
 });
@@ -23,6 +24,8 @@ const setUpSocket = (itemId, userId, sellerId) => {
 
   const socket = {
     emit: EMIT_SPY,
+    on: () => {},
+    disconnect: () => {},
   };
   const id = getRoomId(itemId, userId, sellerId);
   setSocketForTesting(socket, id);

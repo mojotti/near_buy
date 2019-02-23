@@ -17,12 +17,18 @@ const sockets = {};
 
 export const destroySocket = (itemId, userId, sellerId) => {
   const roomId = getRoomId(itemId, userId, sellerId);
+
   if (sockets[roomId]) {
+    sockets[roomId].disconnect();
     delete sockets[roomId];
   }
 };
 
 export const connectSocket = (itemId, userId, sellerId) => {
+  if (isNaN(itemId) || isNaN(userId) || isNaN(sellerId)) {
+    console.warn('invalid room details', itemId, userId, sellerId);
+    return;
+  }
   const roomId = getRoomId(itemId, userId, sellerId);
   if (!sockets[roomId]) {
     sockets[roomId] = io(path, connectionConfig);
@@ -39,10 +45,20 @@ export const getRoomId = (itemId, userId, sellerId) => {
 
 export const createRoom = (itemId, userId, sellerId) => {
   const room = getRoomId(itemId, userId, sellerId);
+  const socket = sockets[room] || null;
+  if (!room || !socket) {
+    console.warn('failed to create a socket', room);
+    return;
+  }
   sockets[room].emit('create_room', room);
 };
 
 export const sendMessage = (msg, room) => {
+  const socket = sockets[room] || null;
+  if (!socket) {
+    console.warn('sending msg in non-existing room', room);
+    return;
+  }
   const payload = {
     msg,
     room,
@@ -50,9 +66,13 @@ export const sendMessage = (msg, room) => {
   sockets[room].emit('message', JSON.stringify(payload));
 };
 
-const listenToMessages = roomId => {
-  // listen messages in room
-  sockets[roomId].on('message', msg => {
+const listenToMessages = room => {
+  const socket = sockets[room] || null;
+  if (!room || !socket) {
+    console.warn('failed to listen messages', room);
+    return;
+  }
+  socket.on('message', msg => {
     console.log('received some shit in chat', msg);
   });
 };

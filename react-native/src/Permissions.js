@@ -13,7 +13,7 @@ export const requestPermissions = () => {
     })
     .then(granted => {
       // (granted == true) is checked in case of API levels < 23, which
-      // does not return 'granted' like never APIs do.
+      // does not return 'granted' like newer APIs do.
       if (granted === PermissionsAndroid.RESULTS.GRANTED || granted === true) {
         return requestCameraPermissions();
       } else {
