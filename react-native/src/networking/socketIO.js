@@ -10,7 +10,7 @@ const connectionConfig = {
   reconnection: true,
   reconnectionDelay: 100,
   reconnectionAttempts: 100000,
-  transports: ['websocket'], // you need to explicitly tell it to use websockets
+  transports: ['websocket'],
 };
 
 const sockets = {};

@@ -1,8 +1,8 @@
 import React from 'react';
+import { TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { GiftedChat } from 'react-native-gifted-chat';
-import { localhost } from '../../static/constants';
 import NavigationBarIconAndText from '../common/NavigationBarIconAndText';
 import {
   connectSocket,
@@ -24,10 +24,23 @@ class _Chat extends React.Component {
   }
 
   static navigationOptions = ({ navigation }) => {
-    const { id, title } = navigation.state.params.item;
     return {
-      headerTitle: <NavigationBarIconAndText imageId={id} title={title} />,
+      headerTitle: _Chat.getHeaderTitle(
+        navigation.navigate,
+        navigation.state.params.item
+      ),
     };
+  };
+
+  static getHeaderTitle = (navigate, item) => {
+    const navigateToItem = () => {
+      navigate('ItemDetails', { item, distance: 10 });
+    };
+    return (
+      <TouchableHighlight onPress={navigateToItem}>
+        <NavigationBarIconAndText imageId={item.id} title={item.title} />
+      </TouchableHighlight>
+    );
   };
 
   componentDidMount() {
@@ -81,8 +94,9 @@ const mapStateToProps = state => {
   const { chatHeaders, isFetching } = state.currentChatsReducer;
   const { chatMessages } = state.chatMessagesReducer;
   const { token } = state.authorizationReducer;
+  const { latitude, longitude } = state.locationReducer;
 
-  return { chatHeaders, chatMessages, isFetching, token };
+  return { chatHeaders, chatMessages, isFetching, token, latitude, longitude };
 };
 
 const Chat = connect(mapStateToProps)(_Chat);

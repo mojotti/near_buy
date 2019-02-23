@@ -13,7 +13,6 @@ import ItemSeparator from '../user_items/ItemSeparator';
 import { createChat } from '../../redux/actions/ChatActions';
 
 
-
 export class _ItemDetails extends React.Component {
   constructor(props) {
     super(props);
