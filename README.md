@@ -1,5 +1,9 @@
 # NearBuy 
 
+__Screenshots of the app__
+
+https://github.com/mojotti/near_buy/wiki/Screenshots-of-the-React-Native-app
+
 __Running instuctions - back-end:__ 
 
 	Install Python3.4:
