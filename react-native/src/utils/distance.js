@@ -1,6 +1,6 @@
 export const degreesToRadians = degrees => degrees * Math.PI / 180;
 
-export const calculateDistanceInKm = (lat1, lat2, lon1, lon2) => {
+export const calculateDistanceInKm = (lat1, lon1, lat2, lon2) => {
   const R = 6371; // Radius of the earth in km
   const dLat = degreesToRadians(lat2 - lat1);
   const dLon = degreesToRadians(lon2 - lon1);

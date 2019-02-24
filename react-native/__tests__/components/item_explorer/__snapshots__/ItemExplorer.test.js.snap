@@ -181,7 +181,6 @@ exports[`<_ItemExplorer /> renders placeholder when not rendering and no items 2
   lockScrollWhileSnapping={false}
   loop={false}
   loopClonesPerSide={3}
-  onSnapToItem={[Function]}
   renderItem={[Function]}
   shouldOptimizeUpdates={true}
   slideStyle={

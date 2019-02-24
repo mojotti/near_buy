@@ -31,7 +31,7 @@ export class _ChatDetails extends PureComponent {
                 />
               </View>
             </View>
-            <View style={styles.item}>
+            <View style={[styles.item, { alignSelf: 'center' }]}>
               <Text style={styles.title}>{this.props.item.item.title}</Text>
             </View>
           </View>
@@ -44,7 +44,7 @@ export class _ChatDetails extends PureComponent {
 _ChatDetails.propTypes = {
   item: PropTypes.shape({
     item: PropTypes.shape({
-      item_id: PropTypes.number.isRequired,
+      id: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
       seller_id: PropTypes.number.isRequired,
       buyer_id: PropTypes.number.isRequired,

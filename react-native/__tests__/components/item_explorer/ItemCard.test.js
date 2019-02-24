@@ -6,46 +6,23 @@ const ITEM = {
   item: {
     title: 'foo',
     id: 0,
+    price: 10,
   },
-  latitude: 0,
-  longitude: 0,
+  latitude: 65, // oulu
+  longitude: 25,
 };
 const LOCATION = {
-  lat: 15,
-  lon: 100,
+  lat: 60.192059, // helsinki
+  lon: 24.945831,
 };
 
 describe('<_ItemCard />', () => {
-  test('transfers degrees to radians', () => {
-    const oneDegreeToRadian = 0.0174532925; // accuracy of ten decimals
-
-    const wrapper = shallow(
-      <_ItemCard
-        item={ITEM}
-        latitude={LOCATION.lat}
-        longitude={LOCATION.lon}
-      />
-    );
-    const result = wrapper.instance()._degreesToRadians(1);
-
-    expect(eval(result.toFixed(10))).toEqual(oneDegreeToRadian);
-  });
-
   test('gets distance in km between two coordinates', () => {
     const ouluHelsinkiDistance = '534.6 km';
-    const oulu = { lat: 65, lon: 25 }; // not really but almost
-    const helsinki = { lat: 60.192059, lon: 24.945831 };
 
     const wrapper = shallow(
-      <_ItemCard
-        item={ITEM}
-        latitude={LOCATION.lat}
-        longitude={LOCATION.lon}
-      />
+      <_ItemCard item={ITEM} latitude={LOCATION.lat} longitude={LOCATION.lon} />
     );
-    wrapper
-      .instance()
-      ._getDistanceInKm(oulu.lat, oulu.lon, helsinki.lat, helsinki.lon);
 
     expect(wrapper.state('distanceInKm')).toEqual(ouluHelsinkiDistance);
   });
@@ -53,7 +30,7 @@ describe('<_ItemCard />', () => {
   test('navigates to item on press', () => {
     const naviSpy = jest.fn();
     const navi = {
-      navigate: naviSpy
+      navigate: naviSpy,
     };
     const wrapper = shallow(
       <_ItemCard
@@ -72,19 +49,15 @@ describe('<_ItemCard />', () => {
 
   test('component did update updates distance when prop differs', () => {
     const wrapper = shallow(
-      <_ItemCard
-        item={ITEM}
-        latitude={LOCATION.lat}
-        longitude={LOCATION.lon}
-      />
+      <_ItemCard item={ITEM} latitude={LOCATION.lat} longitude={LOCATION.lon} />
     );
 
-    const getDistanceSpy = jest.spyOn(wrapper.instance(), '_getDistanceInKm')
+    const getDistanceSpy = jest.spyOn(wrapper.instance(), '_getDistanceInKm');
     const prevProps = {
       item: {
         latitude: 64,
         longitude: 25,
-      }
+      },
     };
     expect(getDistanceSpy.mock.calls.length).toEqual(0);
     wrapper.instance().componentDidUpdate(prevProps);

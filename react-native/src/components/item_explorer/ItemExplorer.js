@@ -1,5 +1,3 @@
-'use strict';
-
 import React from 'react';
 import { Dimensions, Text, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
@@ -40,11 +38,9 @@ export class _ItemExplorer extends React.Component {
   };
 
   _renderItems = () => {
-    return (
-      this.props.items === 'no items' ||
+    return this.props.items === 'no items' ||
       this.props.items === [] ||
       !this.props.items
-    )
       ? this._renderNoItems()
       : this._renderCarousel();
   };
@@ -62,16 +58,12 @@ export class _ItemExplorer extends React.Component {
   _renderCarousel = () => {
     return (
       <Carousel
-        ref={c => {
-          this._carousel = c;
-        }}
         data={this.props.items}
-        renderItem={({item, index}) => {
+        renderItem={({ item, index }) => {
           return this._renderItem(item, index, this.props.navigation);
         }}
         sliderWidth={width}
         itemWidth={width}
-        onSnapToItem={(i) => console.log('i was selected', i)}
         slideStyle={{ justifyContent: 'center' }}
         layout={'stack'}
       />
@@ -97,7 +89,7 @@ export class _ItemExplorer extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   console.log('state', state);
   return {
     isFetching: state.itemExplorerReducer.isFetching,

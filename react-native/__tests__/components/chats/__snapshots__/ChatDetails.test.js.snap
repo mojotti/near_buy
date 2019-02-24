@@ -53,13 +53,18 @@ exports[`<ChatDetails /> renders correctly 1`] = `
       </View>
       <View
         style={
-          Object {
-            "backgroundColor": "#FFFFFF",
-            "flex": 1,
-            "flexDirection": "column",
-            "padding": 10,
-            "width": 750,
-          }
+          Array [
+            Object {
+              "backgroundColor": "#FFFFFF",
+              "flex": 1,
+              "flexDirection": "column",
+              "padding": 10,
+              "width": 750,
+            },
+            Object {
+              "alignSelf": "center",
+            },
+          ]
         }
       >
         <Text

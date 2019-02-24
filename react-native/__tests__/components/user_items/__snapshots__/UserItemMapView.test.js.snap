@@ -35,9 +35,9 @@ exports[`<UserItemMapView renders correctly 1`] = `
       coordinate={
         Object {
           "latitude": 64,
-          "latitudeDelta": NaN,
+          "latitudeDelta": 0,
           "longitude": 25,
-          "longitudeDelta": NaN,
+          "longitudeDelta": 0,
         }
       }
       pinColor="#100eff"

@@ -84,7 +84,7 @@ _MyChats.propTypes = {
       seller_id: PropTypes.number.isRequired,
       buyer_id: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
-      item_id: PropTypes.number.isRequired,
+      id: PropTypes.number.isRequired,
     }).isRequired
   ).isRequired,
 };

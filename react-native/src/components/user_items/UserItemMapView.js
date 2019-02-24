@@ -13,6 +13,8 @@ export default class UserItemMapView extends Component {
       coordinate: new AnimatedRegion({
         latitude: this.props.latitude,
         longitude: this.props.longitude,
+        latitudeDelta: 0,
+        longitudeDelta: 0,
       }),
     };
     this.animatedMarker = null;

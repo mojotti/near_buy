@@ -5,14 +5,15 @@ Array [
   Array [
     "ItemDetails",
     Object {
-      "distance": "11081.2 km",
+      "distance": "534.6 km",
       "item": Object {
         "item": Object {
           "id": 0,
+          "price": 10,
           "title": "foo",
         },
-        "latitude": 0,
-        "longitude": 0,
+        "latitude": 65,
+        "longitude": 25,
       },
     },
   ],

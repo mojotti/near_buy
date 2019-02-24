@@ -17,7 +17,7 @@ export class _ItemDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      distance: props.distance || 'Getting distance...',
+      distance: 'Getting distance...',
       imageUrls: ['foo.bar'], // provide some uri while loading actual img uris
     };
   }
@@ -39,10 +39,10 @@ export class _ItemDetails extends React.Component {
 
   getDistance = () => {
     const dist = calculateDistanceInKm(
-      this.props.latitude,
-      this.props.longitude,
       this.props.item.latitude,
-      this.props.item.longitude
+      this.props.item.longitude,
+      this.props.latitude,
+      this.props.longitude
     );
     this.setState(() => ({ distance: `${dist} km` }));
   };
@@ -95,6 +95,9 @@ export class _ItemDetails extends React.Component {
     return (
       <ScrollView style={styles.container}>
         <ItemDetailsImageCarousel images={this.state.imageUrls} />
+        <Text style={baseStyles.headerText}>Price</Text>
+        <Text style={styles.plainText}>{`${this.props.item.price} €`}</Text>
+        <ItemSeparator widthPercentage={0.86} />
         <Text style={baseStyles.headerText}>Distance</Text>
         <View style={styles.locationIconContainer}>
           <FontAwesome
