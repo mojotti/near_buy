@@ -4,6 +4,13 @@ __Screenshots of the app__
 
 https://github.com/mojotti/near_buy/wiki/Screenshots-of-the-React-Native-app
 
+__Google API Key__
+
+	To be able to use Google Maps in the app, generate your own api key here: https://console.cloud.google.com/google/maps-apis
+	and follow these instructions to get generated API key to right place: https://github.com/react-native-community/react-native-maps/blob/master/docs/installation.md#enabling-google-maps-on-ios
+	and https://github.com/react-native-community/react-native-maps/blob/master/docs/installation.md#enabling-google-maps-on-ios
+
+	There is an old API key in the code, but it's been deleted for safety reasons.
 __Running instuctions - back-end:__ 
 
 	Install Python3.4:
